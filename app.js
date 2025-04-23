@@ -1,50 +1,42 @@
 /************************************************************
  *  Checkreel front-end script
+ *  – RTL support
+ *  – Sends subscription via GET (no-cors) to Apps Script
  ************************************************************/
 
-/* RTL / LTR */
-console.log("Checkreel Mobile App Loaded.");
+/* 1 RTL / LTR */
 document.body.style.direction =
-  document.documentElement.lang === "ar" ? "rtl" : "ltr";
+  document.documentElement.lang === 'ar' ? 'rtl' : 'ltr';
 
-/* Subscription form */
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("subscription-form");
+/* 2 Subscription form */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('subscription-form');
   if (!form) return;
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const email = form.elements["email"].value.trim();
-    if (!email) {
-      alert("Please enter an e-mail address.");
-      return;
-    }
+    const email = form.elements['email'].value.trim();
+    if (!email) return alert('Please enter an e-mail address.');
 
-    /* LIVE Apps Script endpoint (leave /exec at the end!) */
+    /* LIVE Apps Script endpoint (paste your /exec URL) */
     const endpoint =
-      "https://script.google.com/macros/s/AKfycbwImj66Iz5a8FAB7n-jD-gQ5BF6MMrxBVSiPn-g_uwbGJEmVPQKXPErjMEigcH6Qrpp/exec";
+      'https://script.google.com/macros/s/PASTE_YOUR_NEW_EXEC_URL_HERE/exec';
 
-    /* Build a query-string URL – no CORS pre-flight */
+    /* Build query-string & use no-cors to skip CORS pre-flight */
     const url =
       endpoint +
-      "?action=subscribe&email=" +
+      '?action=subscribe&email=' +
       encodeURIComponent(email);
 
-    fetch(url) // default is GET
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.result === "success") {
-          alert(
-            "Subscription successful! Check your e-mail for confirmation."
-          );
-          form.reset();
-        } else {
-          alert("Backend error: " + (data.message || "unknown"));
-        }
+    fetch(url, { method: 'GET', mode: 'no-cors' })
+      .then(() => {
+        alert('Subscription successful! Check your e-mail for confirmation.');
+        form.reset();
       })
       .catch((err) => {
-        console.error("Fetch error:", err);
-        alert("Network error. Please try again.");
+        console.error('Fetch error:', err);
+        alert('Network error. Please try again.');
       });
   });
 });
+
