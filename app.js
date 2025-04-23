@@ -1,21 +1,16 @@
 /************************************************************
  *  Checkreel front-end script
- *  – sets RTL if Arabic
- *  – posts subscription e-mail to Google Apps Script backend
  ************************************************************/
 
-/* ---------- 1  RTL / LTR handling ---------- */
+/* RTL / LTR */
 console.log("Checkreel Mobile App Loaded.");
-if (document.documentElement.lang === "ar") {
-  document.body.style.direction = "rtl";
-} else {
-  document.body.style.direction = "ltr";
-}
+document.body.style.direction =
+  document.documentElement.lang === "ar" ? "rtl" : "ltr";
 
-/* ---------- 2  Subscription form ---------- */
+/* Subscription form */
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("subscription-form");
-  if (!form) return; // safety guard
+  if (!form) return;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -25,15 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 🔗  LIVE Apps Script endpoint (ends in /exec)
-    const endpointUrl =
+    /* LIVE Apps Script endpoint (leave /exec at the end!) */
+    const endpoint =
       "https://script.google.com/macros/s/AKfycbwImj66Iz5a8FAB7n-jD-gQ5BF6MMrxBVSiPn-g_uwbGJEmVPQKXPErjMEigcH6Qrpp/exec";
 
-    fetch(endpointUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, action: "subscribe" }),
-    })
+    /* Build a query-string URL – no CORS pre-flight */
+    const url =
+      endpoint +
+      "?action=subscribe&email=" +
+      encodeURIComponent(email);
+
+    fetch(url) // default is GET
       .then((res) => res.json())
       .then((data) => {
         if (data.result === "success") {
