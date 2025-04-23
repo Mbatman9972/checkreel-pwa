@@ -1,10 +1,10 @@
 /************************************************************
  *  Checkreel front-end script
- *  – registers RTL if Arabic
+ *  – sets RTL if Arabic
  *  – posts subscription e-mail to Google Apps Script backend
  ************************************************************/
 
-// 1️⃣  RTL / LTR handling
+/* ---------- 1  RTL / LTR handling ---------- */
 console.log("Checkreel Mobile App Loaded.");
 if (document.documentElement.lang === "ar") {
   document.body.style.direction = "rtl";
@@ -12,18 +12,22 @@ if (document.documentElement.lang === "ar") {
   document.body.style.direction = "ltr";
 }
 
-// 2️⃣  Subscription form → Google Apps Script
+/* ---------- 2  Subscription form ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("subscription-form");
-  if (!form) return; // safety
+  if (!form) return; // safety guard
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = form.elements["email"].value.trim();
-    if (!email) return alert("Please enter an e-mail address.");
+    if (!email) {
+      alert("Please enter an e-mail address.");
+      return;
+    }
 
+    // 🔗  LIVE Apps Script endpoint (ends in /exec)
     const endpointUrl =
-      "YOUR_SCRIPT_URL"; // <-- replace this entire string with the /exec URL
+      "https://script.google.com/macros/s/AKfycbwImj66Iz5a8FAB7n-jD-gQ5BF6MMrxBVSiPn-g_uwbGJEmVPQKXPErjMEigcH6Qrpp/exec";
 
     fetch(endpointUrl, {
       method: "POST",
@@ -33,7 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.result === "success") {
-          alert("Subscription successful! Check your e-mail for confirmation.");
+          alert(
+            "Subscription successful! Check your e-mail for confirmation."
+          );
           form.reset();
         } else {
           alert("Backend error: " + (data.message || "unknown"));
