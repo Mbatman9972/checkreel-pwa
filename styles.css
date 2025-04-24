@@ -1,6 +1,4 @@
-/* ✅ Updated styles.css */
-
-/* Reset & Base */
+/* ✅ Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -18,6 +16,7 @@ body {
   position: relative;
   width: 100%;
   height: 100vh;
+  background-image: url('images/images/checkreel-hero-desktop.jpg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -32,6 +31,10 @@ body {
   color: white;
   max-width: 90%;
 }
+.hero-logo {
+  width: 80px;
+  margin-bottom: 1rem;
+}
 .hero-title {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -44,10 +47,6 @@ body {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   list-style: none;
-  padding: 0;
-}
-.hero-benefits li {
-  margin: 0.4rem 0;
 }
 .cta-button {
   background: #00c9a7;
@@ -63,7 +62,7 @@ body {
   background: #00a185;
 }
 
-/* 🌐 Services Section */
+/* 🌐 Services */
 .services {
   display: flex;
   justify-content: space-around;
@@ -82,7 +81,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* 🧾 Subscription Section */
+/* 🧾 Subscription */
 .subscription {
   padding: 3rem 1rem;
   background: #f1f1f1;
@@ -126,7 +125,7 @@ body {
   margin-top: 1rem;
 }
 
-/* 🧠 About Us */
+/* 🧠 About Section */
 .about {
   padding: 3rem 1rem;
   background: #ffffff;
@@ -152,8 +151,11 @@ body {
   text-decoration: underline;
 }
 
-/* 📱 Responsive Adjustments */
+/* 📱 Responsive */
 @media (max-width: 768px) {
+  .hero {
+    background-image: url('images/images/checkreel-hero-mobile.jpg');
+  }
   .hero-title {
     font-size: 2rem;
   }
