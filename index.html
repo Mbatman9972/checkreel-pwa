@@ -1,14 +1,63 @@
-<!-- 🌟 Hero Banner Section -->
-<section class="hero" style="background-image: url('./images/landing-image.png');">
-  <div class="hero-overlay">
-    <h1 class="hero-title">CheckReel</h1>
-    <p class="hero-subtitle">Your AI-Powered Media Compliance Partner</p>
-    <p class="hero-benefits">
-      ✅ Unlimited Checks – Smarter and Faster<br>
-      ✅ Support for Video, Audio, and Image<br>
-      ✅ First 3 Checks Free – No credit card required<br>
-      ✅ Trusted by Media Creators & Agencies
+<!-- ✅ Updated index.html (Phase A patch) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CheckReel</title>
+  <link rel="icon" type="image/png" href="images/checkreel-logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfveSIrAAAA"></script>
+</head>
+<body>
+  <!-- 🌟 Hero Banner -->
+  <section class="hero" style="background-image: url('./images/landing-image.png');">
+    <div class="hero-overlay">
+      <h1 class="hero-title">CheckReel</h1>
+      <p class="hero-subtitle">Stop guessing, start checking.</p>
+      <p class="hero-benefits">
+        ✅ Scan your media before it backfires<br>
+        ✅ AI checks for video, audio, images<br>
+        ✅ Free trial: 3 total scans<br>
+        ✅ $4.99/month for unlimited access
+      </p>
+      <a href="#subscribe" class="cta-button">Start Free Trial</a>
+    </div>
+  </section>
+
+  <!-- 🌐 Other Services -->
+  <section class="services">
+    <div class="service"><h3>Social Media Management</h3><p>From strategy to content.</p></div>
+    <div class="service"><h3>Web & AI Apps</h3><p>Smart tools built for your brand.</p></div>
+    <div class="service"><h3>Marketing Campaigns</h3><p>Data-driven growth at scale.</p></div>
+  </section>
+
+  <!-- 🧾 Subscription Form -->
+  <section class="subscription" id="subscribe">
+    <div class="subscription-content">
+      <h2>Start Your Free Trial</h2>
+      <form id="subscription-form">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <input type="hidden" id="recaptcha-token" name="recaptcha">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="price-note">$4.99/month per product after trial</p>
+      <p class="subs-count">🎯 <span id="subs-count">—</span> active users</p>
+    </div>
+  </section>
+
+  <!-- 🧠 About Us -->
+  <section class="about">
+    <h2>About CheckReel</h2>
+    <p>
+      CheckReel is a flagship service of <a href="https://www.alwaferr.com" target="_blank">Alwafer Media</a> — a full-stack studio delivering end-to-end social-account management,
+      AI-powered websites & mobile apps, and data-driven marketing campaigns.<br><br>
+      We believe great ideas deserve a friction-free path to publication, so we built CheckReel to make compliance automatic, accurate and affordable.<br><br>
+      <strong>What you get:</strong> instant media checks, simple fix-guides, and a 3-item free trial to prove the value.<br>
+      <strong>Why it matters:</strong> clean content protects your brand, avoids takedowns, and saves hours every week.
     </p>
-    <a href="#subscribe" class="cta-button">Start Free Trial</a>
-  </div>
-</section>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
