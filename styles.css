@@ -1,4 +1,4 @@
-/* ✅ Updated styles.css for Phase A */
+/* ✅ Updated styles.css */
 
 /* Reset & Base */
 * {
@@ -26,7 +26,7 @@ body {
   text-align: center;
 }
 .hero-overlay {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   border-radius: 10px;
   color: white;
@@ -43,31 +43,12 @@ body {
 .hero-benefits {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
-}
-.hero-benefits {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
   list-style: none;
   padding: 0;
 }
 .hero-benefits li {
-  margin: 0.3rem 0;
+  margin: 0.4rem 0;
 }
-@media (max-width: 768px) {
-  .hero-overlay img {
-    width: 60px;
-  }
-  .hero-title {
-    font-size: 1.8rem;
-  }
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-  .hero-benefits {
-    font-size: 1rem;
-  }
-}
-
 .cta-button {
   background: #00c9a7;
   padding: 1rem 2rem;
