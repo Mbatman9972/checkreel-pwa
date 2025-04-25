@@ -148,3 +148,76 @@ body {
     gap: 2rem;
   }
 }
+/* 🧩 Platforms Supported Section */
+.platforms {
+  background: #f9f9f9;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.platforms h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.platform {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+/* 🧩 Platform Section */
+.platforms {
+  padding: 3rem 1rem;
+  background: #f8f8f8;
+  text-align: center;
+}
+.platforms h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.platform {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  font-size: 1.1rem;
+}
+/* 🚀 Platforms Section */
+.platforms {
+  padding: 3rem 1rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+.platforms h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+}
+.platform-list span {
+  background: #00c9a7;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}

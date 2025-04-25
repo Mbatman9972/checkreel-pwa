@@ -1,99 +1,40 @@
-/************************************************************
- *  Checkreel front-end script
- *  – Language switching (en, fr, ar)
- *  – RTL if Arabic
- *  – Posts subscription to Google Apps Script
- ************************************************************/
-
-// 🌐 ملفات الترجمة
-const translations = {
-  en: 'lang-en.json',
-  fr: 'lang-fr.json',
-  ar: 'lang-ar.json'
-};
-
-// 🔁 تفعيل RTL للعربية
-if (document.documentElement.lang === "ar") {
-  document.body.style.direction = "rtl";
-} else {
-  document.body.style.direction = "ltr";
+{
+  "heroTitle": "تشيكرِيل",
+  "heroSubtitle": "توقّف عن التخمين، وابدأ بالتحقق.",
+  "heroBenefits": [
+    "✅ افحص الوسائط قبل أن تُسبب لك مشكلة",
+    "✅ ذكاء اصطناعي لتحليل الفيديو، الصوت، والصور",
+    "✅ تجربة مجانية: 3 عمليات فحص",
+    "✅ 4.99$/شهريًا للوصول الكامل"
+  ],
+  "startTrial": "ابدأ التجربة المجانية",
+  "services": {
+    "1": ["إدارة حسابات التواصل", "من الاستراتيجية إلى المحتوى."],
+    "2": ["مواقع وتطبيقات ذكاء اصطناعي", "أدوات ذكية لخدمة علامتك."],
+    "3": ["حملات تسويقية", "نمو مدفوع بالبيانات."]
+  },
+  "subscription": {
+    "title": "ابدأ تجربتك المجانية",
+    "placeholder": "أدخل بريدك الإلكتروني",
+    "button": "اشترك",
+    "note": "4.99$/شهريًا لكل منتج بعد التجربة",
+    "count": "🎯 {count} مستخدم نشط"
+  },
+  "about": {
+    "title": "عن تشيكرِيل",
+    "content": "تشيكرِيل هو مشروع تابع لـ Alwafer Media — استوديو شامل لإدارة الحسابات، تطوير مواقع وتطبيقات تعتمد الذكاء الاصطناعي، وإطلاق حملات تسويقية دقيقة.\n\nما ستحصل عليه: فحص فوري للوسائط، إرشادات تصحيح بسيطة، وتجربة مجانية لثلاث ملفات.\nأهمية تشيكرِيل: حماية علامتك التجارية، وتوفير ساعات من العمل، وتجنب الإنذارات والإغلاق."
+  }
 }
-
-// 📌 تحميل الترجمة وتطبيقها
-function applyTranslations(lang) {
-  const file = translations[lang];
-  if (!file) return;
-
-  fetch(file)
-    .then(res => res.json())
-    .then(data => {
-      document.querySelector('.hero-title').textContent = data.hero_title;
-      document.querySelector('.hero-subtitle').textContent = data.hero_subtitle;
-      const listItems = document.querySelectorAll('.hero-benefits li');
-      listItems[0].textContent = data.benefits[0];
-      listItems[1].textContent = data.benefits[1];
-      listItems[2].textContent = data.benefits[2];
-      listItems[3].textContent = data.benefits[3];
-
-      document.querySelector('.cta-button').textContent = data.cta_button;
-      document.querySelector('.subscription-content h2').textContent = data.subscribe_title;
-      document.querySelector('#subscription-form input[type="email"]').placeholder = data.email_placeholder;
-      document.querySelector('#subscription-form button').textContent = data.subscribe_button;
-      document.querySelector('.price-note').textContent = data.price_note;
-      document.querySelector('.subs-count').innerHTML = `🎯 <span id="subs-count">—</span> ${data.active_users}`;
-      document.querySelector('.about h2').textContent = data.about_title;
-      document.querySelector('.about p').innerHTML = data.about_paragraph;
-    })
-    .catch(err => console.error('Translation load error:', err));
+{
+  "hero_title": "CheckReel",
+  "hero_subtitle": "Stop guessing, start checking.",
+  "benefit_1": "✅ Scan your media before it backfires",
+  "benefit_2": "✅ AI checks for video, audio, images",
+  "benefit_3": "✅ Free trial: 3 total scans",
+  "benefit_4": "✅ $4.99/month for unlimited access",
+  "start_trial": "Start Free Trial"
 }
-
-// ✅ عند تحميل الصفحة
-document.addEventListener("DOMContentLoaded", () => {
-  // 🔀 تحميل الترجمة الافتراضية
-  const langSelect = document.getElementById('language-select');
-  const defaultLang = langSelect.value || 'en';
-  applyTranslations(defaultLang);
-
-  // 🔁 تغيير اللغة
-  langSelect.addEventListener('change', () => {
-    const selectedLang = langSelect.value;
-    applyTranslations(selectedLang);
-    document.documentElement.lang = selectedLang;
-    document.body.style.direction = selectedLang === 'ar' ? 'rtl' : 'ltr';
-  });
-
-  // ✉️ الاشتراك في النشرة
-  const form = document.getElementById("subscription-form");
-  if (!form) return;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = form.elements["email"].value.trim();
-    if (!email) return alert("Please enter an e-mail address.");
-
-    grecaptcha.ready(() => {
-      grecaptcha.execute('6LfveSIrAAAA', { action: 'subscribe' }).then((token) => {
-        document.getElementById("recaptcha-token").value = token;
-
-        fetch("https://script.google.com/macros/s/AKfycbzznyXR05SYR0K0B8hpRza9cyFwHywjuiUudGJofJDoBYR3WZ0LYS5NoB3FiiLxEB4/exec", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, action: "subscribe" }),
-        })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.result === "success") {
-            alert("Subscription successful! Check your e-mail for confirmation.");
-            form.reset();
-          } else {
-            alert("Error: " + (data.message || "Something went wrong"));
-          }
-        })
-        .catch((err) => {
-          console.error("Fetch error:", err);
-          alert("Network error. Please try again.");
-        });
-      });
-    });
-  });
-});
+// Platforms (dynamic)
+document.getElementById('platforms-title').innerText = translations['platforms_title'];
+const platformList = document.querySelector('.platform-list');
+platformList.innerHTML = translations['platforms_list'].map(p => `<span>${p}</span>`).join('');
