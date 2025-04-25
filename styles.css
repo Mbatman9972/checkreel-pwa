@@ -221,3 +221,29 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 8px;
 }
+.platforms {
+  text-align: center;
+  padding: 30px;
+}
+
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.platform {
+  text-align: center;
+}
+
+.platform-logo {
+  width: 50px; /* Adjust as needed */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.platform p {
+  font-size: 14px;
+  font-weight: bold;
+}
