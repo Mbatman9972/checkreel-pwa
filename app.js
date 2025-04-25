@@ -1,40 +1,41 @@
-{
-  "heroTitle": "تشيكرِيل",
-  "heroSubtitle": "توقّف عن التخمين، وابدأ بالتحقق.",
-  "heroBenefits": [
-    "✅ افحص الوسائط قبل أن تُسبب لك مشكلة",
-    "✅ ذكاء اصطناعي لتحليل الفيديو، الصوت، والصور",
-    "✅ تجربة مجانية: 3 عمليات فحص",
-    "✅ 4.99$/شهريًا للوصول الكامل"
-  ],
-  "startTrial": "ابدأ التجربة المجانية",
-  "services": {
-    "1": ["إدارة حسابات التواصل", "من الاستراتيجية إلى المحتوى."],
-    "2": ["مواقع وتطبيقات ذكاء اصطناعي", "أدوات ذكية لخدمة علامتك."],
-    "3": ["حملات تسويقية", "نمو مدفوع بالبيانات."]
-  },
-  "subscription": {
-    "title": "ابدأ تجربتك المجانية",
-    "placeholder": "أدخل بريدك الإلكتروني",
-    "button": "اشترك",
-    "note": "4.99$/شهريًا لكل منتج بعد التجربة",
-    "count": "🎯 {count} مستخدم نشط"
-  },
-  "about": {
-    "title": "عن تشيكرِيل",
-    "content": "تشيكرِيل هو مشروع تابع لـ Alwafer Media — استوديو شامل لإدارة الحسابات، تطوير مواقع وتطبيقات تعتمد الذكاء الاصطناعي، وإطلاق حملات تسويقية دقيقة.\n\nما ستحصل عليه: فحص فوري للوسائط، إرشادات تصحيح بسيطة، وتجربة مجانية لثلاث ملفات.\nأهمية تشيكرِيل: حماية علامتك التجارية، وتوفير ساعات من العمل، وتجنب الإنذارات والإغلاق."
-  }
+// Initialize translations variable
+let translations = {};
+
+// Load translations from the selected language file
+function loadTranslations(language) {
+  fetch(`./lang/${language}.json`)
+    .then(response => response.json())
+    .then(data => {
+      translations = data;
+      updateContent();
+    });
 }
-{
-  "hero_title": "CheckReel",
-  "hero_subtitle": "Stop guessing, start checking.",
-  "benefit_1": "✅ Scan your media before it backfires",
-  "benefit_2": "✅ AI checks for video, audio, images",
-  "benefit_3": "✅ Free trial: 3 total scans",
-  "benefit_4": "✅ $4.99/month for unlimited access",
-  "start_trial": "Start Free Trial"
+
+// Update content based on the loaded translations
+function updateContent() {
+  // Hero Section
+  document.getElementById('hero-title').innerText = translations['hero_title'];
+  document.getElementById('hero-subtitle').innerText = translations['hero_subtitle'];
+  document.getElementById('start-trial').innerText = translations['start_trial'];
+
+  // Hero Benefits
+  const benefits = document.querySelectorAll('.benefit');
+  benefits[0].innerText = translations['benefit_1'];
+  benefits[1].innerText = translations['benefit_2'];
+  benefits[2].innerText = translations['benefit_3'];
+  benefits[3].innerText = translations['benefit_4'];
+
+  // Platforms Section
+  document.getElementById('platforms-title').innerText = translations['platforms_title'];
+  const platformList = document.querySelector('.platform-list');
+  platformList.innerHTML = translations['platforms_list'].map(p => `<span>${p}</span>`).join('');
 }
-// Platforms (dynamic)
-document.getElementById('platforms-title').innerText = translations['platforms_title'];
-const platformList = document.querySelector('.platform-list');
-platformList.innerHTML = translations['platforms_list'].map(p => `<span>${p}</span>`).join('');
+
+// Set up the language switcher event listener
+document.getElementById('language-switcher').addEventListener('change', (event) => {
+  const selectedLanguage = event.target.value;  // Get selected language from dropdown
+  loadTranslations(selectedLanguage);
+});
+
+// Load default language (English)
+loadTranslations('en');  // Default to English language
