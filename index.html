@@ -2,58 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CheckReel</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
+
+  <header class="hero">
+    <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
     <h1 id="hero-title"></h1>
     <p id="hero-subtitle"></p>
-    <ul id="hero-benefits"></ul>
     <button id="start-trial"></button>
+  </header>
+
+  <section class="benefits" id="benefits-list"></section>
+
+  <section class="services">
+    <h2 id="services-title">Our Services</h2>
+    <div class="service-list" id="services-list"></div>
+  </section>
+
+  <section class="platforms">
+    <h2 id="platforms-title">Supported Platforms</h2>
+    <div class="platform-logos" id="platform-logos"></div>
+  </section>
+
+  <section class="subscription">
+    <h2 id="subscription-title"></h2>
+    <form id="subscription-form">
+      <input type="email" id="email" placeholder="">
+      <button type="submit" id="subscribe-button"></button>
+    </form>
+    <p id="subscription-note"></p>
+    <p id="active-users"></p>
+  </section>
+
+  <section class="about">
+    <h2 id="about-title"></h2>
+    <p id="about-content"></p>
+  </section>
+
+  <footer class="footer">
     <select id="language-select">
       <option value="en">English</option>
       <option value="ar">العربية</option>
       <option value="fr">Français</option>
     </select>
-  </header>
-
-  <main>
-    <section id="services">
-      <div>
-        <h2 id="service-1-title"></h2>
-        <p id="service-1-desc"></p>
-      </div>
-      <div>
-        <h2 id="service-2-title"></h2>
-        <p id="service-2-desc"></p>
-      </div>
-      <div>
-        <h2 id="service-3-title"></h2>
-        <p id="service-3-desc"></p>
-      </div>
-    </section>
-
-    <section id="subscription">
-      <h2 id="subscription-title"></h2>
-      <input type="email" id="email-input" placeholder="">
-      <button id="subscribe-button"></button>
-      <p id="subscription-note"></p>
-      <p id="active-users"></p>
-    </section>
-
-    <section id="platforms">
-      <h2 id="platforms-title"></h2>
-      <div id="platforms-list" class="platforms-list"></div>
-    </section>
-
-    <section id="about">
-      <h2 id="about-title"></h2>
-      <p id="about-content"></p>
-    </section>
-  </main>
+  </footer>
 
   <script src="app.js"></script>
+
 </body>
 </html>
