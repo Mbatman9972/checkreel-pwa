@@ -247,3 +247,56 @@ body {
   font-size: 14px;
   font-weight: bold;
 }
+.platform-section {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.platform-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.platform-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
+
+.platform-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.platform-item span {
+  font-size: 0.9em;
+  color: #333;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .platform-item {
+    width: 80px;
+  }
+  
+  .platform-item img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .platform-item span {
+    font-size: 0.8em;
+  }
+}
