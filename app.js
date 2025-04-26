@@ -1,41 +1,70 @@
-// Initialize translations variable
+const langSelect = document.getElementById("languageSelect");
 let translations = {};
+let currentLang = "en";
 
-// Load translations from the selected language file
-function loadTranslations(language) {
-  fetch(`./lang/${language}.json`)
-    .then(response => response.json())
-    .then(data => {
+// Load JSON file based on selected language
+function loadLanguage(lang) {
+  fetch(`lang/${lang}.json`)
+    .then((res) => res.json())
+    .then((data) => {
       translations = data;
       updateContent();
     });
 }
 
-// Update content based on the loaded translations
+// Update page content dynamically
 function updateContent() {
-  // Hero Section
-  document.getElementById('hero-title').innerText = translations['hero_title'];
-  document.getElementById('hero-subtitle').innerText = translations['hero_subtitle'];
-  document.getElementById('start-trial').innerText = translations['start_trial'];
+  document.getElementById("hero-title").innerText = translations.heroTitle;
+  document.getElementById("hero-subtitle").innerText = translations.heroSubtitle;
 
-  // Hero Benefits
-  const benefits = document.querySelectorAll('.benefit');
-  benefits[0].innerText = translations['benefit_1'];
-  benefits[1].innerText = translations['benefit_2'];
-  benefits[2].innerText = translations['benefit_3'];
-  benefits[3].innerText = translations['benefit_4'];
+  const benefits = document.getElementById("hero-benefits");
+  benefits.innerHTML = "";
+  translations.heroBenefits.forEach((text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    benefits.appendChild(li);
+  });
 
-  // Platforms Section
-  document.getElementById('platforms-title').innerText = translations['platforms_title'];
-  const platformList = document.querySelector('.platform-list');
-  platformList.innerHTML = translations['platforms_list'].map(p => `<span>${p}</span>`).join('');
+  document.getElementById("start-trial").innerText = translations.startTrial;
+
+  // Services
+  document.getElementById("service-1-title").innerText = translations.services["1"][0];
+  document.getElementById("service-1-desc").innerText = translations.services["1"][1];
+  document.getElementById("service-2-title").innerText = translations.services["2"][0];
+  document.getElementById("service-2-desc").innerText = translations.services["2"][1];
+  document.getElementById("service-3-title").innerText = translations.services["3"][0];
+  document.getElementById("service-3-desc").innerText = translations.services["3"][1];
+
+  // Subscription
+  document.getElementById("sub-title").innerText = translations.subscription.title;
+  document.getElementById("email-input").placeholder = translations.subscription.placeholder;
+  document.getElementById("subscribe-btn").innerText = translations.subscription.button;
+  document.getElementById("pricing-note").innerText = translations.subscription.note;
+
+  const fakeCount = 2697;
+  document.getElementById("user-count").innerText = translations.subscription.count.replace("{count}", fakeCount);
+
+  // About section
+  document.getElementById("about-title").innerText = translations.about.title;
+  document.getElementById("about-content").innerText = translations.about.content;
+
+  // Platform section
+  document.getElementById("platforms-title").innerText = translations.platforms.title;
+  const platformHTML = translations.platforms.items.map(
+    (p) => `
+      <div class="platform">
+        <img src="${p.logo}" alt="${p.name}" />
+        <div>${p.name}</div>
+      </div>`
+  ).join('');
+  document.querySelector(".platform-list").innerHTML = platformHTML;
 }
 
-// Set up the language switcher event listener
-document.getElementById('language-switcher').addEventListener('change', (event) => {
-  const selectedLanguage = event.target.value;  // Get selected language from dropdown
-  loadTranslations(selectedLanguage);
+// Language change
+langSelect.addEventListener("change", () => {
+  currentLang = langSelect.value;
+  loadLanguage(currentLang);
 });
 
-// Load default language (English)
-loadTranslations('en');  // Default to English language
+// Load default language
+loadLanguage(currentLang);
