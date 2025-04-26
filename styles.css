@@ -1,302 +1,135 @@
-/* Global Reset */
+/* Reset and basics */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
 }
-
 body {
-  background-color: #ffffff;
-  color: #222;
+  font-family: 'Poppins', sans-serif;
   line-height: 1.6;
+  background: #ffffff;
+  color: #222;
+  padding: 20px;
 }
 
 /* Hero Section */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.hero-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.hero-overlay {
-  position: relative;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 3rem 2rem;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-  border-radius: 12px;
-  color: #fff;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.hero-logo {
-  width: 80px;
-  margin-bottom: 1rem;
-}
-
-.hero-title {
+h1 {
   font-size: 2.5rem;
-  font-weight: bold;
+  margin-bottom: 10px;
 }
-
-.hero-subtitle {
-  font-size: 1.2rem;
-  margin: 1rem 0;
+h2 {
+  font-size: 2rem;
+  margin: 30px 0 15px;
 }
-
-.hero-benefits {
+ul {
   list-style: none;
-  margin-bottom: 1.5rem;
+  margin: 10px 0;
+}
+ul li {
+  margin-bottom: 8px;
 }
 
-.hero-benefits li {
-  margin: 0.5rem 0;
+/* Service Section */
+section {
+  margin-top: 40px;
 }
 
-/* CTA Button */
-.cta-button {
-  display: inline-block;
-  background-color: #00c9a7;
-  color: white;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s;
-}
-
-.cta-button:hover {
-  background-color: #00b395;
-}
-
-/* Services Section */
-.services {
+/* Subscription Form */
+#subscription-form {
+  margin-top: 20px;
   display: flex;
-  justify-content: space-around;
-  padding: 4rem 1rem;
-  background-color: #f5f5f5;
-  text-align: center;
+  gap: 10px;
+  align-items: center;
 }
-
-.service h3 {
-  margin-bottom: 0.5rem;
-}
-
-/* Subscription Section */
-.subscription {
-  padding: 3rem 1rem;
-  background-color: #fff;
-  text-align: center;
-}
-
-.subscription-content input[type="email"] {
-  padding: 0.75rem;
-  width: 300px;
-  max-width: 90%;
-  margin-bottom: 1rem;
+#subscription-form input[type="email"] {
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  flex: 1;
+  border-radius: 5px;
 }
-
-.subscription-content button {
-  padding: 0.75rem 2rem;
-  background-color: #00c9a7;
-  border: none;
+#subscription-form button {
+  padding: 10px 20px;
+  background-color: #00c896;
   color: white;
-  border-radius: 6px;
-  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#subscription-form button:hover {
+  background-color: #00b184;
 }
 
-.price-note, .subs-count {
-  margin-top: 1rem;
+/* Active users */
+#active-users {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/* Platforms Section */
+.platforms {
+  margin-top: 40px;
+  text-align: center;
+}
+.platform-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.platform-card {
+  background-color: #00c896;
+  padding: 15px;
+  border-radius: 10px;
+  width: 130px;
+  text-align: center;
+  transition: 0.3s;
+}
+.platform-card:hover {
+  background-color: #00b184;
+}
+.platform-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+.platform-card span {
+  display: block;
+  color: #fff;
+  font-weight: bold;
 }
 
 /* About Section */
 .about {
-  padding: 3rem 1rem;
-  max-width: 800px;
-  margin: 0 auto;
+  margin-top: 50px;
+}
+.about p {
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .hero-title {
+/* Language selector */
+#language-select {
+  margin-top: 15px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  h1 {
     font-size: 2rem;
   }
-
-  .cta-button {
-    width: 100%;
+  h2 {
+    font-size: 1.5rem;
   }
-
-  .services {
-    flex-direction: column;
-    gap: 2rem;
+  .platform-card {
+    width: 100px;
+    padding: 10px;
   }
-}
-/* 🧩 Platforms Supported Section */
-.platforms {
-  background: #f9f9f9;
-  padding: 3rem 1rem;
-  text-align: center;
-}
-.platforms h2 {
-  font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 1rem;
-}
-.platform-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-.platform {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-/* 🧩 Platform Section */
-.platforms {
-  padding: 3rem 1rem;
-  background: #f8f8f8;
-  text-align: center;
-}
-.platforms h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #007bff;
-}
-.platform-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-.platform {
-  background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  font-size: 1.1rem;
-}
-/* 🚀 Platforms Section */
-.platforms {
-  padding: 3rem 1rem;
-  background: #f9f9f9;
-  text-align: center;
-}
-.platforms h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #007bff;
-}
-.platform-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  font-size: 1.2rem;
-}
-.platform-list span {
-  background: #00c9a7;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-}
-.platforms {
-  text-align: center;
-  padding: 30px;
-}
-
-.platform-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
-}
-
-.platform {
-  text-align: center;
-}
-
-.platform-logo {
-  width: 50px; /* Adjust as needed */
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.platform p {
-  font-size: 14px;
-  font-weight: bold;
-}
-.platform-section {
-  text-align: center;
-  margin: 50px 0;
-}
-
-.platform-section h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.platform-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 0;
-  list-style: none;
-}
-
-.platform-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100px;
-}
-
-.platform-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-
-.platform-item span {
-  font-size: 0.9em;
-  color: #333;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 600px) {
-  .platform-item {
-    width: 80px;
-  }
-  
-  .platform-item img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .platform-item span {
-    font-size: 0.8em;
+  .platform-card img {
+    width: 40px;
+    height: 40px;
   }
 }
