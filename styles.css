@@ -1,146 +1,112 @@
-/* Reset some default browser styles */
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #ffffff;
-  color: #333;
+.hero {
+  background: url('images/checkreel-hero-desktop.jpg') no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  color: white;
   padding: 20px;
 }
 
-/* Logo */
-.logo {
-  max-width: 150px;
+.hero img {
+  width: 150px;
   margin-bottom: 20px;
-}
-
-/* Hero Section */
-.hero {
-  background: url('images/checkreel-hero-desktop.jpg') no-repeat center center/cover;
-  padding: 60px 20px;
-  color: #fff;
 }
 
 .hero h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
+  font-size: 48px;
+  margin: 10px 0;
 }
 
 .hero p {
-  font-size: 1.2em;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 36px;
   margin-bottom: 20px;
 }
 
-/* Benefits */
-.benefits {
-  margin: 40px 0;
-}
-
-.benefits div {
-  margin-bottom: 10px;
-  font-size: 1.1em;
-}
-
-/* Services */
-.services {
-  margin: 40px 0;
-}
-
-.service-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.service-list div {
-  background: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  width: 250px;
-}
-
-/* Platforms */
 .platforms {
-  margin: 40px 0;
-}
-
-.platform-logos {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.platform-logos img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-/* Subscription */
-.subscription {
-  margin: 40px 0;
-}
-
-.subscription form {
-  display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.platform-button {
+  background-color: #00c6a9;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
   gap: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.subscription input[type="email"] {
+.platform-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.platform-button:hover {
+  background-color: #009e8a;
+}
+
+.subscription-form {
+  margin-top: 40px;
+}
+
+.subscription-form input {
   padding: 10px;
+  font-size: 16px;
   width: 250px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-right: 10px;
 }
 
-.subscription button {
+.subscription-form button {
   padding: 10px 20px;
-  background: #007BFF;
-  color: #fff;
+  font-size: 16px;
+  background-color: #00c6a9;
+  color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-/* About */
-.about {
-  margin: 40px 0;
+.subscription-form button:hover {
+  background-color: #009e8a;
 }
 
-/* Footer */
-.footer {
-  margin-top: 40px;
+.language-switcher {
+  margin-top: 20px;
 }
 
-#language-select {
-  padding: 10px;
-  font-size: 1em;
+.language-switcher select {
+  padding: 8px;
+  font-size: 16px;
 }
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .hero {
-    background: url('images/checkreel-hero-mobile.jpg') no-repeat center center/cover;
-  }
-  
-  .service-list {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .platform-logos {
-    flex-direction: column;
-    align-items: center;
+    background: url('images/checkreel-hero-mobile.jpg') no-repeat center center;
+    background-size: cover;
   }
 }
