@@ -1,37 +1,28 @@
 {
   "heroTitle": "CheckReel",
-  "heroSubtitle": "Arrêtez de deviner, commencez à vérifier.",
+  "heroSubtitle": "Cessez de deviner, commencez à vérifier.",
   "heroBenefits": [
-    "✅ Analysez vos médias avant qu'ils ne causent problème",
-    "✅ Vérifications IA pour vidéos, audios et images",
-    "✅ Essai gratuit : 3 vérifications au total",
+    "✅ Analysez vos médias avant que cela ne vous retombe dessus",
+    "✅ Vérifications IA pour vidéo, audio et images",
+    "✅ Essai gratuit : 3 analyses",
     "✅ 4,99$/mois pour un accès illimité"
   ],
   "startTrial": "Commencer l'essai gratuit",
+  "servicesTitle": "Autres Services",
   "services": {
-    "1": ["Gestion des réseaux sociaux", "De la stratégie au contenu."],
-    "2": ["Sites Web et applications IA", "Outils intelligents pour votre marque."],
-    "3": ["Campagnes marketing", "Croissance pilotée par les données à grande échelle."]
+    "1": ["Gestion des Réseaux Sociaux", "De la stratégie au contenu."],
+    "2": ["Sites Web & Apps IA", "Outils intelligents pour votre marque."],
+    "3": ["Campagnes Marketing", "Croissance basée sur les données."]
   },
   "subscription": {
     "title": "Commencez votre essai gratuit",
     "placeholder": "Entrez votre email",
     "button": "S'abonner",
-    "note": "4,99$/mois par produit après l'essai",
-    "count": "🎯 {count} utilisateurs actifs"
-  },
-  "platforms": {
-    "title": "Plateformes supportées",
-    "list": [
-      { "name": "TikTok", "logo": "tiktok.png" },
-      { "name": "YouTube", "logo": "youtube.png" },
-      { "name": "Instagram", "logo": "instagram.png" },
-      { "name": "Snapchat", "logo": "snapchat.png" },
-      { "name": "Podcasts", "logo": "podcasts.png" }
-    ]
+    "note": "4,99$/mois par produit après essai",
+    "count": "🎯 {count} Utilisateurs actifs"
   },
   "about": {
     "title": "À propos de CheckReel",
-    "content": "CheckReel est un service phare de Alwafer Media — un studio complet offrant gestion de comptes sociaux, sites Web et apps alimentés par l'IA, et campagnes marketing basées sur les données."
+    "content": "CheckReel est un projet d'Alwafer Media — un studio complet pour la gestion de comptes, la création de sites et d'applications basées sur l'IA, et des campagnes marketing précises.\n\nCe que vous obtenez : vérification immédiate des médias, conseils de correction simples, et essai gratuit pour trois fichiers.\nPourquoi CheckReel est important : protéger votre marque, économiser des heures de travail, et éviter les avertissements et suspensions."
   }
 }
