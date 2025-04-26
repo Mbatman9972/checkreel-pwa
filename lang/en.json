@@ -7,7 +7,7 @@
     "✅ Free trial: 3 total scans",
     "✅ $4.99/month for unlimited access"
   ],
-  "startTrial": "Start Your Free Trial",
+  "startTrial": "Start Free Trial",
   "services": {
     "1": ["Social Media Management", "From strategy to content."],
     "2": ["Web & AI Apps", "Smart tools built for your brand."],
@@ -20,19 +20,18 @@
     "note": "$4.99/month per product after trial",
     "count": "🎯 {count} active users"
   },
-  "about": {
-    "title": "About CheckReel",
-    "content": "CheckReel is an Alwafer Media project — a full-stack digital studio for managing social accounts, building AI-driven tools, and launching precise campaigns."
-  },
   "platforms": {
     "title": "Supported Platforms",
-    "items": [
-      { "name": "Facebook", "logo": "images/platform-logos/facebook.png" },
-      { "name": "Instagram", "logo": "images/platform-logos/instagram.png" },
-      { "name": "Snapchat", "logo": "images/platform-logos/snapchat.png" },
-      { "name": "Threads", "logo": "images/platform-logos/threads.png" },
-      { "name": "Twitter", "logo": "images/platform-logos/twitter.png" },
-      { "name": "YouTube", "logo": "images/platform-logos/youtube.png" }
+    "list": [
+      { "name": "TikTok", "logo": "tiktok.png" },
+      { "name": "YouTube", "logo": "youtube.png" },
+      { "name": "Instagram", "logo": "instagram.png" },
+      { "name": "Snapchat", "logo": "snapchat.png" },
+      { "name": "Podcasts", "logo": "podcasts.png" }
     ]
+  },
+  "about": {
+    "title": "About CheckReel",
+    "content": "CheckReel is a flagship service of Alwafer Media — a full-stack studio delivering end-to-end social account management, AI-powered websites & mobile apps, and data-driven marketing campaigns."
   }
 }
