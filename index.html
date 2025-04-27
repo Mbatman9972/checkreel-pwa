@@ -7,34 +7,39 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <header class="hero">
+  <section class="hero">
     <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
-    <h1 id="hero-title"></h1>
-    <p id="hero-subtitle"></p>
-    <button id="start-trial"></button>
-  </header>
-
-  <section class="benefits" id="benefits-list"></section>
-
-  <section class="services">
-    <h2 id="services-title">Our Services</h2>
-    <div class="service-list" id="services-list"></div>
+    <h1 id="title"></h1>
+    <p id="tagline"></p>
   </section>
 
-  <section class="platforms">
-    <h2 id="platforms-title">Supported Platforms</h2>
-    <div class="platform-logos" id="platform-logos"></div>
+  <section class="services">
+    <h2 id="services-title"></h2>
+    <ul id="services-list"></ul>
   </section>
 
   <section class="subscription">
-    <h2 id="subscription-title"></h2>
+    <h2 id="start-trial-title"></h2>
     <form id="subscription-form">
       <input type="email" id="email" placeholder="">
       <button type="submit" id="subscribe-button"></button>
     </form>
     <p id="subscription-note"></p>
-    <p id="active-users"></p>
+    <p id="subscription-count"></p>
+  </section>
+
+  <section class="platforms">
+    <h2 id="platforms-title"></h2>
+    <div class="platform-icons">
+      <img src="images/platform-logos/tiktok.png" alt="TikTok">
+      <img src="images/platform-logos/youtube.png" alt="YouTube">
+      <img src="images/platform-logos/instagram.png" alt="Instagram">
+      <img src="images/platform-logos/snapchat.png" alt="Snapchat">
+      <img src="images/platform-logos/facebook.png" alt="Facebook">
+      <img src="images/platform-logos/threads.png" alt="Threads">
+      <img src="images/platform-logos/twitter.png" alt="Twitter">
+      <img src="images/platform-logos/podcasts.png" alt="Podcasts">
+    </div>
   </section>
 
   <section class="about">
@@ -42,8 +47,8 @@
     <p id="about-content"></p>
   </section>
 
-  <footer class="footer">
-    <select id="language-select">
+  <footer>
+    <select id="language-selector">
       <option value="en">English</option>
       <option value="ar">العربية</option>
       <option value="fr">Français</option>
@@ -51,6 +56,5 @@
   </footer>
 
   <script src="app.js"></script>
-
 </body>
 </html>

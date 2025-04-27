@@ -1,112 +1,95 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: url('images/checkreel-hero-desktop.jpg') no-repeat center center/cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero {
-  background: url('images/checkreel-hero-desktop.jpg') no-repeat center center;
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  color: white;
-  padding: 20px;
+  padding: 100px 20px 60px;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
 }
 
-.hero img {
+.logo {
   width: 150px;
   margin-bottom: 20px;
 }
 
-.hero h1 {
-  font-size: 48px;
-  margin: 10px 0;
-}
-
-.hero p {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.section {
+.services, .subscription, .platforms, .about {
+  background: #fff;
   padding: 60px 20px;
   text-align: center;
 }
 
-.section h2 {
-  font-size: 36px;
+.services h2, .platforms h2, .about h2, .subscription h2 {
   margin-bottom: 20px;
+  font-size: 2rem;
 }
 
-.platforms {
+.platform-icons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-}
-
-.platform-button {
-  background-color: #00c6a9;
-  border: none;
-  border-radius: 10px;
-  padding: 15px 30px;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.platform-button img {
-  width: 24px;
-  height: 24px;
-}
-
-.platform-button:hover {
-  background-color: #009e8a;
-}
-
-.subscription-form {
-  margin-top: 40px;
-}
-
-.subscription-form input {
-  padding: 10px;
-  font-size: 16px;
-  width: 250px;
-  margin-right: 10px;
-}
-
-.subscription-form button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #00c6a9;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.subscription-form button:hover {
-  background-color: #009e8a;
-}
-
-.language-switcher {
+  gap: 15px;
   margin-top: 20px;
 }
 
-.language-switcher select {
-  padding: 8px;
-  font-size: 16px;
+.platform-icons img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 }
-@media (max-width: 768px) {
+
+.subscription form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.subscription input {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  max-width: 80%;
+}
+
+.subscription button {
+  padding: 10px;
+  font-size: 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+footer {
+  background: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+footer select {
+  padding: 8px;
+  font-size: 14px;
+}
+
+@media(max-width: 768px) {
   .hero {
-    background: url('images/checkreel-hero-mobile.jpg') no-repeat center center;
-    background-size: cover;
+    padding: 80px 10px 50px;
+  }
+  
+  .platform-icons img {
+    width: 50px;
+    height: 50px;
   }
 }
