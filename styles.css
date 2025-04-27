@@ -1,4 +1,14 @@
-/* GENERAL RESET */
+/* GENERAL RESET */header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
 * {
   margin: 0;
   padding: 0;
