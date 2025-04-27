@@ -22,7 +22,7 @@ header {
   margin-bottom: 10px;
 }
 
-/* HERO SECTION */
+/* HERO Section */
 .hero {
   background-image: url('images/checkreel-hero-desktop.jpg');
   background-size: cover;
@@ -41,7 +41,7 @@ header {
   color: #fff;
 }
 
-/* PLATFORMS SECTION */
+/* PLATFORM Section */
 .platforms {
   padding: 4rem 2rem;
   text-align: center;
@@ -60,7 +60,7 @@ header {
   height: 60px;
 }
 
-/* SUBSCRIPTION SECTION */
+/* SUBSCRIPTION Section */
 .subscription {
   padding: 4rem 2rem;
   text-align: center;
@@ -85,7 +85,7 @@ header {
   margin-top: 1rem;
 }
 
-/* ABOUT SECTION */
+/* ABOUT Section */
 .about {
   padding: 4rem 2rem;
   background: #f9f9f9;
