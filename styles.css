@@ -10,7 +10,7 @@ body {
   color: #333;
 }
 
-/* HEADER */
+/* HEADER LOGO */
 header {
   text-align: center;
   margin-top: 20px;
@@ -34,14 +34,14 @@ header {
 }
 
 .hero-overlay {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 2rem;
   border-radius: 8px;
   text-align: center;
   color: #fff;
 }
 
-/* PLATFORM LOGOS */
+/* PLATFORM SECTION */
 .platforms {
   padding: 4rem 2rem;
   text-align: center;
@@ -60,7 +60,7 @@ header {
   height: 60px;
 }
 
-/* SUBSCRIPTION */
+/* SUBSCRIPTION SECTION */
 .subscription {
   padding: 4rem 2rem;
   text-align: center;
@@ -85,7 +85,7 @@ header {
   margin-top: 1rem;
 }
 
-/* ABOUT */
+/* ABOUT SECTION */
 .about {
   padding: 4rem 2rem;
   background: #f9f9f9;
