@@ -8,7 +8,6 @@
 body {
   font-family: 'Arial', sans-serif;
   color: #333;
-  background-color: #ffffff;
 }
 
 /* HEADER */
@@ -23,7 +22,7 @@ header {
   margin-bottom: 10px;
 }
 
-/* HERO */
+/* HERO SECTION */
 .hero {
   background-image: url('images/checkreel-hero-desktop.jpg');
   background-size: cover;
@@ -42,7 +41,7 @@ header {
   color: #fff;
 }
 
-/* PLATFORM SECTION */
+/* PLATFORMS SECTION */
 .platforms {
   padding: 4rem 2rem;
   text-align: center;
@@ -99,24 +98,4 @@ header {
   top: 20px;
   right: 20px;
   padding: 0.5rem;
-  font-size: 1rem;
-}
-
-/* Responsive Improvements */
-@media (max-width: 768px) {
-  .platform-logos {
-    gap: 1rem;
-  }
-
-  .subscription input {
-    width: 200px;
-    margin-bottom: 10px;
-  }
-
-  #language-switcher {
-    top: 10px;
-    right: 10px;
-    padding: 0.4rem;
-    font-size: 0.9rem;
-  }
 }
