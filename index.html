@@ -5,56 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CheckReel</title>
   <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <section class="hero">
-    <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
-    <h1 id="title"></h1>
-    <p id="tagline"></p>
-  </section>
 
-  <section class="services">
-    <h2 id="services-title"></h2>
-    <ul id="services-list"></ul>
-  </section>
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1 id="hero-title"></h1>
+    <p id="hero-subtitle"></p>
+    <div id="hero-benefits"></div>
+    <button id="start-trial"></button>
+  </div>
+</section>
 
-  <section class="subscription">
-    <h2 id="start-trial-title"></h2>
-    <form id="subscription-form">
-      <input type="email" id="email" placeholder="">
-      <button type="submit" id="subscribe-button"></button>
-    </form>
+<!-- PLATFORM SECTION -->
+<section class="platforms">
+  <h2 id="platforms-title"></h2>
+  <div class="platform-logos">
+    <img src="images/platform-logos/facebook.png" alt="Facebook">
+    <img src="images/platform-logos/instagram.png" alt="Instagram">
+    <img src="images/platform-logos/youtube.png" alt="YouTube">
+    <img src="images/platform-logos/twitter.png" alt="Twitter">
+    <img src="images/platform-logos/threads.png" alt="Threads">
+    <img src="images/platform-logos/snapchat.png" alt="Snapchat">
+  </div>
+</section>
+
+<!-- SUBSCRIPTION SECTION -->
+<section class="subscription">
+  <h2 id="subscription-title"></h2>
+  <form id="subscribe-form">
+    <input type="email" id="email-input" placeholder="">
+    <button type="submit" id="subscribe-button"></button>
     <p id="subscription-note"></p>
-    <p id="subscription-count"></p>
-  </section>
+    <p id="active-users"></p>
+  </form>
+</section>
 
-  <section class="platforms">
-    <h2 id="platforms-title"></h2>
-    <div class="platform-icons">
-      <img src="images/platform-logos/tiktok.png" alt="TikTok">
-      <img src="images/platform-logos/youtube.png" alt="YouTube">
-      <img src="images/platform-logos/instagram.png" alt="Instagram">
-      <img src="images/platform-logos/snapchat.png" alt="Snapchat">
-      <img src="images/platform-logos/facebook.png" alt="Facebook">
-      <img src="images/platform-logos/threads.png" alt="Threads">
-      <img src="images/platform-logos/twitter.png" alt="Twitter">
-      <img src="images/platform-logos/podcasts.png" alt="Podcasts">
-    </div>
-  </section>
+<!-- ABOUT SECTION -->
+<section class="about">
+  <h2 id="about-title"></h2>
+  <p id="about-content"></p>
+</section>
 
-  <section class="about">
-    <h2 id="about-title"></h2>
-    <p id="about-content"></p>
-  </section>
+<!-- LANGUAGE SWITCHER -->
+<select id="language-switcher">
+  <option value="en">English</option>
+  <option value="ar">العربية</option>
+  <option value="fr">Français</option>
+</select>
 
-  <footer>
-    <select id="language-selector">
-      <option value="en">English</option>
-      <option value="ar">العربية</option>
-      <option value="fr">Français</option>
-    </select>
-  </footer>
-
-  <script src="app.js"></script>
 </body>
 </html>

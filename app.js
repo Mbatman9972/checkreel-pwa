@@ -1,36 +1,44 @@
-let actualSubscribers = 2697;
+// Define translations
+let translations = {};
+let currentLang = 'en';
 
-function loadLanguage(lang) {
-  fetch(`lang/${lang}.json`)
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('title').innerText = data.hero.title;
-      document.getElementById('tagline').innerText = data.hero.tagline;
-      document.getElementById('services-title').innerText = data.services.title;
-      document.getElementById('start-trial-title').innerText = data.subscription.title;
-      document.getElementById('email').placeholder = data.subscription.placeholder;
-      document.getElementById('subscribe-button').innerText = data.subscription.button;
-      document.getElementById('subscription-note').innerText = data.subscription.note;
-      document.getElementById('subscription-count').innerText = data.subscription.count.replace('{count}', actualSubscribers);
-      document.getElementById('platforms-title').innerText = data.platforms.title;
-      document.getElementById('about-title').innerText = data.about.title;
-      document.getElementById('about-content').innerText = data.about.content;
-
-      document.getElementById('services-list').innerHTML = data.services.items
-        .map(item => `<li>${item}</li>`)
-        .join('');
-    });
+async function loadLanguage(lang) {
+  const res = await fetch(`lang/${lang}.json`);
+  translations = await res.json();
+  applyTranslations();
 }
 
-document.getElementById('language-selector').addEventListener('change', (e) => {
+function applyTranslations() {
+  document.getElementById('hero-title').innerText = translations.heroTitle;
+  document.getElementById('hero-subtitle').innerText = translations.heroSubtitle;
+
+  const benefitsHtml = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
+  document.getElementById('hero-benefits').innerHTML = benefitsHtml;
+
+  document.getElementById('start-trial').innerText = translations.startTrial;
+
+  document.getElementById('platforms-title').innerText = translations.platformsTitle;
+
+  document.getElementById('subscription-title').innerText = translations.subscription.title;
+  document.getElementById('email-input').placeholder = translations.subscription.placeholder;
+  document.getElementById('subscribe-button').innerText = translations.subscription.button;
+  document.getElementById('subscription-note').innerText = translations.subscription.note;
+
+  document.getElementById('about-title').innerText = translations.about.title;
+  document.getElementById('about-content').innerText = translations.about.content;
+}
+
+document.getElementById('language-switcher').addEventListener('change', (e) => {
   loadLanguage(e.target.value);
 });
 
-loadLanguage('en'); // Default language
+loadLanguage(currentLang);
 
-// Subscriber counter increases every 15 seconds
-setInterval(() => {
-  actualSubscribers++;
-  const lang = document.getElementById('language-selector').value;
-  loadLanguage(lang);
-}, 15000);
+// Counter
+let activeUsers = 2697;
+const activeUsersElement = document.getElementById('active-users');
+function updateActiveUsers() {
+  activeUsers++;
+  activeUsersElement.innerText = translations.subscription.count.replace('{count}', activeUsers);
+}
+setInterval(updateActiveUsers, 15000);

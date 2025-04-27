@@ -1,28 +1,23 @@
 {
   "heroTitle": "CheckReel",
-  "heroSubtitle": "Cessez de deviner, commencez à vérifier.",
+  "heroSubtitle": "Arrêtez de deviner, commencez à vérifier.",
   "heroBenefits": [
-    "✅ Analysez vos médias avant que cela ne vous retombe dessus",
-    "✅ Vérifications IA pour vidéo, audio et images",
-    "✅ Essai gratuit : 3 analyses",
+    "✅ Analysez vos médias avant qu'ils ne posent problème",
+    "✅ IA pour vidéos, audios et images",
+    "✅ Essai gratuit: 3 analyses",
     "✅ 4,99$/mois pour un accès illimité"
   ],
   "startTrial": "Commencer l'essai gratuit",
-  "servicesTitle": "Autres Services",
-  "services": {
-    "1": ["Gestion des Réseaux Sociaux", "De la stratégie au contenu."],
-    "2": ["Sites Web & Apps IA", "Outils intelligents pour votre marque."],
-    "3": ["Campagnes Marketing", "Croissance basée sur les données."]
-  },
+  "platformsTitle": "Plateformes supportées",
   "subscription": {
     "title": "Commencez votre essai gratuit",
-    "placeholder": "Entrez votre email",
+    "placeholder": "Entrez votre e-mail",
     "button": "S'abonner",
-    "note": "4,99$/mois par produit après essai",
-    "count": "🎯 {count} Utilisateurs actifs"
+    "note": "4,99$/mois après l'essai",
+    "count": "🎯 {count} utilisateurs actifs"
   },
   "about": {
     "title": "À propos de CheckReel",
-    "content": "CheckReel est un projet d'Alwafer Media — un studio complet pour la gestion de comptes, la création de sites et d'applications basées sur l'IA, et des campagnes marketing précises.\n\nCe que vous obtenez : vérification immédiate des médias, conseils de correction simples, et essai gratuit pour trois fichiers.\nPourquoi CheckReel est important : protéger votre marque, économiser des heures de travail, et éviter les avertissements et suspensions."
+    "content": "CheckReel fait partie de Alwafer Media - gestion de réseaux sociaux, développement d'applications IA et campagnes marketing de précision.\n\nCe que vous obtenez : analyse instantanée des médias, instructions de correction simples, essai gratuit pour trois fichiers.\nPourquoi CheckReel est important : économiser du temps, protéger votre marque, éviter les avertissements et les blocages."
   }
 }
