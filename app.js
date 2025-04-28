@@ -47,10 +47,11 @@ function updateActiveUsers() {
 }
 setInterval(updateActiveUsers, 15000);
 
-// Checkreel subscription
+// Checkreel subscription system
 
-// ✨ Correctly assigned API URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbwZapWr4wp_O_Hu8jms2mPtZShJOHqYbwTeYGsIvAeCAN_GMNAtBoGgOLOnZgZiHvc/exec://script.google.com/macros/s/AKfycbzGuMHSngnPSIIiV8npyrCR3YRm_B7kLYX1pzxaAj_21dGfpkMeVZnsDQEor3cQlFQ/exec';
+// ✅ Correct API URL assigned here:
+const API_URL = 'https://script.google.com/macros/s/AKfycbyuclCdGyHVl-rz-23SF4Sed_AzyDGM_TTkk1V0X-jz-GEpT83uSYFhiRC-Slsi-w4/exec';
+
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
     .then(response => response.json())
