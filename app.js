@@ -47,10 +47,10 @@ function updateActiveUsers() {
 }
 setInterval(updateActiveUsers, 15000);
 
-// ----- Checkreel subscription -----
+// Checkreel subscription
 
-// ✨ Replace this URL with YOUR APPS SCRIPT deployed URL ✨
-const API_URL = const API_URL = 'https://script.google.com/macros/s/AKfycbzGuMHSngnPSIIiV8npyrCR3YRm_B7kLYX1pzxaAj_21dGfpkMeVZnsDQEor3cQlFQ/exec';
+// ✨ Correctly assigned API URL
+const API_URL = 'https://script.google.com/macros/s/AKfycbzGuMHSngnPSIIiV8npyrCR3YRm_B7kLYX1pzxaAj_21dGfpkMeVZnsDQEor3cQlFQ/exec';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
@@ -75,6 +75,6 @@ document.getElementById('subscribe-form').addEventListener('submit', function(e)
   if (email) {
     subscribeUser(email);
   } else {
-    alert('Please enter a valid email address.');
+    alert('⚠️ Please enter a valid email address.');
   }
 });
