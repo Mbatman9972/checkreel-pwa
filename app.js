@@ -46,10 +46,12 @@ function updateActiveUsers() {
     activeUsersElement.innerText = `🎯 ${activeUsers} Active Users`;
   }
 }
-updateActiveUsers(); // Initial set
+updateActiveUsers(); // Initial counter
 
-// 🚀 CORRECT Web App URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbwuDs_Ro2-YsqJiQnTyOuzKrJAlGVyeCGeq-Kv6ujM_CdYGcJLXa2JkXrMM3J8bquI/exec';
+// ✅ Correct new Web App API URL
+const API_URL = 'https://script.google.com/macros/s/AKfycbwTvpc2nixb2JAbTZD_-sy5ToXOZiOIoZHgpzSxmmrFLbPeFwgO--YlgvnDEIwOfQ/exec';
+
+// Subscription function
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
     .then(response => response.json())
@@ -69,6 +71,7 @@ function subscribeUser(email) {
     });
 }
 
+// Form submit event
 document.getElementById('subscribe-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const email = document.getElementById('email-input').value.trim();
