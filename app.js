@@ -58,7 +58,7 @@ function subscribeUser(email) {
       if (data.result === 'success') {
         alert('✅ Thanks for subscribing! Check your email.');
         document.getElementById('email-input').value = '';
-        activeUsers++; // Only increment for testing after subscription
+        activeUsers++; // Increment for now during test
         updateActiveUsers();
       } else {
         alert('⚠️ Oops! Something went wrong.');
