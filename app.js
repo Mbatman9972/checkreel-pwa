@@ -13,8 +13,10 @@ async function loadLanguage(lang) {
 function applyTranslations() {
   document.getElementById('hero-title').innerText = translations.heroTitle;
   document.getElementById('hero-subtitle').innerText = translations.heroSubtitle;
+
   const benefitsHtml = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
   document.getElementById('hero-benefits').innerHTML = benefitsHtml;
+
   document.getElementById('start-trial').innerText = translations.startTrial;
   document.getElementById('platforms-title').innerText = translations.platformsTitle;
   document.getElementById('subscription-title').innerText = translations.subscription.title;
@@ -44,11 +46,10 @@ function updateActiveUsers() {
     activeUsersElement.innerText = `🎯 ${activeUsers} Active Users`;
   }
 }
-updateActiveUsers(); // Initial set without auto-growing anymore
+updateActiveUsers(); // Initial set
 
-// Correct final deployed Apps Script URL (YOUR LAST DEPLOYMENT)
+// 🚀 CORRECT Web App URL
 const API_URL = 'https://script.google.com/macros/s/AKfycbwuDs_Ro2-YsqJiQnTyOuzKrJAlGVyeCGeq-Kv6ujM_CdYGcJLXa2JkXrMM3J8bquI/exec';
-
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
     .then(response => response.json())
@@ -56,7 +57,7 @@ function subscribeUser(email) {
       if (data.result === 'success') {
         alert('✅ Thanks for subscribing! Check your email.');
         document.getElementById('email-input').value = '';
-        activeUsers++; // Only for temporary testing increase
+        activeUsers++;
         updateActiveUsers();
       } else {
         alert('⚠️ Oops! Something went wrong.');
