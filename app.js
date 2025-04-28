@@ -48,8 +48,6 @@ function updateActiveUsers() {
 }
 updateActiveUsers(); // Initial set without auto-growing anymore
 
-// Checkreel subscription
-
 // Correct final deployed Apps Script URL
 const API_URL = 'https://script.google.com/macros/s/AKfycbwuDs_Ro2-YsqJiQnTyOuzKrJAlGVyeCGeq-Kv6ujM_CdYGcJLXa2JkXrMM3J8bquI/exec';
 
@@ -60,8 +58,7 @@ function subscribeUser(email) {
       if (data.result === 'success') {
         alert('✅ Thanks for subscribing! Check your email.');
         document.getElementById('email-input').value = '';
-        // Temporary testing: Increase counter by 1 when user subscribes
-        activeUsers++;
+        activeUsers++; // Only increment for testing after subscription
         updateActiveUsers();
       } else {
         alert('⚠️ Oops! Something went wrong.');
