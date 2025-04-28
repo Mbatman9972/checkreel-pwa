@@ -35,21 +35,22 @@ document.getElementById('language-switcher').addEventListener('change', (e) => {
 // Load default language
 loadLanguage(currentLang);
 
+// -----------------------------
 // Active subscribers counter
-let activeUsers = 2697;
+// -----------------------------
+
+let startingSubscribers = 2697;
+let activeUsers = startingSubscribers;
 const activeUsersElement = document.getElementById('active-users');
 
-function updateActiveUsers() {
-  activeUsers++;
+function updateDisplayedUsers() {
   if (translations.subscription?.count) {
     activeUsersElement.innerText = translations.subscription.count.replace('{count}', activeUsers);
   }
 }
-setInterval(updateActiveUsers, 15000);
+updateDisplayedUsers();
 
-// Checkreel subscription system
-
-// ✅ Correct API URL assigned here:
+// Checkreel subscription
 const API_URL = 'https://script.google.com/macros/s/AKfycbyuclCdGyHVl-rz-23SF4Sed_AzyDGM_TTkk1V0X-jz-GEpT83uSYFhiRC-Slsi-w4/exec';
 
 function subscribeUser(email) {
@@ -57,8 +58,17 @@ function subscribeUser(email) {
     .then(response => response.json())
     .then(data => {
       if (data.result === 'success') {
+        activeUsers = startingSubscribers + 1;
+        updateDisplayedUsers();
         alert('✅ Thanks for subscribing! Check your email.');
         document.getElementById('email-input').value = '';
+
+        // Reset back to starting number after 20 seconds
+        setTimeout(() => {
+          activeUsers = startingSubscribers;
+          updateDisplayedUsers();
+        }, 20000); // 20 seconds
+
       } else {
         alert('⚠️ Oops! Something went wrong.');
       }
