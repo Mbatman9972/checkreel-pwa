@@ -50,8 +50,7 @@ setInterval(updateActiveUsers, 15000);
 // Checkreel subscription
 
 // ✨ Correctly assigned API URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbzGuMHSngnPSIIiV8npyrCR3YRm_B7kLYX1pzxaAj_21dGfpkMeVZnsDQEor3cQlFQ/exec';
-
+const API_URL = 'https://script.google.com/macros/s/AKfycbwZapWr4wp_O_Hu8jms2mPtZShJOHqYbwTeYGsIvAeCAN_GMNAtBoGgOLOnZgZiHvc/exec://script.google.com/macros/s/AKfycbzGuMHSngnPSIIiV8npyrCR3YRm_B7kLYX1pzxaAj_21dGfpkMeVZnsDQEor3cQlFQ/exec';
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
     .then(response => response.json())
