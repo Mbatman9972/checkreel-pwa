@@ -49,7 +49,7 @@ function updateActiveUsers() {
 updateActiveUsers(); // Initial set without auto-growing anymore
 
 // Correct final deployed Apps Script URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbwuDs_Ro2-YsqJiQnTyOuzKrJAlGVyeCGeq-Kv6ujM_CdYGcJLXa2JkXrMM3J8bquI/exec';
+const API_URL = 'https://script.google.com/macros/library/d/1WYQOlLKoE-F7z-3Rb5-qUoXU2yxy_5NK-Au-M3V9k3p2sRgg51lhpX1r/7';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
