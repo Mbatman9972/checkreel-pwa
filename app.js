@@ -9,14 +9,10 @@ async function loadLanguage(lang) {
   applyTranslations();
 }
 
-// Apply translations to page
 function applyTranslations() {
   document.getElementById('hero-title').innerText = translations.heroTitle;
   document.getElementById('hero-subtitle').innerText = translations.heroSubtitle;
-
-  const benefitsHtml = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
-  document.getElementById('hero-benefits').innerHTML = benefitsHtml;
-
+  document.getElementById('hero-benefits').innerHTML = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
   document.getElementById('start-trial').innerText = translations.startTrial;
   document.getElementById('platforms-title').innerText = translations.platformsTitle;
   document.getElementById('subscription-title').innerText = translations.subscription.title;
@@ -25,6 +21,7 @@ function applyTranslations() {
   document.getElementById('subscription-note').innerText = translations.subscription.note;
   document.getElementById('about-title').innerText = translations.about.title;
   document.getElementById('about-content').innerText = translations.about.content;
+  updateDisplayedUsers(); // Refresh users count translation too
 }
 
 // Language switcher
@@ -32,13 +29,11 @@ document.getElementById('language-switcher').addEventListener('change', (e) => {
   loadLanguage(e.target.value);
 });
 
-// Load default language
 loadLanguage(currentLang);
 
-// -----------------------------
-// Active subscribers counter
-// -----------------------------
-
+// --------------------------------------------
+// Active users counter system (real + fake)
+// --------------------------------------------
 let startingSubscribers = 2697;
 let activeUsers = startingSubscribers;
 const activeUsersElement = document.getElementById('active-users');
@@ -50,7 +45,7 @@ function updateDisplayedUsers() {
 }
 updateDisplayedUsers();
 
-// Checkreel subscription
+// ✨ Correct API URL
 const API_URL = 'https://script.google.com/macros/s/AKfycbyuclCdGyHVl-rz-23SF4Sed_AzyDGM_TTkk1V0X-jz-GEpT83uSYFhiRC-Slsi-w4/exec';
 
 function subscribeUser(email) {
@@ -58,16 +53,16 @@ function subscribeUser(email) {
     .then(response => response.json())
     .then(data => {
       if (data.result === 'success') {
-        activeUsers = startingSubscribers + 1;
+        activeUsers++;
         updateDisplayedUsers();
         alert('✅ Thanks for subscribing! Check your email.');
         document.getElementById('email-input').value = '';
 
-        // Reset back to starting number after 20 seconds
+        // Reset back after 20 seconds
         setTimeout(() => {
           activeUsers = startingSubscribers;
           updateDisplayedUsers();
-        }, 20000); // 20 seconds
+        }, 20000);
 
       } else {
         alert('⚠️ Oops! Something went wrong.');
