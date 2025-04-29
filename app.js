@@ -48,8 +48,8 @@ function updateActiveUsers() {
 }
 updateActiveUsers(); // Initial set
 
-// 🚀 CORRECT Web App URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbz_nAkEaAqgU5UF-jLqKXMMVLVpR4VkAN_yATH7nFiiOaU4hsb6fqMwFM1GoEb6SHKA/exec';
+// ✅ FINAL Correct API URL
+const API_URL = 'https://script.google.com/macros/s/AKfycbzZ6Gq0gaKfuat-C87Cmr_IrscBH8iLvsz6z8eA_hFUREpP-s38BnzzPeZN5HYSw4kx/exec';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
