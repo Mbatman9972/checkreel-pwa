@@ -49,7 +49,7 @@ function updateActiveUsers() {
 updateActiveUsers(); // Initial set
 
 // 🚀 CORRECT Web App URL
-const API_URL = 'https://script.google.com/macros/s/AKfycbzPQQ29gFfaWvml6l6wlSU47MsvosP5oGBCbJKVdt_baQw7F9XekclGbiFIOIRJhQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbz_nAkEaAqgU5UF-jLqKXMMVLVpR4VkAN_yATH7nFiiOaU4hsb6fqMwFM1GoEb6SHKA/exec';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
