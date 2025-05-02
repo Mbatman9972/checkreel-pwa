@@ -1,4 +1,4 @@
-// Initialize translations
+// ====== Translations Setup ======
 let translations = {};
 let currentLang = 'en';
 
@@ -6,6 +6,7 @@ async function loadLanguage(lang) {
   const res = await fetch(`lang/${lang}.json`);
   translations = await res.json();
   applyTranslations();
+  updateActiveUsers(); // moved inside to ensure translations are ready
 }
 
 function applyTranslations() {
@@ -22,25 +23,28 @@ function applyTranslations() {
   document.getElementById('about-content').innerText = translations.about.content;
 }
 
-document.getElementById('language-switcher').addEventListener('change', (e) => {
-  loadLanguage(e.target.value);
+// ====== Language Switcher ======
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('language-switcher').addEventListener('change', (e) => {
+    loadLanguage(e.target.value);
+  });
+
+  loadLanguage(currentLang); // initial load
 });
 
-loadLanguage(currentLang);
-
-// Active subscribers counter
+// ====== Active User Counter ======
 let activeUsers = 2697;
 const activeUsersElement = document.getElementById('active-users');
+
 function updateActiveUsers() {
-  if (translations.subscription?.count) {
+  if (translations.subscription && translations.subscription.count) {
     activeUsersElement.innerText = translations.subscription.count.replace('{count}', activeUsers);
   } else {
     activeUsersElement.innerText = `🎯 ${activeUsers} Active Users`;
   }
 }
-updateActiveUsers();
 
-// ✅ FINAL production Apps Script URL
+// ====== Subscription API Integration ======
 const API_URL = 'https://script.google.com/macros/s/AKfycbwLhNRd5GsFRf7l9zrHANAg30W1mzvusjIZaXeJptO932cVNWmiIlcnCu8NYKz00X3u/exec';
 
 function subscribeUser(email) {
@@ -62,12 +66,15 @@ function subscribeUser(email) {
     });
 }
 
-document.getElementById('subscribe-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email-input').value.trim();
-  if (email) {
-    subscribeUser(email);
-  } else {
-    alert('⚠️ Please enter a valid email address.');
-  }
+// ====== Form Submission Handler ======
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('subscribe-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value.trim();
+    if (email) {
+      subscribeUser(email);
+    } else {
+      alert('⚠️ Please enter a valid email address.');
+    }
+  });
 });
