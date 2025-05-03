@@ -1,66 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CheckReel</title>
-  <link rel="icon" href="images/favicon.png?v=2" type="image/png">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-<!-- HEADER with logo -->
-<header>
-  <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
-</header>
-
-<!-- HERO Section -->
-<section class="hero">
-  <div class="hero-overlay">
-    <h1 id="hero-title"></h1>
+  <section id="hero">
+    <h1 id="hero-title">Loading...</h1>
     <p id="hero-subtitle"></p>
     <div id="hero-benefits"></div>
-    <button id="start-trial"></button>
-  </div>
-</section>
-
-<!-- PLATFORM Section -->
-<section class="platforms">
-  <h2 id="platforms-title"></h2>
-  <div class="platform-logos">
-    <img src="images/platform-logos/facebook.png" alt="Facebook">
-    <img src="images/platform-logos/instagram.png" alt="Instagram">
-    <img src="images/platform-logos/youtube.png" alt="YouTube">
-    <img src="images/platform-logos/twitter.png" alt="Twitter">
-    <img src="images/platform-logos/threads.png" alt="Threads">
-    <img src="images/platform-logos/snapchat.png" alt="Snapchat">
-  </div>
-</section>
-
-<!-- SUBSCRIPTION Section -->
-<section class="subscription">
-  <h2 id="subscription-title"></h2>
-  <form id="subscribe-form">
-    <input type="email" id="email-input" placeholder="">
-    <button type="submit" id="subscribe-button"></button>
+    <form id="subscribe-form">
+      <input type="email" id="email-input" placeholder="Enter your email" required />
+      <button type="submit" id="subscribe-button">Subscribe</button>
+    </form>
     <p id="subscription-note"></p>
-    <p id="active-users"></p>
-  </form>
-</section>
+    <p id="active-users">🎯 2697 Active Users</p>
+  </section>
 
-<!-- ABOUT Section -->
-<section class="about">
-  <h2 id="about-title"></h2>
-  <p id="about-content"></p>
-</section>
+  <section id="platforms">
+    <h2 id="platforms-title">Supported Platforms</h2>
+    <ul>
+      <li>TikTok</li>
+      <li>YouTube</li>
+      <li>Instagram</li>
+    </ul>
+  </section>
 
-<!-- LANGUAGE SWITCHER -->
-<select id="language-switcher">
-  <option value="en">English</option>
-  <option value="ar">العربية</option>
-  <option value="fr">Français</option>
-</select>
+  <section id="about">
+    <h2 id="about-title">About CheckReel</h2>
+    <p id="about-content"></p>
+  </section>
 
+  <select id="language-switcher">
+    <option value="en" selected>English</option>
+    <option value="fr">Français</option>
+    <option value="ar">العربية</option>
+  </select>
+
+  <script src="app.js"></script>
 </body>
 </html>

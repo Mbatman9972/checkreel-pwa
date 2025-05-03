@@ -1,79 +1,66 @@
-// ====== Translations Setup ======
+/* ---------- language / UI ---------- */
 let translations = {};
-let currentLang = 'en';
+let currentLang  = 'en';
 
-async function loadLanguage(lang) {
+async function loadLang(lang){
   const res = await fetch(`lang/${lang}.json`);
   translations = await res.json();
-  applyTranslations();
-  updateActiveUsers();
+  applyTxt();         // fill texts once loaded
+  updateCounter();    // refresh counter with correct template
+}
+function applyTxt(){
+  const $ = id => document.getElementById(id);
+  $('hero-title').innerText           = translations.heroTitle;
+  $('hero-subtitle').innerText        = translations.heroSubtitle;
+  $('hero-benefits').innerHTML        = translations.heroBenefits.map(t=>`<p>${t}</p>`).join('');
+  $('subscribe-button').innerText     = translations.subscription.button;
+  $('email-input').placeholder        = translations.subscription.placeholder;
+  $('subscription-note').innerText    = translations.subscription.note;
+  $('platforms-title').innerText      = translations.platformsTitle;
+  $('about-title').innerText          = translations.about.title;
+  $('about-content').innerText        = translations.about.content;
 }
 
-function applyTranslations() {
-  document.getElementById('hero-title').innerText = translations.heroTitle;
-  document.getElementById('hero-subtitle').innerText = translations.heroSubtitle;
-  document.getElementById('hero-benefits').innerHTML = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
-  document.getElementById('subscribe-button').innerText = translations.subscription.button;
-  document.getElementById('email-input').placeholder = translations.subscription.placeholder;
-  document.getElementById('subscription-note').innerText = translations.subscription.note;
-  document.getElementById('start-trial')?.innerText = translations.startTrial;
-  document.getElementById('platforms-title').innerText = translations.platformsTitle;
-  document.getElementById('about-title').innerText = translations.about.title;
-  document.getElementById('about-content').innerText = translations.about.content;
-}
-
-// ====== Language Switcher ======
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('language-switcher').addEventListener('change', (e) => {
-    loadLanguage(e.target.value);
-  });
-
-  loadLanguage(currentLang); // Initial load
-});
-
-// ====== Active User Counter ======
+/* ---------- fake active users badge ---------- */
 let activeUsers = 2697;
-const activeUsersElement = document.getElementById('active-users');
-
-function updateActiveUsers() {
-  if (translations.subscription?.count) {
-    activeUsersElement.innerText = translations.subscription.count.replace('{count}', activeUsers);
-  } else {
-    activeUsersElement.innerText = `🎯 ${activeUsers} Active Users`;
-  }
+const $badge = document.getElementById('active-users');
+function updateCounter(){
+  const t = translations?.subscription?.count || '🎯 {count} Active Users';
+  $badge.innerText = t.replace('{count}', activeUsers);
 }
 
-// ====== Subscription API Integration ======
-const API_URL = 'https://script.google.com/macros/s/AKfycbwEBpioZLrFpA5PvppkJyGywqxIyNJi1fFcedh-RvwgNi96PuyVOCprNZlPxZwLg9Je/exec';
+/* ---------- subscribe flow ---------- */
+const API_URL = 'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';  // <== YOUR web-app URL
 
-function subscribeUser(email) {
+function subscribe(email){
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.result === 'success') {
-        alert('✅ Thanks for subscribing!');
-        document.getElementById('email-input').value = '';
-        activeUsers++;
-        updateActiveUsers();
-      } else {
-        alert(`⚠️ ${data.message}`);
-      }
+    .then(r => r.json())
+    .then(j => {
+       if(j.result==='success'){
+         alert('✅ Thanks for subscribing!');
+         activeUsers++; updateCounter();
+       }else{
+         alert(`⚠️ ${j.message}`);
+       }
     })
-    .catch(err => {
-      console.error('Error:', err);
-      alert('⚡ Server error. Try again.');
+    .catch(err=>{
+       console.error(err);
+       alert('⚡ Server error – try later');
     });
 }
 
-// ====== Form Submission ======
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('subscribe-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email-input').value.trim();
-    if (email) {
-      subscribeUser(email);
-    } else {
-      alert('⚠️ Please enter a valid email address.');
-    }
-  });
+/* ---------- event wiring ---------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  loadLang(currentLang);
+
+  document.getElementById('language-switcher')
+    .addEventListener('change',e=>loadLang(e.target.value));
+
+  document.getElementById('subscribe-form')
+    .addEventListener('submit',e=>{
+       e.preventDefault();
+       const email = document.getElementById('email-input').value.trim();
+       if(email) subscribe(email);
+       else alert('⚠️ Enter a valid e-mail');
+    });
 });
