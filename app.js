@@ -6,19 +6,18 @@ async function loadLanguage(lang) {
   const res = await fetch(`lang/${lang}.json`);
   translations = await res.json();
   applyTranslations();
-  updateActiveUsers(); // moved inside to ensure translations are ready
+  updateActiveUsers();
 }
 
 function applyTranslations() {
   document.getElementById('hero-title').innerText = translations.heroTitle;
   document.getElementById('hero-subtitle').innerText = translations.heroSubtitle;
   document.getElementById('hero-benefits').innerHTML = translations.heroBenefits.map(b => `<p>${b}</p>`).join('');
-  document.getElementById('start-trial').innerText = translations.startTrial;
-  document.getElementById('platforms-title').innerText = translations.platformsTitle;
-  document.getElementById('subscription-title').innerText = translations.subscription.title;
-  document.getElementById('email-input').placeholder = translations.subscription.placeholder;
   document.getElementById('subscribe-button').innerText = translations.subscription.button;
+  document.getElementById('email-input').placeholder = translations.subscription.placeholder;
   document.getElementById('subscription-note').innerText = translations.subscription.note;
+  document.getElementById('start-trial')?.innerText = translations.startTrial;
+  document.getElementById('platforms-title').innerText = translations.platformsTitle;
   document.getElementById('about-title').innerText = translations.about.title;
   document.getElementById('about-content').innerText = translations.about.content;
 }
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadLanguage(e.target.value);
   });
 
-  loadLanguage(currentLang); // initial load
+  loadLanguage(currentLang); // Initial load
 });
 
 // ====== Active User Counter ======
@@ -37,7 +36,7 @@ let activeUsers = 2697;
 const activeUsersElement = document.getElementById('active-users');
 
 function updateActiveUsers() {
-  if (translations.subscription && translations.subscription.count) {
+  if (translations.subscription?.count) {
     activeUsersElement.innerText = translations.subscription.count.replace('{count}', activeUsers);
   } else {
     activeUsersElement.innerText = `🎯 ${activeUsers} Active Users`;
@@ -45,20 +44,19 @@ function updateActiveUsers() {
 }
 
 // ====== Subscription API Integration ======
-const API_URL = 'https://script.google.com/macros/s/AKfycbwLhNRd5GsFRf7l9zrHANAg30W1mzvusjIZaXeJptO932cVNWmiIlcnCu8NYKz00X3u/exec';
-
+const API_URL = 'https://script.google.com/macros/s/AKfycbwEBpioZLrFpA5PvppkJyGywqxIyNJi1fFcedh-RvwgNi96PuyVOCprNZlPxZwLg9Je/exec';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
     .then(res => res.json())
     .then(data => {
       if (data.result === 'success') {
-        alert('✅ Thanks for subscribing! Check your email.');
+        alert('✅ Thanks for subscribing!');
         document.getElementById('email-input').value = '';
         activeUsers++;
         updateActiveUsers();
       } else {
-        alert('⚠️ Something went wrong.');
+        alert(`⚠️ ${data.message}`);
       }
     })
     .catch(err => {
@@ -67,7 +65,7 @@ function subscribeUser(email) {
     });
 }
 
-// ====== Form Submission Handler ======
+// ====== Form Submission ======
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('subscribe-form').addEventListener('submit', (e) => {
     e.preventDefault();
