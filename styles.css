@@ -7,6 +7,8 @@ body{line-height:1.5;color:#222;background:#fff}
 .hero .logo{width:120px;margin-bottom:1rem}
 .benefits{list-style:none;margin:1rem 0}
 .benefits li{margin:0.25rem 0}
+.hero h1{font-size:3rem;font-weight:700;margin-bottom:1rem}
+.hero p{font-size:1.1rem}
 
 /* subscription box */
 .subscribe-box{margin:1.5rem auto;display:inline-flex;gap:0.5rem}
@@ -28,3 +30,6 @@ body{line-height:1.5;color:#222;background:#fff}
 
 /* ——— language switcher ——— */
 .lang-switch{position:fixed;top:1rem;right:1rem;padding:0.4rem;font-size:0.9rem}
+body{
+  background:linear-gradient(135deg,#63b3ff 0%,#e2d2ff 35%,#ffb5c6 70%,#ffd79c 100%);
+}
