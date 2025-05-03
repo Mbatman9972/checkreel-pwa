@@ -1,19 +1,30 @@
-/* --- reset / base --- */
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:sans-serif;line-height:1.5;color:#111;background:#fff;padding:2rem;display:flex;flex-direction:column;gap:4rem;max-width:900px;margin-inline:auto}
+/* ——— global reset ——— */
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{line-height:1.5;color:#222;background:#fff}
 
-/* hero */
-#hero{text-align:center}
-#logo{width:140px;margin-bottom:1rem}
-#hero-benefits{margin:1rem 0;text-align:left;display:inline-block}
-#hero-benefits p{margin:.15rem 0}
-form{margin:1rem 0;display:flex;justify-content:center;gap:.5rem}
-input{padding:.4rem .6rem;font-size:1rem;width:230px}
-button{padding:.45rem .9rem;font-size:1rem;background:#0066ff;color:#fff;border:0;border-radius:3px;cursor:pointer}
+/* ——— hero ——— */
+.hero{padding:4rem 1rem;text-align:center}
+.hero .logo{width:120px;margin-bottom:1rem}
+.benefits{list-style:none;margin:1rem 0}
+.benefits li{margin:0.25rem 0}
 
-/* platforms */
-.platform-logos{margin-top:.5rem;display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
-.platform-logos img{width:66px;height:66px}
+/* subscription box */
+.subscribe-box{margin:1.5rem auto;display:inline-flex;gap:0.5rem}
+.subscribe-box input{padding:0.5rem 0.75rem;font-size:1rem;width:220px;border:1px solid #ccc;border-radius:4px}
+.subscribe-box button{padding:0.5rem 1rem;font-size:1rem;background:#006cff;color:#fff;border:none;border-radius:4px;cursor:pointer}
+.subscribe-box button:hover{background:#0050c2}
 
-/* language switcher */
-#language-switcher{position:fixed;top:1rem;right:1rem;padding:.3rem;font-size:.9rem}
+/* small text */
+#subscription-note,#active-users{margin-top:0.5rem;font-size:0.9rem;color:#444}
+
+/* ——— platforms ——— */
+.platforms{padding:3rem 1rem;text-align:center}
+.platform-logos{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;margin-top:1rem}
+.platform-logos img{width:60px;height:60px;object-fit:contain}
+
+/* ——— about ——— */
+.about{padding:3rem 1rem;max-width:800px;margin:auto;text-align:center}
+.about h2{margin-bottom:1rem}
+
+/* ——— language switcher ——— */
+.lang-switch{position:fixed;top:1rem;right:1rem;padding:0.4rem;font-size:0.9rem}

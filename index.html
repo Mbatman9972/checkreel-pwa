@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CheckReel</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- ---------- HERO ----------- -->
-  <section id="hero">
-    <img src="images/checkreel-logo.png" alt="CheckReel" id="logo" />
-
+  <!-- Hero / headline -->
+  <header class="hero">
+    <img src="images/checkreel-logo.png" class="logo" alt="CheckReel logo" />
     <h1 id="hero-title">Loading…</h1>
     <p id="hero-subtitle"></p>
+    <ul id="hero-benefits" class="benefits"></ul>
 
-    <div id="hero-benefits"></div>
-
-    <!-- Subscribe -->
-    <form id="subscribe-form">
-      <input type="email" id="email-input" placeholder="Enter your email" required />
+    <!-- Subscription form -->
+    <form id="subscribe-form" class="subscribe-box">
+      <input type="email" id="email-input" placeholder="Enter your email" required>
       <button id="subscribe-button" type="submit">Subscribe</button>
     </form>
     <p id="subscription-note"></p>
     <p id="active-users">🎯 2697 Active Users</p>
-  </section>
+  </header>
 
-  <!-- ---------- PLATFORMS ----------- -->
-  <section id="platforms">
+  <!-- Supported platforms -->
+  <section class="platforms">
     <h2 id="platforms-title">Supported Platforms</h2>
-
     <div class="platform-logos">
-      <!-- 66 × 66 px pngs stored in images/platform-logos/ -->
-      <img src="images/platform-logos/tiktok.png"   alt="TikTok" />
-      <img src="images/platform-logos/youtube.png"  alt="YouTube" />
-      <img src="images/platform-logos/instagram.png" alt="Instagram" />
-      <img src="images/platform-logos/x.png"        alt="X" />
-      <img src="images/platform-logos/threads.png"  alt="Threads" />
-      <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
+      <img src="images/platform-logos/facebook.png"  alt="Facebook">
+      <img src="images/platform-logos/instagram.png" alt="Instagram">
+      <img src="images/platform-logos/youtube.png"   alt="YouTube">
+      <img src="images/platform-logos/x.png"         alt="X / Twitter">
+      <img src="images/platform-logos/threads.png"   alt="Threads">
+      <img src="images/platform-logos/snapchat.png"  alt="Snapchat">
     </div>
   </section>
 
-  <!-- ---------- ABOUT ----------- -->
-  <section id="about">
+  <!-- About -->
+  <section class="about">
     <h2 id="about-title">About CheckReel</h2>
     <p id="about-content"></p>
   </section>
 
-  <!-- ---------- LANG PICKER ----------- -->
-  <select id="language-switcher">
+  <!-- Language switcher -->
+  <select id="language-switcher" class="lang-switch">
     <option value="en" selected>English</option>
     <option value="fr">Français</option>
     <option value="ar">العربية</option>
   </select>
 
-  <!-- Main script (deferred so the DOM is ready) -->
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </body>
 </html>
