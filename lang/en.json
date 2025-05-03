@@ -1,16 +1,24 @@
 {
-  "heroTitle": "Welcome to CheckReel",
-  "heroSubtitle": "AI-based compliance for your content",
-  "heroBenefits": ["✅ Automated content checks", "📊 Real-time reports", "🔒 Privacy-focused"],
+  "heroTitle": "CheckReel",
+  "heroSubtitle": "Stop guessing, start checking.",
+  "heroBenefits": [
+    "✅ Automated content checks",
+    "📊 Real-time reports",
+    "🔒 Privacy-focused"
+  ],
+
   "subscription": {
-    "button": "Subscribe",
+    "title": "Start your free trial",
     "placeholder": "Enter your email",
+    "button": "Subscribe",
     "note": "$4.99/month after free trial",
     "count": "🎯 {count} Active Users"
   },
+
   "platformsTitle": "Supported Platforms",
+
   "about": {
     "title": "About CheckReel",
-    "content": "CheckReel helps creators ensure their content complies with platform guidelines before posting."
+    "content": "CheckReel is part of Alwafer Media, specializing in social-media management, AI-driven apps, and precision marketing campaigns. We help creators scan videos, images and audio for policy violations before they post — saving time, protecting brands and avoiding strikes or bans."
   }
 }
