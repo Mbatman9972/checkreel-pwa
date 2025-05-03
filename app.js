@@ -45,7 +45,8 @@ function updateActiveUsers() {
 }
 
 // ====== Subscription API Integration ======
-const API_URL = 'https://script.google.com/macros/s/AKfycbwLhNRd5GsFRf7l9zrHANAg30W1mzvusjIZaXeJptO932cVNWmiIlcnCu8NYKz00X3u/exec';
+const API_URL ='https://script.google.com/macros/s/AKfycbwLhNRd5GsFRf7l9zrHANAg30W1mzvusjIZaXeJptO932cVNWmiIlcnCu8NYKz00X3u/exec';
+';
 
 function subscribeUser(email) {
   fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
