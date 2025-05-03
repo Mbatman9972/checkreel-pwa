@@ -1,23 +1,16 @@
 {
-  "heroTitle": "CheckReel",
-  "heroSubtitle": "Arrêtez de deviner, commencez à vérifier.",
-  "heroBenefits": [
-    "✅ Analysez vos médias avant qu'ils ne posent problème",
-    "✅ IA pour vidéos, audios et images",
-    "✅ Essai gratuit: 3 analyses",
-    "✅ 4,99$/mois pour un accès illimité"
-  ],
-  "startTrial": "Commencer l'essai gratuit",
-  "platformsTitle": "Plateformes supportées",
+  "heroTitle": "Bienvenue chez CheckReel",
+  "heroSubtitle": "Conformité du contenu basée sur l'IA",
+  "heroBenefits": ["✅ Vérifications automatiques", "📊 Rapports en temps réel", "🔒 Respect de la vie privée"],
   "subscription": {
-    "title": "Commencez votre essai gratuit",
-    "placeholder": "Entrez votre e-mail",
     "button": "S'abonner",
-    "note": "4,99$/mois après l'essai",
+    "placeholder": "Entrez votre e-mail",
+    "note": "4,99 $/mois après essai gratuit",
     "count": "🎯 {count} utilisateurs actifs"
   },
+  "platformsTitle": "Plateformes prises en charge",
   "about": {
     "title": "À propos de CheckReel",
-    "content": "CheckReel fait partie de Alwafer Media - gestion de réseaux sociaux, développement d'applications IA et campagnes marketing de précision.\n\nCe que vous obtenez : analyse instantanée des médias, instructions de correction simples, essai gratuit pour trois fichiers.\nPourquoi CheckReel est important : économiser du temps, protéger votre marque, éviter les avertissements et les blocages."
+    "content": "CheckReel aide les créateurs à vérifier la conformité de leur contenu avant la publication."
   }
 }

@@ -1,107 +1,19 @@
-/* GENERAL RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* --- reset / base --- */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:sans-serif;line-height:1.5;color:#111;background:#fff;padding:2rem;display:flex;flex-direction:column;gap:4rem;max-width:900px;margin-inline:auto}
 
-body {
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
+/* hero */
+#hero{text-align:center}
+#logo{width:140px;margin-bottom:1rem}
+#hero-benefits{margin:1rem 0;text-align:left;display:inline-block}
+#hero-benefits p{margin:.15rem 0}
+form{margin:1rem 0;display:flex;justify-content:center;gap:.5rem}
+input{padding:.4rem .6rem;font-size:1rem;width:230px}
+button{padding:.45rem .9rem;font-size:1rem;background:#0066ff;color:#fff;border:0;border-radius:3px;cursor:pointer}
 
-/* HEADER */
-header {
-  text-align: center;
-  margin-top: 20px;
-}
+/* platforms */
+.platform-logos{margin-top:.5rem;display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+.platform-logos img{width:66px;height:66px}
 
-.logo {
-  width: 180px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-/* HERO Section */
-.hero {
-  background-image: url('images/checkreel-hero-desktop.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-overlay {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
-  color: #fff;
-}
-
-/* PLATFORM Section */
-.platforms {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.platform-logos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.platform-logos img {
-  width: 60px;
-  height: 60px;
-}
-
-/* SUBSCRIPTION Section */
-.subscription {
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.subscription input {
-  padding: 0.8rem;
-  width: 250px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-}
-
-.subscription button {
-  padding: 0.8rem 1.5rem;
-  background: #0070f3;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-}
-
-.subscription p {
-  margin-top: 1rem;
-}
-
-/* ABOUT Section */
-.about {
-  padding: 4rem 2rem;
-  background: #f9f9f9;
-  text-align: center;
-}
-
-/* LANGUAGE SWITCHER */
-#language-switcher {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 0.5rem;
-}
-body{margin:0;padding:2rem;font-family:sans-serif;line-height:1.5}
-section{max-width:700px;margin:auto}
-#platforms ul{display:flex;gap:1rem;list-style:none;padding:0;margin:0}
-#platforms li{font-weight:bold}
-input,button{font-size:1rem;padding:.4rem .6rem}
-button{background:#0066ff;color:#fff;border:0;cursor:pointer}
+/* language switcher */
+#language-switcher{position:fixed;top:1rem;right:1rem;padding:.3rem;font-size:.9rem}

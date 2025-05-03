@@ -1,66 +1,80 @@
-/* ---------- language / UI ---------- */
-let translations = {};
-let currentLang  = 'en';
+// -------------- configuration --------------
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';
 
-async function loadLang(lang){
+// -------------- i18n -----------------------
+let translations = {};
+let currentLang = 'en';
+
+async function loadLanguage(lang) {
   const res = await fetch(`lang/${lang}.json`);
   translations = await res.json();
-  applyTxt();         // fill texts once loaded
-  updateCounter();    // refresh counter with correct template
-}
-function applyTxt(){
-  const $ = id => document.getElementById(id);
-  $('hero-title').innerText           = translations.heroTitle;
-  $('hero-subtitle').innerText        = translations.heroSubtitle;
-  $('hero-benefits').innerHTML        = translations.heroBenefits.map(t=>`<p>${t}</p>`).join('');
-  $('subscribe-button').innerText     = translations.subscription.button;
-  $('email-input').placeholder        = translations.subscription.placeholder;
-  $('subscription-note').innerText    = translations.subscription.note;
-  $('platforms-title').innerText      = translations.platformsTitle;
-  $('about-title').innerText          = translations.about.title;
-  $('about-content').innerText        = translations.about.content;
+  renderTexts();
+  updateActiveUsers();
 }
 
-/* ---------- fake active users badge ---------- */
+function renderTexts() {
+  _txt('hero-title', 'heroTitle');
+  _txt('hero-subtitle', 'heroSubtitle');
+  _html('hero-benefits', translations.heroBenefits?.map(b => `<p>✅ ${b}</p>`).join(''));
+
+  _txt('subscribe-button', 'subscription.button');
+  _attr('email-input', 'placeholder', translations.subscription.placeholder);
+  _txt('subscription-note', 'subscription.note');
+
+  _txt('platforms-title', 'platformsTitle');
+  _txt('about-title', 'about.title');
+  _txt('about-content', 'about.content');
+}
+
+function _txt(id, path) {
+  const el = document.getElementById(id);
+  const val = path.split('.').reduce((o, k) => o?.[k], translations);
+  if (el && val) el.innerText = val;
+}
+function _html(id, html) { const el = document.getElementById(id); if (el && html) el.innerHTML = html; }
+function _attr(id, attr, val) { const el = document.getElementById(id); if (el && val) el.setAttribute(attr, val); }
+
+// -------------- active users counter -------
 let activeUsers = 2697;
-const $badge = document.getElementById('active-users');
-function updateCounter(){
-  const t = translations?.subscription?.count || '🎯 {count} Active Users';
-  $badge.innerText = t.replace('{count}', activeUsers);
+function updateActiveUsers() {
+  const el = document.getElementById('active-users');
+  if (!el) return;
+  const tpl = translations?.subscription?.count ?? '🎯 {count} Active Users';
+  el.innerText = tpl.replace('{count}', activeUsers);
 }
 
-/* ---------- subscribe flow ---------- */
-const API_URL = 'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';  // <== YOUR web-app URL
-
-function subscribe(email){
-  fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`)
-    .then(r => r.json())
-    .then(j => {
-       if(j.result==='success'){
-         alert('✅ Thanks for subscribing!');
-         activeUsers++; updateCounter();
-       }else{
-         alert(`⚠️ ${j.message}`);
-       }
-    })
-    .catch(err=>{
-       console.error(err);
-       alert('⚡ Server error – try later');
-    });
+// -------------- subscribe ------------------
+async function subscribeUser(email) {
+  try {
+    const res = await fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`);
+    const data = await res.json();
+    if (data.result === 'success') {
+      alert('✅ Thanks for subscribing! Check your email.');
+      document.getElementById('email-input').value = '';
+      activeUsers++;
+      updateActiveUsers();
+    } else {
+      alert(`⚠️ ${data.message || 'Something went wrong.'}`);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('⚡ Server error. Try again.');
+  }
 }
 
-/* ---------- event wiring ---------- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  loadLang(currentLang);
+// -------------- listeners ------------------
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('subscribe-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value.trim();
+    if (email) subscribeUser(email);
+    else alert('⚠️ Please enter a valid email address.');
+  });
 
-  document.getElementById('language-switcher')
-    .addEventListener('change',e=>loadLang(e.target.value));
+  document.getElementById('language-switcher').addEventListener('change', e => {
+    loadLanguage(e.target.value);
+  });
 
-  document.getElementById('subscribe-form')
-    .addEventListener('submit',e=>{
-       e.preventDefault();
-       const email = document.getElementById('email-input').value.trim();
-       if(email) subscribe(email);
-       else alert('⚠️ Enter a valid e-mail');
-    });
+  loadLanguage(currentLang); // first render
 });

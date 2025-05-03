@@ -2,43 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>CheckReel</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- ---------- HERO ----------- -->
   <section id="hero">
-    <h1 id="hero-title">Loading...</h1>
+    <img src="images/checkreel-logo.png" alt="CheckReel" id="logo" />
+
+    <h1 id="hero-title">Loading…</h1>
     <p id="hero-subtitle"></p>
+
     <div id="hero-benefits"></div>
+
+    <!-- Subscribe -->
     <form id="subscribe-form">
       <input type="email" id="email-input" placeholder="Enter your email" required />
-      <button type="submit" id="subscribe-button">Subscribe</button>
+      <button id="subscribe-button" type="submit">Subscribe</button>
     </form>
     <p id="subscription-note"></p>
     <p id="active-users">🎯 2697 Active Users</p>
   </section>
 
+  <!-- ---------- PLATFORMS ----------- -->
   <section id="platforms">
     <h2 id="platforms-title">Supported Platforms</h2>
-    <ul>
-      <li>TikTok</li>
-      <li>YouTube</li>
-      <li>Instagram</li>
-    </ul>
+
+    <div class="platform-logos">
+      <!-- 66 × 66 px pngs stored in images/platform-logos/ -->
+      <img src="images/platform-logos/tiktok.png"   alt="TikTok" />
+      <img src="images/platform-logos/youtube.png"  alt="YouTube" />
+      <img src="images/platform-logos/instagram.png" alt="Instagram" />
+      <img src="images/platform-logos/x.png"        alt="X" />
+      <img src="images/platform-logos/threads.png"  alt="Threads" />
+      <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
+    </div>
   </section>
 
+  <!-- ---------- ABOUT ----------- -->
   <section id="about">
     <h2 id="about-title">About CheckReel</h2>
     <p id="about-content"></p>
   </section>
 
+  <!-- ---------- LANG PICKER ----------- -->
   <select id="language-switcher">
     <option value="en" selected>English</option>
     <option value="fr">Français</option>
     <option value="ar">العربية</option>
   </select>
 
+  <!-- Main script (deferred so the DOM is ready) -->
   <script src="app.js" defer></script>
 </body>
 </html>
