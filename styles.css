@@ -1,33 +1,35 @@
-/* ─── Reset / base ─────────────────────────── */
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.5}
-
-/* ─── Hero ─────────────────────────────────── */
-.hero{
-  background:url("images/hero-bg.jpg") center/cover no-repeat;
-  min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+/* ------- base / layout ------- */
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,sans-serif}
+body{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  background:linear-gradient(135deg,#bee0ff 0%,#ffd1d1 50%,#ffc585 100%);
+  color:#111;
 }
-.hero .overlay{
-  background:rgba(0,0,0,0.6);color:#fff;padding:3rem 2rem;max-width:640px;border-radius:8px
-}
-#hero-benefits{list-style:none;margin:1rem 0}
-#hero-benefits li{margin:.3rem 0}
+header,section{width:100%;max-width:980px;padding:4rem 1rem}
 
-#subscribe-form{margin-top:1rem}
-#email-input{padding:.6rem 1rem;width:240px}
-#subscribe-button{padding:.65rem 1.5rem;background:#0070f3;border:none;color:#fff;cursor:pointer}
-
-#active-users{margin-top:1rem;font-weight:bold}
-
-/* ─── Platforms ────────────────────────────── */
-.platforms{padding:4rem 1rem;text-align:center}
-.platform-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:1.5rem}
-.platform-logos img{width:60px;height:60px;object-fit:contain}
-
-/* ─── About ────────────────────────────────── */
-.about{padding:4rem 1rem;background:#f7f7f7;text-align:center}
-
-/* ─── Lang switcher ────────────────────────── */
+/* language switcher */
 .lang-switch{
-  position:fixed;top:20px;right:20px;padding:.4rem;border-radius:4px
+  position:fixed;top:1.2rem;right:1.2rem;
+  padding:.35rem .6rem;font-size:.95rem;border-radius:4px;
 }
+
+/* hero */
+#hero h1{font-size:2.25rem;margin-bottom:.75rem}
+#hero ul{list-style:none;margin:1.2rem auto 2rem;max-width:28rem}
+#hero ul li{margin:.35rem 0;text-align:left;font-size:1rem}
+.subscribe{display:flex;gap:.5rem;justify-content:center;margin:1rem 0}
+.subscribe input{min-width:230px;padding:.5rem .6rem;font-size:1rem;border:1px solid #ccc;border-radius:4px}
+.subscribe button{padding:.55rem 1rem;font-size:1rem;border:none;border-radius:4px;background:#0069ff;color:#fff;cursor:pointer}
+#active-users{margin-top:.4rem}
+
+/* platforms */
+#platforms h2{font-size:1.75rem;margin-bottom:1.5rem}
+.logo-row{display:flex;flex-wrap:wrap;gap:1.1rem;justify-content:center}
+.logo-row img{width:72px;height:72px;object-fit:contain}
+
+/* about */
+#about{background:#fff9f2;border-top:1px solid #eee;padding:4rem 1rem}
+#about h2{font-size:1.75rem;margin-bottom:1.2rem}
+#about p{max-width:720px;margin-inline:auto;font-size:1.05rem;line-height:1.55}
