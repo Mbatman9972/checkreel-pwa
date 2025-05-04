@@ -7,16 +7,17 @@ body{color:#333;background:#fff;line-height:1.5}
      min-height:100vh;display:flex;flex-direction:column;align-items:center;
      justify-content:center;text-align:center;padding:2rem;color:#fff}
 
-#hero .logo { /* Added this to style the logo container */
+#hero .logo { /* Style the logo container */
     display: flex;
-    flex-direction: column; /* Stack the image and heading */
-    align-items: center;      /* Center them horizontally */
+    flex-direction: column; /* Stack image and heading */
+    align-items: center;      /* Center horizontally */
+    margin-bottom: 1rem;     /* Add more space below the logo area */
 }
 
-#hero .logo img { /* Added this to style the logo image */
-    width: 60px;          /* Set the width to 60px */
-    height: 60px;         /* Set the height to 60px */
-    margin-bottom: 0.5rem; /* Add some space between the logo and heading */
+#hero .logo img { /* Style the logo image, allow it to scale within constraints */
+    max-width: 80px;       /* Set a maximum width */
+    height: auto;          /* Maintain aspect ratio */
+    max-height: 80px;      /* Set a maximum height */
 }
 
 #hero ul{list-style:none;margin:1rem 0}
