@@ -1,24 +1,22 @@
 {
   "heroTitle": "CheckReel",
-  "heroSubtitle": "Stop guessing, start checking.",
+  "heroSubtitle": "Stop guessing – start checking.",
   "heroBenefits": [
-    "✅ Automated content checks",
-    "📊 Real-time reports",
-    "🔒 Privacy-focused"
+    "✅ Scan your media before it backfires",
+    "✅ AI checks for video, audio & images",
+    "✅ Free trial: 3 total scans",
+    "✅ $4.99 / month unlimited"
   ],
-
   "subscription": {
     "title": "Start your free trial",
     "placeholder": "Enter your email",
     "button": "Subscribe",
-    "note": "$4.99/month after free trial",
+    "note": "$4.99 / month after trial",
     "count": "🎯 {count} Active Users"
   },
-
   "platformsTitle": "Supported Platforms",
-
   "about": {
     "title": "About CheckReel",
-    "content": "CheckReel is part of Alwafer Media, specializing in social-media management, AI-driven apps, and precision marketing campaigns. We help creators scan videos, images and audio for policy violations before they post — saving time, protecting brands and avoiding strikes or bans."
+    "content": "CheckReel is part of Alwafer Media, specializing in social-media management, AI-driven apps and precision marketing campaigns. We help creators scan videos, images and audio for policy violations before they post — saving time, protecting brands and avoiding strikes or bans."
   }
 }

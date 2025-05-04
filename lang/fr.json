@@ -1,12 +1,11 @@
 {
   "heroTitle": "CheckReel",
-  "heroSubtitle": "Ne devinez plus, vérifiez.",
+  "heroSubtitle": "Arrêtez de deviner, vérifiez.",
   "heroBenefits": [
-    "✅ Vérification automatique du contenu",
+    "✅ Analyse automatique de votre contenu",
     "📊 Rapports en temps réel",
-    "🔒 Respect de la vie privée"
+    "🔒 Confidentialité garantie"
   ],
-
   "subscription": {
     "title": "Commencez votre essai gratuit",
     "placeholder": "Entrez votre e-mail",
@@ -14,12 +13,10 @@
     "note": "4,99 $/mois après l’essai",
     "count": "🎯 {count} utilisateurs actifs"
   },
-
   "platformsTitle": "Plateformes prises en charge",
-
   "about": {
     "title": "À propos de CheckReel",
-    "content": "CheckReel fait partie d’Alwafer Media, spécialiste de la gestion des réseaux sociaux, des applications IA et du marketing de précision. Nous aidons les créateurs à analyser vidéos, images et audios afin de détecter les infractions avant publication — un gain de temps qui protège votre marque et évite avertissements ou suspensions."
+    "content": "CheckReel fait partie d’Alwafer Media, spécialiste de la gestion des réseaux sociaux, des applications IA et du marketing de précision. Nous aidons les créateurs à analyser vidéos, images et audios afin de détecter les infractions avant publication — un gain de temps qui protège les marques et évite avertissements ou suspensions."
   }
 }
 

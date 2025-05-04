@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CheckReel</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Favicon / logo -->
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Hero / headline -->
-  <header class="hero">
-    <img src="images/checkreel-logo.png" class="logo" alt="CheckReel logo" />
-    <h1 id="hero-title">Loading…</h1>
-    <p id="hero-subtitle"></p>
-    <ul id="hero-benefits" class="benefits"></ul>
 
-    <!-- Subscription form -->
-    <form id="subscribe-form" class="subscribe-box">
-      <input type="email" id="email-input" placeholder="Enter your email" required>
-      <button id="subscribe-button" type="submit">Subscribe</button>
-    </form>
-    <p id="subscription-note"></p>
-    <p id="active-users">🎯 2697 Active Users</p>
+  <!-- ───────── HERO ───────── -->
+  <header class="hero">
+    <div class="overlay">
+      <h1 id="hero-title">Loading…</h1>
+      <p  id="hero-subtitle"></p>
+
+      <ul id="hero-benefits"></ul>
+
+      <form id="subscribe-form">
+        <input  type="email" id="email-input" placeholder="Enter your email" required />
+        <button type="submit" id="subscribe-button">Subscribe</button>
+      </form>
+
+      <p id="subscription-note"></p>
+      <p id="active-users">🎯 2697 Active Users</p>
+    </div>
   </header>
 
-  <!-- Supported platforms -->
+  <!-- ───────── PLATFORMS ───────── -->
   <section class="platforms">
     <h2 id="platforms-title">Supported Platforms</h2>
     <div class="platform-logos">
-      <img src="images/platform-logos/facebook.png"  alt="Facebook">
-      <img src="images/platform-logos/instagram.png" alt="Instagram">
-      <img src="images/platform-logos/youtube.png"   alt="YouTube">
-      <img src="images/platform-logos/twitter.png" alt="X / Twitter">
-      <img src="images/platform-logos/threads.png"   alt="Threads">
-      <img src="images/platform-logos/snapchat.png"  alt="Snapchat">
+      <img src="images/platforms/tiktok.png"    alt="TikTok logo"   />
+      <img src="images/platforms/youtube.png"   alt="YouTube logo" />
+      <img src="images/platforms/instagram.png" alt="Instagram logo" />
+      <img src="images/platforms/twitter.png"   alt="Twitter logo" />
+      <img src="images/platforms/threads.png"   alt="Threads logo" />
+      <img src="images/platforms/snapchat.png"  alt="Snapchat logo" />
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ───────── ABOUT ───────── -->
   <section class="about">
-    <p id="about-content">
-      CheckReel is part of <strong>Alwafer&nbsp;Media</strong>, specializing in social-media management, AI-driven apps,
-      and precision marketing campaigns. We help creators scan videos, images and audio for policy violations before they
-      post—saving time, protecting brands and avoiding strikes or bans.
-    </p>
-    
-  <!-- Language switcher -->
+    <h2 id="about-title">About CheckReel</h2>
+    <p  id="about-content"></p>
+  </section>
+
+  <!-- ───────── LANGUAGE SWITCHER ───────── -->
   <select id="language-switcher" class="lang-switch">
     <option value="en" selected>English</option>
     <option value="fr">Français</option>
     <option value="ar">العربية</option>
   </select>
 
+  <!-- Main script -->
   <script src="app.js"></script>
 </body>
 </html>
