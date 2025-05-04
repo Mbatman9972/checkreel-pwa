@@ -1,71 +1,78 @@
-// ---------- translations ----------
+/* ============= I18N ============= */
 let translations = {};
-let currentLang = 'en';
+let currentLang  = 'en';
 
 async function loadLanguage(lang) {
+  currentLang = lang;
   try {
     const res = await fetch(`lang/${lang}.json`);
     translations = await res.json();
-  } catch {
-    translations = {};            // fallback if file missing
+  } catch {                         // fallback if the file is missing or invalid
+    translations = {};
   }
   applyTranslations();
   updateActiveUsers();
 }
 
-function applyTranslations() {
-  // text
-  document.getElementById('hero-title'   ).innerText = translations.heroTitle        ?? 'CheckReel';
-  document.getElementById('hero-subtitle').innerText = translations.heroSubtitle     ?? 'Stop guessing, start checking.';
-  document.getElementById('platforms-title').innerText = translations.platformsTitle ?? 'Supported Platforms';
-  document.getElementById('about-title' ).innerText = translations.about?.title      ?? 'About CheckReel';
-  document.getElementById('about-content').innerText = translations.about?.content   ??
-    'CheckReel helps creators ensure their content complies with platform guidelines before posting.';
-
-  // benefits list
-  const benefits = translations.heroBenefits ?? [
-    '✅ Scan your media before it backfires',
-    '✅ AI checks for video, audio, and images',
-    '✅ Free trial: 3 total scans',
-    '✅ $4.99 / month for unlimited access'
-  ];
-  document.getElementById('hero-benefits').innerHTML =
-     benefits.map(t => `<li>${t}</li>`).join('');
-
-  // subscribe box text
-  document.getElementById('email-input').placeholder =
-    translations.subscription?.placeholder ?? 'Enter your email';
-  document.getElementById('subscribe-button').innerText =
-    translations.subscription?.button ?? 'Subscribe';
-  document.getElementById('subscription-note').innerText =
-    translations.subscription?.note ?? '$4.99/month after the trial';
+function t(path, fallback = '') {
+  // Very small helper to fetch deep keys safely
+  return path.split('.').reduce((o, k) => (o ?? {})[k], translations) ?? fallback;
 }
 
-// language switcher
+function applyTranslations() {
+  /* ----- hero block ----- */
+  document.getElementById('hero-title'      ).innerText = t('heroTitle'   , 'CheckReel');
+  document.getElementById('hero-subtitle'   ).innerText = t('heroSubtitle', 'Stop guessing, start checking.');
+
+  const benefits = t('heroBenefits', [
+      '✅ Scan your media before it backfires',
+      '📊 Real-time reports',
+      '🔒 Privacy-focused'
+  ]);
+  document.getElementById('hero-benefits').innerHTML =
+        benefits.map(b => `<li>${b}</li>`).join('');
+
+  /* ----- subscription box ( the 4 items you asked for ) ----- */
+  document.getElementById('email-input'      ).placeholder = t('subscription.placeholder', 'Enter your email');
+  document.getElementById('subscribe-button' ).innerText   = t('subscription.button'     , 'Subscribe');
+  document.getElementById('subscription-note').innerText   = t('subscription.note'       , '$4.99 / month after trial');
+
+  /* ----- section titles ----- */
+  document.getElementById('platforms-title').innerText = t('platformsTitle', 'Supported Platforms');
+  document.getElementById('about-title'    ).innerText = t('about.title'   , 'About CheckReel');
+
+  /* ----- about paragraph ----- */
+  document.getElementById('about-content').innerText =
+    t('about.content',
+      'CheckReel helps creators ensure their content complies with platform guidelines before posting.');
+}
+
+/* ============= language switcher ============= */
 document.getElementById('language-switcher')
         .addEventListener('change', e => loadLanguage(e.target.value));
 
-// ---------- active-user counter ----------
-let activeUsers = 2697;
+/* ============= active-user counter ============= */
+let activeUsers = 2_697;
+
 function updateActiveUsers() {
-  const el = document.getElementById('active-users');
-  const fmt = translations.subscription?.count ?? '🎯 {count} Active Users';
-  el.innerText = fmt.replace('{count}', activeUsers);
+  const fmt = t('subscription.count', '🎯 {count} Active Users');
+  document.getElementById('active-users').innerText =
+        fmt.replace('{count}', activeUsers);
 }
 
-// ---------- subscription (Google Apps Script) ----------
+/* ============= subscription (Apps Script backend) ============= */
 const API_URL = 'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';
 
 async function subscribeUser(email) {
   try {
-    const res   = await fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`);
-    const reply = await res.json();
-    if (reply.result === 'success') {
+    const r = await fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`);
+    const j = await r.json();
+    if (j.result === 'success') {
       alert('✅ Thanks for subscribing! Check your email.');
       document.getElementById('email-input').value = '';
       activeUsers++; updateActiveUsers();
     } else {
-      alert(`⚠️ ${reply.message || 'Subscription failed.'}`);
+      alert(`⚠️ ${j.message || 'Subscription failed.'}`);
     }
   } catch (err) {
     console.error(err);
@@ -73,13 +80,16 @@ async function subscribeUser(email) {
   }
 }
 
-// form handler
+/* ============= form handler ============= */
 document.getElementById('subscribe-form').addEventListener('submit', e => {
   e.preventDefault();
   const email = document.getElementById('email-input').value.trim();
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) subscribeUser(email);
-  else alert('⚠️ Please enter a valid email address.');
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    subscribeUser(email);
+  } else {
+    alert('⚠️ Please enter a valid email address.');
+  }
 });
 
-// initial load
+/* ============= first load ============= */
 loadLanguage(currentLang);
