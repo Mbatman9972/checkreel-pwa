@@ -1,53 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CheckReel</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CheckReel - Stop Guessing, Start Checking.</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/favicon.png" type="image/png">
 </head>
+
 <body>
-  <!-- HERO -->
-  <section id="hero">
-    <h1 id="hero-title">Loading…</h1>
-    <p  id="hero-subtitle"></p>
-    <ul id="hero-benefits"></ul>
+    <header id="hero">
+        <div class="logo">
+            <img src="images/checkreel-logo.png" alt="CheckReel Logo">
+            <h1>CheckReel</h1>
+        </div>
+        <nav>
+            <div id="language-switcher">
+                <select>
+                    <option value="en" selected>🇬🇧 English</option>
+                    <option value="ar">🇦🇪 العربية</option>
+                    <option value="fr">🇫🇷 Français</option>
+                </select>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h2 id="hero-title">Loading…</h2>
+            <p id="hero-subtitle"></p>
+            <ul id="hero-benefits"></ul>
+            <form id="subscribe-form">
+                <input type="email" id="email-input" placeholder="Enter your email" required />
+                <button type="submit" id="subscribe-button">Subscribe</button>
+            </form>
+            <p id="subscription-note"></p>
+            <p id="active-users">🎯 2697 Active Users</p>
+        </div>
+    </header>
 
-    <!-- subscribe -->
-    <form id="subscribe-form">
-      <input  type="email" id="email-input" placeholder="Enter your email" required />
-      <button type="submit" id="subscribe-button">Subscribe</button>
-    </form>
-    <p id="subscription-note"></p>
-    <p id="active-users">🎯 2697 Active Users</p>
-  </section>
+    <section id="platforms">
+        <h2><span id="platforms-title">Supported Platforms</span></h2>
+        <div class="logos">
+            <img src="images/platform-logos/tiktok.png" alt="TikTok">
+            <img src="images/platform-logos/youtube.png" alt="YouTube">
+            <img src="images/platform-logos/instagram.png" alt="Instagram">
+            <img src="images/platform-logos/twitter.png" alt="Twitter">
+            <img src="images/platform-logos/facebook.png" alt="Facebook">
+            <img src="images/platform-logos/threads.png" alt="Threads">
+            <img src="images/platform-logos/snapchat.png" alt="Snapchat">
+        </div>
+    </section>
 
-  <!-- PLATFORMS -->
-  <section id="platforms">
-    <h2 id="platforms-title">Supported Platforms</h2>
-    <div class="logos">
-      <img src="images/platform-logos/tiktok.png"    alt="TikTok">
-      <img src="images/platform-logos/youtube.png"   alt="YouTube">
-      <img src="images/platform-logos/instagram.png" alt="Instagram">
-      <img src="images/platform-logos/twitter.png"   alt="Twitter">
-      <img src="images/platform-logos/threads.png"   alt="Threads">
-      <img src="images/platform-logos/snapchat.png"  alt="Snapchat">
-    </div>
-  </section>
+    <section id="about">
+        <h2><span id="about-title">About CheckReel</span></h2>
+        <p id="about-content"></p>
+    </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2 id="about-title">About CheckReel</h2>
-    <p  id="about-content"></p>
-  </section>
-
-  <!-- language switch -->
-  <select id="language-switcher">
-    <option value="en" selected>English</option>
-    <option value="fr">Français</option>
-    <option value="ar">العربية</option>
-  </select>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
 </body>
+
 </html>
