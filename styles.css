@@ -1,43 +1,53 @@
-/* ------- base / layout ------- */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{color:#333;background:#fff;line-height:1.6; /* Slightly increased line height for readability */}
-
 /* hero */
-#hero{background:url("images/checkreel-hero-desktop.jpg") center/cover no-repeat;
-     min-height:100vh;display:flex;flex-direction:column;align-items:center;
-     justify-content:center;text-align:center;padding:3rem;color:#fff} /* Increased padding */
+#hero{
+  background:url("images/checkreel-hero-desktop.jpg") center/cover no-repeat;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center; /* Center items horizontally in the hero section */
+  justify-content:center;
+  text-align:center; /* Center text within the hero section */
+  padding:3rem;
+  color:#fff;
+}
 
 #hero .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem; /* Increased margin below logo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 #hero .logo img {
-    max-width: 100px;      /* Increased max width for a slightly larger logo */
-    height: auto;
-    max-height: 100px;     /* Increased max height */
+  max-width: 100px;
+  height: auto;
+  max-height: 100px;
 }
 
 #hero .logo h1 {
-    font-size: 2.2rem;     /* Increased main heading size */
-    margin-top: 0.5rem;
+  font-size: 2.2rem;
+  margin-top: 0.5rem;
+}
+
+#hero .hero-content { /* Ensure content within hero is centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #hero #hero-subtitle {
-    font-size: 1.4rem;     /* Increased subtitle size */
-    margin-top: 1rem;
-    line-height: 1.7;
-    max-width: 80%;       /* Prevent overly wide text on large screens */
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  line-height: 1.7;
+  max-width: 80%;
 }
 
-#hero ul{list-style:none;margin:1.5rem 0} /* Increased margin for benefits list */
-#hero li{margin:0.5rem 0; font-size: 1.1rem;} /* Increased benefit list item size */
+#hero ul{list-style:none;margin:1.5rem 0}
+#hero li{margin:0.5rem 0; font-size: 1.1rem;}
 
-#subscribe-form{margin:2rem 0;display:flex;gap:0.75rem;flex-wrap:wrap; justify-content: center;} /* Centered form */
-#email-input{padding:0.8rem 1.2rem;width:300px;max-width:100%; font-size: 1.1rem;} /* Increased input size */
-#subscribe-button{padding:0.8rem 2rem;background:#0070f3;border:none;color:#fff;cursor:pointer; font-size: 1.1rem;} /* Increased button size */
+#subscribe-form{margin:2rem 0;display:flex;gap:0.75rem;flex-wrap:wrap; justify-content: center;}
+#email-input{padding:0.8rem 1.2rem;width:300px;max-width:100%; font-size: 1.1rem;}
+#subscribe-button{padding:0.8rem 2rem;background:#0070f3;border:none;color:#fff;cursor:pointer; font-size: 1.1rem;}
 
 #subscription-note{margin-top:1rem;font-size: 1rem;}
 
@@ -45,61 +55,61 @@ body{color:#333;background:#fff;line-height:1.6; /* Slightly increased line heig
 
 /* platforms */
 #platforms{padding:4rem 1rem;text-align:center}
-#platforms h2{font-size: 1.8rem;} /* Increased platforms title size */
+#platforms h2{font-size: 1.8rem;}
 .logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem}
-.logos img{width:70px;height:70px} /* Slightly larger platform logos */
+.logos img{width:70px;height:70px}
 
 /* about */
 #about{padding:4rem 1rem;background:#f9f9f9;text-align:center}
-#about h2{font-size: 1.8rem;} /* Increased about title size */
-#about p{font-size: 1.2rem; line-height: 1.8; max-width: 70%; margin: 1rem auto;} /* Increased about text size */
+#about h2{font-size: 1.8rem;}
+#about p{font-size: 1.2rem; line-height: 1.8; max-width: 70%; margin: 1rem auto;}
 
 /* language switch */
-#language-switcher{position:fixed;top:30px;right:30px;padding:0.6rem; font-size: 1rem;} /* Slightly larger language switch */
+#language-switcher{position:fixed;top:30px;right:30px;padding:0.6rem; font-size: 1rem;}
 
 /* responsive hero text overlay */
 @media(max-width:600px){
-  #hero{padding:2rem}
-  #hero .logo img {
-      max-width: 80px;
-      max-height: 80px;
-  }
-  #hero .logo h1 {
-      font-size: 1.8rem;
-  }
-  #hero #hero-subtitle {
-      font-size: 1.2rem;
-  }
-  #hero ul li {
-      font-size: 1rem;
-  }
-  #email-input {
-      width: 90%;
-      padding: 0.7rem;
-      font-size: 1rem;
-  }
-  #subscribe-button {
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-  }
-  #platforms h2 {
-      font-size: 1.6rem;
-  }
-  .logos img {
-      width: 50px;
-      height: 50px;
-      gap: 0.75rem;
-  }
-  #about h2 {
-      font-size: 1.6rem;
-  }
-  #about p {
-      font-size: 1.1rem;
-  }
-  #language-switcher {
-      top: 15px;
-      right: 15px;
-      padding: 0.3rem;
-      font-size: 0.9rem;
-  }
+#hero{padding:2rem}
+#hero .logo img {
+    max-width: 80px;
+    max-height: 80px;
+}
+#hero .logo h1 {
+    font-size: 1.8rem;
+}
+#hero .hero-content #hero-subtitle {
+    font-size: 1.2rem;
+}
+#hero ul li {
+    font-size: 1rem;
+}
+#email-input {
+    width: 90%;
+    padding: 0.7rem;
+    font-size: 1rem;
+}
+#subscribe-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+}
+#platforms h2 {
+    font-size: 1.6rem;
+}
+.logos img {
+    width: 50px;
+    height: 50px;
+    gap: 0.75rem;
+}
+#about h2 {
+    font-size: 1.6rem;
+}
+#about p {
+    font-size: 1.1rem;
+}
+#language-switcher {
+    top: 15px;
+    right: 15px;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+}
 }
