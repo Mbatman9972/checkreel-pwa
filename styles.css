@@ -6,6 +6,19 @@ body{color:#333;background:#fff;line-height:1.5}
 #hero{background:url("images/checkreel-hero-desktop.jpg") center/cover no-repeat;
      min-height:100vh;display:flex;flex-direction:column;align-items:center;
      justify-content:center;text-align:center;padding:2rem;color:#fff}
+
+#hero .logo { /* Added this to style the logo container */
+    display: flex;
+    flex-direction: column; /* Stack the image and heading */
+    align-items: center;      /* Center them horizontally */
+}
+
+#hero .logo img { /* Added this to style the logo image */
+    width: 60px;          /* Set the width to 60px */
+    height: 60px;         /* Set the height to 60px */
+    margin-bottom: 0.5rem; /* Add some space between the logo and heading */
+}
+
 #hero ul{list-style:none;margin:1rem 0}
 #hero li{margin:0.3rem 0}
 
