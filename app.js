@@ -50,7 +50,7 @@ function updateActiveUsers() {
 }
 
 // ---------- subscription (Google Apps Script) ----------
-const API_URL = 'https://script.google.com/macros/s/AKfycbwNXll_MNLUMuAPRWWo7BzDoB5mI3afC-LBGHjV-qgutuD1gIpbxuq3vsb1Hv-T5Ss/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxYbS6FJYyxAUMoTg5xdFmyUt_I3uz1LTTITUoKblET52TGiPx9Q8Q1sQV3i1kJSMsg/exec';
 async function subscribeUser(email) {
     console.log('Attempting to subscribe with email:', email);
     try {
