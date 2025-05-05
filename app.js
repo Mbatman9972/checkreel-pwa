@@ -41,7 +41,8 @@ document.getElementById('language-switcher')
 loadLanguage(currentLang);
 
 // ---------- active-user counter ----------
-let activeUsers = 2697;
+const INITIAL_ACTIVE_USERS = 2672;
+let displayedActiveUsers = INITIAL_ACTIVE_USERS;
 
 async function updateActiveUsers() {
     const el = document.getElementById('active-users');
@@ -58,17 +59,16 @@ async function updateActiveUsers() {
         const data = await response.json();
 
         if (data && data.count !== undefined) {
-            el.innerText = fmt.replace('{count}', data.count);
+            displayedActiveUsers = data.count; // Update with the actual count from the sheet
         } else {
             console.error('Error fetching paying subscriber count:', data);
-            // Fallback to the existing behavior (incrementing local count)
-            el.innerText = fmt.replace('{count}', activeUsers);
+            displayedActiveUsers = INITIAL_ACTIVE_USERS; // Fallback to initial count on error
         }
     } catch (error) {
         console.error('Error fetching paying subscriber count:', error);
-        // Fallback to the existing behavior
-        el.innerText = fmt.replace('{count}', activeUsers);
+        displayedActiveUsers = INITIAL_ACTIVE_USERS; // Fallback to initial count on error
     }
+    el.innerText = fmt.replace('{count}', displayedActiveUsers);
 }
 
 // ---------- subscription (Google Apps Script) ----------
@@ -82,18 +82,21 @@ async function subscribeUser(email) {
         params.append('email', email);
 
         const res = await fetch(API_URL, {
-            method: 'POST', // Change to POST request
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded' // Set the content type
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: params.toString() // Send the parameters in the body
+            body: params.toString()
         });
         const reply = await res.json();
         if (reply.result === 'success') {
             alert('✅ Thanks for subscribing! Check your email.');
             document.getElementById('email-input').value = '';
-            activeUsers++;
-            updateActiveUsers();
+            displayedActiveUsers = INITIAL_ACTIVE_USERS + 1; // Temporarily increment for test
+            updateActiveUsers(); // Update display
+            setTimeout(() => {
+                updateActiveUsers(); // Revert to actual count after a delay
+            }, 5000); // Reset after 5 seconds (adjust as needed)
         } else {
             alert(`⚠️ ${reply.message || 'Subscription failed.'}`);
         }
@@ -107,4 +110,9 @@ document.getElementById('subscribe-form').addEventListener('submit', e => {
     const email = document.getElementById('email-input').value.trim();
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) subscribeUser(email);
     else alert('⚠️ Please enter a valid email address.');
+});
+
+// Initialize the displayed count on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateActiveUsers();
 });
