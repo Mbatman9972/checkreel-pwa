@@ -10,7 +10,7 @@ async function loadLanguage(lang) {
         translations = {};                 // fallback
     }
     applyTranslations();
-    updateActiveUsers();
+    // Don't call updateActiveUsers() immediately here
 }
 
 function txt(path, fallback = '') {
@@ -93,7 +93,9 @@ async function subscribeUser(email) {
             alert('✅ Thanks for subscribing! Check your email.');
             document.getElementById('email-input').value = '';
             displayedActiveUsers = INITIAL_ACTIVE_USERS + 1; // Temporarily increment for test
-            updateActiveUsers(); // Update display
+            const el = document.getElementById('active-users');
+            const fmt = txt('subscription.count', '🎯 {count} Active Users');
+            el.innerText = fmt.replace('{count}', displayedActiveUsers); // Update display immediately
             setTimeout(() => {
                 updateActiveUsers(); // Revert to actual count after a delay
             }, 5000); // Reset after 5 seconds (adjust as needed)
@@ -112,7 +114,13 @@ document.getElementById('subscribe-form').addEventListener('submit', e => {
     else alert('⚠️ Please enter a valid email address.');
 });
 
-// Initialize the displayed count on page load
+// Initialize the displayed count and then fetch after a delay
 document.addEventListener('DOMContentLoaded', () => {
-    updateActiveUsers();
+    const el = document.getElementById('active-users');
+    const fmt = txt('subscription.count', '🎯 {count} Active Users');
+    el.innerText = fmt.replace('{count}', INITIAL_ACTIVE_USERS); // Set initial fake number
+
+    setTimeout(() => {
+        updateActiveUsers(); // Fetch actual count after a short delay
+    }, 2000); // Adjust the delay (in milliseconds) as needed
 });
