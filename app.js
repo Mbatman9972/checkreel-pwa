@@ -51,15 +51,21 @@ function updateActiveUsers() {
 
 // ---------- subscription (Google Apps Script) ----------
 const API_URL = 'https://script.google.com/macros/s/AKfycbxYbS6FJYyxAUMoTg5xdFmyUt_I3uz1LTTITUoKblET52TGiPx9Q8Q1sQV3i1kJSMsg/exec';
+
 async function subscribeUser(email) {
     console.log('Attempting to subscribe with email:', email);
     try {
         const params = new URLSearchParams();
         params.append('action', 'subscribe');
         params.append('email', email);
-        const urlWithParams = `<span class="math-inline">\{API\_URL\}?</span>{params.toString()}`;
-        console.log('Fetching URL:', urlWithParams); // Add this line for debugging
-        const res = await fetch(urlWithParams);
+
+        const res = await fetch(API_URL, {
+            method: 'POST', // Change to POST request
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded' // Set the content type
+            },
+            body: params.toString() // Send the parameters in the body
+        });
         const reply = await res.json();
         if (reply.result === 'success') {
             alert('✅ Thanks for subscribing! Check your email.');
