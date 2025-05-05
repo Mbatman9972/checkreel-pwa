@@ -10,7 +10,7 @@ async function loadLanguage(lang) {
         translations = {};                 // fallback
     }
     applyTranslations();
-    // Don't call updateActiveUsers() immediately here
+    updateDisplayedActiveUsers(); // Call to update the displayed count on load
 }
 
 function txt(path, fallback = '') {
@@ -44,30 +44,9 @@ loadLanguage(currentLang);
 const INITIAL_ACTIVE_USERS = 2672;
 let displayedActiveUsers = INITIAL_ACTIVE_USERS;
 
-async function updateActiveUsers() {
+function updateDisplayedActiveUsers() {
     const el = document.getElementById('active-users');
     const fmt = txt('subscription.count', '🎯 {count} Active Users');
-
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=getPayingCount'
-        });
-        const data = await response.json();
-
-        if (data && data.count !== undefined) {
-            displayedActiveUsers = data.count; // Update with the actual count from the sheet
-        } else {
-            console.error('Error fetching paying subscriber count:', data);
-            displayedActiveUsers = INITIAL_ACTIVE_USERS; // Fallback to initial count on error
-        }
-    } catch (error) {
-        console.error('Error fetching paying subscriber count:', error);
-        displayedActiveUsers = INITIAL_ACTIVE_USERS; // Fallback to initial count on error
-    }
     el.innerText = fmt.replace('{count}', displayedActiveUsers);
 }
 
@@ -92,13 +71,9 @@ async function subscribeUser(email) {
         if (reply.result === 'success') {
             alert('✅ Thanks for subscribing! Check your email.');
             document.getElementById('email-input').value = '';
-            displayedActiveUsers = INITIAL_ACTIVE_USERS + 1; // Temporarily increment for test
-            const el = document.getElementById('active-users');
-            const fmt = txt('subscription.count', '🎯 {count} Active Users');
-            el.innerText = fmt.replace('{count}', displayedActiveUsers); // Update display immediately
-            setTimeout(() => {
-                updateActiveUsers(); // Revert to actual count after a delay
-            }, 5000); // Reset after 5 seconds (adjust as needed)
+            displayedActiveUsers++; // Increment the displayed count on successful subscription
+            updateDisplayedActiveUsers(); // Update the displayed count immediately
+            // We no longer fetch the actual count here, as we want to maintain the incremented fake number
         } else {
             alert(`⚠️ ${reply.message || 'Subscription failed.'}`);
         }
@@ -114,13 +89,11 @@ document.getElementById('subscribe-form').addEventListener('submit', e => {
     else alert('⚠️ Please enter a valid email address.');
 });
 
-// Initialize the displayed count and then fetch after a delay
+// Initialize the displayed count on page load
 document.addEventListener('DOMContentLoaded', () => {
-    const el = document.getElementById('active-users');
-    const fmt = txt('subscription.count', '🎯 {count} Active Users');
-    el.innerText = fmt.replace('{count}', INITIAL_ACTIVE_USERS); // Set initial fake number
-
-    setTimeout(() => {
-        updateActiveUsers(); // Fetch actual count after a short delay
-    }, 2000); // Adjust the delay (in milliseconds) as needed
+    updateDisplayedActiveUsers();
 });
+
+// We are no longer periodically fetching the actual count
+// If you need to sync the displayed count with the sheet later,
+// you'll need to re-introduce a mechanism for that.
