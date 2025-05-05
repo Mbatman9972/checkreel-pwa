@@ -7,7 +7,7 @@ async function loadLanguage(lang) {
         const res = await fetch(`lang/${lang}.json`);
         translations = await res.json();
     } catch {
-        translations = {};             // fallback
+        translations = {};                 // fallback
     }
     applyTranslations();
     updateActiveUsers();
@@ -43,14 +43,36 @@ loadLanguage(currentLang);
 // ---------- active-user counter ----------
 let activeUsers = 2697;
 
-function updateActiveUsers() {
+async function updateActiveUsers() {
     const el = document.getElementById('active-users');
     const fmt = txt('subscription.count', '🎯 {count} Active Users');
-    el.innerText = fmt.replace('{count}', activeUsers);
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'action=getPayingCount'
+        });
+        const data = await response.json();
+
+        if (data && data.count !== undefined) {
+            el.innerText = fmt.replace('{count}', data.count);
+        } else {
+            console.error('Error fetching paying subscriber count:', data);
+            // Fallback to the existing behavior (incrementing local count)
+            el.innerText = fmt.replace('{count}', activeUsers);
+        }
+    } catch (error) {
+        console.error('Error fetching paying subscriber count:', error);
+        // Fallback to the existing behavior
+        el.innerText = fmt.replace('{count}', activeUsers);
+    }
 }
 
 // ---------- subscription (Google Apps Script) ----------
-const API_URL = 'https://script.google.com/macros/s/AKfycbxHoKaIEVfuoJVk9UC1WXjrKT7rKUr0yW-Givs6c56Ota2tdn659cf_lsNXB9oyHIkZ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzALs8jubOwQdxgd6sqeiZRsWYH4zunfI5Grs1MeaFct0ES80uTgvvbGfKzphQglgID/exec';
 
 async function subscribeUser(email) {
     console.log('Attempting to subscribe with email:', email);
