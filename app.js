@@ -69,11 +69,12 @@ async function subscribeUser(email) {
         });
         const reply = await res.json();
         if (reply.result === 'success') {
-            alert('✅ Thanks for subscribing! Check your email.');
             document.getElementById('email-input').value = '';
-            displayedActiveUsers++; // Increment the displayed count on successful subscription
-            updateDisplayedActiveUsers(); // Update the displayed count immediately
-            // We no longer fetch the actual count here, as we want to maintain the incremented fake number
+            displayedActiveUsers++;
+            updateDisplayedActiveUsers();
+            // New free trial confirmation message
+            alert('🎉 You have successfully subscribed for a 7-day free trial! Enjoy exploring CheckReel.');
+            // Consider adding redirection or further instructions here later
         } else {
             alert(`⚠️ ${reply.message || 'Subscription failed.'}`);
         }
