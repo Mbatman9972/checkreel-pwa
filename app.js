@@ -7,7 +7,7 @@ async function loadLanguage(lang) {
         const res = await fetch(`lang/${lang}.json`);
         translations = await res.json();
     } catch {
-        translations = {};                 // fallback
+        translations = {};             // fallback
     }
     applyTranslations();
     updateActiveUsers();
@@ -50,8 +50,9 @@ function updateActiveUsers() {
 }
 
 // ---------- subscription (Google Apps Script) ----------
-const API_URL = 'https://script.google.com/macros/s/AKfycbzxVXozRMZOa6DvPUZvP2zJFKDZAAP9AJFNro_nKBb_UtdDrCHSD7FEpvPCrzUqtwQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw1S3Its5qHoqs4DDxHuHFdaCa_cdIJyJVbVP-SyOxDKz16r_A_GnR3j51BQXrO0eU/exec';
 async function subscribeUser(email) {
+    console.log('Attempting to subscribe with email:', email); // ADD THIS LINE
     try {
         const res = await fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`);
         const reply = await res.json();
