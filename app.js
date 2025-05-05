@@ -52,9 +52,14 @@ function updateActiveUsers() {
 // ---------- subscription (Google Apps Script) ----------
 const API_URL = 'https://script.google.com/macros/s/AKfycbw1S3Its5qHoqs4DDxHuHFdaCa_cdIJyJVbVP-SyOxDKz16r_A_GnR3j51BQXrO0eU/exec';
 async function subscribeUser(email) {
-    console.log('Attempting to subscribe with email:', email); // ADD THIS LINE
+    console.log('Attempting to subscribe with email:', email);
     try {
-        const res = await fetch(`${API_URL}?action=subscribe&email=${encodeURIComponent(email)}`);
+        const params = new URLSearchParams();
+        params.append('action', 'subscribe');
+        params.append('email', email);
+        const urlWithParams = `<span class="math-inline">\{API\_URL\}?</span>{params.toString()}`;
+        console.log('Fetching URL:', urlWithParams); // Add this line for debugging
+        const res = await fetch(urlWithParams);
         const reply = await res.json();
         if (reply.result === 'success') {
             alert('✅ Thanks for subscribing! Check your email.');
@@ -69,7 +74,6 @@ async function subscribeUser(email) {
         alert('⚠️ Server error. Try again later.');
     }
 }
-
 document.getElementById('subscribe-form').addEventListener('submit', e => {
     e.preventDefault();
     const email = document.getElementById('email-input').value.trim();
