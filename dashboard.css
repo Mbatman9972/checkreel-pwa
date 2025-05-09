@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1e1b30, #1b264f);
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .dashboard-wrapper {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(30, 30, 50, 0.85);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  
+  .logo {
+    width: 60px;
+    display: block;
+    margin: 0 auto 1rem;
+  }
+  
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtext {
+    font-size: 1rem;
+    color: #aaa;
+  }
+  
+  .welcome-box,
+  .upload-area,
+  .result-area,
+  .history-box {
+    margin-bottom: 2rem;
+    background-color: #292f45;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+  }
+  
+  .welcome-box h2,
+  .upload-area h2,
+  .result-area h2,
+  .history-box h2 {
+    margin-top: 0;
+    color: #90c1ff;
+  }
+  
+  .welcome-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  
+  .welcome-box li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  
+  .welcome-box li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #00ffaa;
+  }
+  
+  input[type="file"] {
+    background: #1a1f3d;
+    border: 1px solid #444;
+    color: #ddd;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  button {
+    background: linear-gradient(to right, #0070f3, #00c6ff);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: linear-gradient(to right, #005ecf, #00aaff);
+  }
+  
+  .note {
+    font-size: 0.9rem;
+    color: #bbb;
+  }
+  
+  #ai-feedback {
+    background-color: #1a1a2e;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    white-space: pre-line;
+    color: #e0e0e0;
+  }
+  
+  #history-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #history-list li {
+    background-color: #2d3250;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #00c6ff;
+    font-size: 0.95rem;
+  }
+  
+  .footer-note {
+    font-size: 0.9rem;
+    text-align: center;
+    color: #aaa;
+    margin-top: 2rem;
+  }
+  
