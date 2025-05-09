@@ -50,25 +50,54 @@ function isValidFile(file) {
 
 function saveHistoryEntry(entry) {
   if (tier !== "plus") return;
-
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
   history.push(entry);
   localStorage.setItem("checkreel_history", JSON.stringify(history));
 }
 
+function deleteHistoryEntry(index) {
+  const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
+  history.splice(index, 1);
+  localStorage.setItem("checkreel_history", JSON.stringify(history));
+  renderHistory();
+}
+
 function renderHistory() {
   const list = document.getElementById("history-list");
+  const count = document.getElementById("history-count");
+  const jsonBtn = document.getElementById("export-history-json");
+  const txtBtn = document.getElementById("export-history-txt");
+
   list.innerHTML = "";
+  count.innerText = "";
+  jsonBtn.style.display = "none";
+  txtBtn.style.display = "none";
+
   if (tier !== "plus") return;
 
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
-  history.forEach(item => {
+
+  count.textContent = `🧾 Total saved scans: ${history.length}`;
+
+  history.forEach((item, index) => {
     const li = document.createElement("li");
-    li.textContent = `${item.timestamp} — ${item.filename} [${item.platforms.join(', ')}] | ${item.regions.join(', ')}`;
+    li.innerHTML = `
+      ${item.timestamp} — <strong>${item.filename}</strong> 
+      [${item.platforms.join(', ')}] | ${item.regions.join(', ')} 
+      <button class="delete-btn" data-index="${index}">🗑️</button>
+    `;
     list.appendChild(li);
   });
 
-  document.getElementById("export-history").style.display = history.length ? "inline-block" : "none";
+  jsonBtn.style.display = history.length ? "inline-block" : "none";
+  txtBtn.style.display = history.length ? "inline-block" : "none";
+
+  document.querySelectorAll(".delete-btn").forEach(btn =>
+    btn.addEventListener("click", e => {
+      const index = parseInt(e.target.dataset.index);
+      deleteHistoryEntry(index);
+    })
+  );
 }
 
 function getSelectedValues(containerId) {
@@ -112,17 +141,34 @@ document.getElementById("submit-button").addEventListener("click", () => {
   }, 2000);
 });
 
-// Export history
-document.getElementById("export-history").addEventListener("click", () => {
+// Export to JSON
+document.getElementById("export-history-json").addEventListener("click", () => {
   const history = localStorage.getItem("checkreel_history");
   if (!history) return alert("No history to export.");
-
   const blob = new Blob([history], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-
   const link = document.createElement("a");
   link.href = url;
   link.download = "checkreel_history.json";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+
+// Export to TXT
+document.getElementById("export-history-txt").addEventListener("click", () => {
+  const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
+  if (!history.length) return alert("No history to export.");
+
+  const lines = history.map(
+    (item, i) => `${i + 1}. ${item.timestamp} — ${item.filename}\n  Platforms: ${item.platforms.join(', ')}\n  Regions: ${item.regions.join(', ')}\n`
+  ).join('\n');
+
+  const blob = new Blob([lines], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "checkreel_history.txt";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
