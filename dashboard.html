@@ -72,13 +72,22 @@
 
     <section class="history-box">
         <h2>📂 Previous Checks</h2>
-        <p id="history-count" class="note"></p>
+        <div class="history-header">
+          <p id="history-count" class="note"></p>
+          <label for="sort-history">Sort by:
+            <select id="sort-history">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+            </select>
+          </label>
+        </div>
         <ul id="history-list"></ul>
         <div class="export-controls">
-          <button id="export-history-json" style="display: none;">⬇️ Export as JSON</button>
-          <button id="export-history-txt" style="display: none;">⬇️ Export as TXT</button>
+          <button id="export-history-json" style="display:none;">⬇️ Export as JSON</button>
+          <button id="export-history-txt" style="display:none;">⬇️ Export as TXT</button>
         </div>
       </section>
+      
       
 
     <footer class="footer-note">
