@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CheckReel Dashboard</title>
+  <link rel="stylesheet" href="style.css"> <!-- Optional if you want global styles -->
+</head>
+<body>
+  <div id="dashboard-container">
+    <h1>Welcome to CheckReel</h1>
+    <p id="user-status">Checking your subscription status...</p>
+
+    <section id="upload-section">
+      <h2>Upload Content for Review</h2>
+      <input type="file" id="content-upload" accept="video/*,image/*,audio/*">
+      <button id="submit-button">Submit for Review</button>
+    </section>
+
+    <section id="result-section" style="display: none;">
+      <h2>AI Feedback</h2>
+      <div id="ai-feedback">Waiting for analysis...</div>
+    </section>
+
+    <section id="check-history">
+      <h2>Previous Checks</h2>
+      <ul id="history-list"></ul>
+    </section>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

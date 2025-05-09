@@ -98,3 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // We are no longer periodically fetching the actual count
 // If you need to sync the displayed count with the sheet later,
 // you'll need to re-introduce a mechanism for that.
+if (reply.result === 'success') {
+    localStorage.setItem('checkreel_user_email', email); // 👈 store email
+    document.getElementById('email-input').value = '';
+    displayedActiveUsers++;
+    updateDisplayedActiveUsers();
+    alert('🎉 You have successfully subscribed for a 7-day free trial! Enjoy exploring CheckReel.');
+    window.location.href = '/dashboard.html';
+}

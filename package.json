@@ -1,0 +1,23 @@
+{
+  "name": "chheckreel-visual-studio-code",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mbatman9972/checkreel-pwa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mbatman9972/checkreel-pwa/issues"
+  },
+  "homepage": "https://github.com/Mbatman9972/checkreel-pwa#readme",
+  "description": "",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
