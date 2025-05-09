@@ -10,33 +10,23 @@
   <div class="dashboard-wrapper">
     <header class="dashboard-header">
       <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
-      <h1 id="dashboard-title">Welcome to CheckReel</h1>
-      <p class="subtext" id="dashboard-subtext">Your AI-powered content safety checker for every platform and region.</p>
+      <h1>Welcome to CheckReel</h1>
+      <p class="subtext">Your AI-powered content compliance platform</p>
+      <p class="intro">
+        Welcome subscribers — the first AI compliance checker tailored specifically for short-form content on social media.
+        Testing content for platform + region compliance helps you avoid costly takedowns, demonetization, and shadowbans.
+      </p>
     </header>
 
-    <section class="welcome-box">
-      <h2 id="welcome-heading">👋 Hello, Creator!</h2>
-      <p id="welcome-message">
-        CheckReel is the first AI compliance tool made specifically for content creators.
-        We help you avoid platform takedowns, copyright flags, and regional issues before you post.
-      </p>
-      <ul id="welcome-list">
-        <li>🔍 Choose your platform and region</li>
-        <li>📥 Upload video, audio, or image</li>
-        <li>🧠 Receive instant compliance feedback</li>
-        <li>🌍 Supports English, Arabic, French (more soon!)</li>
-      </ul>
-    </section>
-
     <section class="filter-section">
-      <h3>Select Platforms</h3>
-      <div class="checkbox-group" id="platform-options">
-        <label><input type="checkbox" value="TikTok"> TikTok</label>
-        <label><input type="checkbox" value="YouTube"> YouTube</label>
-        <label><input type="checkbox" value="Instagram"> Instagram</label>
-        <label><input type="checkbox" value="Facebook"> Facebook</label>
-        <label><input type="checkbox" value="Snapchat"> Snapchat</label>
-        <label><input type="checkbox" value="Threads"> Threads</label>
+      <h3>Select Platform(s)</h3>
+      <div class="logo-checkboxes" id="platform-options">
+        <label><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
+        <label><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
+        <label><input type="checkbox" value="Instagram"><img src="images/platform-logos/instagram.png" alt="Instagram" /></label>
+        <label><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
+        <label><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
+        <label><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
       </div>
 
       <h3>Select Region</h3>
@@ -50,47 +40,29 @@
     </section>
 
     <section class="upload-area">
-      <h2 id="upload-title">Upload Content</h2>
+      <h2>Upload Content</h2>
       <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav" />
-      <p class="note" id="upload-note">Supported formats: MP4, JPG, PNG, MP3, WAV</p>
+      <div class="format-badges">
+        <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span>
+      </div>
       <button id="submit-button">Submit for Review</button>
     </section>
 
-    <section class="result-area" id="result-section" style="display: none;">
-      <h2 id="feedback-title">🧠 AI Feedback</h2>
-      <div id="ai-feedback">Processing...</div>
+    <section class="result-area" id="result-section" style="display:none;">
+      <h2>🧠 AI Feedback</h2>
+      <div id="ai-feedback">Analyzing...</div>
     </section>
 
     <section class="history-box">
-      <h2 id="history-title">📂 Previous Checks</h2>
+      <h2>📂 Previous Checks</h2>
       <ul id="history-list"></ul>
     </section>
 
     <footer class="footer-note">
-      <p id="footer-note">🚀 CheckReel+ unlocks saved scans, report history, and real-time alerts. Just $9.99/mo.</p>
+      <p>🚀 Unlock CheckReel+ for saved scans, unlimited checks, and platform-specific tuning.</p>
     </footer>
   </div>
 
   <script src="dashboard.js"></script>
-  <script>
-    const lang = localStorage.getItem('checkreel_lang') || 'en';
-    fetch(`lang/${lang}.json`)
-      .then(res => res.json())
-      .then(t => {
-        document.getElementById('dashboard-title').innerText = t.dashboard?.title || 'Welcome to CheckReel';
-        document.getElementById('dashboard-subtext').innerText = t.dashboard?.subtitle || '';
-        document.getElementById('welcome-heading').innerText = t.dashboard?.welcome || '';
-        document.getElementById('welcome-message').innerText = t.dashboard?.message || '';
-        document.getElementById('upload-title').innerText = t.dashboard?.upload || '';
-        document.getElementById('upload-note').innerText = t.dashboard?.note || '';
-        document.getElementById('submit-button').innerText = t.dashboard?.submit || '';
-        document.getElementById('feedback-title').innerText = t.dashboard?.feedback || '';
-        document.getElementById('history-title').innerText = t.dashboard?.history || '';
-        document.getElementById('footer-note').innerText = t.dashboard?.footer || '';
-        const listItems = t.dashboard?.steps || [];
-        document.getElementById('welcome-list').innerHTML = listItems.map(item => `<li>${item}</li>`).join('');
-      })
-      .catch(() => console.warn('Language fallback in use'));
-  </script>
 </body>
 </html>
