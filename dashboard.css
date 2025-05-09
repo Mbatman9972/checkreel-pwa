@@ -1,20 +1,22 @@
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #1e1b30, #1b264f);
-    color: #f0f0f0;
+    background: linear-gradient(135deg, #0a0f3a, #1d254e, #312161);
+    color: #f2f2f2;
     display: flex;
     justify-content: center;
     padding: 2rem;
+    min-height: 100vh;
   }
   
   .dashboard-wrapper {
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
-    background: rgba(30, 30, 50, 0.85);
+    background: rgba(30, 30, 50, 0.9);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
   }
   
   .logo {
@@ -30,28 +32,32 @@ body {
   
   .dashboard-header h1 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
   
   .subtext {
     font-size: 1rem;
-    color: #aaa;
+    color: #ccc;
   }
   
   .welcome-box,
   .upload-area,
   .result-area,
-  .history-box {
+  .history-box,
+  .filter-section {
     margin-bottom: 2rem;
-    background-color: #292f45;
+    background: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
-    border-radius: 0.75rem;
+    border-radius: 0.8rem;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   
   .welcome-box h2,
   .upload-area h2,
   .result-area h2,
-  .history-box h2 {
+  .history-box h2,
+  .filter-section h3 {
     margin-top: 0;
     color: #90c1ff;
   }
@@ -72,41 +78,65 @@ body {
     content: "✔";
     position: absolute;
     left: 0;
-    color: #00ffaa;
+    color: #00ffcc;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+  
+  .checkbox-group label {
+    background: #222;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #444;
+    cursor: pointer;
+    color: #eee;
+    font-size: 0.95rem;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 0.5rem;
   }
   
   input[type="file"] {
     background: #1a1f3d;
     border: 1px solid #444;
     color: #ddd;
-    padding: 0.5rem;
+    padding: 0.6rem;
     border-radius: 0.4rem;
     margin-bottom: 1rem;
     display: block;
+    width: 100%;
   }
   
   button {
-    background: linear-gradient(to right, #0070f3, #00c6ff);
+    background: linear-gradient(to right, #0070f3, #c500f9);
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.6rem;
     font-size: 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-top: 0.5rem;
   }
   
   button:hover {
-    background: linear-gradient(to right, #005ecf, #00aaff);
+    background: linear-gradient(to right, #005ecf, #a000d9);
   }
   
   .note {
     font-size: 0.9rem;
     color: #bbb;
+    margin-top: 0.5rem;
   }
   
   #ai-feedback {
-    background-color: #1a1a2e;
+    background-color: #1b1d3a;
     padding: 1rem;
     border-radius: 0.5rem;
     margin-top: 1rem;

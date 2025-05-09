@@ -11,24 +11,49 @@
     <header class="dashboard-header">
       <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
       <h1 id="dashboard-title">Welcome to CheckReel</h1>
-      <p class="subtext" id="dashboard-subtext">Your private content compliance assistant</p>
+      <p class="subtext" id="dashboard-subtext">Your AI-powered content safety checker for every platform and region.</p>
     </header>
 
     <section class="welcome-box">
-      <h2 id="welcome-heading">Hello, Creator 👋</h2>
-      <p id="welcome-message">You're now ready to run AI-powered compliance checks.</p>
+      <h2 id="welcome-heading">👋 Hello, Creator!</h2>
+      <p id="welcome-message">
+        CheckReel is the first AI compliance tool made specifically for content creators.
+        We help you avoid platform takedowns, copyright flags, and regional issues before you post.
+      </p>
       <ul id="welcome-list">
-        <li>📥 Upload short-form content (video, image, or audio)</li>
-        <li>🧠 Get instant feedback from our GPT engine</li>
-        <li>📊 Premium users get saved reports and priority scans</li>
+        <li>🔍 Choose your platform and region</li>
+        <li>📥 Upload video, audio, or image</li>
+        <li>🧠 Receive instant compliance feedback</li>
+        <li>🌍 Supports English, Arabic, French (more soon!)</li>
       </ul>
+    </section>
+
+    <section class="filter-section">
+      <h3>Select Platforms</h3>
+      <div class="checkbox-group" id="platform-options">
+        <label><input type="checkbox" value="TikTok"> TikTok</label>
+        <label><input type="checkbox" value="YouTube"> YouTube</label>
+        <label><input type="checkbox" value="Instagram"> Instagram</label>
+        <label><input type="checkbox" value="Facebook"> Facebook</label>
+        <label><input type="checkbox" value="Snapchat"> Snapchat</label>
+        <label><input type="checkbox" value="Threads"> Threads</label>
+      </div>
+
+      <h3>Select Region</h3>
+      <div class="checkbox-group" id="region-options">
+        <label><input type="checkbox" value="US"> US</label>
+        <label><input type="checkbox" value="EU"> EU</label>
+        <label><input type="checkbox" value="MENA"> MENA</label>
+        <label><input type="checkbox" value="Middle East"> Middle East</label>
+        <label><input type="checkbox" value="Global"> Global</label>
+      </div>
     </section>
 
     <section class="upload-area">
       <h2 id="upload-title">Upload Content</h2>
-      <input type="file" id="content-upload" accept="video/*,image/*,audio/*" />
+      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav" />
+      <p class="note" id="upload-note">Supported formats: MP4, JPG, PNG, MP3, WAV</p>
       <button id="submit-button">Submit for Review</button>
-      <p class="note" id="upload-note">Only .mp4, .jpg, .png, .mp3 are supported for now.</p>
     </section>
 
     <section class="result-area" id="result-section" style="display: none;">
@@ -42,35 +67,30 @@
     </section>
 
     <footer class="footer-note">
-      <p id="footer-note">🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.</p>
+      <p id="footer-note">🚀 CheckReel+ unlocks saved scans, report history, and real-time alerts. Just $9.99/mo.</p>
     </footer>
   </div>
 
   <script src="dashboard.js"></script>
   <script>
-    // 🌐 Apply selected language from localStorage
     const lang = localStorage.getItem('checkreel_lang') || 'en';
-    const langFile = `lang/${lang}.json`;
-
-    fetch(langFile)
+    fetch(`lang/${lang}.json`)
       .then(res => res.json())
       .then(t => {
         document.getElementById('dashboard-title').innerText = t.dashboard?.title || 'Welcome to CheckReel';
-        document.getElementById('dashboard-subtext').innerText = t.dashboard?.subtitle || 'Your private content compliance assistant';
-        document.getElementById('welcome-heading').innerText = t.dashboard?.welcome || 'Hello, Creator 👋';
-        document.getElementById('welcome-message').innerText = t.dashboard?.instructions || 'You\'re now ready to run AI-powered compliance checks.';
-        document.getElementById('upload-title').innerText = t.dashboard?.upload || 'Upload Content';
-        document.getElementById('submit-button').innerText = t.dashboard?.submit || 'Submit for Review';
-        document.getElementById('upload-note').innerText = t.dashboard?.note || 'Only .mp4, .jpg, .png, .mp3 are supported for now.';
-        document.getElementById('feedback-title').innerText = t.dashboard?.feedback || '🧠 AI Feedback';
-        document.getElementById('history-title').innerText = t.dashboard?.history || '📂 Previous Checks';
-        document.getElementById('footer-note').innerText = t.dashboard?.footer || '🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.';
+        document.getElementById('dashboard-subtext').innerText = t.dashboard?.subtitle || '';
+        document.getElementById('welcome-heading').innerText = t.dashboard?.welcome || '';
+        document.getElementById('welcome-message').innerText = t.dashboard?.message || '';
+        document.getElementById('upload-title').innerText = t.dashboard?.upload || '';
+        document.getElementById('upload-note').innerText = t.dashboard?.note || '';
+        document.getElementById('submit-button').innerText = t.dashboard?.submit || '';
+        document.getElementById('feedback-title').innerText = t.dashboard?.feedback || '';
+        document.getElementById('history-title').innerText = t.dashboard?.history || '';
+        document.getElementById('footer-note').innerText = t.dashboard?.footer || '';
         const listItems = t.dashboard?.steps || [];
         document.getElementById('welcome-list').innerHTML = listItems.map(item => `<li>${item}</li>`).join('');
       })
-      .catch(() => {
-        console.warn('Language file not loaded — falling back to English.');
-      });
+      .catch(() => console.warn('Language fallback in use'));
   </script>
 </body>
 </html>
