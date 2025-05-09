@@ -6,7 +6,7 @@ async function loadLanguage(lang) {
   try {
     const res = await fetch(`lang/${lang}.json`);
     translations = await res.json();
-  } catch {
+  } catch (err) {
     translations = {}; // fallback
   }
   applyTranslations();
@@ -48,16 +48,16 @@ function updateDisplayedActiveUsers() {
   el.innerText = fmt.replace('{count}', displayedActiveUsers);
 }
 
-// ---------- subscription (Google Apps Script) ----------
+// ---------- subscription logic ----------
 const API_URL = 'https://script.google.com/macros/s/AKfycbzALs8jubOwQdxgd6sqeiZRsWYH4zunfI5Grs1MeaFct0ES80uTgvvbGfKzphQglgID/exec';
 
 async function subscribeUser(email) {
   console.log('Attempting to subscribe with email:', email);
-  try {
-    const params = new URLSearchParams();
-    params.append('action', 'subscribe');
-    params.append('email', email);
+  const params = new URLSearchParams();
+  params.append('action', 'subscribe');
+  params.append('email', email);
 
+  try {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -66,23 +66,34 @@ async function subscribeUser(email) {
       body: params.toString()
     });
 
-    
+    const reply = await res.json();
+    if (reply.result === 'success') {
+      localStorage.setItem('checkreel_user_email', email);
+      document.getElementById('email-input').value = '';
+      displayedActiveUsers++;
+      updateDisplayedActiveUsers();
+      alert('🎉 You have successfully subscribed for a 7-day free trial! Enjoy exploring CheckReel.');
+      window.location.href = '/dashboard.html';
+    } else {
       alert(`⚠️ ${reply.message || 'Subscription failed.'}`);
     }
   } catch (err) {
-    console.error(err);
+    console.error('Subscription failed:', err);
     alert('⚠️ Server error. Try again later.');
   }
-
+}
 
 document.getElementById('subscribe-form').addEventListener('submit', e => {
   e.preventDefault();
   const email = document.getElementById('email-input').value.trim();
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) subscribeUser(email);
-  else alert('⚠️ Please enter a valid email address.');
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    subscribeUser(email);
+  } else {
+    alert('⚠️ Please enter a valid email address.');
+  }
 });
 
-// ---------- on load ----------
+// ---------- Initialize on load ----------
 document.addEventListener('DOMContentLoaded', () => {
   updateDisplayedActiveUsers();
 });
