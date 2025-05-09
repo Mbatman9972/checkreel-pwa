@@ -3,11 +3,14 @@
 // Retrieve user tier from localStorage or default to 'free'
 const tier = localStorage.getItem("checkreel_tier") || "free";
 
-// Define limits for each tier
+// Define globally supported formats
+const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac'];
+
+// Define scan/size limits per tier (formats are now universal)
 const limits = {
-  free: { scans: 3, size: 10, formats: ['.mp4', '.jpg', '.png', '.mp3'] },
-  premium: { scans: 20, size: 10, formats: ['.mp4', '.jpg', '.png', '.mp3'] },
-  plus: { scans: 40, size: 50, formats: ['.mp4', '.jpg', '.png', '.mp3', '.mov', '.wav', '.webm', '.gif'] }
+  free: { scans: 3, size: 10, formats: supportedFormats },
+  premium: { scans: 20, size: 10, formats: supportedFormats },
+  plus: { scans: 40, size: 50, formats: supportedFormats }
 };
 
 // Retrieve current scan count from localStorage or default to 0
@@ -24,14 +27,14 @@ function isValidFile(file) {
   const maxMB = limits[tier].size;
   const ext = '.' + file.name.split('.').pop().toLowerCase();
   const sizeOK = file.size <= maxMB * 1024 * 1024;
-  const formatOK = limits[tier].formats.includes(ext);
+  const formatOK = supportedFormats.includes(ext);
 
   if (!sizeOK) {
     alert(`⚠️ Your file exceeds the ${maxMB}MB limit for the ${tier} plan.`);
     return false;
   }
   if (!formatOK) {
-    alert(`⚠️ Format “${ext}” isn’t supported on the ${tier} plan.\nAccepted: ${limits[tier].formats.join(', ')}`);
+    alert(`⚠️ Format “${ext}” is not supported. Accepted formats: ${supportedFormats.join(', ')}`);
     return false;
   }
 
@@ -48,39 +51,30 @@ document.getElementById("submit-button").addEventListener("click", () => {
     return;
   }
 
-  if (!isValidFile(file)) {
-    return;
-  }
+  if (!isValidFile(file)) return;
 
   if (scanCount >= limits[tier].scans) {
     alert(`⚠️ You have reached your scan limit for the ${tier} plan.`);
     return;
   }
 
-  // Proceed with file processing (e.g., send to server or process locally)
-  // ...
-
-  // Increment scan count and update UI
+  // Simulate AI processing
   scanCount += 1;
   localStorage.setItem("checkreel_scan_count", scanCount);
   updateScanCounter();
 
-  // Display AI feedback section
   document.getElementById("result-section").style.display = "block";
   document.getElementById("ai-feedback").textContent = "Analyzing...";
 
-  // Simulate AI processing delay
   setTimeout(() => {
-    document.getElementById("ai-feedback").textContent = "✅ Analysis complete. Your content complies with platform guidelines.";
+    document.getElementById("ai-feedback").textContent =
+      "✅ Analysis complete. Your content complies with platform guidelines.";
   }, 2000);
 });
 
-// Initialize dashboard on page load
+// Initialize dashboard on load
 window.addEventListener("DOMContentLoaded", () => {
-  // Set plan badge
   const planBadge = document.getElementById("plan-tier");
   planBadge.textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
-
-  // Update scan counter
   updateScanCounter();
 });
