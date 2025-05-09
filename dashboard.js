@@ -1,45 +1,42 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Simulate user detection (you’ll replace this with actual user session/email later)
-    const userEmail = localStorage.getItem('checkreel_user_email') || 'demo@user.com';
+submitButton.addEventListener('click', async () => {
+    const file = uploadInput.files[0];
+    if (!file) {
+      alert('Please upload a content file first.');
+      return;
+    }
   
-    document.getElementById('user-status').innerText = `Logged in as: ${userEmail}`;
+    if (checkCount >= MAX_FREE_CHECKS) {
+      alert('You’ve reached the maximum of 3 free checks. Please upgrade to continue.');
+      return;
+    }
   
-    const uploadInput = document.getElementById('content-upload');
-    const submitButton = document.getElementById('submit-button');
-    const feedbackBox = document.getElementById('ai-feedback');
-    const resultSection = document.getElementById('result-section');
-    const historyList = document.getElementById('history-list');
+    resultSection.style.display = 'block';
+    feedbackBox.innerText = '🧠 Analyzing your content...';
   
-    let checkCount = 0;
-    const MAX_FREE_CHECKS = 3;
+    // Simulate a prompt based on file name and type
+    const prompt = `Analyze this ${file.type} content titled "${file.name}". Provide feedback on compliance for TikTok, YouTube, and Instagram. Highlight potential copyright issues and suggest improvements.`;
   
-    submitButton.addEventListener('click', () => {
-      const file = uploadInput.files[0];
-      if (!file) {
-        alert('Please upload a content file first.');
-        return;
-      }
+    try {
+      const res = await fetch('/.netlify/functions/ai-check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ prompt })
+      });
   
-      // Check if user exceeded free limit (mocked for now)
-      if (checkCount >= MAX_FREE_CHECKS) {
-        alert('You’ve reached the maximum of 3 free checks. Please upgrade to continue.');
-        return;
-      }
+      const data = await res.json();
+      const feedback = data.reply || 'No feedback received.';
+      feedbackBox.innerText = feedback;
   
-      resultSection.style.display = 'block';
-      feedbackBox.innerText = '🧠 Analyzing content...';
+      const historyItem = document.createElement('li');
+      historyItem.innerText = `Check #${checkCount + 1}: ${new Date().toLocaleString()}`;
+      historyList.appendChild(historyItem);
   
-      // Simulated GPT feedback (you'll replace this with real OpenAI call)
-      setTimeout(() => {
-        const fakeFeedback = `✅ Your content passed all platform compliance checks.\n📈 Tip: Boost engagement by adding a trending hook.`;
-        feedbackBox.innerText = fakeFeedback;
-  
-        const historyItem = document.createElement('li');
-        historyItem.innerText = `Check #${checkCount + 1}: Passed – ${new Date().toLocaleString()}`;
-        historyList.appendChild(historyItem);
-  
-        checkCount++;
-      }, 2000);
-    });
+      checkCount++;
+    } catch (err) {
+      console.error(err);
+      feedbackBox.innerText = '⚠️ Error analyzing content.';
+    }
   });
   
