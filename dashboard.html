@@ -54,11 +54,14 @@
 
     <section class="upload-area">
       <h2>Upload Content</h2>
-      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif" />
+      <input type="file" id="content-upload" accept="mp4, .jpg, .jpeg, .png, .mp3, .wav, .mov, .webm, .gif, .aac" />
       <div class="format-badges">
         <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span>
       </div>
-      <p class="note">💡 Supported formats depend on your plan. Upgrade to Plus to use .mov, .webm, .wav and more.</p>
+      <p class="note"><p class="note">
+        💡 Supported formats: .mp4, .jpg, .jpeg, .png, .mp3, .wav, .mov, .webm, .gif, .aac — available for all users. File size limits still apply.
+      </p>
+      
       <button id="submit-button">Submit for Review</button>
     </section>
 
@@ -68,9 +71,11 @@
     </section>
 
     <section class="history-box">
-      <h2>📂 Previous Checks</h2>
-      <ul id="history-list"></ul>
-    </section>
+        <h2>📂 Previous Checks</h2>
+        <ul id="history-list"></ul>
+        <button id="export-history" style="display: none;">⬇️ Export History</button>
+      </section>
+      
 
     <footer class="footer-note">
       <p>🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.</p>
