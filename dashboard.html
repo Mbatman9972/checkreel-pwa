@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CheckReel Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
   <div class="dashboard-wrapper">
     <header class="dashboard-header">
-      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
-      <h1>Welcome to CheckReel</h1>
-      <p class="subtext">Your private content compliance assistant</p>
+      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
+      <h1 id="dashboard-title">Welcome to CheckReel</h1>
+      <p class="subtext" id="dashboard-subtext">Your private content compliance assistant</p>
     </header>
 
     <section class="welcome-box">
-      <h2>Hello, Creator 👋</h2>
-      <p>You're now ready to run AI-powered compliance checks.</p>
-      <ul>
+      <h2 id="welcome-heading">Hello, Creator 👋</h2>
+      <p id="welcome-message">You're now ready to run AI-powered compliance checks.</p>
+      <ul id="welcome-list">
         <li>📥 Upload short-form content (video, image, or audio)</li>
         <li>🧠 Get instant feedback from our GPT engine</li>
         <li>📊 Premium users get saved reports and priority scans</li>
@@ -25,78 +25,52 @@
     </section>
 
     <section class="upload-area">
-      <h2>Upload Content</h2>
-      <input type="file" id="content-upload" accept="video/*,image/*,audio/*">
+      <h2 id="upload-title">Upload Content</h2>
+      <input type="file" id="content-upload" accept="video/*,image/*,audio/*" />
       <button id="submit-button">Submit for Review</button>
-      <p class="note">Only .mp4, .jpg, .png, .mp3 are supported for now.</p>
+      <p class="note" id="upload-note">Only .mp4, .jpg, .png, .mp3 are supported for now.</p>
     </section>
 
-    <section class="result-area" id="result-section" style="display:none;">
-      <h2>🧠 AI Feedback</h2>
+    <section class="result-area" id="result-section" style="display: none;">
+      <h2 id="feedback-title">🧠 AI Feedback</h2>
       <div id="ai-feedback">Processing...</div>
     </section>
 
     <section class="history-box">
-      <h2>📂 Previous Checks</h2>
+      <h2 id="history-title">📂 Previous Checks</h2>
       <ul id="history-list"></ul>
     </section>
 
     <footer class="footer-note">
-      <p>🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.</p>
+      <p id="footer-note">🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.</p>
     </footer>
   </div>
 
   <script src="dashboard.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CheckReel Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-  <div class="dashboard-wrapper">
-    <header class="dashboard-header">
-      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo">
-      <h1>Welcome to CheckReel</h1>
-      <p class="subtext">Your private content compliance assistant</p>
-    </header>
+  <script>
+    // 🌐 Apply selected language from localStorage
+    const lang = localStorage.getItem('checkreel_lang') || 'en';
+    const langFile = `lang/${lang}.json`;
 
-    <section class="welcome-box">
-      <h2>Hello, Creator 👋</h2>
-      <p>You're now ready to run AI-powered compliance checks.</p>
-      <ul>
-        <li>📥 Upload short-form content (video, image, or audio)</li>
-        <li>🧠 Get instant feedback from our GPT engine</li>
-        <li>📊 Premium users get saved reports and priority scans</li>
-      </ul>
-    </section>
-
-    <section class="upload-area">
-      <h2>Upload Content</h2>
-      <input type="file" id="content-upload" accept="video/*,image/*,audio/*">
-      <button id="submit-button">Submit for Review</button>
-      <p class="note">Only .mp4, .jpg, .png, .mp3 are supported for now.</p>
-    </section>
-
-    <section class="result-area" id="result-section" style="display:none;">
-      <h2>🧠 AI Feedback</h2>
-      <div id="ai-feedback">Processing...</div>
-    </section>
-
-    <section class="history-box">
-      <h2>📂 Previous Checks</h2>
-      <ul id="history-list"></ul>
-    </section>
-
-    <footer class="footer-note">
-      <p>🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.</p>
-    </footer>
-  </div>
-
-  <script src="dashboard.js"></script>
+    fetch(langFile)
+      .then(res => res.json())
+      .then(t => {
+        document.getElementById('dashboard-title').innerText = t.dashboard?.title || 'Welcome to CheckReel';
+        document.getElementById('dashboard-subtext').innerText = t.dashboard?.subtitle || 'Your private content compliance assistant';
+        document.getElementById('welcome-heading').innerText = t.dashboard?.welcome || 'Hello, Creator 👋';
+        document.getElementById('welcome-message').innerText = t.dashboard?.instructions || 'You\'re now ready to run AI-powered compliance checks.';
+        document.getElementById('upload-title').innerText = t.dashboard?.upload || 'Upload Content';
+        document.getElementById('submit-button').innerText = t.dashboard?.submit || 'Submit for Review';
+        document.getElementById('upload-note').innerText = t.dashboard?.note || 'Only .mp4, .jpg, .png, .mp3 are supported for now.';
+        document.getElementById('feedback-title').innerText = t.dashboard?.feedback || '🧠 AI Feedback';
+        document.getElementById('history-title').innerText = t.dashboard?.history || '📂 Previous Checks';
+        document.getElementById('footer-note').innerText = t.dashboard?.footer || '🚀 Upgrade to CheckReel+ ($9.99/mo) to unlock saved reports & unlimited scans.';
+        const listItems = t.dashboard?.steps || [];
+        document.getElementById('welcome-list').innerHTML = listItems.map(item => `<li>${item}</li>`).join('');
+      })
+      .catch(() => {
+        console.warn('Language file not loaded — falling back to English.');
+      });
+  </script>
 </body>
 </html>
