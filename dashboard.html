@@ -12,6 +12,9 @@
     <!-- Upgrade CTA -->
     <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
 
+    <!-- Plan Badge -->
+    <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
+
     <header class="dashboard-header">
       <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
       <h1>Welcome to CheckReel</h1>
@@ -23,6 +26,9 @@
         <strong>3.</strong> Get instant GPT-based analysis  
       </p>
     </header>
+
+    <!-- Scan Counter -->
+    <p id="scan-counter">Scans used: 0 / 3</p>
 
     <section class="filter-section">
       <h3>Select Platform(s)</h3>
@@ -48,10 +54,11 @@
 
     <section class="upload-area">
       <h2>Upload Content</h2>
-      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav" />
+      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif" />
       <div class="format-badges">
-        <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span>
+        <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span>
       </div>
+      <p class="note">💡 Supported formats depend on your plan. Upgrade to Plus to use .mov, .webm, .wav and more.</p>
       <button id="submit-button">Submit for Review</button>
     </section>
 
@@ -73,23 +80,3 @@
   <script src="dashboard.js"></script>
 </body>
 </html>
-<p id="scan-counter">Scans used: 0 / 3</p> <!-- Updates dynamically -->
-<span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
-<p class="note">💡 Supported formats depend on your plan. Upgrade to Plus to use .mov, .webm, .wav and more.</p>
-<!-- Plan Badge -->
-<span class="plan-badge" id="plan-tier">Free Plan</span>
-
-<!-- Scan Counter -->
-<p id="scan-counter">Scans used: 0 / 3</p>
-
-<!-- File Upload Input -->
-<input type="file" id="content-upload" accept=".mp4,.jpg,.png,.mp3,.mov,.wav,.webm,.gif" />
-
-<!-- Submit Button -->
-<button id="submit-button">Submit for Review</button>
-
-<!-- AI Feedback Section -->
-<section class="result-area" id="result-section" style="display:none;">
-  <h2>🧠 AI Feedback</h2>
-  <div id="ai-feedback">Analyzing...</div>
-</section>
