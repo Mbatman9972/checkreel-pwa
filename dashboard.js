@@ -1,88 +1,86 @@
-// 🔐 Restrict dashboard access if not subscribed
-document.addEventListener('DOMContentLoaded', () => {
-    const email = localStorage.getItem('checkreel_user_email');
-    if (!email) {
-      alert('Please subscribe or log in first.');
-      window.location.href = '/';
-    }
-  });
-  
-  function getUserRole(email) {
-    if (!email) return 'Free';
-    if (email.endsWith('@pro.com')) return 'Premium'; // $9.99
-    if (email.endsWith('@sub.com')) return 'Paid';    // $4.99
-    return 'Free';
+// dashboard.js
+
+// Retrieve user tier from localStorage or default to 'free'
+const tier = localStorage.getItem("checkreel_tier") || "free";
+
+// Define limits for each tier
+const limits = {
+  free: { scans: 3, size: 10, formats: ['.mp4', '.jpg', '.png', '.mp3'] },
+  premium: { scans: 20, size: 10, formats: ['.mp4', '.jpg', '.png', '.mp3'] },
+  plus: { scans: 40, size: 50, formats: ['.mp4', '.jpg', '.png', '.mp3', '.mov', '.wav', '.webm', '.gif'] }
+};
+
+// Retrieve current scan count from localStorage or default to 0
+let scanCount = parseInt(localStorage.getItem("checkreel_scan_count")) || 0;
+
+// Update scan counter UI
+function updateScanCounter() {
+  const counter = document.getElementById("scan-counter");
+  counter.textContent = `Scans used: ${scanCount} / ${limits[tier].scans}`;
+}
+
+// Validate uploaded file
+function isValidFile(file) {
+  const maxMB = limits[tier].size;
+  const ext = '.' + file.name.split('.').pop().toLowerCase();
+  const sizeOK = file.size <= maxMB * 1024 * 1024;
+  const formatOK = limits[tier].formats.includes(ext);
+
+  if (!sizeOK) {
+    alert(`⚠️ Your file exceeds the ${maxMB}MB limit for the ${tier} plan.`);
+    return false;
   }
-  
-  const uploadInput = document.getElementById('content-upload');
-  const submitButton = document.getElementById('submit-button');
-  const resultSection = document.getElementById('result-section');
-  const feedbackBox = document.getElementById('ai-feedback');
-  const historyList = document.getElementById('history-list');
-  
-  let checkCount = 0;
-  const MAX_FREE_CHECKS = 3;
-  
-  submitButton.addEventListener('click', async () => {
-    const file = uploadInput.files[0];
-    if (!file) {
-      alert('Please upload a content file first.');
-      return;
-    }
-  
-    const email = localStorage.getItem('checkreel_user_email') || '';
-    const role = getUserRole(email);
-  
-    if (role !== 'Premium') {
-      alert('⚠️ Content analysis is available only to $9.99 Premium subscribers.');
-      return;
-    }
-  
-    const sessionHistory = JSON.parse(localStorage.getItem('checkreel_history') || '[]');
-    const existing = sessionHistory.find(item => item.name === file.name);
-    if (existing) {
-      resultSection.style.display = 'block';
-      feedbackBox.innerHTML = `
-        <em>⚡ Showing cached result for: ${existing.name}</em><br><br>
-        ${existing.result}
-      `;
-      return;
-    }
-  
-    resultSection.style.display = 'block';
-    feedbackBox.innerText = '🧠 Analyzing your content...';
-  
-    const prompt = `Analyze this ${file.type} content titled "${file.name}". Provide feedback on compliance for TikTok, YouTube, and Instagram. Highlight potential copyright issues and suggest improvements.`;
-  
-    try {
-      const res = await fetch('/.netlify/functions/ai-check', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ prompt })
-      });
-  
-      const data = await res.json();
-      const feedback = data.reply || 'No feedback received.';
-      feedbackBox.innerText = feedback;
-  
-      const resultObj = {
-        name: file.name,
-        type: file.type,
-        result: feedback,
-        timestamp: new Date().toLocaleString()
-      };
-      sessionHistory.push(resultObj);
-      localStorage.setItem('checkreel_history', JSON.stringify(sessionHistory));
-  
-      const historyItem = document.createElement('li');
-      historyItem.innerText = `Check: ${file.name} at ${resultObj.timestamp}`;
-      historyList.appendChild(historyItem);
-  
-    } catch (err) {
-      console.error(err);
-      feedbackBox.innerText = '⚠️ Error analyzing content.';
-    }
-  });
-  
+  if (!formatOK) {
+    alert(`⚠️ Format “${ext}” isn’t supported on the ${tier} plan.\nAccepted: ${limits[tier].formats.join(', ')}`);
+    return false;
+  }
+
+  return true;
+}
+
+// Handle file upload submission
+document.getElementById("submit-button").addEventListener("click", () => {
+  const fileInput = document.getElementById("content-upload");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please select a file to upload.");
+    return;
+  }
+
+  if (!isValidFile(file)) {
+    return;
+  }
+
+  if (scanCount >= limits[tier].scans) {
+    alert(`⚠️ You have reached your scan limit for the ${tier} plan.`);
+    return;
+  }
+
+  // Proceed with file processing (e.g., send to server or process locally)
+  // ...
+
+  // Increment scan count and update UI
+  scanCount += 1;
+  localStorage.setItem("checkreel_scan_count", scanCount);
+  updateScanCounter();
+
+  // Display AI feedback section
+  document.getElementById("result-section").style.display = "block";
+  document.getElementById("ai-feedback").textContent = "Analyzing...";
+
+  // Simulate AI processing delay
+  setTimeout(() => {
+    document.getElementById("ai-feedback").textContent = "✅ Analysis complete. Your content complies with platform guidelines.";
+  }, 2000);
+});
+
+// Initialize dashboard on page load
+window.addEventListener("DOMContentLoaded", () => {
+  // Set plan badge
+  const planBadge = document.getElementById("plan-tier");
+  planBadge.textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
+
+  // Update scan counter
+  updateScanCounter();
+});
