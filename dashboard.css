@@ -1,21 +1,37 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #fbd3e9, #bbd7f8, #c6ffe3);
+    background: linear-gradient(to bottom right, #fbd3e9, #bbd7f8, #c6ffe3);
     color: #1e1e1e;
     display: flex;
     justify-content: center;
     padding: 2rem;
-    min-height: 100vh;
   }
   
   .dashboard-wrapper {
     max-width: 960px;
     width: 100%;
-    background: #ffffffdd;
+    background: rgba(255, 255, 255, 0.95);
     padding: 2.5rem;
     border-radius: 1.5rem;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  /* Upgrade CTA */
+  .upgrade-badge {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: #0070f3;
+    color: #fff;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0,112,243,0.4);
+    font-weight: bold;
+    z-index: 999;
   }
   
   .logo {
@@ -32,28 +48,28 @@ body {
     font-size: 2.4rem;
     margin-bottom: 0.3rem;
   }
-  .dashboard-header .subtext {
+  .subtext {
     font-size: 1rem;
     color: #444;
     margin-bottom: 0.5rem;
   }
-  .dashboard-header .intro {
-    color: #555;
+  .intro {
     font-size: 0.95rem;
-    line-height: 1.6;
+    color: #555;
     max-width: 700px;
-    margin: 0.5rem auto 0;
+    margin: 0 auto;
+    line-height: 1.6;
   }
   
   .filter-section,
   .upload-area,
   .result-area,
   .history-box {
-    background: #fff;
+    background: #ffffff;
     padding: 1.5rem;
     border-radius: 1rem;
     margin-bottom: 2rem;
-    border: 1px solid #eee;
+    border: 1px solid #e6e6e6;
   }
   
   h2, h3 {
@@ -73,15 +89,15 @@ body {
     border: 2px solid #ccc;
     background: #f9f9f9;
     cursor: pointer;
-    transition: all 0.2s;
   }
   .logo-checkboxes input[type="checkbox"] {
     display: none;
   }
   .logo-checkboxes img {
-    height: 36px;
-    width: 36px;
-    opacity: 0.5;
+    height: 40px;
+    width: 40px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
   }
   .logo-checkboxes input[type="checkbox"]:checked + img,
   .logo-checkboxes label:hover img {
@@ -97,7 +113,7 @@ body {
   .checkbox-group label {
     padding: 0.5rem 1rem;
     border-radius: 0.6rem;
-    background: #f2f2f2;
+    background: #f4f4f4;
     border: 1px solid #ccc;
     cursor: pointer;
   }
