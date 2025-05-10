@@ -1,17 +1,17 @@
-/* Base */
+/* Base Styles */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #f9faff, #edf0fc); /* soft violet/light tone */
+  background: linear-gradient(to right, #f9faff, #edf0fc);
   color: #222;
 }
-
 
 .container {
   max-width: 1100px;
   margin: auto;
   padding: 2rem;
+  position: relative;
 }
 
 /* Header */
@@ -36,13 +36,7 @@ body {
   color: #444;
 }
 
-.intro mark {
-  background: #fffacc;
-  padding: 0 0.3em;
-  font-weight: 600;
-}
-
-/* Plan Info */
+/* Plan Info + Badge Positions */
 .plan-info {
   position: absolute;
   top: 1rem;
@@ -84,6 +78,15 @@ body {
   background: #005ec2;
 }
 
+/* Language Selector */
+.language-switch select {
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
 /* Platform Logos */
 .logo-checkboxes {
   display: flex;
@@ -122,9 +125,35 @@ body {
 .logo-checkboxes input[type="checkbox"]:checked + img {
   opacity: 1;
   transform: scale(1.2);
-  filter: drop-shadow(0 0 8px #0070f3);
-  border-radius: 8px;
-  background: #e6f0ff;
+}
+
+.logo-checkboxes label[data-platform="TikTok"]:has(input:checked) {
+  border-color: #000000;
+  box-shadow: 0 0 10px #00000066;
+}
+.logo-checkboxes label[data-platform="YouTube"]:has(input:checked) {
+  border-color: #FF0000;
+  box-shadow: 0 0 10px #FF000088;
+}
+.logo-checkboxes label[data-platform="Instagram"]:has(input:checked) {
+  border-color: #E1306C;
+  box-shadow: 0 0 10px #E1306C88;
+}
+.logo-checkboxes label[data-platform="Facebook"]:has(input:checked) {
+  border-color: #3b5998;
+  box-shadow: 0 0 10px #3b599888;
+}
+.logo-checkboxes label[data-platform="Snapchat"]:has(input:checked) {
+  border-color: #FFFC00;
+  box-shadow: 0 0 10px #FFFC0088;
+}
+.logo-checkboxes label[data-platform="Threads"]:has(input:checked) {
+  border-color: #000000;
+  box-shadow: 0 0 10px #00000066;
+}
+.logo-checkboxes label[data-platform="Twitter"]:has(input:checked) {
+  border-color: #1DA1F2;
+  box-shadow: 0 0 10px #1DA1F288;
 }
 
 /* Region Selection */
@@ -184,7 +213,7 @@ body {
   opacity: 0.9;
 }
 
-/* Feedback Area */
+/* AI Feedback */
 .result-area {
   background: #f2f8ff;
   padding: 1rem;
@@ -203,7 +232,7 @@ body {
   100% { opacity: 0.5; }
 }
 
-/* History */
+/* History Section */
 .history-box {
   margin-top: 2rem;
 }
@@ -214,12 +243,6 @@ body {
   align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 1rem;
-}
-
-
-
-.history-header select {
-  margin-left: 0.5rem;
 }
 
 #history-list {
@@ -233,15 +256,6 @@ body {
   border: 1px solid #ddd;
   border-radius: 6px;
   margin: 0.5rem 0;
-}
-
-#history-list:empty::after {
-  content: "🕵️ No past scans saved yet.";
-  display: block;
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  padding: 1rem 0;
 }
 
 .badge {

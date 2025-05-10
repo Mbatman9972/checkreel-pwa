@@ -190,9 +190,14 @@ function downloadBlob(url, filename) {
 
 window.addEventListener("DOMContentLoaded", () => {
   resetIfNewMonth();
-  document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
   updateScanCounter();
   renderHistory();
+  document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
+
+  // Restore selected platform glow
+  document.querySelectorAll('#platform-options input[type="checkbox"]').forEach(cb => {
+    if (cb.checked) cb.dispatchEvent(new Event("change"));
+  });
 });
 
 document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {

@@ -10,36 +10,47 @@
 </head>
 <body>
   <div class="container">
+    <!-- Plan Info -->
     <div class="plan-info">
       <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
       <p id="scan-counter">Scans used: 0 / 0</p>
     </div>
 
+    <!-- Upgrade CTA -->
     <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
 
+    <!-- Language Selection (persistent) -->
+    <div class="language-switch" style="position:absolute;top:1rem;left:50%;transform:translateX(-50%);">
+      <select id="language-selector">
+        <option value="en">🌐 English</option>
+        <option value="ar">🇸🇦 Arabic</option>
+      </select>
+    </div>
+
+    <!-- Header -->
     <header class="dashboard-header">
       <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
       <h1>Welcome to CheckReel</h1>
       <p class="subtext">Your AI-powered content compliance platform</p>
       <p class="intro">
-  📣 <strong>Why CheckReel?</strong><br />
-  CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
-  Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br />
-  <strong>🚀 Upgrade to CheckReel+ for 40 monthly scans, export history, and full content tracking.</strong>
-</p>
-
+        📣 <strong>Why CheckReel?</strong><br />
+        CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
+        Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br />
+        <strong>🚀 Upgrade to CheckReel+ for 40 monthly scans, export history, and full content tracking.</strong>
+      </p>
     </header>
 
+    <!-- Platform & Region Filters -->
     <section class="filter-section">
       <h3>Select Platform</h3>
       <div class="logo-checkboxes" id="platform-options">
-        <label><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
-        <label><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
-        <label><input type="checkbox" value="Instagram"><img src="images/platform-logos/instagram.png" alt="Instagram" /></label>
-        <label><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
-        <label><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
-        <label><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
-        <label><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter/X" /></label>
+        <label data-platform="TikTok"><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
+        <label data-platform="YouTube"><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
+        <label data-platform="Instagram"><input type="checkbox" value="Instagram"><img src="images/platform-logos/instagram.png" alt="Instagram" /></label>
+        <label data-platform="Facebook"><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
+        <label data-platform="Snapchat"><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
+        <label data-platform="Threads"><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
+        <label data-platform="Twitter"><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter/X" /></label>
       </div>
 
       <h3>Select Region</h3>
@@ -52,6 +63,7 @@
       </div>
     </section>
 
+    <!-- Upload Section -->
     <section class="upload-area">
       <h2>Upload Content</h2>
       <label class="file-upload-wrapper">
@@ -64,11 +76,13 @@
       <button id="submit-button">Submit for Review</button>
     </section>
 
+    <!-- AI Feedback -->
     <section class="result-area" id="result-section" style="display:none;">
       <h2>🧠 AI Feedback</h2>
       <div id="ai-feedback" class="loading">Analyzing...</div>
     </section>
 
+    <!-- History -->
     <section class="history-box">
       <h2>📂 Previous Checks</h2>
       <div class="history-header">
@@ -95,10 +109,16 @@
   <script src="dashboard.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('✅ Service Worker registered'))
-        .catch(err => console.error('❌ Service Worker failed', err));
+      navigator.serviceWorker.register('service-worker.js');
     }
+
+    const lang = localStorage.getItem("checkreel_language");
+    if (lang) document.getElementById("language-selector").value = lang;
+
+    document.getElementById("language-selector").addEventListener("change", (e) => {
+      localStorage.setItem("checkreel_language", e.target.value);
+      alert("Language preference saved. Reload to apply changes.");
+    });
   </script>
 </body>
 </html>
