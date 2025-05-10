@@ -26,9 +26,9 @@
       <h1>Welcome to CheckReel</h1>
       <p class="subtext">Your AI-powered content compliance platform</p>
       <p class="intro">
-        <strong>1.</strong> Select your platform + region<br />
-        <strong>2.</strong> Upload your content<br />
-        <strong>3.</strong> Get instant GPT-based analysis
+        <strong>📣 Why CheckReel?</strong><br />
+        <mark>CheckReel protects your content before you post</mark> — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
+        Scan across regions and platforms like TikTok, Instagram, YouTube and more, <mark>before</mark> your content ever goes live.
       </p>
     </header>
 
@@ -58,11 +58,13 @@
     <!-- Upload Section -->
     <section class="upload-area">
       <h2>Upload Content</h2>
-      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
-      <div class="format-badges">
-        <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span>
-      </div>
-      <p class="note">💡 Supported formats up to your plan limits. File size max: 10MB Free/Premium, 50MB Plus.</p>
+      <label class="file-upload-wrapper">
+        <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
+        <span>📁 Choose File</span>
+      </label>
+      <p class="note">
+        💡 Supported formats: MP4, JPG, PNG, MP3, WAV, MOV, GIF, WEBM, AAC. Max file size depends on your plan.
+      </p>
       <button id="submit-button">Submit for Review</button>
     </section>
 

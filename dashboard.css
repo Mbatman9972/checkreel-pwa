@@ -2,251 +2,41 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #f6f8fc, #eef2fb);
+  background: linear-gradient(to right, #eef2f9, #f7f9ff);
   color: #222;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-}
-
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.logo {
-  width: 120px;
-  margin-bottom: 1rem;
-}
-
-.subtext {
-  font-size: 1rem;
-  color: #555;
-}
-
-.intro {
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
-  color: #444;
-}
-
-.plan-info {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  display: flex;
-  gap: 1rem;
-}
-
-.plan-badge {
-  background-color: #0070f3;
-  color: #fff;
-  padding: 0.4rem 0.9rem;
-  border-radius: 1.2rem;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-#scan-counter {
-  font-size: 0.9rem;
-  color: #333;
-  margin-top: 0.3rem;
-}
-
-.upgrade-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+/* Enhanced file upload */
+.file-upload-wrapper {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
   background: #0070f3;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  text-decoration: none;
+  color: white;
+  border-radius: 6px;
   font-weight: 600;
-  font-size: 0.85rem;
+  cursor: pointer;
   transition: background 0.3s ease;
 }
-.upgrade-badge:hover {
-  background: #005ec2;
+.file-upload-wrapper:hover {
+  background: #0059d8;
 }
-
-.logo-checkboxes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  justify-content: center;
-}
-
-.logo-checkboxes label {
-  padding: 0.6rem;
-  border-radius: 0.6rem;
-  border: 2px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  width: 64px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.logo-checkboxes input[type="checkbox"] {
+.file-upload-wrapper input[type="file"] {
   display: none;
 }
 
-.logo-checkboxes img {
-  height: 32px;
-  width: 32px;
-  opacity: 0.5;
-  transition: all 0.2s ease;
-}
-
+/* Glow when selected */
 .logo-checkboxes input[type="checkbox"]:checked + img {
   opacity: 1;
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 6px #0070f3);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px #0070f3);
   border-radius: 8px;
   background: #e6f0ff;
 }
 
-.logo-checkboxes label:hover {
-  border-color: #0070f3;
-  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
-}
-
-.checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  justify-content: center;
-}
-
-.upload-area {
-  background: #ffffff;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 0 2px #e0e0e0;
-  text-align: center;
-}
-
-#content-upload {
-  margin: 1rem 0;
-  padding: 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #f8f9fa;
-  width: 80%;
-  max-width: 400px;
-}
-
-.note {
-  font-size: 0.85rem;
-  color: #555;
-  margin-top: 0.5rem;
-}
-
-#submit-button {
-  background: linear-gradient(to right, #0070f3, #8300e9);
-  color: white;
-  padding: 0.7rem 1.4rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 1.2rem;
-}
-#submit-button:hover {
-  opacity: 0.9;
-}
-
-.result-area {
-  background: #f2f8ff;
-  padding: 1rem;
-  border-radius: 6px;
-  margin-top: 2rem;
-}
-
-#ai-feedback.loading::after {
-  content: ' ⏳';
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
-}
-
-.history-box {
-  margin-top: 2rem;
-}
-
-.history-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.history-header select {
-  margin-left: 0.5rem;
-}
-
-#history-list {
-  list-style: none;
-  padding: 0;
-}
-
-#history-list li {
-  background: #fff;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin: 0.5rem 0;
-}
-
-#history-list:empty::after {
-  content: "🕵️ No past scans saved yet.";
-  display: block;
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  padding: 1rem 0;
-}
-
-.badge {
-  display: inline-block;
-  background: #0070f3;
-  color: white;
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  font-size: 0.75rem;
-  margin-right: 0.3rem;
-}
-
-.delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  float: right;
-  font-size: 1rem;
-}
-
-.export-controls button {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.footer-note {
-  text-align: center;
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: #666;
+/* Highlighted intro */
+.intro mark {
+  background: #fffacc;
+  padding: 0 0.3em;
+  font-weight: 600;
+  color: #000;
 }
