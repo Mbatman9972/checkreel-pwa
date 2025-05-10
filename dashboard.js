@@ -1,6 +1,6 @@
-const tier = localStorage.getItem("checkreel_tier") || "free";
+// dashboard.js
 
-// Global supported formats across all plans
+const tier = localStorage.getItem("checkreel_tier") || "free";
 const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
 
 const limits = {
@@ -14,7 +14,6 @@ let scanCount = parseInt(localStorage.getItem("checkreel_scan_count")) || 0;
 function resetIfNewMonth() {
   const now = new Date();
   const lastReset = new Date(localStorage.getItem("checkreel_last_reset") || 0);
-
   if (now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
     localStorage.setItem("checkreel_scan_count", "0");
     localStorage.setItem("checkreel_last_reset", now.toISOString());
@@ -33,8 +32,14 @@ function isValidFile(file) {
   const sizeOK = file.size <= limits[tier].size * 1024 * 1024;
   const formatOK = supportedFormats.includes(ext);
 
-  if (!sizeOK) return alert(`⚠️ Max ${limits[tier].size}MB allowed.`), false;
-  if (!formatOK) return alert(`⚠️ Format ${ext} not allowed.`), false;
+  if (!sizeOK) {
+    alert(`⚠️ Max ${limits[tier].size}MB allowed.`);
+    return false;
+  }
+  if (!formatOK) {
+    alert(`⚠️ Format ${ext} not allowed.`);
+    return false;
+  }
 
   return true;
 }
@@ -64,16 +69,18 @@ function renderHistory() {
   const txtBtn = document.getElementById("export-history-txt");
 
   list.innerHTML = "";
-  count.textContent = "";
+  count.innerText = "";
   jsonBtn.style.display = "none";
   txtBtn.style.display = "none";
 
   if (tier !== "plus") return;
 
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
-  const sort = document.getElementById("sort-history").value;
+  const sort = document.getElementById("sort-history")?.value || "newest";
   const sorted = [...history].sort((a, b) =>
-    sort === "newest" ? new Date(b.timestamp) - new Date(a.timestamp) : new Date(a.timestamp) - new Date(b.timestamp)
+    sort === "newest"
+      ? new Date(b.timestamp) - new Date(a.timestamp)
+      : new Date(a.timestamp) - new Date(b.timestamp)
   );
 
   count.textContent = `🧾 Total saved scans: ${sorted.length}`;
@@ -102,9 +109,17 @@ function renderHistory() {
 
 document.getElementById("submit-button").addEventListener("click", () => {
   const file = document.getElementById("content-upload").files[0];
-  if (!file) return alert("Please select a file.");
+  if (!file) {
+    alert("Please select a file.");
+    return;
+  }
+
   if (!isValidFile(file)) return;
-  if (scanCount >= limits[tier].scans) return alert("⚠️ Scan limit reached.");
+
+  if (scanCount >= limits[tier].scans) {
+    alert("⚠️ Scan limit reached.");
+    return;
+  }
 
   scanCount += 1;
   localStorage.setItem("checkreel_scan_count", scanCount);
@@ -115,13 +130,14 @@ document.getElementById("submit-button").addEventListener("click", () => {
   const feedback = "✅ Analysis complete. Content meets platform guidelines.";
 
   if (tier === "plus") {
-    saveHistoryEntry({
+    const entry = {
       filename: file.name,
       timestamp: new Date().toLocaleString(),
       platforms,
       regions,
       feedback
-    });
+    };
+    saveHistoryEntry(entry);
     renderHistory();
   }
 
@@ -133,9 +149,9 @@ document.getElementById("submit-button").addEventListener("click", () => {
   }, 1500);
 });
 
-document.getElementById("sort-history").addEventListener("change", renderHistory);
+document.getElementById("sort-history")?.addEventListener("change", renderHistory);
 
-document.getElementById("export-history-json").addEventListener("click", () => {
+document.getElementById("export-history-json")?.addEventListener("click", () => {
   const data = localStorage.getItem("checkreel_history");
   if (!data) return;
   const blob = new Blob([data], { type: "application/json" });
@@ -143,7 +159,7 @@ document.getElementById("export-history-json").addEventListener("click", () => {
   downloadBlob(url, "checkreel_history.json");
 });
 
-document.getElementById("export-history-txt").addEventListener("click", () => {
+document.getElementById("export-history-txt")?.addEventListener("click", () => {
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
   const lines = history.map((h, i) =>
     `${i + 1}. ${h.timestamp} — ${h.filename}\n   Platforms: ${h.platforms.join(', ')}\n   Regions: ${h.regions.join(', ')}\n   Feedback: ${h.feedback}\n`
@@ -162,7 +178,6 @@ function downloadBlob(url, filename) {
   document.body.removeChild(a);
 }
 
-// Initialize
 window.addEventListener("DOMContentLoaded", () => {
   resetIfNewMonth();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
