@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CheckReel Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
@@ -12,10 +13,9 @@
 
     <!-- Plan Info -->
     <div class="plan-info">
-  <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
-  <p id="scan-counter">Scans used: 0 / 0</p>
-  <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
-</div>
+      <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
+      <p id="scan-counter">Scans used: 0 / 0</p>
+    </div>
 
     <!-- Upgrade CTA -->
     <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
@@ -26,8 +26,7 @@
       <h1>Welcome to CheckReel</h1>
       <p class="subtext">Your AI-powered content compliance platform</p>
       <p class="intro">
-        Welcome subscribers — the first AI compliance checker tailored for short-form social media.<br />
-        <strong>1.</strong> Select your platform(s) & region<br />
+        <strong>1.</strong> Select your platform + region<br />
         <strong>2.</strong> Upload your content<br />
         <strong>3.</strong> Get instant GPT-based analysis
       </p>
@@ -35,7 +34,7 @@
 
     <!-- Platform & Region Filters -->
     <section class="filter-section">
-      <h3>Select Platform(s)</h3>
+      <h3>Select Platform</h3>
       <div class="logo-checkboxes" id="platform-options">
         <label><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
         <label><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
@@ -48,11 +47,11 @@
 
       <h3>Select Region</h3>
       <div class="checkbox-group" id="region-options">
-        <label><input type="checkbox" value="US"> US</label>
-        <label><input type="checkbox" value="EU"> EU</label>
-        <label><input type="checkbox" value="MENA"> MENA</label>
-        <label><input type="checkbox" value="Middle East"> Middle East</label>
-        <label><input type="checkbox" value="Global"> Global</label>
+        <label><input type="radio" name="region" value="US"> US</label>
+        <label><input type="radio" name="region" value="EU"> EU</label>
+        <label><input type="radio" name="region" value="MENA"> MENA</label>
+        <label><input type="radio" name="region" value="Middle East"> Middle East</label>
+        <label><input type="radio" name="region" value="Global"> Global</label>
       </div>
     </section>
 
@@ -63,16 +62,14 @@
       <div class="format-badges">
         <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span>
       </div>
-      <p class="note">
-        💡 Supported formats: .mp4, .jpg, .jpeg, .png, .mp3, .wav, .mov, .webm, .gif, .aac — available for all users. File size limits still apply.
-      </p>
+      <p class="note">💡 Supported formats up to your plan limits. File size max: 10MB Free/Premium, 50MB Plus.</p>
       <button id="submit-button">Submit for Review</button>
     </section>
 
     <!-- AI Feedback -->
     <section class="result-area" id="result-section" style="display:none;">
       <h2>🧠 AI Feedback</h2>
-      <div id="ai-feedback">Analyzing...</div>
+      <div id="ai-feedback" class="loading">Analyzing...</div>
     </section>
 
     <!-- History -->
@@ -101,5 +98,12 @@
 
   </div>
   <script src="dashboard.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('✅ Service Worker registered', reg.scope))
+        .catch(err => console.warn('❌ SW registration failed', err));
+    }
+  </script>
 </body>
 </html>

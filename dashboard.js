@@ -1,5 +1,3 @@
-// dashboard.js
-
 const tier = localStorage.getItem("checkreel_tier") || "free";
 const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
 
@@ -46,6 +44,11 @@ function isValidFile(file) {
 
 function getSelectedValues(containerId) {
   return [...document.querySelectorAll(`#${containerId} input:checked`)].map(cb => cb.value);
+}
+
+function getSelectedRadioValue(containerId) {
+  const checked = document.querySelector(`#${containerId} input[type="radio"]:checked`);
+  return checked ? [checked.value] : [];
 }
 
 function saveHistoryEntry(entry) {
@@ -126,7 +129,7 @@ document.getElementById("submit-button").addEventListener("click", () => {
   updateScanCounter();
 
   const platforms = getSelectedValues("platform-options");
-  const regions = getSelectedValues("region-options");
+  const regions = getSelectedRadioValue("region-options");
   const feedback = "✅ Analysis complete. Content meets platform guidelines.";
 
   if (tier === "plus") {
@@ -142,11 +145,18 @@ document.getElementById("submit-button").addEventListener("click", () => {
   }
 
   document.getElementById("result-section").style.display = "block";
-  document.getElementById("ai-feedback").textContent = "Analyzing...";
+  const feedbackElem = document.getElementById("ai-feedback");
+  feedbackElem.classList.add("loading");
+  feedbackElem.textContent = "Analyzing...";
 
   setTimeout(() => {
-    document.getElementById("ai-feedback").textContent = feedback;
+    feedbackElem.textContent = feedback;
+    feedbackElem.classList.remove("loading");
   }, 1500);
+});
+
+document.getElementById("content-upload").addEventListener("change", () => {
+  document.getElementById("result-section").style.display = "none";
 });
 
 document.getElementById("sort-history")?.addEventListener("change", renderHistory);
@@ -184,6 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
   updateScanCounter();
   renderHistory();
 });
+
 document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {
   checkbox.addEventListener('change', function () {
     if (this.checked) {
