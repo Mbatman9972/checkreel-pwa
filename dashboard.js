@@ -184,3 +184,12 @@ window.addEventListener("DOMContentLoaded", () => {
   updateScanCounter();
   renderHistory();
 });
+document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {
+  checkbox.addEventListener('change', function () {
+    if (this.checked) {
+      document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((cb) => {
+        if (cb !== this) cb.checked = false;
+      });
+    }
+  });
+});
