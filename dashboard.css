@@ -1,184 +1,71 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom right, #fbd3e9, #bbd7f8, #c6ffe3);
-    color: #1e1e1e;
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
-  }
-  
-  .dashboard-wrapper {
-    max-width: 960px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  /* Upgrade CTA */
-  .upgrade-badge {
-    position: absolute;
-    top: 1.2rem;
-    right: 1.5rem;
-    background: #0070f3;
-    color: #fff;
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
-    border-radius: 2rem;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(0,112,243,0.4);
-    font-weight: bold;
-    z-index: 999;
-  }
-  
-  .logo {
-    width: 70px;
-    display: block;
-    margin: 0 auto 1rem;
-  }
-  
-  .dashboard-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .dashboard-header h1 {
-    font-size: 2.4rem;
-    margin-bottom: 0.3rem;
-  }
-  .subtext {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 0.5rem;
-  }
-  .intro {
-    font-size: 0.95rem;
-    color: #555;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  
-  .filter-section,
-  .upload-area,
-  .result-area,
-  .history-box {
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-    border: 1px solid #e6e6e6;
-  }
-  
-  h2, h3 {
-    margin-top: 0;
-    color: #222;
-  }
-  
-  .logo-checkboxes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  .logo-checkboxes label {
-    padding: 0.6rem;
-    border-radius: 0.6rem;
-    border: 2px solid #ccc;
-    background: #f9f9f9;
-    cursor: pointer;
-  }
-  .logo-checkboxes input[type="checkbox"] {
-    display: none;
-  }
-  .logo-checkboxes img {
-    height: 40px;
-    width: 40px;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-  }
-  .logo-checkboxes input[type="checkbox"]:checked + img,
-  .logo-checkboxes label:hover img {
-    opacity: 1;
-  }
-  
-  .checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 0.5rem;
-  }
-  .checkbox-group label {
-    padding: 0.5rem 1rem;
-    border-radius: 0.6rem;
-    background: #f4f4f4;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  
-  input[type="file"] {
-    background: #f6f8fc;
-    border: 1px solid #ccc;
-    color: #333;
-    padding: 0.6rem;
-    border-radius: 0.4rem;
-    margin-bottom: 1rem;
-    display: block;
-    width: 100%;
-  }
-  
-  .format-badges {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .format-badges span {
-    background: #0070f3;
-    color: #fff;
-    padding: 0.3rem 0.7rem;
-    border-radius: 0.4rem;
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  
-  button {
-    background: linear-gradient(to right, #0070f3, #a300f9);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.6rem;
-    font-size: 1rem;
-    border-radius: 0.6rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  button:hover {
-    background: linear-gradient(to right, #0055cc, #8000c7);
-  }
-  
-  #ai-feedback {
-    padding: 1rem;
-    background: #f7f7f7;
-    border-left: 4px solid #0070f3;
-    border-radius: 0.4rem;
-    color: #333;
-  }
-  
-  #history-list {
-    list-style: none;
-    padding: 0;
-  }
-  #history-list li {
-    padding: 0.8rem;
-    margin-bottom: 0.5rem;
-    background: #f0f0f0;
-    border-left: 4px solid #0070f3;
-  }
-  
-  .footer-note {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
+.logo-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.logo-checkboxes label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  width: 64px;
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  border: 2px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Hide native checkbox */
+.logo-checkboxes input[type="checkbox"] {
+  display: none;
+}
+
+.logo-checkboxes img {
+  height: 32px;
+  width: 32px;
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.logo-checkboxes label:hover {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+/* Selected platform */
+.logo-checkboxes input[type="checkbox"]:checked + img {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px #0070f3);
+  border-radius: 8px;
+}
+
+/* Scan info and badge */
+.plan-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.plan-badge {
+  background-color: #0070f3;
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  border-radius: 1.2rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+#scan-counter {
+  font-size: 0.9rem;
+  color: #333;
+}
