@@ -97,3 +97,30 @@ document.getElementById('subscribe-form').addEventListener('submit', e => {
 document.addEventListener('DOMContentLoaded', () => {
   updateDisplayedActiveUsers();
 });
+const tier = localStorage.getItem("checkreel_tier") || "free";
+
+const allFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
+
+const limits = {
+  free: { scans: 3, size: 10, formats: allFormats },
+  premium: { scans: 20, size: 10, formats: allFormats },
+  plus: { scans: 40, size: 50, formats: allFormats }
+};
+
+function isValidFile(file) {
+  const maxMB = limits[tier].size;
+  const ext = '.' + file.name.split('.').pop().toLowerCase();
+  const sizeOK = file.size <= maxMB * 1024 * 1024;
+  const formatOK = limits[tier].formats.includes(ext);
+
+  if (!sizeOK) {
+    alert(`⚠️ Your file exceeds the ${maxMB}MB limit for the ${tier} plan.`);
+    return false;
+  }
+  if (!formatOK) {
+    alert(`⚠️ Format “${ext}” isn’t supported on the ${tier} plan.\nAccepted: ${limits[tier].formats.join(', ')}`);
+    return false;
+  }
+
+  return true;
+}

@@ -13,7 +13,7 @@ function resetIfNewMonth() {
   const now = new Date();
   const lastReset = new Date(localStorage.getItem("checkreel_last_reset") || 0);
   if (now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
-    localStorage.setItem("checkreel_scan_count", 0);
+    localStorage.setItem("checkreel_scan_count", "0");
     localStorage.setItem("checkreel_last_reset", now.toISOString());
     localStorage.removeItem("checkreel_history");
     scanCount = 0;
@@ -29,8 +29,17 @@ function isValidFile(file) {
   const ext = '.' + file.name.split('.').pop().toLowerCase();
   const sizeOK = file.size <= limits[tier].size * 1024 * 1024;
   const formatOK = supportedFormats.includes(ext);
-  if (!sizeOK) return alert(`⚠️ Max ${limits[tier].size}MB allowed.`), false;
-  if (!formatOK) return alert(`⚠️ Format ${ext} not allowed.`), false;
+
+  if (!sizeOK) {
+    alert(`⚠️ Max ${limits[tier].size}MB allowed.`);
+    return false;
+  }
+
+  if (!formatOK) {
+    alert(`⚠️ Format ${ext} not allowed.`);
+    return false;
+  }
+
   return true;
 }
 
@@ -67,7 +76,11 @@ function renderHistory() {
 
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
   const sort = document.getElementById("sort-history").value;
-  const sorted = [...history].sort((a, b) => sort === "newest" ? new Date(b.timestamp) - new Date(a.timestamp) : new Date(a.timestamp) - new Date(b.timestamp));
+  const sorted = [...history].sort((a, b) =>
+    sort === "newest"
+      ? new Date(b.timestamp) - new Date(a.timestamp)
+      : new Date(a.timestamp) - new Date(b.timestamp)
+  );
 
   count.textContent = `🧾 Total saved scans: ${sorted.length}`;
 
@@ -83,8 +96,10 @@ function renderHistory() {
     list.appendChild(li);
   });
 
-  jsonBtn.style.display = sorted.length ? "inline-block" : "none";
-  txtBtn.style.display = sorted.length ? "inline-block" : "none";
+  if (sorted.length > 0) {
+    jsonBtn.style.display = "inline-block";
+    txtBtn.style.display = "inline-block";
+  }
 
   document.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", () => deleteHistoryEntry(parseInt(btn.dataset.index)));
@@ -93,9 +108,17 @@ function renderHistory() {
 
 document.getElementById("submit-button").addEventListener("click", () => {
   const file = document.getElementById("content-upload").files[0];
-  if (!file) return alert("Please select a file.");
+  if (!file) {
+    alert("Please select a file.");
+    return;
+  }
+
   if (!isValidFile(file)) return;
-  if (scanCount >= limits[tier].scans) return alert("⚠️ Scan limit reached.");
+
+  if (scanCount >= limits[tier].scans) {
+    alert("⚠️ Scan limit reached.");
+    return;
+  }
 
   scanCount += 1;
   localStorage.setItem("checkreel_scan_count", scanCount);
