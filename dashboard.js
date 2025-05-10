@@ -1,11 +1,12 @@
 const tier = localStorage.getItem("checkreel_tier") || "free";
-const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac'];
+const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
 
 const limits = {
   free: { scans: 3, size: 10, formats: supportedFormats },
   premium: { scans: 20, size: 10, formats: supportedFormats },
   plus: { scans: 40, size: 50, formats: supportedFormats }
 };
+
 
 let scanCount = parseInt(localStorage.getItem("checkreel_scan_count")) || 0;
 
