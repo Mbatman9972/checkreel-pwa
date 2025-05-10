@@ -1,4 +1,6 @@
 const tier = localStorage.getItem("checkreel_tier") || "free";
+
+// Global supported formats across all plans
 const supportedFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
 
 const limits = {
@@ -7,12 +9,12 @@ const limits = {
   plus: { scans: 40, size: 50, formats: supportedFormats }
 };
 
-
 let scanCount = parseInt(localStorage.getItem("checkreel_scan_count")) || 0;
 
 function resetIfNewMonth() {
   const now = new Date();
   const lastReset = new Date(localStorage.getItem("checkreel_last_reset") || 0);
+
   if (now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
     localStorage.setItem("checkreel_scan_count", "0");
     localStorage.setItem("checkreel_last_reset", now.toISOString());
@@ -31,15 +33,8 @@ function isValidFile(file) {
   const sizeOK = file.size <= limits[tier].size * 1024 * 1024;
   const formatOK = supportedFormats.includes(ext);
 
-  if (!sizeOK) {
-    alert(`⚠️ Max ${limits[tier].size}MB allowed.`);
-    return false;
-  }
-
-  if (!formatOK) {
-    alert(`⚠️ Format ${ext} not allowed.`);
-    return false;
-  }
+  if (!sizeOK) return alert(`⚠️ Max ${limits[tier].size}MB allowed.`), false;
+  if (!formatOK) return alert(`⚠️ Format ${ext} not allowed.`), false;
 
   return true;
 }
@@ -69,7 +64,7 @@ function renderHistory() {
   const txtBtn = document.getElementById("export-history-txt");
 
   list.innerHTML = "";
-  count.innerText = "";
+  count.textContent = "";
   jsonBtn.style.display = "none";
   txtBtn.style.display = "none";
 
@@ -78,9 +73,7 @@ function renderHistory() {
   const history = JSON.parse(localStorage.getItem("checkreel_history") || "[]");
   const sort = document.getElementById("sort-history").value;
   const sorted = [...history].sort((a, b) =>
-    sort === "newest"
-      ? new Date(b.timestamp) - new Date(a.timestamp)
-      : new Date(a.timestamp) - new Date(b.timestamp)
+    sort === "newest" ? new Date(b.timestamp) - new Date(a.timestamp) : new Date(a.timestamp) - new Date(b.timestamp)
   );
 
   count.textContent = `🧾 Total saved scans: ${sorted.length}`;
@@ -109,17 +102,9 @@ function renderHistory() {
 
 document.getElementById("submit-button").addEventListener("click", () => {
   const file = document.getElementById("content-upload").files[0];
-  if (!file) {
-    alert("Please select a file.");
-    return;
-  }
-
+  if (!file) return alert("Please select a file.");
   if (!isValidFile(file)) return;
-
-  if (scanCount >= limits[tier].scans) {
-    alert("⚠️ Scan limit reached.");
-    return;
-  }
+  if (scanCount >= limits[tier].scans) return alert("⚠️ Scan limit reached.");
 
   scanCount += 1;
   localStorage.setItem("checkreel_scan_count", scanCount);
@@ -130,14 +115,13 @@ document.getElementById("submit-button").addEventListener("click", () => {
   const feedback = "✅ Analysis complete. Content meets platform guidelines.";
 
   if (tier === "plus") {
-    const entry = {
+    saveHistoryEntry({
       filename: file.name,
       timestamp: new Date().toLocaleString(),
       platforms,
       regions,
       feedback
-    };
-    saveHistoryEntry(entry);
+    });
     renderHistory();
   }
 
@@ -178,6 +162,7 @@ function downloadBlob(url, filename) {
   document.body.removeChild(a);
 }
 
+// Initialize
 window.addEventListener("DOMContentLoaded", () => {
   resetIfNewMonth();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
