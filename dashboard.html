@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -5,13 +7,15 @@
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
-
-
+<body>
+  <div class="dashboard-wrapper">
     <!-- Upgrade CTA -->
     <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
 
-    <!-- Plan Badge -->
-    <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
+    <div class="plan-info">
+      <p id="scan-counter">Scans used: 0 / 0</p>
+      <span class="plan-badge" id="plan-tier">Free Plan</span>
+    </div>
 
     <header class="dashboard-header">
       <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
@@ -24,9 +28,6 @@
         <strong>3.</strong> Get instant GPT-based analysis  
       </p>
     </header>
-
-    <!-- Scan Counter -->
-    <p id="scan-counter">Scans used: 0 / 3</p>
 
     <section class="filter-section">
       <h3>Select Platform(s)</h3>
@@ -49,20 +50,14 @@
         <label><input type="checkbox" value="Global"> Global</label>
       </div>
     </section>
-<p id="scan-counter">Scans used: 0 / ?</p>
-<span class="plan-badge" id="plan-tier">Plan: Unknown</span>
 
     <section class="upload-area">
       <h2>Upload Content</h2>
       <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
-
       <div class="format-badges">
         <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span>
       </div>
-      <p class="note"><p class="note">
-        💡 Supported formats: .mp4, .jpg, .jpeg, .png, .mp3, .wav, .mov, .webm, .gif, .aac — available for all users. File size limits still apply.
-      </p>
-      
+      <p class="note">💡 Supported formats available for all users. File size limits still apply.</p>
       <button id="submit-button">Submit for Review</button>
     </section>
 
@@ -72,24 +67,103 @@
     </section>
 
     <section class="history-box">
-        <h2>📂 Previous Checks</h2>
-        <div class="history-header">
-          <p id="history-count" class="note"></p>
-          <label for="sort-history">Sort by:
-            <select id="sort-history">
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-            </select>
-          </label>
-        </div>
-        <ul id="history-list"></ul>
-        <div class="export-controls">
-          <button id="export-history-json" style="display:none;">⬇️ Export as JSON</button>
-          <button id="export-history-txt" style="display:none;">⬇️ Export as TXT</button>
-        </div>
-      </section>
-      
-      
+      <h2>📂 Previous Checks</h2>
+      <div class="history-header">
+        <p id="history-count" class="note"></p>
+        <label for="sort-history">Sort by:
+          <select id="sort-history">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </label>
+      </div>
+      <ul id="history-list"></ul>
+      <div class="export-controls">
+        <button id="export-history-json" style="display:none;">⬇️ Export as JSON</button>
+        <button id="export-history-txt" style="display:none;">⬇️ Export as TXT</button>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <p>🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.</p>
+    </footer>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+
+
+    <!-- Upgrade CTA -->
+    <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
+
+    <header class="dashboard-header">
+      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
+      <h1>Welcome to CheckReel</h1>
+      <p class="subtext">Your AI-powered content compliance platform</p>
+      <p class="intro">
+        Welcome subscribers — the first AI compliance checker tailored for short-form social media.  
+        <strong>1.</strong> Select your platform(s) & region  
+        <strong>2.</strong> Upload your content  
+        <strong>3.</strong> Get instant GPT-based analysis  
+      </p>
+    </header>
+
+    <section class="filter-section">
+      <h3>Select Platform(s)</h3>
+      <div class="logo-checkboxes" id="platform-options">
+        <label><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
+        <label><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
+        <label><input type="checkbox" value="Instagram"><img src="images/platform-logos/instagram.png" alt="Instagram" /></label>
+        <label><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
+        <label><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
+        <label><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
+        <label><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter/X" /></label>
+      </div>
+
+      <h3>Select Region</h3>
+      <div class="checkbox-group" id="region-options">
+        <label><input type="checkbox" value="US"> US</label>
+        <label><input type="checkbox" value="EU"> EU</label>
+        <label><input type="checkbox" value="MENA"> MENA</label>
+        <label><input type="checkbox" value="Middle East"> Middle East</label>
+        <label><input type="checkbox" value="Global"> Global</label>
+      </div>
+    </section>
+
+    <section class="upload-area">
+      <h2>Upload Content</h2>
+      <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
+      <div class="format-badges">
+        <span>MP4</span><span>JPG</span><span>PNG</span><span>MP3</span><span>WAV</span><span>MOV</span><span>WEBM</span><span>GIF</span><span>AAC</span><span>OPUS</span>
+      </div>
+      <p class="note">
+        💡 Supported formats: .mp4, .jpg, .jpeg, .png, .mp3, .wav, .mov, .webm, .gif, .aac, .opus — available for all users. File size limits still apply.
+      </p>
+      <button id="submit-button">Submit for Review</button>
+    </section>
+
+    <section class="result-area" id="result-section" style="display:none;">
+      <h2>🧠 AI Feedback</h2>
+      <div id="ai-feedback">Analyzing...</div>
+    </section>
+
+    <section class="history-box">
+      <h2>📂 Previous Checks</h2>
+      <div class="history-header">
+        <p id="history-count" class="note"></p>
+        <label for="sort-history">Sort by:
+          <select id="sort-history">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </label>
+      </div>
+      <ul id="history-list"></ul>
+      <div class="export-controls">
+        <button id="export-history-json" style="display:none;">⬇️ Export as JSON</button>
+        <button id="export-history-txt" style="display:none;">⬇️ Export as TXT</button>
+      </div>
+    </section>
 
     <footer class="footer-note">
       <p>🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.</p>
