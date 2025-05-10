@@ -1,12 +1,11 @@
 /* Base Styles */
-bbody {
+body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #f5f7ff, #d6ecff);
+  background: linear-gradient(to right, #f6f8fc, #eef2fb);
   color: #222;
 }
-
 
 .container {
   max-width: 1100px;
@@ -36,13 +35,13 @@ bbody {
   color: #444;
 }
 
-/* Plan Info */
+/* Plan Info + Badge Positions */
 .plan-info {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .plan-badge {
@@ -57,6 +56,7 @@ bbody {
 #scan-counter {
   font-size: 0.9rem;
   color: #333;
+  margin-top: 0.3rem;
 }
 
 /* Upgrade Badge */
@@ -101,12 +101,10 @@ bbody {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Hide checkbox itself */
 .logo-checkboxes input[type="checkbox"] {
   display: none;
 }
 
-/* Icon style */
 .logo-checkboxes img {
   height: 32px;
   width: 32px;
@@ -114,7 +112,6 @@ bbody {
   transition: all 0.2s ease;
 }
 
-/* Checked style */
 .logo-checkboxes input[type="checkbox"]:checked + img {
   opacity: 1;
   transform: scale(1.15);
@@ -123,13 +120,12 @@ bbody {
   background: #e6f0ff;
 }
 
-/* Hover */
 .logo-checkboxes label:hover {
   border-color: #0070f3;
   box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
 }
 
-/* Region */
+/* Region Selection */
 .checkbox-group {
   display: flex;
   flex-wrap: wrap;
@@ -138,23 +134,24 @@ bbody {
   justify-content: center;
 }
 
-/* Upload */
+/* Upload Area */
 .upload-area {
+  background: #ffffff;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px #e0e0e0;
   text-align: center;
 }
 
 #content-upload {
   margin: 1rem 0;
-}
-
-.format-badges span {
-  background: #0070f3;
-  color: #fff;
-  font-size: 0.75rem;
-  padding: 0.4rem 0.7rem;
-  margin: 0.2rem;
+  padding: 0.6rem;
   border-radius: 6px;
-  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  width: 80%;
+  max-width: 400px;
 }
 
 .note {
@@ -172,7 +169,7 @@ bbody {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 #submit-button:hover {
   opacity: 0.9;
@@ -183,6 +180,7 @@ bbody {
   background: #f2f8ff;
   padding: 1rem;
   border-radius: 6px;
+  margin-top: 2rem;
 }
 
 /* History */
@@ -231,7 +229,7 @@ bbody {
   font-size: 1rem;
 }
 
-/* Export */
+/* Export Buttons */
 .export-controls button {
   margin-top: 0.5rem;
   margin-right: 0.5rem;
@@ -243,12 +241,4 @@ bbody {
   margin-top: 3rem;
   font-size: 0.9rem;
   color: #666;
-}
-.upload-area {
-  background: #ffffff;
-  border: 1px solid #ccc;
-  padding: 2rem;
-  border-radius: 8px;
-  margin-top: 2rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
