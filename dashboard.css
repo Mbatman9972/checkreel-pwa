@@ -1,4 +1,41 @@
-/* Layout + Plan Info */
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f6f8fc;
+  color: #222;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.subtext {
+  font-size: 1rem;
+  color: #555;
+}
+
+.intro {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  color: #444;
+}
+
+/* Plan Info */
 .plan-info {
   display: flex;
   justify-content: flex-end;
@@ -21,54 +58,188 @@
   color: #333;
 }
 
-/* Platform Selection Grid */
+/* Upgrade Badge */
+.upgrade-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #0070f3;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+}
+.upgrade-badge:hover {
+  background: #005ec2;
+}
+
+/* Platform Logos */
 .logo-checkboxes {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
   margin-top: 1rem;
+  justify-content: center;
 }
 
 .logo-checkboxes label {
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+  border: 2px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 64px;
   width: 64px;
-  border: 2px solid #ccc;
-  border-radius: 0.6rem;
-  background: #f9f9f9;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* Hide checkbox itself */
 .logo-checkboxes input[type="checkbox"] {
   display: none;
 }
 
+/* Icon style */
 .logo-checkboxes img {
-  width: 32px;
   height: 32px;
+  width: 32px;
   opacity: 0.5;
   transition: all 0.2s ease;
 }
 
+/* Checked style */
 .logo-checkboxes input[type="checkbox"]:checked + img {
   opacity: 1;
-  transform: scale(1.1);
+  transform: scale(1.15);
   filter: drop-shadow(0 0 6px #0070f3);
   border-radius: 8px;
+  background: #e6f0ff;
 }
 
-/* Upload Area Adjustments (optional polish) */
-.upload-area input[type="file"] {
-  display: block;
-  width: 100%;
-  padding: 0.6rem;
-  background: #f6f8fc;
-  border: 1px solid #ccc;
-  border-radius: 0.4rem;
-  margin-bottom: 1rem;
+/* Hover */
+.logo-checkboxes label:hover {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+/* Region */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+/* Upload */
+.upload-area {
+  text-align: center;
+}
+
+#content-upload {
+  margin: 1rem 0;
+}
+
+.format-badges span {
+  background: #0070f3;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  margin: 0.2rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Button */
+#submit-button {
+  background: linear-gradient(to right, #0070f3, #8300e9);
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+#submit-button:hover {
+  opacity: 0.9;
+}
+
+/* AI Feedback */
+.result-area {
+  background: #f2f8ff;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+/* History */
+.history-box {
+  margin-top: 2rem;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-header select {
+  margin-left: 0.5rem;
+}
+
+#history-list {
+  list-style: none;
+  padding: 0;
+}
+
+#history-list li {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #0070f3;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  margin-right: 0.3rem;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  float: right;
+  font-size: 1rem;
+}
+
+/* Export */
+.export-controls button {
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Footer */
+.footer-note {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #666;
 }
