@@ -192,22 +192,7 @@ function downloadBlob(url, filename) {
 window.addEventListener("DOMContentLoaded", () => {
   const lang = localStorage.getItem('selectedLanguage') || 'en';
 
-  resetIfNewMonth();
-  updateScanCounter();
-  renderHistory();
-  document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
-
-  // Optional language label display
-  const label = {
-    en: "English",
-    ar: "العربية",
-    fr: "Français"
-  }[lang] || "English";
-
-  const langDisplay = document.querySelector(".language-display");
-  if (langDisplay) langDisplay.textContent = `Language: ${label}`;
-
-  // RTL support for Arabic
+  // ✅ RTL support
   if (lang === 'ar') {
     document.body.setAttribute("dir", "rtl");
     document.body.classList.add("rtl");
@@ -215,6 +200,20 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.setAttribute("dir", "ltr");
     document.body.classList.remove("rtl");
   }
+
+  // ✅ Optional language label
+  const labelMap = {
+    en: "English",
+    ar: "العربية",
+    fr: "Français"
+  };
+  const langDisplay = document.querySelector(".language-display");
+  if (langDisplay) langDisplay.textContent = `Language: ${labelMap[lang] || "English"}`;
+
+  resetIfNewMonth();
+  updateScanCounter();
+  renderHistory();
+  document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 });
 
 // ✅ Exclusive platform selection
