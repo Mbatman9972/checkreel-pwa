@@ -188,18 +188,28 @@ function downloadBlob(url, filename) {
   document.body.removeChild(a);
 }
 
+// On DOM Load
 window.addEventListener("DOMContentLoaded", () => {
   resetIfNewMonth();
   updateScanCounter();
   renderHistory();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 
-  // Restore selected platform glow
-  document.querySelectorAll('#platform-options input[type="checkbox"]').forEach(cb => {
-    if (cb.checked) cb.dispatchEvent(new Event("change"));
-  });
+  // Display selected language (from home page)
+  const lang = localStorage.getItem("selectedLanguage") || "en";
+  const label = {
+    en: "English",
+    ar: "العربية",
+    fr: "Français"
+  }[lang] || "English";
+
+  const langDisplay = document.querySelector(".language-display");
+  if (langDisplay) langDisplay.textContent = `Language: ${label}`;
+
+  // Apply any RTL direction if needed (future)
 });
 
+// Exclusive platform selection
 document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {
   checkbox.addEventListener('change', function () {
     if (this.checked) {

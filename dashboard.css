@@ -3,7 +3,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #f9faff, #edf0fc);
+  background: linear-gradient(to right, #cd9be1, #eec491);
   color: #222;
 }
 
@@ -60,11 +60,17 @@ body {
   margin-top: 0.3rem;
 }
 
-/* Upgrade Badge */
-.upgrade-badge {
+/* Top Controls (CheckReel+ + Language) */
+.top-controls {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.upgrade-badge {
   background: #0070f3;
   color: #fff;
   padding: 0.5rem 1rem;
@@ -78,13 +84,15 @@ body {
   background: #005ec2;
 }
 
-/* Language Selector */
-.language-switch select {
-  font-weight: 600;
-  padding: 0.3rem 0.8rem;
-  border-radius: 6px;
+#language-selector {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  background: #fff;
+  background: #a0c1d3d3;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  cursor: pointer;
 }
 
 /* Platform Logos */
@@ -108,7 +116,7 @@ body {
   justify-content: center;
   height: 64px;
   width: 64px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .logo-checkboxes input[type="checkbox"] {
@@ -171,7 +179,7 @@ body {
   padding: 1.5rem;
   margin-top: 2rem;
   border-radius: 12px;
-  box-shadow: 0 0 0 2px #e0e0e0;
+  box-shadow: 0 0 0 2px #e492ee;
   text-align: center;
 }
 
@@ -227,9 +235,15 @@ body {
 }
 
 @keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 /* History Section */
@@ -251,7 +265,7 @@ body {
 }
 
 #history-list li {
-  background: #fff;
+  background: #deedf098;
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -287,33 +301,4 @@ body {
   margin-top: 3rem;
   font-size: 0.9rem;
   color: #666;
-}
-/* Top Controls (CheckReel+ + Language) */
-.top-controls {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-#language-selector {
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: #333;
-  cursor: pointer;
-}
-
-/* Apply theme */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #f6f8fc, #eef2fb); /* Light blue gradient theme */
-  color: #222;
 }

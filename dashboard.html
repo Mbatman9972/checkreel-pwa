@@ -10,32 +10,17 @@
 </head>
 <body>
   <div class="container">
+
     <!-- Plan Info -->
-<div class="plan-info">
-  <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
-  <p id="scan-counter">Scans used: 3 / 3</p>
-</div>
+    <div class="plan-info">
+      <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
+      <p id="scan-counter">Scans used: 0 / 0</p>
+    </div>
 
-<!-- Top Right Controls -->
-<div class="top-controls">
-  <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
-  <select id="language-selector" title="Choose Language">
-    <option value="en">🇺🇸 EN</option>
-    <option value="ar">🇸🇦 AR</option>
-    <option value="fr">🇫🇷 FR</option>
-  </select>
-</div>
-
-
-    <!-- Upgrade CTA -->
-    <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
-
-    <!-- Language Selection (persistent) -->
-    <div class="language-switch" style="position:absolute;top:1rem;left:50%;transform:translateX(-50%);">
-      <select id="language-selector">
-        <option value="en">🌐 English</option>
-        <option value="ar">🇸🇦 Arabic</option>
-      </select>
+    <!-- Top Right Controls -->
+    <div class="top-controls">
+      <a href="#" class="upgrade-badge" title="Unlock Plus Features">CheckReel+</a>
+      <span class="language-display">Language: English</span>
     </div>
 
     <!-- Header -->
@@ -44,10 +29,9 @@
       <h1>Welcome to CheckReel</h1>
       <p class="subtext">Your AI-powered content compliance platform</p>
       <p class="intro">
-        📣 <strong>Why CheckReel?</strong><br />
         CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
         Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br />
-        <strong>🚀 Upgrade to CheckReel+ for 40 monthly scans, export history, and full content tracking.</strong>
+        <strong>🚀 Upgrade to CheckReel+ for saved scans, export features, and extended limits.</strong>
       </p>
     </header>
 
@@ -61,16 +45,16 @@
         <label data-platform="Facebook"><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
         <label data-platform="Snapchat"><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
         <label data-platform="Threads"><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
-        <label data-platform="Twitter"><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter/X" /></label>
+        <label data-platform="Twitter"><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter" /></label>
       </div>
 
       <h3>Select Region</h3>
       <div class="checkbox-group" id="region-options">
-        <label><input type="radio" name="region" value="US"> US</label>
-        <label><input type="radio" name="region" value="EU"> EU</label>
-        <label><input type="radio" name="region" value="MENA"> MENA</label>
-        <label><input type="radio" name="region" value="Middle East"> Middle East</label>
-        <label><input type="radio" name="region" value="Global"> Global</label>
+        <label><input type="radio" name="region" value="US" /> US</label>
+        <label><input type="radio" name="region" value="EU" /> EU</label>
+        <label><input type="radio" name="region" value="MENA" /> MENA</label>
+        <label><input type="radio" name="region" value="Middle East" /> Middle East</label>
+        <label><input type="radio" name="region" value="Global" /> Global</label>
       </div>
     </section>
 
@@ -78,19 +62,17 @@
     <section class="upload-area">
       <h2>Upload Content</h2>
       <label class="file-upload-wrapper">
+        Choose File
         <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
-        <span>📁 Choose File</span>
       </label>
-      <p class="note">
-        💡 Supported formats: MP4, JPG, PNG, MP3, WAV, MOV, GIF, WEBM, AAC. Max file size depends on your plan.
-      </p>
+      <p class="note">💡 Supported formats: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus</p>
       <button id="submit-button">Submit for Review</button>
     </section>
 
     <!-- AI Feedback -->
     <section class="result-area" id="result-section" style="display:none;">
       <h2>🧠 AI Feedback</h2>
-      <div id="ai-feedback" class="loading">Analyzing...</div>
+      <div id="ai-feedback">Analyzing...</div>
     </section>
 
     <!-- History -->
@@ -112,24 +94,12 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer-note">
       <p>🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.</p>
     </footer>
+
   </div>
-
   <script src="dashboard.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-
-    const lang = localStorage.getItem("checkreel_language");
-    if (lang) document.getElementById("language-selector").value = lang;
-
-    document.getElementById("language-selector").addEventListener("change", (e) => {
-      localStorage.setItem("checkreel_language", e.target.value);
-      alert("Language preference saved. Reload to apply changes.");
-    });
-  </script>
 </body>
 </html>
