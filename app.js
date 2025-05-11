@@ -1,16 +1,21 @@
 // ---------- translations ----------
 let translations = {};
-let currentLang = 'en';
+let currentLang = localStorage.getItem('selectedLanguage') || 'en';
 
 async function loadLanguage(lang) {
   try {
     const res = await fetch(`lang/${lang}.json`);
     translations = await res.json();
   } catch (err) {
+    console.warn(`⚠️ Could not load lang/${lang}.json`);
     translations = {}; // fallback
   }
+
+  currentLang = lang;
+  localStorage.setItem('selectedLanguage', lang);
   applyTranslations();
   updateDisplayedActiveUsers();
+  updateDropdownSelection();
 }
 
 function txt(path, fallback = '') {
@@ -33,9 +38,19 @@ function applyTranslations() {
     'CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.');
 }
 
-document.getElementById('language-switcher')
-  .addEventListener('change', e => loadLanguage(e.target.value));
+// Reflect language in the dropdown
+function updateDropdownSelection() {
+  const langSelect = document.getElementById('language-select');
+  if (langSelect) langSelect.value = currentLang;
+}
 
+// Language switching
+document.getElementById('language-select')?.addEventListener('change', e => {
+  const selected = e.target.value;
+  loadLanguage(selected);
+});
+
+// Init language
 loadLanguage(currentLang);
 
 // ---------- active-user counter ----------
@@ -93,12 +108,8 @@ document.getElementById('subscribe-form').addEventListener('submit', e => {
   }
 });
 
-// ---------- Initialize on load ----------
-document.addEventListener('DOMContentLoaded', () => {
-  updateDisplayedActiveUsers();
-});
+// ---------- File validation helper (optional reuse) ----------
 const tier = localStorage.getItem("checkreel_tier") || "free";
-
 const allFormats = ['.mp4', '.jpg', '.jpeg', '.png', '.mp3', '.wav', '.mov', '.webm', '.gif', '.aac', '.opus'];
 
 const limits = {
