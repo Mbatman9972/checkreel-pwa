@@ -195,9 +195,10 @@ window.addEventListener("DOMContentLoaded", () => {
   renderHistory();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 
-  // ✅ Corrected Language Integration
+  // ✅ Load selected language from localStorage
   const lang = localStorage.getItem('selectedLanguage') || 'en';
 
+  // ✅ Optional: display language label if needed
   const label = {
     en: "English",
     ar: "العربية",
@@ -206,9 +207,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const langDisplay = document.querySelector(".language-display");
   if (langDisplay) langDisplay.textContent = `Language: ${label}`;
+
+  // ✅ RTL support for Arabic
+  if (lang === 'ar') {
+    document.body.setAttribute("dir", "rtl");
+    document.body.classList.add("rtl");
+  } else {
+    document.body.setAttribute("dir", "ltr");
+    document.body.classList.remove("rtl");
+  }
 });
 
-// Exclusive platform selection
+// ✅ Exclusive platform selection (only one at a time)
 document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {
   checkbox.addEventListener('change', function () {
     if (this.checked) {
