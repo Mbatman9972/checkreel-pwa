@@ -288,3 +288,32 @@ body {
   font-size: 0.9rem;
   color: #666;
 }
+/* Top Controls (CheckReel+ + Language) */
+.top-controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#language-selector {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Apply theme */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #f6f8fc, #eef2fb); /* Light blue gradient theme */
+  color: #222;
+}
