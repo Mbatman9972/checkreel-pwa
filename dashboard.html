@@ -1,105 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CheckReel Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="dashboard-title">CheckReel Dashboard</title>
   <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
-  <div class="container">
-
-    <!-- Plan Info -->
-    <div class="plan-info">
-      <span class="plan-badge" id="plan-tier">🎖️ Free Plan</span>
-      <p id="scan-counter">Scans used: 0 / 0</p>
+  <header>
+    <div class="logo">
+      <img src="images/checkreel-logo.png" alt="CheckReel Logo" />
+      <h1 data-i18n="dashboard-title">CheckReel Dashboard</h1>
     </div>
+    <nav>
+      <div id="language-switcher">
+        <select id="language-select">
+          <option value="en">🇬🇧 English</option>
+          <option value="ar">🇦🇪 العربية</option>
+          <option value="fr">🇫🇷 Français</option>
+        </select>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Top Right Controls -->
-    <div class="top-controls">
-      <a href="#" class="upgrade-badge">CheckReel+</a>
-      <span class="language-display"></span> <!-- Will be filled by JS -->
-    </div>
-
-    <!-- Header -->
-    <header class="dashboard-header">
-      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
-      <h1>Welcome to CheckReel</h1>
-      <p class="subtext">Your AI-powered content compliance platform</p>
-      <p class="intro">
-        CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
-        Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br />
-        <strong>🚀 Upgrade to CheckReel+ for saved scans, export features, and extended limits.</strong>
+  <main>
+    <section id="welcome">
+      <h2 data-i18n="welcome-title">Welcome to CheckReel</h2>
+      <p data-i18n="dashboard-tagline">Your AI-powered content compliance platform</p>
+      <p data-i18n="dashboard-intro">
+        CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized. Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live. 🚀 Upgrade to CheckReel+ for saved scans, export features, and extended limits.
       </p>
-    </header>
-
-    <!-- Platform & Region Filters -->
-    <section class="filter-section">
-      <h3>Select Platform</h3>
-      <div class="logo-checkboxes" id="platform-options">
-        <label data-platform="TikTok"><input type="checkbox" value="TikTok"><img src="images/platform-logos/tiktok.png" alt="TikTok" /></label>
-        <label data-platform="YouTube"><input type="checkbox" value="YouTube"><img src="images/platform-logos/youtube.png" alt="YouTube" /></label>
-        <label data-platform="Instagram"><input type="checkbox" value="Instagram"><img src="images/platform-logos/instagram.png" alt="Instagram" /></label>
-        <label data-platform="Facebook"><input type="checkbox" value="Facebook"><img src="images/platform-logos/facebook.png" alt="Facebook" /></label>
-        <label data-platform="Snapchat"><input type="checkbox" value="Snapchat"><img src="images/platform-logos/snapchat.png" alt="Snapchat" /></label>
-        <label data-platform="Threads"><input type="checkbox" value="Threads"><img src="images/platform-logos/threads.png" alt="Threads" /></label>
-        <label data-platform="Twitter"><input type="checkbox" value="Twitter"><img src="images/platform-logos/twitter.png" alt="Twitter" /></label>
-      </div>
-
-      <h3>Select Region</h3>
-      <div class="checkbox-group" id="region-options">
-        <label><input type="radio" name="region" value="US" /> US</label>
-        <label><input type="radio" name="region" value="EU" /> EU</label>
-        <label><input type="radio" name="region" value="MENA" /> MENA</label>
-        <label><input type="radio" name="region" value="Middle East" /> Middle East</label>
-        <label><input type="radio" name="region" value="Global" /> Global</label>
-      </div>
     </section>
 
-    <!-- Upload Section -->
-    <section class="upload-area">
-      <h2>Upload Content</h2>
-      <label class="file-upload-wrapper">
-        Choose File
-        <input type="file" id="content-upload" accept=".mp4,.jpg,.jpeg,.png,.mp3,.wav,.mov,.webm,.gif,.aac,.opus" />
-      </label>
-      <p class="note">💡 Supported formats: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus</p>
-      <button id="submit-button">Submit for Review</button>
+    <section id="upload">
+      <h3 data-i18n="upload-title">Upload Content</h3>
+      <form id="upload-form">
+        <label for="platform-select" data-i18n="select-platform">Select Platform</label>
+        <select id="platform-select">
+          <option value="tiktok">TikTok</option>
+          <option value="instagram">Instagram</option>
+          <option value="youtube">YouTube</option>
+        </select>
+
+        <label for="region-select" data-i18n="select-region">Select Region</label>
+        <select id="region-select">
+          <option value="us">US</option>
+          <option value="eu">EU</option>
+          <option value="mena">MENA</option>
+        </select>
+
+        <input type="file" id="file-input" />
+        <p data-i18n="upload-note">
+          💡 Supported formats: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus
+        </p>
+        <button type="submit" data-i18n="submit-review">Submit for Review</button>
+      </form>
     </section>
 
-    <!-- AI Feedback -->
-    <section class="result-area" id="result-section" style="display:none;">
-      <h2>🧠 AI Feedback</h2>
-      <div id="ai-feedback">Analyzing...</div>
+    <section id="results">
+      <h3 data-i18n="ai-feedback-title">🧠 AI Feedback</h3>
     </section>
 
-    <!-- History -->
-    <section class="history-box">
-      <h2>📂 Previous Checks</h2>
-      <div class="history-header">
-        <p id="history-count" class="note"></p>
-        <label for="sort-history">Sort by:
-          <select id="sort-history">
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-          </select>
-        </label>
-      </div>
-      <ul id="history-list"></ul>
-      <div class="export-controls">
-        <button id="export-history-json" style="display:none;">⬇️ Export as JSON</button>
-        <button id="export-history-txt" style="display:none;">⬇️ Export as TXT</button>
-      </div>
+    <section id="history">
+      <h3 data-i18n="previous-checks">📂 Previous Checks</h3>
+      <label for="sort-select" data-i18n="sort-by">Sort by:</label>
+      <select id="sort-select">
+        <option value="newest" data-i18n="newest">Newest</option>
+        <option value="oldest" data-i18n="oldest">Oldest</option>
+      </select>
+      <button id="export-json" data-i18n="export-json">⬇️ Export as JSON</button>
+      <button id="export-txt" data-i18n="export-txt">⬇️ Export as TXT</button>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer-note">
-      <p>🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.</p>
-    </footer>
+    <section id="upgrade">
+      <p data-i18n="upgrade-note">
+        🚀 Upgrade to <strong>CheckReel+</strong> for saved results, faster scans, and full platform access — $9.99/mo.
+      </p>
+    </section>
+  </main>
 
-  </div>
+  <!-- Load translation before app logic -->
+  <script src="lang-loader.js"></script>
   <script src="dashboard.js"></script>
+
+  <script>
+    const langSelector = document.getElementById('language-select');
+    if (langSelector) {
+      langSelector.addEventListener('change', function () {
+        const selectedLang = this.value;
+        localStorage.setItem('selectedLanguage', selectedLang);
+        location.reload(); // Reload to apply translation
+      });
+
+      // On load, show the currently selected language
+      const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+      langSelector.value = currentLang;
+    }
+  </script>
 </body>
 </html>

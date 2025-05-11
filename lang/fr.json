@@ -1,22 +1,33 @@
 {
-  "heroTitle": "CheckReel",
-  "heroSubtitle": "Arrêtez de deviner, vérifiez.",
-  "heroBenefits": [
-    "✅ Analyse automatique de votre contenu",
-    "📊 Rapports en temps réel",
-    "🔒 Confidentialité garantie"
-  ],
-  "subscription": {
-    "title": "Commencez votre essai gratuit",
-    "placeholder": "Entrez votre e-mail",
-    "button": "S’abonner",
-    "note": "4,99 $/mois après l’essai",
-    "count": "🎯 {count} utilisateurs actifs"
-  },
-  "platformsTitle": "Plateformes prises en charge",
-  "about": {
-    "title": "À propos de CheckReel",
-    "content": "CheckReel fait partie d’Alwafer Media, spécialiste de la gestion des réseaux sociaux, des applications IA et du marketing de précision. Nous aidons les créateurs à analyser vidéos, images et audios afin de détecter les infractions avant publication — un gain de temps qui protège les marques et évite avertissements ou suspensions."
-  }
+  "page-title": "CheckReel - Ne devinez plus, vérifiez.",
+  "hero-title": "CheckReel",
+  "hero-subtitle": "Ne devinez plus, vérifiez avant de publier.",
+  "benefit-1": "✅ Analyse de toute vidéo, image ou audio",
+  "benefit-2": "📊 Rapport instantané de conformité IA",
+  "benefit-3": "🔒 Votre contenu reste privé",
+  "subscribe-button": "S'abonner",
+  "subscription-note": "4,99$/mois après l'essai",
+  "active-users": "🎯 2697 utilisateurs actifs",
+  "platforms-title": "Plateformes prises en charge",
+  "about-title": "À propos de CheckReel",
+  "about-content": "CheckReel fait partie d'Alwafer Media, spécialisée dans la gestion des réseaux sociaux, les applications IA et le marketing de précision. Nous aidons les créateurs à vérifier leurs vidéos, images et audios pour détecter toute infraction avant la publication — économisant du temps et évitant les avertissements ou blocages.",
+  "dashboard-title": "Tableau de bord - CheckReel",
+  "welcome-title": "Bienvenue sur CheckReel",
+  "dashboard-tagline": "Votre plateforme IA pour la conformité du contenu",
+  "dashboard-intro": "CheckReel protège votre contenu avant la publication — en fournissant une vérification IA pour éviter les suppressions, les blocages ou les pertes de monétisation. Analysez pour TikTok, Instagram, YouTube et plus, avant d’être en ligne. 🚀 Passez à CheckReel+ pour enregistrer vos analyses, exporter les données et obtenir plus de limites.",
+  "upgrade-badge": "CheckReel+",
+  "select-platform": "Choisissez une plateforme",
+  "select-region": "Choisissez une région",
+  "upload-title": "Téléverser un contenu",
+  "choose-file": "Choisir un fichier",
+  "upload-note": "💡 Formats pris en charge : mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus",
+  "submit-review": "Soumettre pour analyse",
+  "ai-feedback-title": "🧠 Retour d’analyse IA",
+  "previous-checks": "📂 Analyses précédentes",
+  "sort-by": "Trier par :",
+  "newest": "Le plus récent",
+  "oldest": "Le plus ancien",
+  "export-json": "⬇️ Exporter en JSON",
+  "export-txt": "⬇️ Exporter en TXT",
+  "upgrade-note": "🚀 Passez à <strong>CheckReel+</strong> pour enregistrer, accélérer et débloquer toutes les fonctionnalités — 9,99$/mois"
 }
-
