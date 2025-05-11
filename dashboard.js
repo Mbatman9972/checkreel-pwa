@@ -195,10 +195,8 @@ window.addEventListener("DOMContentLoaded", () => {
   renderHistory();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 
-  // Display selected language (from home page)
-  // On dashboard page load
-const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-// Use selectedLanguage to load appropriate translations
+  // ✅ Corrected Language Integration
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
 
   const label = {
     en: "English",
@@ -208,8 +206,6 @@ const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
 
   const langDisplay = document.querySelector(".language-display");
   if (langDisplay) langDisplay.textContent = `Language: ${label}`;
-
-  // Apply any RTL direction if needed (future)
 });
 
 // Exclusive platform selection
