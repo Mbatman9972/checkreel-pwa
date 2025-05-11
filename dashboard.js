@@ -188,17 +188,16 @@ function downloadBlob(url, filename) {
   document.body.removeChild(a);
 }
 
-// On DOM Load
+// ✅ DOM Ready
 window.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem('selectedLanguage') || 'en';
+
   resetIfNewMonth();
   updateScanCounter();
   renderHistory();
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 
-  // ✅ Load selected language from localStorage
-  const lang = localStorage.getItem('selectedLanguage') || 'en';
-
-  // ✅ Optional: display language label if needed
+  // Optional language label display
   const label = {
     en: "English",
     ar: "العربية",
@@ -208,7 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const langDisplay = document.querySelector(".language-display");
   if (langDisplay) langDisplay.textContent = `Language: ${label}`;
 
-  // ✅ RTL support for Arabic
+  // RTL support for Arabic
   if (lang === 'ar') {
     document.body.setAttribute("dir", "rtl");
     document.body.classList.add("rtl");
@@ -217,93 +216,8 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("rtl");
   }
 });
-const translations = {
-  en: {
-    welcome: "Welcome to CheckReel",
-    subtext: "Your AI-powered content compliance platform",
-    intro: `CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br />
-            Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br />
-            <strong>🚀 Upgrade to CheckReel+ for saved scans, export features, and extended limits.</strong>`,
-    upload: "Upload Content",
-    chooseFile: "Choose File",
-    note: "💡 Supported formats: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus",
-    submit: "Submit for Review",
-    feedback: "🧠 AI Feedback",
-    prevChecks: "📂 Previous Checks",
-    sortBy: "Sort by:",
-    newest: "Newest",
-    oldest: "Oldest",
-    exportJSON: "⬇️ Export as JSON",
-    exportTXT: "⬇️ Export as TXT",
-    footer: "🚀 Upgrade to CheckReel+ for saved results, faster scans, and full platform access — $9.99/mo.",
-    platform: "Select Platform",
-    region: "Select Region"
-  },
-  ar: {
-    welcome: "مرحبًا بك في CheckReel",
-    subtext: "منصة الامتثال للمحتوى تعمل بالذكاء الاصطناعي",
-    intro: `تحميك CheckReel قبل نشر المحتوى — من خلال فحص الامتثال بالذكاء الاصطناعي لتجنب الحظر أو الكتم أو تقليل الأرباح.<br />
-            افحص عبر المناطق والمنصات مثل TikTok، Instagram، YouTube والمزيد، قبل النشر.<br />
-            <strong>🚀 قم بالترقية إلى CheckReel+ لحفظ الفحوصات وتصديرها وزيادة الحد.</strong>`,
-    upload: "رفع المحتوى",
-    chooseFile: "اختر ملف",
-    note: "💡 الصيغ المدعومة: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus",
-    submit: "أرسل للتحقق",
-    feedback: "🧠 ملاحظات الذكاء الاصطناعي",
-    prevChecks: "📂 الفحوصات السابقة",
-    sortBy: "ترتيب حسب:",
-    newest: "الأحدث",
-    oldest: "الأقدم",
-    exportJSON: "⬇️ تصدير JSON",
-    exportTXT: "⬇️ تصدير TXT",
-    footer: "🚀 الترقية إلى CheckReel+ لحفظ النتائج وفحوصات أسرع ووصول كامل — 9.99$/شهريًا.",
-    platform: "اختر المنصة",
-    region: "اختر المنطقة"
-  },
-  fr: {
-    welcome: "Bienvenue sur CheckReel",
-    subtext: "Votre plateforme de conformité de contenu alimentée par l'IA",
-    intro: `CheckReel protège votre contenu avant publication — grâce à des vérifications de conformité IA pour éviter les signalements, blocages ou pertes de revenus.<br />
-            Scannez par région et plateforme : TikTok, Instagram, YouTube, etc.<br />
-            <strong>🚀 Passez à CheckReel+ pour enregistrer, exporter, et étendre vos limites.</strong>`,
-    upload: "Téléverser un contenu",
-    chooseFile: "Choisir un fichier",
-    note: "💡 Formats pris en charge : mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus",
-    submit: "Soumettre pour vérification",
-    feedback: "🧠 Résultat IA",
-    prevChecks: "📂 Vérifications précédentes",
-    sortBy: "Trier par :",
-    newest: "Plus récent",
-    oldest: "Plus ancien",
-    exportJSON: "⬇️ Exporter en JSON",
-    exportTXT: "⬇️ Exporter en TXT",
-    footer: "🚀 Passez à CheckReel+ pour des résultats sauvegardés, des analyses rapides, et un accès complet — 9.99$/mois.",
-    platform: "Choisir une plateforme",
-    region: "Choisir une région"
-  }
-};
 
-const t = translations[lang] || translations['en'];
-
-document.querySelector("h1").textContent = t.welcome;
-document.querySelector(".subtext").textContent = t.subtext;
-document.querySelector(".intro").innerHTML = t.intro;
-document.querySelector(".upload-area h2").textContent = t.upload;
-document.querySelector(".file-upload-wrapper").childNodes[0].textContent = t.chooseFile;
-document.querySelector(".note").textContent = t.note;
-document.getElementById("submit-button").textContent = t.submit;
-document.querySelector("#result-section h2").textContent = t.feedback;
-document.querySelector(".history-box h2").textContent = t.prevChecks;
-document.querySelector('label[for="sort-history"]').childNodes[0].textContent = t.sortBy;
-document.querySelector('#sort-history option[value="newest"]').textContent = t.newest;
-document.querySelector('#sort-history option[value="oldest"]').textContent = t.oldest;
-document.getElementById("export-history-json").textContent = t.exportJSON;
-document.getElementById("export-history-txt").textContent = t.exportTXT;
-document.querySelector(".footer-note p").textContent = t.footer;
-document.querySelector(".filter-section h3").textContent = t.platform;
-document.querySelectorAll(".filter-section h3")[1].textContent = t.region;
-
-// ✅ Exclusive platform selection (only one at a time)
+// ✅ Exclusive platform selection
 document.querySelectorAll('#platform-options input[type="checkbox"]').forEach((checkbox) => {
   checkbox.addEventListener('change', function () {
     if (this.checked) {
