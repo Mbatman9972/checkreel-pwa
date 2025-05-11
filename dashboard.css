@@ -1,11 +1,18 @@
+:root {
+  --primary-color: #8300e9; /* CheckReel purple */
+  --secondary-color: #0070f3; /* CheckReel blue */
+  --background-gradient: linear-gradient(to right, #cd9be1, #eec491);
+}
 /* Base Styles */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #cd9be1, #eec491);
+  background: var(--background-gradient);
   color: #222;
 }
+
+.upgrade-badge {
+  background: var(--secondary-color);
+}
+
 
 .container {
   max-width: 1100px;

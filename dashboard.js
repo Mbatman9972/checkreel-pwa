@@ -196,7 +196,10 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("plan-tier").textContent = tier.charAt(0).toUpperCase() + tier.slice(1) + " Plan";
 
   // Display selected language (from home page)
-  const lang = localStorage.getItem("selectedLanguage") || "en";
+  // On dashboard page load
+const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+// Use selectedLanguage to load appropriate translations
+
   const label = {
     en: "English",
     ar: "العربية",
