@@ -1,103 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="dashboard-title">CheckReel Dashboard</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="dashboard.css" />
-  <link rel="icon" href="images/favicon.png" type="image/png" />
-</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CheckReel · Dashboard</title>
 
-<body>
-  <div class="container">
-    <!-- Top Bar -->
-    <div class="plan-info">
-      <span class="plan-badge" id="plan-tier">Free Plan</span>
-      <span id="scan-counter">Scans used: 0 / 3</span>
-    </div>
+    <!-- styles -->
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
 
-    <div class="top-controls">
-      <select id="language-selector">
-        <option value="en">English</option>
-        <option value="ar">العربية</option>
-        <option value="fr">Français</option>
-      </select>
-      <a href="#" class="upgrade-badge">CheckReel+</a>
-    </div>
+  <body>
+    <header class="dash-header">
+      <img src="images/logo.svg" alt="CheckReel logo" class="logo" />
 
-    <!-- Header -->
-    <header class="dashboard-header">
-      <img src="images/checkreel-logo.png" alt="CheckReel Logo" class="logo" />
-      <h1 data-i18n="welcome-title">Welcome to CheckReel</h1>
-      <p class="subtext" data-i18n="dashboard-tagline">Your AI-powered content compliance platform</p>
-      <p class="intro" data-i18n="dashboard-intro">
-        📣 Why CheckReel?<br>
-        CheckReel protects your content before you post — giving AI-powered compliance checks so you don’t get flagged, muted, or demonetized.<br>
-        Scan across regions and platforms like TikTok, Instagram, YouTube and more, before your content ever goes live.<br>
-        <strong>🚀 Upgrade to CheckReel+ for 40 monthly scans, export history, and full content tracking.</strong>
-      </p>
+      <!--  LANGUAGE SELECTOR REMOVED -->
     </header>
 
-    <!-- Platform selection -->
-    <section class="platforms">
-      <h2 data-i18n="select-platform">Select Platform</h2>
-      <div id="platform-options" class="logo-checkboxes">
-        <!-- Platform checkboxes go here -->
-      </div>
-    </section>
+    <main class="dash-content">
+      <!-- concise onboarding intro -->
+      <section class="intro" data-i18n="introCopy">
+        Welcome! Upload your content, pick the platform &amp; region, and let CheckReel double-check compliance before you post.
+      </section>
 
-    <!-- Region selection -->
-    <section class="regions">
-      <h2 data-i18n="select-region">Select Region</h2>
-      <div id="region-options" class="checkbox-group">
-        <!-- Region radios go here -->
-      </div>
-    </section>
+      <!-- PLATFORM SELECT (icons / single-select) -->
+      <section class="platform-wrap">
+        <h2 data-i18n="platformSelect">Select Platform</h2>
 
-    <!-- Upload -->
-    <section class="upload-area">
-      <h3 data-i18n="upload-title">Upload Content</h3>
-      <label class="file-upload-wrapper">
-        Choose File
-        <input type="file" id="content-upload" />
-      </label>
-      <p class="note" data-i18n="upload-note">
-        💡 Supported formats: mp4, jpg, png, mp3, wav, mov, webm, gif, aac, opus
-      </p>
-      <button id="submit-button" data-i18n="submit-review">Submit for Review</button>
-    </section>
+        <div id="platforms" class="platforms">
+          <!-- add/remove icons freely -- must match id used in JS -->
+          <button class="platform" id="tiktok"   aria-label="TikTok"></button>
+          <button class="platform" id="youtube"  aria-label="YouTube"></button>
+          <button class="platform" id="instagram" aria-label="Instagram"></button>
+          <button class="platform" id="x"        aria-label="X"></button>
+        </div>
+      </section>
 
-    <!-- AI Feedback -->
-    <section id="result-section" class="result-area" style="display:none;">
-      <h3 data-i18n="ai-feedback-title">🧠 AI Feedback</h3>
-      <p id="ai-feedback">...</p>
-    </section>
+      <!-- REGION SELECT -->
+      <section class="region-wrap">
+        <h2 data-i18n="regionSelect">Select Region</h2>
 
-    <!-- History -->
-    <section class="history-box">
-      <div class="history-header">
-        <h3 data-i18n="previous-checks">📂 Previous Checks</h3>
-        <label for="sort-history" data-i18n="sort-by">Sort by:</label>
-        <select id="sort-history">
-          <option value="newest" data-i18n="newest">Newest</option>
-          <option value="oldest" data-i18n="oldest">Oldest</option>
-        </select>
-      </div>
-      <ul id="history-list"></ul>
-      <div class="export-controls">
-        <button id="export-history-json" style="display:none;" data-i18n="export-json">⬇️ Export as JSON</button>
-        <button id="export-history-txt" style="display:none;" data-i18n="export-txt">⬇️ Export as TXT</button>
-      </div>
-    </section>
+        <fieldset id="regions" class="regions">
+          <label><input type="radio" name="region" value="mena"    checked /> MENA</label>
+          <label><input type="radio" name="region" value="us"      /> US</label>
+          <label><input type="radio" name="region" value="eu"      /> EU</label>
+          <label><input type="radio" name="region" value="global"  /> Global</label>
+          <label><input type="radio" name="region" value="me"      /> Middle East</label>
+        </fieldset>
+      </section>
 
-    <!-- Footer -->
-    <footer class="footer-note">
-      <p>&copy; 2025 CheckReel — All rights reserved.</p>
-    </footer>
-  </div>
+      <!-- UPLOAD + HISTORY (unchanged) -->
+      <section class="upload-wrap">
+        <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
+        <button id="scanBtn" data-i18n="scan">Scan</button>
+      </section>
 
-  <script src="lang-loader.js"></script>
-  <script src="dashboard.js"></script>
-</body>
+      <section class="history-wrap">
+        <h2 data-i18n="history">Scan History</h2>
+        <ul id="history"></ul>
+      </section>
+    </main>
+
+    <!-- scripts -->
+    <script src="lang-loader.js" defer></script>
+    <script src="dashboard.js"   defer></script>
+  </body>
 </html>
