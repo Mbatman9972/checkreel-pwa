@@ -309,3 +309,34 @@ body {
   font-size: 0.9rem;
   color: #666;
 }
+/* RTL Support */
+body.rtl {
+  text-align: right;
+}
+
+body.rtl .plan-info {
+  left: unset;
+  right: 1rem;
+  flex-direction: row-reverse;
+}
+
+body.rtl .top-controls {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+body.rtl .intro,
+body.rtl .note,
+body.rtl .subtext {
+  direction: rtl;
+  text-align: right;
+}
+
+body.rtl .logo-checkboxes,
+body.rtl .checkbox-group {
+  justify-content: flex-end;
+}
+
+body.rtl .history-header {
+  align-items: flex-end;
+}

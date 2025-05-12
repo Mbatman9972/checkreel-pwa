@@ -1,5 +1,3 @@
-// lang-loader.js
-
 (function () {
   const lang = localStorage.getItem('selectedLanguage') || 'en';
 
@@ -15,6 +13,7 @@
         }
       });
 
+      // Set document language and direction
       document.documentElement.lang = lang;
       document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     } catch (error) {

@@ -2,62 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CheckReel - Stop Guessing, Start Checking.</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="images/favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="home-page-title">CheckReel - Stop Guessing, Start Checking.</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 
 <body>
-    <header id="hero">
-        <div class="logo">
-            <img src="images/checkreel-logo.png" alt="CheckReel Logo">
-            <h1 id="hero-title">CheckReel</h1> </div>
-        <nav>
-            <div id="language-switcher">
-                <select>
-                    <option value="en" selected>🇬🇧 English</option>
-                    <option value="ar">🇦🇪 العربية</option>
-                    <option value="fr">🇫🇷 Français</option>
-                </select>
-            </div>
-        </nav>
-        <div class="hero-content">
-            <h2 id="hero-subtitle">Stop guessing, start checking.</h2> <ul id="hero-benefits"></ul>
-            <form id="subscribe-form">
-                <input type="email" id="email-input" placeholder="Enter your email" required />
-                <button type="submit" id="subscribe-button">Subscribe</button>
-            </form>
-            <p id="subscription-note">$4.99/month after trial</p> <p id="active-users">🎯 2697 Active Users</p> </div>
-    </header>
+  <header id="hero">
+    <div class="logo">
+      <img src="images/checkreel-logo.png" alt="CheckReel Logo" />
+      <h1 data-i18n="home-hero-title">CheckReel</h1>
+    </div>
 
-    <section id="platforms">
-        <h2><span id="platforms-title">Supported Platforms</span></h2>
-        <div class="logos">
-            <img src="images/platform-logos/tiktok.png" alt="TikTok">
-            <img src="images/platform-logos/youtube.png" alt="YouTube">
-            <img src="images/platform-logos/instagram.png" alt="Instagram">
-            <img src="images/platform-logos/twitter.png" alt="Twitter">
-            <img src="images/platform-logos/facebook.png" alt="Facebook">
-            <img src="images/platform-logos/threads.png" alt="Threads">
-            <img src="images/platform-logos/snapchat.png" alt="Snapchat">
-        </div>
-    </section>
+    <nav>
+      <div id="language-switcher">
+        <select id="language-select">
+          <option value="en" selected>🇬🇧 English</option>
+          <option value="ar">🇦🇪 العربية</option>
+          <option value="fr">🇫🇷 Français</option>
+        </select>
+      </div>
+    </nav>
 
-    <section id="about">
-        <h2><span id="about-title">About CheckReel</span></h2>
-        <p id="about-content">CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.</p> </section>
+    <div class="hero-content">
+      <h2 data-i18n="home-hero-subtitle">Stop guessing, start checking.</h2>
+      <ul id="hero-benefits">
+        <li data-i18n="home-benefit-1">✅ Pre-check any video, image, or audio</li>
+        <li data-i18n="home-benefit-2">📊 Instant AI-powered compliance report</li>
+        <li data-i18n="home-benefit-3">🔒 Your privacy is fully protected</li>
+      </ul>
 
-    <script src="lang-loader.js"></script>
-<script src="app.js"></script>
+      <form id="subscribe-form">
+        <input type="email" id="email-input" placeholder="Enter your email" required />
+        <button type="submit" data-i18n="home-subscribe-button">Subscribe</button>
+      </form>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
-    </script>
+      <p data-i18n="home-subscription-note">$4.99/month after trial</p>
+      <p data-i18n="home-active-users">🎯 2697 Active Users</p>
+    </div>
+  </header>
+
+  <section id="platforms">
+    <h2><span data-i18n="home-platforms-title">Supported Platforms</span></h2>
+    <div class="logos">
+      <img src="images/platform-logos/tiktok.png" alt="TikTok" />
+      <img src="images/platform-logos/youtube.png" alt="YouTube" />
+      <img src="images/platform-logos/instagram.png" alt="Instagram" />
+      <img src="images/platform-logos/twitter.png" alt="Twitter" />
+      <img src="images/platform-logos/facebook.png" alt="Facebook" />
+      <img src="images/platform-logos/threads.png" alt="Threads" />
+      <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
+    </div>
+  </section>
+
+  <section id="about">
+    <h2><span data-i18n="home-about-title">About CheckReel</span></h2>
+    <p data-i18n="home-about-content">
+      CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.
+    </p>
+  </section>
+
+  <script src="lang-loader.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+  </script>
 </body>
 
 </html>

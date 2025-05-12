@@ -1,47 +1,102 @@
-const CACHE_NAME = 'checkreel-v3';
-const URLS_TO_CACHE = [
+// -----------------------------
+// ✅ Progressive Web App: Service Worker
+// -----------------------------
+
+const CACHE_VERSION = 'v2.0';
+const CACHE_NAME = `checkreel-cache-${CACHE_VERSION}`;
+
+// Static assets to always cache
+const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/dashboard.html',
-  '/dashboard.js',
-  '/dashboard.css',
-  '/images/checkreel-logo.png',
+  '/styles.css',
+  '/app.js',
   '/images/favicon.png',
-  '/manifest.json',
+  '/images/checkreel-logo.png',
+  '/manifest.json'
 ];
 
-// Install: cache everything
+// Files we want to always fetch fresh if possible
+const DYNAMIC_FILES = [
+  '/dashboard.html',
+  '/dashboard.js'
+];
+
+// ✅ INSTALL: Cache static files
 self.addEventListener('install', event => {
+  console.log('[SW] Installing and caching static assets...');
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
+  );
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(URLS_TO_CACHE);
-    })
-  );
 });
 
-// Activate: clean old caches
+// ✅ ACTIVATE: Clear old caches
 self.addEventListener('activate', event => {
-  clients.claim();
+  console.log('[SW] Activating new service worker...');
   event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key.startsWith('checkreel-cache-') && key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    )
   );
+  self.clients.claim();
 });
 
-// Fetch: prefer network, fallback to cache
+// ✅ FETCH: Handle asset loading
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        return caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, response.clone());
-          return response;
-        });
-      })
-      .catch(() => caches.match(event.request))
+  const { request } = event;
+
+  // ❌ Don’t cache POST or other non-GET methods
+  if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
+  const isDynamic = DYNAMIC_FILES.some(file =>
+    url.pathname.endsWith(file) || url.pathname === file
   );
+
+  if (isDynamic) {
+    // 🔄 Network-first strategy
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+  } else {
+    // 📦 Cache-first for static assets
+    event.respondWith(
+      caches.match(request).then(cached =>
+        cached || fetch(request).then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          return response;
+        })
+      )
+    );
+  }
 });
+
+// ✅ LISTEN: Language change or manual cache clearing
+self.addEventListener('message', event => {
+  if (event.data && event.data.action === 'clearDynamicCache') {
+    clearDynamicCache();
+  }
+});
+
+// 🔧 Helper: Clear dashboard cache
+function clearDynamicCache() {
+  caches.open(CACHE_NAME).then(cache => {
+    DYNAMIC_FILES.forEach(file => {
+      cache.delete(file).then(success => {
+        if (success) console.log(`[SW] Cleared: ${file}`);
+      });
+    });
+  });
+}
