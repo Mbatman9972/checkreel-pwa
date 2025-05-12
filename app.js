@@ -1,56 +1,41 @@
-/* ------------------------------------------------------------------
-   CheckReel · Landing‐page logic  (v2.5)
-   – language selector persistence handled by lang-loader.js
-   – clean subscribe flow → redirects to dashboard.html
-   – safe active-user counter (starts 2697, +1 on each subscribe)
--------------------------------------------------------------------*/
+/* CheckReel – landing logic (v2.6) */
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- active users counter ---------- */
-  const BASE = 2697;
-  const COUNTER_KEY = 'cr-active-count';
-  const counterEl = document.querySelector('[data-i18n="home-active-users"]');
+  /* ---------- language selector ---------- */
+  const sel = document.getElementById('language-select');
+  const cur = localStorage.getItem('selectedLanguage') || 'en';
+  sel.value = cur;
+  sel.onchange = e => {
+    localStorage.setItem('selectedLanguage', e.target.value);
+    location.reload();
+  };
 
-  function getCount() {
-    return parseInt(localStorage.getItem(COUNTER_KEY) || BASE, 10);
+  /* ---------- active-user counter ---------- */
+  const BASE = 2697;
+  const KEY  = 'cr-active-count';
+  const el   = document.getElementById('active-users');
+
+  function get()  { return +(localStorage.getItem(KEY) || BASE); }
+  function set(v) { localStorage.setItem(KEY, v); }
+  function show() {
+    if (!el) return;
+    el.innerText = `🎯 ${get().toLocaleString()} active users`;
   }
-  function setCount(val) {
-    localStorage.setItem(COUNTER_KEY, val);
-  }
-  function showCount() {
-    if (!counterEl) return;
-    const n = getCount();
-    // keep the original translation string but replace {count} if present
-    const tmpl = counterEl.innerHTML.includes('{count}')
-      ? counterEl.innerHTML
-      : '🎯 {count} active users';
-    counterEl.innerHTML = tmpl.replace('{count}', n.toLocaleString());
-  }
-  showCount();
+  show();
 
   /* ---------- subscribe flow ---------- */
-  const form = document.getElementById('subscribe-form');
-  const emailInput = document.getElementById('email-input');
+  document.getElementById('subscribe-form').onsubmit = e => {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert('Please enter a valid email.');
 
-  if (form && emailInput) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = emailInput.value.trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Please enter a valid email.');
-        return;
-      }
-      try {
-        // store user email + bump counter
-        localStorage.setItem('checkreel-user-email', email);
-        setCount(getCount() + 1);
-        // go dashboard
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        console.error('[Subscribe]', err);
-        alert('⚠️ Server error. Try again later.');
-      }
-    });
-  }
+    try {
+      localStorage.setItem('checkreel-user-email', email);
+      set(get() + 1);
+      window.location.href = 'dashboard.html';
+    } catch {
+      alert('⚠️ Server error. Try again later.');
+    }
+  };
 
 });

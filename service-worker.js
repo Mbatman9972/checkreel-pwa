@@ -1,87 +1,35 @@
-// -----------------------------
-// ✅ Progressive Web App – Service Worker
-// -----------------------------
-const CACHE_VERSION = 'v2.5';
-const CACHE_NAME    = `checkreel-cache-${CACHE_VERSION}`;
-
-/* Static assets – cached once, served cache-first */
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/dashboard.html',
-  '/styles.css',
-  '/app.js',
-  '/dashboard.js',
-  '/lang-loader.js',
-  '/manifest.json',
-  '/images/favicon.png',
-  '/images/checkreel-logo.png',
-  '/images/platform-logos/facebook.png',
-  '/images/platform-logos/instagram.png',
-  '/images/platform-logos/youtube.png',
-  '/images/platform-logos/tiktok.png',
-  '/images/platform-logos/threads.png',
-  '/images/platform-logos/twitter.png',
+/* v2.6 – 2025-05-13 */
+const CACHE = 'checkreel-cache-v2.6';
+const ASSETS = [
+  '/', '/index.html', '/dashboard.html',
+  '/styles.css', '/app.js', '/dashboard.js', '/lang-loader.js',
+  '/images/favicon.png', '/images/checkreel-logo.png',
+  '/images/platform-logos/facebook.png',  '/images/platform-logos/instagram.png',
+  '/images/platform-logos/youtube.png',   '/images/platform-logos/tiktok.png',
+  '/images/platform-logos/threads.png',   '/images/platform-logos/twitter.png',
   '/images/platform-logos/snapchat.png',
-  '/lang/en.json',
-  '/lang/fr.json',
-  '/lang/ar.json'
+  '/manifest.json', '/lang/en.json', '/lang/fr.json', '/lang/ar.json'
 ];
 
-/* ---------------- INSTALL ---------------- */
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
-  );
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
   self.skipWaiting();
 });
-
-/* ---------------- ACTIVATE ---------------- */
-self.addEventListener('activate', event => {
-  event.waitUntil(
+self.addEventListener('activate', e => {
+  e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(k => k.startsWith('checkreel-cache-') && k !== CACHE_NAME)
-          .map(k => caches.delete(k))
-      )
+      Promise.all(keys.filter(k => k.startsWith('checkreel-cache-') && k !== CACHE).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
 });
-
-/* ---------------- FETCH ---------------- */
-self.addEventListener('fetch', event => {
-  const { request } = event;
-  if (request.method !== 'GET') return;
-
-  const urlPath = new URL(request.url).pathname;
-
-  /* cache-first for known statics */
-  if (STATIC_ASSETS.includes(urlPath)) {
-    event.respondWith(
-      caches.match(request).then(res => res || fetch(request))
-    );
-    return;
-  }
-
-  /* network-first for everything else */
-  event.respondWith(
-    fetch(request)
-      .then(res => {
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then(c => c.put(request, clone));
-        return res;
-      })
-      .catch(() => caches.match(request))
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+      const clone = res.clone();
+      caches.open(CACHE).then(c => c.put(e.request, clone));
+      return res;
+    }))
   );
 });
-
-/* ---------------- MESSAGE ---------------- */
-self.addEventListener('message', event => {
-  if (event.data === 'clearCaches') {
-    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-  }
-});
-
-/* v2.5 · 2025-05-13 */

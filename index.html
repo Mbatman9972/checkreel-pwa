@@ -42,20 +42,21 @@
         </form>
 
         <p data-i18n="home-subscription-note">$4.99/month after trial period</p>
-        <p data-i18n="home-active-users">🎯 2,697 active users</p>
+        <!-- ⭐ added id for JS lookup -->
+        <p id="active-users" data-i18n="home-active-users">🎯 2,697 active users</p>
       </div>
     </header>
 
     <section id="platforms">
       <h2><span data-i18n="home-platforms-title">Supported Platforms</span></h2>
       <div class="logos">
-        <img src="images/platform-logos/tiktok.png" alt="TikTok" />
-        <img src="images/platform-logos/youtube.png" alt="YouTube" />
-        <img src="images/platform-logos/instagram.png" alt="Instagram" />
-        <img src="images/platform-logos/twitter.png"  alt="Twitter" />
-        <img src="images/platform-logos/facebook.png" alt="Facebook" />
-        <img src="images/platform-logos/threads.png"  alt="Threads" />
-        <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
+        <img src="images/platform-logos/tiktok.png"     alt="TikTok" />
+        <img src="images/platform-logos/youtube.png"    alt="YouTube" />
+        <img src="images/platform-logos/instagram.png"  alt="Instagram" />
+        <img src="images/platform-logos/twitter.png"    alt="Twitter" />
+        <img src="images/platform-logos/facebook.png"   alt="Facebook" />
+        <img src="images/platform-logos/threads.png"    alt="Threads" />
+        <img src="images/platform-logos/snapchat.png"   alt="Snapchat" />
       </div>
     </section>
 
@@ -69,23 +70,5 @@
 
   <script src="lang-loader.js" defer></script>
   <script src="app.js"        defer></script>
-
-  <script>
-    const sel = document.getElementById('language-select'),
-          cur = localStorage.getItem('selectedLanguage') || 'en';
-    sel.value = cur;
-    sel.addEventListener('change', e => {
-      localStorage.setItem('selectedLanguage', e.target.value);
-      location.reload();
-    });
-
-    document.getElementById('subscribe-form').addEventListener('submit', e => {
-      e.preventDefault();
-      localStorage.setItem('checkreel-user-email', e.target.elements.email.value);
-      window.location.href = 'dashboard.html';
-    });
-
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');
-  </script>
 </body>
 </html>
