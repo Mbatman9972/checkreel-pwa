@@ -1,14 +1,37 @@
-/* hero */
-#hero{
-  background:url("images/checkreel-hero-desktop.jpg") center/cover no-repeat;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:3rem;
-  color:#fff; /* Keep this for the logo heading if needed */
+/* Universal Container */
+#container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #89f7fe 0%, #ff9a9e 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Hero Section */
+#hero {
+  background: url("images/checkreel-hero-desktop.jpg") center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #fff;
 }
 
 #hero .logo {
@@ -27,90 +50,188 @@
 #hero .logo h1 {
   font-size: 2.2rem;
   margin-top: 0.5rem;
-  color: #fff; /* Keep logo heading white */
+  color: #fff;
 }
 
-#hero .hero-content {
+.hero-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #333; /* Set default text color to a darker gray */
+  color: #333;
 }
 
-#hero #hero-subtitle {
+#hero-subtitle {
   font-size: 1.4rem;
   margin-top: 1rem;
   line-height: 1.7;
   max-width: 80%;
+  color: #fff;
 }
 
-#hero ul{list-style:none;margin:1.5rem 0}
-#hero li{margin:0.5rem 0; font-size: 1.1rem;}
+#hero ul {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
 
-#subscribe-form{margin:2rem 0;display:flex;gap:0.75rem;flex-wrap:wrap; justify-content: center;}
-#email-input{padding:0.8rem 1.2rem;width:300px;max-width:100%; font-size: 1.1rem; color: #333;} /* Ensure input text is dark */
-#subscribe-button{padding:0.8rem 2rem;background:#0070f3;border:none;color:#fff;cursor:pointer; font-size: 1.1rem;} /* Button text is already white */
+#hero li {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
 
-#subscription-note{margin-top:1rem;font-size: 1rem; color: #333;}
-#active-users{margin-top:1rem;font-weight:bold; font-size: 1.1rem; color: #333;}
+#subscribe-form {
+  margin: 2rem 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-/* platforms */
-#platforms{padding:4rem 1rem;text-align:center}
-#platforms h2{font-size: 1.8rem;}
-.logos{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem}
-.logos img{width:70px;height:70px}
+#email-input {
+  padding: 0.8rem 1.2rem;
+  width: 300px;
+  max-width: 100%;
+  font-size: 1.1rem;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+}
 
-/* about */
-#about{padding:4rem 1rem;background:#f9f9f9;text-align:center}
-#about h2{font-size: 1.8rem;}
-#about p{font-size: 1.2rem; line-height: 1.8; max-width: 70%; margin: 1rem auto;}
+#subscribe-button {
+  padding: 0.8rem 2rem;
+  background: #0070f3;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.1rem;
+  border-radius: 4px;
+}
 
-/* language switch */
-#language-switcher{position:fixed;top:30px;right:30px;padding:0.6rem; font-size: 1rem;}
+#subscribe-button:hover {
+  background: #005dc1;
+}
 
-/* responsive hero text overlay */
-@media(max-width:600px){
-#hero{padding:2rem}
-#hero .logo img {
+#subscription-note,
+#active-users {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Platforms Section */
+#platforms {
+  padding: 4rem 1rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+#platforms h2 {
+  font-size: 1.8rem;
+  color: #222;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.logos img {
+  width: 70px;
+  height: 70px;
+}
+
+/* About Section */
+#about {
+  padding: 4rem 1rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+#about h2 {
+  font-size: 1.8rem;
+  color: #222;
+}
+
+#about p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 70%;
+  margin: 1rem auto;
+  color: #555;
+}
+
+/* Language Switcher */
+#language-switcher {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  #hero {
+    padding: 2rem 1rem;
+  }
+
+  #hero .logo img {
     max-width: 80px;
     max-height: 80px;
-}
-#hero .logo h1 {
+  }
+
+  #hero .logo h1 {
     font-size: 1.8rem;
-}
-#hero .hero-content #hero-subtitle {
+  }
+
+  #hero-subtitle {
     font-size: 1.2rem;
-}
-#hero ul li {
+  }
+
+  #hero ul li {
     font-size: 1rem;
-}
-#email-input {
+  }
+
+  #email-input {
     width: 90%;
     padding: 0.7rem;
     font-size: 1rem;
-}
-#subscribe-button {
+  }
+
+  #subscribe-button {
     padding: 0.7rem 1.5rem;
     font-size: 1rem;
-}
-#platforms h2 {
+  }
+
+  #platforms h2 {
     font-size: 1.6rem;
-}
-.logos img {
+  }
+
+  .logos img {
     width: 50px;
     height: 50px;
-    gap: 0.75rem;
-}
-#about h2 {
+  }
+
+  #about h2 {
     font-size: 1.6rem;
-}
-#about p {
+  }
+
+  #about p {
     font-size: 1.1rem;
-}
-#language-switcher {
+  }
+
+  #language-switcher {
     top: 15px;
     right: 15px;
     padding: 0.3rem;
     font-size: 0.9rem;
-}
+  }
 }

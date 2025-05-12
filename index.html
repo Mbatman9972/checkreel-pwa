@@ -4,71 +4,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="home-page-title">CheckReel - Stop Guessing, Start Checking.</title>
+  <title data-i18n="home-page-title">CheckReel - Check Before You Post</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 
 <body>
-  <header id="hero">
-    <div class="logo">
-      <img src="images/checkreel-logo.png" alt="CheckReel Logo" />
-      <h1 data-i18n="home-hero-title">CheckReel</h1>
-    </div>
-
-    <nav>
-      <div id="language-switcher">
-        <select id="language-select">
-          <option value="en" selected>🇬🇧 English</option>
-          <option value="ar">🇦🇪 العربية</option>
-          <option value="fr">🇫🇷 Français</option>
-        </select>
+  <div id="container">
+    <header id="hero">
+      <div class="logo">
+        <img src="images/checkreel-logo.png" alt="CheckReel Logo" />
+        <h1 data-i18n="home-hero-title">CheckReel</h1>
       </div>
-    </nav>
 
-    <div class="hero-content">
-      <h2 data-i18n="home-hero-subtitle">Stop guessing, start checking.</h2>
-      <ul id="hero-benefits">
-        <li data-i18n="home-benefit-1">✅ Pre-check any video, image, or audio</li>
-        <li data-i18n="home-benefit-2">📊 Instant AI-powered compliance report</li>
-        <li data-i18n="home-benefit-3">🔒 Your privacy is fully protected</li>
-      </ul>
+      <nav>
+        <div id="language-switcher">
+          <select id="language-select">
+            <option value="en" selected>🇬🇧 English</option>
+            <option value="ar">🇦🇪 العربية</option>
+            <option value="fr">🇫🇷 Français</option>
+          </select>
+        </div>
+      </nav>
 
-      <form id="subscribe-form">
-        <input type="email" id="email-input" placeholder="Enter your email" required />
-        <button type="submit" data-i18n="home-subscribe-button">Subscribe</button>
-      </form>
+      <div class="hero-content">
+        <h2 data-i18n="home-hero-subtitle">Don’t guess — check before you post.</h2>
 
-      <p data-i18n="home-subscription-note">$4.99/month after trial</p>
-      <p data-i18n="home-active-users">🎯 2697 Active Users</p>
-    </div>
-  </header>
+        <ul id="hero-benefits">
+          <li data-i18n="home-benefit-1">✅ Pre-check any video, image, or audio</li>
+          <li data-i18n="home-benefit-2">📊 Instant AI-powered compliance report</li>
+          <li data-i18n="home-benefit-3">🔒 Your privacy is fully protected</li>
+        </ul>
 
-  <section id="platforms">
-    <h2><span data-i18n="home-platforms-title">Supported Platforms</span></h2>
-    <div class="logos">
-      <img src="images/platform-logos/tiktok.png" alt="TikTok" />
-      <img src="images/platform-logos/youtube.png" alt="YouTube" />
-      <img src="images/platform-logos/instagram.png" alt="Instagram" />
-      <img src="images/platform-logos/twitter.png" alt="Twitter" />
-      <img src="images/platform-logos/facebook.png" alt="Facebook" />
-      <img src="images/platform-logos/threads.png" alt="Threads" />
-      <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
-    </div>
-  </section>
+        <form id="subscribe-form">
+          <input type="email" id="email-input" placeholder="Enter your email" required />
+          <button type="submit" data-i18n="home-subscribe-button">Subscribe Now</button>
+        </form>
 
-  <section id="about">
-    <h2><span data-i18n="home-about-title">About CheckReel</span></h2>
-    <p data-i18n="home-about-content">
-      CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.
-    </p>
-  </section>
+        <p data-i18n="home-subscription-note">$4.99/month after trial period</p>
+        <p data-i18n="home-active-users">🎯 2,697 active users</p>
+      </div>
+    </header>
+
+    <section id="platforms">
+      <h2><span data-i18n="home-platforms-title">Supported Platforms</span></h2>
+      <div class="logos">
+        <img src="images/platform-logos/tiktok.png" alt="TikTok" />
+        <img src="images/platform-logos/youtube.png" alt="YouTube" />
+        <img src="images/platform-logos/instagram.png" alt="Instagram" />
+        <img src="images/platform-logos/twitter.png" alt="Twitter" />
+        <img src="images/platform-logos/facebook.png" alt="Facebook" />
+        <img src="images/platform-logos/threads.png" alt="Threads" />
+        <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
+      </div>
+    </section>
+
+    <section id="about">
+      <h2><span data-i18n="home-about-title">About CheckReel</span></h2>
+      <p data-i18n="home-about-content">
+        CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.
+      </p>
+    </section>
+  </div>
 
   <script src="lang-loader.js"></script>
   <script src="app.js"></script>
 
   <script>
+    // Language persistence + reload
+    const langSelector = document.getElementById('language-select');
+    if (langSelector) {
+      langSelector.addEventListener('change', function () {
+        const selectedLang = this.value;
+        localStorage.setItem('selectedLanguage', selectedLang);
+        location.reload(); // Re-apply translations
+      });
+
+      // Set current language on load
+      const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+      langSelector.value = currentLang;
+    }
+
+    // Subscribe form (no backend)
+    document.getElementById('subscribe-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email-input').value;
+      if (!email) {
+        alert("Please enter a valid email.");
+        return;
+      }
+
+      localStorage.setItem('checkreel-user-email', email);
+      window.location.href = "dashboard.html";
+    });
+
+    // PWA service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js');
     }
