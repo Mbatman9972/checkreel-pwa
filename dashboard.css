@@ -487,3 +487,21 @@ section {
     padding: 0 1rem;
   }
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+main {
+  display: block;
+}
+
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
