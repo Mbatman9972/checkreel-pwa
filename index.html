@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title data-i18n="home-page-title">CheckReel - Check Before You Post</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
@@ -21,7 +20,7 @@
       <nav>
         <div id="language-switcher">
           <select id="language-select">
-            <option value="en" selected>🇬🇧 English</option>
+            <option value="en">🇬🇧 English</option>
             <option value="ar">🇦🇪 العربية</option>
             <option value="fr">🇫🇷 Français</option>
           </select>
@@ -38,7 +37,7 @@
         </ul>
 
         <form id="subscribe-form">
-          <input type="email" id="email-input" placeholder="Enter your email" required />
+          <input type="email" id="email-input" placeholder="Enter your email" required autocomplete="email" />
           <button type="submit" data-i18n="home-subscribe-button">Subscribe Now</button>
         </form>
 
@@ -53,9 +52,9 @@
         <img src="images/platform-logos/tiktok.png" alt="TikTok" />
         <img src="images/platform-logos/youtube.png" alt="YouTube" />
         <img src="images/platform-logos/instagram.png" alt="Instagram" />
-        <img src="images/platform-logos/twitter.png" alt="Twitter" />
+        <img src="images/platform-logos/twitter.png"  alt="Twitter" />
         <img src="images/platform-logos/facebook.png" alt="Facebook" />
-        <img src="images/platform-logos/threads.png" alt="Threads" />
+        <img src="images/platform-logos/threads.png"  alt="Threads" />
         <img src="images/platform-logos/snapchat.png" alt="Snapchat" />
       </div>
     </section>
@@ -68,43 +67,25 @@
     </section>
   </div>
 
-  <script src="lang-loader.js"></script>
-  <script src="app.js"></script>
+  <script src="lang-loader.js" defer></script>
+  <script src="app.js"        defer></script>
 
   <script>
-    // Language persistence + reload
-    const langSelector = document.getElementById('language-select');
-    if (langSelector) {
-      langSelector.addEventListener('change', function () {
-        const selectedLang = this.value;
-        localStorage.setItem('selectedLanguage', selectedLang);
-        location.reload(); // Re-apply translations
-      });
-
-      // Set current language on load
-      const currentLang = localStorage.getItem('selectedLanguage') || 'en';
-      langSelector.value = currentLang;
-    }
-
-    // Subscribe form (no backend)
-    document.getElementById('subscribe-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const email = document.getElementById('email-input').value;
-      if (!email) {
-        alert("Please enter a valid email.");
-        return;
-      }
-
-      localStorage.setItem('checkreel-user-email', email);
-      window.location.href = "dashboard.html";
+    const sel = document.getElementById('language-select'),
+          cur = localStorage.getItem('selectedLanguage') || 'en';
+    sel.value = cur;
+    sel.addEventListener('change', e => {
+      localStorage.setItem('selectedLanguage', e.target.value);
+      location.reload();
     });
 
-    // PWA service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    }
+    document.getElementById('subscribe-form').addEventListener('submit', e => {
+      e.preventDefault();
+      localStorage.setItem('checkreel-user-email', e.target.elements.email.value);
+      window.location.href = 'dashboard.html';
+    });
+
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/service-worker.js');
   </script>
 </body>
-
 </html>

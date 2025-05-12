@@ -1,103 +1,87 @@
 // -----------------------------
-// ✅ Progressive Web App: Service Worker
+// ✅ Progressive Web App – Service Worker
 // -----------------------------
+const CACHE_VERSION = 'v2.5';
+const CACHE_NAME    = `checkreel-cache-${CACHE_VERSION}`;
 
-const CACHE_VERSION = 'v2.0';
-const CACHE_NAME = `checkreel-cache-${CACHE_VERSION}`;
-
-// Static assets to always cache
+/* Static assets – cached once, served cache-first */
 const STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/dashboard.html',
   '/styles.css',
   '/app.js',
+  '/dashboard.js',
+  '/lang-loader.js',
+  '/manifest.json',
   '/images/favicon.png',
   '/images/checkreel-logo.png',
-  '/manifest.json'
+  '/images/platform-logos/facebook.png',
+  '/images/platform-logos/instagram.png',
+  '/images/platform-logos/youtube.png',
+  '/images/platform-logos/tiktok.png',
+  '/images/platform-logos/threads.png',
+  '/images/platform-logos/twitter.png',
+  '/images/platform-logos/snapchat.png',
+  '/lang/en.json',
+  '/lang/fr.json',
+  '/lang/ar.json'
 ];
 
-// Files we want to always fetch fresh if possible
-const DYNAMIC_FILES = [
-  '/dashboard.html',
-  '/dashboard.js'
-];
-
-// ✅ INSTALL: Cache static files
+/* ---------------- INSTALL ---------------- */
 self.addEventListener('install', event => {
-  console.log('[SW] Installing and caching static assets...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS))
   );
   self.skipWaiting();
 });
 
-// ✅ ACTIVATE: Clear old caches
+/* ---------------- ACTIVATE ---------------- */
 self.addEventListener('activate', event => {
-  console.log('[SW] Activating new service worker...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
         keys
-          .filter(key => key.startsWith('checkreel-cache-') && key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+          .filter(k => k.startsWith('checkreel-cache-') && k !== CACHE_NAME)
+          .map(k => caches.delete(k))
       )
     )
   );
   self.clients.claim();
 });
 
-// ✅ FETCH: Handle asset loading
+/* ---------------- FETCH ---------------- */
 self.addEventListener('fetch', event => {
   const { request } = event;
-
-  // ❌ Don’t cache POST or other non-GET methods
   if (request.method !== 'GET') return;
 
-  const url = new URL(request.url);
-  const isDynamic = DYNAMIC_FILES.some(file =>
-    url.pathname.endsWith(file) || url.pathname === file
+  const urlPath = new URL(request.url).pathname;
+
+  /* cache-first for known statics */
+  if (STATIC_ASSETS.includes(urlPath)) {
+    event.respondWith(
+      caches.match(request).then(res => res || fetch(request))
+    );
+    return;
+  }
+
+  /* network-first for everything else */
+  event.respondWith(
+    fetch(request)
+      .then(res => {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(request, clone));
+        return res;
+      })
+      .catch(() => caches.match(request))
   );
-
-  if (isDynamic) {
-    // 🔄 Network-first strategy
-    event.respondWith(
-      fetch(request)
-        .then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          return response;
-        })
-        .catch(() => caches.match(request))
-    );
-  } else {
-    // 📦 Cache-first for static assets
-    event.respondWith(
-      caches.match(request).then(cached =>
-        cached || fetch(request).then(response => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          return response;
-        })
-      )
-    );
-  }
 });
 
-// ✅ LISTEN: Language change or manual cache clearing
+/* ---------------- MESSAGE ---------------- */
 self.addEventListener('message', event => {
-  if (event.data && event.data.action === 'clearDynamicCache') {
-    clearDynamicCache();
+  if (event.data === 'clearCaches') {
+    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
   }
 });
 
-// 🔧 Helper: Clear dashboard cache
-function clearDynamicCache() {
-  caches.open(CACHE_NAME).then(cache => {
-    DYNAMIC_FILES.forEach(file => {
-      cache.delete(file).then(success => {
-        if (success) console.log(`[SW] Cleared: ${file}`);
-      });
-    });
-  });
-}
-/* v2.1 – 2025-05-13: cache-bust after icon-path fix */
+/* v2.5 · 2025-05-13 */
