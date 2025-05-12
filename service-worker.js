@@ -100,3 +100,4 @@ function clearDynamicCache() {
     });
   });
 }
+/* v2.1 – 2025-05-13: cache-bust after icon-path fix */

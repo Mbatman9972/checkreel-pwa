@@ -63,11 +63,14 @@ body {
   box-shadow: 0 0 12px var(--accent);
   border-color: var(--accent);
 }
-/* individual icons — just set background-image */
-#tiktok   { background-image: url("images/platform-logos/tiktok.svg"); }
-#youtube  { background-image: url("images/platform-logos/youtube.svg"); }
-#instagram{ background-image: url("images/platform-logos/instagram.svg"); }
-#x        { background-image: url("images/platform-logos/x.svg"); }
+/* individual icons — use the PNGs that are already in /images/platform-logos/ */
+#facebook  { background-image: url("images/platform-logos/facebook.png"); }
+#tiktok    { background-image: url("images/platform-logos/tiktok.png"); }
+#instagram { background-image: url("images/platform-logos/instagram.png"); }
+#threads   { background-image: url("images/platform-logos/threads.png"); }
+#youtube   { background-image: url("images/platform-logos/youtube.png"); }
+#twitter   { background-image: url("images/platform-logos/twitter.png"); }
+#snapchat  { background-image: url("images/platform-logos/snapchat.png"); }
 
 /* region radios */
 .regions {
