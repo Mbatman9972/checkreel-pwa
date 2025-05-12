@@ -16,23 +16,23 @@
   <main class="dash-content">
     <!-- welcome + quick guide -->
     <section class="welcome">
-      <p>
-        CheckReel scans your content against the latest platform policies, flags
-        potential violations <strong>before</strong> you post, and keeps your
-        files private – so you stay compliant and protected.
+      <p data-i18n="dash-welcome">
+        CheckReel scans your content against the latest platform policies,
+        flags potential violations <strong>before</strong> you post,
+        and keeps your files private – so you stay compliant and protected.
       </p>
 
       <div class="guide-card">
-        <h3>How it works</h3>
+        <h3 data-i18n="dash-how-title">How it works</h3>
         <ul>
-          <li><span>1️⃣</span> Upload your video, image, or audio.</li>
-          <li><span>2️⃣</span> Pick the target platform & region.</li>
-          <li><span>3️⃣</span> Hit <strong>Scan</strong> to get an instant report.</li>
+          <li data-i18n="dash-step1"><span>1️⃣</span> Upload your video, image, or audio.</li>
+          <li data-i18n="dash-step2"><span>2️⃣</span> Pick the target platform &amp; region.</li>
+          <li data-i18n="dash-step3"><span>3️⃣</span> Hit <strong>Scan</strong> to get an instant report.</li>
         </ul>
       </div>
     </section>
 
-    <h2 class="section-title">Select Platform</h2>
+    <h2 class="section-title" data-i18n="dash-platform-title">Select Platform</h2>
     <div id="platforms" class="platforms">
       <button class="platform" id="facebook"   aria-label="Facebook"></button>
       <button class="platform" id="instagram" aria-label="Instagram"></button>
@@ -43,34 +43,34 @@
       <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
     </div>
 
-    <h2 class="section-title">Select Region</h2>
+    <h2 class="section-title" data-i18n="dash-region-title">Select Region</h2>
     <fieldset id="regions" class="regions">
-      <label><input type="radio" name="region" value="mena" checked /> MENA</label>
-      <label><input type="radio" name="region" value="us" /> US</label>
-      <label><input type="radio" name="region" value="eu" /> EU</label>
-      <label><input type="radio" name="region" value="global" /> Global</label>
-      <label><input type="radio" name="region" value="me" /> Middle&nbsp;East</label>
+      <label><input type="radio" name="region" value="mena" checked /> <span data-i18n="reg-mena">MENA</span></label>
+      <label><input type="radio" name="region" value="us" /> <span data-i18n="reg-us">US</span></label>
+      <label><input type="radio" name="region" value="eu" /> <span data-i18n="reg-eu">EU</span></label>
+      <label><input type="radio" name="region" value="global" /> <span data-i18n="reg-glob">Global</span></label>
+      <label><input type="radio" name="region" value="me" /> <span data-i18n="reg-me">Middle East</span></label>
     </fieldset>
 
     <section class="upload-wrap">
       <label class="file-label">
         <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
-        <span id="fileLabelText">Choose a file…</span>
+        <span id="fileLabelText" data-i18n="dash-choose">Choose a file…</span>
       </label>
-      <button id="scanBtn">Scan</button>
+      <button id="scanBtn" data-i18n="dash-scan">Scan</button>
     </section>
 
     <section class="history-wrap">
-      <h2>Scan History</h2>
+      <h2 data-i18n="dash-history">Scan History</h2>
       <ul id="history"></ul>
     </section>
   </main>
 
   <footer class="site-footer">
     <p>© 2025 CheckReel · All rights reserved.</p>
-    <p class="disclaimer">
-      Disclaimer: CheckReel provides automated compliance insights. Final responsibility
-      for publishing decisions remains with the user.
+    <p class="disclaimer" data-i18n="dash-disclaimer">
+      Disclaimer: CheckReel provides automated compliance insights.
+      Final responsibility for publishing decisions remains with the user.
     </p>
   </footer>
 
@@ -78,3 +78,4 @@
   <script src="dashboard.js"  defer></script>
 </body>
 </html>
+<input type="file" id="fileInput" accept="video/*,image/*,audio/*" autocomplete="off" />
