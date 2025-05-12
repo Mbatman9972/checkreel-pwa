@@ -1,49 +1,24 @@
 :root {
-  --primary-color: #8300e9; /* CheckReel purple */
-  --secondary-color: #0070f3; /* CheckReel blue */
+  --primary-color: #8300e9;
+  --secondary-color: #0070f3;
   --background-gradient: linear-gradient(to right, #cd9be1, #eec491);
 }
-/* Base Styles */
+
+/* Base */
 body {
   background: var(--background-gradient);
   color: #222;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.upgrade-badge {
-  background: var(--secondary-color);
-}
-
 
 .container {
   max-width: 1100px;
   margin: auto;
   padding: 2rem;
-  position: relative;
 }
 
-/* Header */
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.logo {
-  width: 120px;
-  margin-bottom: 1rem;
-}
-
-.subtext {
-  font-size: 1rem;
-  color: #555;
-}
-
-.intro {
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
-  color: #444;
-}
-
-/* Plan Info + Badge Positions */
+/* Plan Info */
 .plan-info {
   position: absolute;
   top: 1rem;
@@ -53,7 +28,7 @@ body {
 }
 
 .plan-badge {
-  background-color: #0070f3;
+  background-color: var(--secondary-color);
   color: #fff;
   padding: 0.4rem 0.9rem;
   border-radius: 1.2rem;
@@ -67,7 +42,7 @@ body {
   margin-top: 0.3rem;
 }
 
-/* Top Controls (CheckReel+ + Language) */
+/* Top Controls */
 .top-controls {
   position: absolute;
   top: 1rem;
@@ -78,7 +53,7 @@ body {
 }
 
 .upgrade-badge {
-  background: #0070f3;
+  background: var(--secondary-color);
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -87,31 +62,53 @@ body {
   font-size: 0.85rem;
   transition: background 0.3s ease;
 }
+
 .upgrade-badge:hover {
   background: #005ec2;
 }
 
-#language-selector {
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #a0c1d3d3;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: #333;
-  cursor: pointer;
+/* Header & Intro */
+.dashboard-header {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 
-/* Platform Logos */
-.logo-checkboxes {
+.dashboard-header img {
+  width: 90px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.dashboard-header p {
+  font-size: 1rem;
+  color: #555;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.dashboard-header .why {
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+/* Platform Selection */
+#platform-options {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1rem;
   justify-content: center;
+  margin-top: 2rem;
 }
 
-.logo-checkboxes label {
+#platform-options label {
   padding: 0.6rem;
   border-radius: 0.6rem;
   border: 2px solid #ccc;
@@ -126,58 +123,33 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.logo-checkboxes input[type="checkbox"] {
+#platform-options input[type="checkbox"] {
   display: none;
 }
 
-.logo-checkboxes img {
+#platform-options img {
   height: 32px;
   width: 32px;
   opacity: 0.5;
   transition: all 0.2s ease;
 }
 
-.logo-checkboxes input[type="checkbox"]:checked + img {
+#platform-options input[type="checkbox"]:checked + img {
   opacity: 1;
   transform: scale(1.2);
 }
 
-.logo-checkboxes label[data-platform="TikTok"]:has(input:checked) {
-  border-color: #000000;
-  box-shadow: 0 0 10px #00000066;
-}
-.logo-checkboxes label[data-platform="YouTube"]:has(input:checked) {
-  border-color: #FF0000;
-  box-shadow: 0 0 10px #FF000088;
-}
-.logo-checkboxes label[data-platform="Instagram"]:has(input:checked) {
-  border-color: #E1306C;
-  box-shadow: 0 0 10px #E1306C88;
-}
-.logo-checkboxes label[data-platform="Facebook"]:has(input:checked) {
-  border-color: #3b5998;
-  box-shadow: 0 0 10px #3b599888;
-}
-.logo-checkboxes label[data-platform="Snapchat"]:has(input:checked) {
-  border-color: #FFFC00;
-  box-shadow: 0 0 10px #FFFC0088;
-}
-.logo-checkboxes label[data-platform="Threads"]:has(input:checked) {
-  border-color: #000000;
-  box-shadow: 0 0 10px #00000066;
-}
-.logo-checkboxes label[data-platform="Twitter"]:has(input:checked) {
-  border-color: #1DA1F2;
-  box-shadow: 0 0 10px #1DA1F288;
-}
-
 /* Region Selection */
-.checkbox-group {
+#region-options {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
   justify-content: center;
+}
+
+#region-options label {
+  font-weight: 500;
 }
 
 /* Upload Area */
@@ -193,16 +165,19 @@ body {
 .file-upload-wrapper {
   display: inline-block;
   padding: 0.7rem 1.4rem;
-  background: #0070f3;
+  background: var(--secondary-color);
   color: white;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-top: 1rem;
 }
+
 .file-upload-wrapper:hover {
   background: #0059d8;
 }
+
 .file-upload-wrapper input[type="file"] {
   display: none;
 }
@@ -213,9 +188,9 @@ body {
   margin-top: 0.5rem;
 }
 
-/* Submit Button */
+/* Submit */
 #submit-button {
-  background: linear-gradient(to right, #0070f3, #8300e9);
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
   color: white;
   padding: 0.7rem 1.4rem;
   border: none;
@@ -224,11 +199,12 @@ body {
   cursor: pointer;
   margin-top: 1.2rem;
 }
+
 #submit-button:hover {
   opacity: 0.9;
 }
 
-/* AI Feedback */
+/* Result */
 .result-area {
   background: #f2f8ff;
   padding: 1rem;
@@ -242,18 +218,12 @@ body {
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
 }
 
-/* History Section */
+/* History */
 .history-box {
   margin-top: 2rem;
 }
@@ -281,7 +251,7 @@ body {
 
 .badge {
   display: inline-block;
-  background: #0070f3;
+  background: var(--secondary-color);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
@@ -309,7 +279,8 @@ body {
   font-size: 0.9rem;
   color: #666;
 }
-/* RTL Support */
+
+/* RTL */
 body.rtl {
   text-align: right;
 }
@@ -339,169 +310,4 @@ body.rtl .checkbox-group {
 
 body.rtl .history-header {
   align-items: flex-end;
-}
-/* ============================== */
-/* Dashboard Layout Fixes & Tune */
-/* ============================== */
-
-.dashboard-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 2rem;
-}
-
-.dashboard-header .logo {
-  width: 100px;
-  max-width: 100%;
-  margin-bottom: 1rem;
-}
-
-.dashboard-header h1 {
-  font-size: 2rem;
-  color: #222;
-  margin-bottom: 0.5rem;
-}
-
-.dashboard-header .subtext {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 0.3rem;
-}
-
-.dashboard-header .intro {
-  max-width: 800px;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
-  margin-top: 0.5rem;
-  text-align: center;
-}
-/* ========== Final Layout Fixes for Dashboard ========== */
-
-/* Improve spacing between fixed top elements */
-.container {
-  padding-top: 6rem; /* Leaves room for plan info + controls */
-  padding-bottom: 4rem;
-}
-
-/* Responsive adjustments for top bar elements */
-@media (max-width: 768px) {
-  .plan-info,
-  .top-controls {
-    position: static;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .plan-info {
-    margin-top: 1rem;
-  }
-
-  .top-controls select,
-  .upgrade-badge {
-    width: 100%;
-    text-align: center;
-  }
-
-  .dashboard-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .dashboard-header .intro {
-    font-size: 0.95rem;
-    padding: 0 1rem;
-  }
-
-  .upload-area,
-  .result-area,
-  .history-box {
-    padding: 1rem;
-  }
-
-  .logo-checkboxes label {
-    width: 56px;
-    height: 56px;
-  }
-
-  .logo-checkboxes img {
-    height: 28px;
-    width: 28px;
-  }
-
-  .checkbox-group {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Tweak section spacing */
-section {
-  margin-bottom: 3rem;
-}
-
-/* Logo adjustments */
-.logo {
-  max-width: 100px;
-  margin: 0 auto 1rem auto;
-  display: block;
-}
-
-/* Improve intro paragraph alignment */
-.dashboard-header p {
-  margin: 0.5rem auto;
-  max-width: 800px;
-  line-height: 1.6;
-  font-size: 1rem;
-  text-align: center;
-}
-
-/* Upload area fixes */
-.file-upload-wrapper {
-  margin-bottom: 1rem;
-}
-
-#submit-button {
-  width: auto;
-  min-width: 200px;
-}
-
-/* Fix RTL scaling on mobile */
-@media (max-width: 768px) {
-  body.rtl .checkbox-group {
-    align-items: flex-end;
-  }
-
-  body.rtl .top-controls {
-    align-items: flex-end;
-  }
-
-  body.rtl .plan-info {
-    align-items: flex-end;
-  }
-
-  body.rtl .dashboard-header p {
-    padding: 0 1rem;
-  }
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  box-sizing: border-box;
-  font-family: system-ui, sans-serif;
-  scroll-behavior: smooth;
-}
-main {
-  display: block;
-}
-
-
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
