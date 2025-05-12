@@ -378,3 +378,112 @@ body.rtl .history-header {
   margin-top: 0.5rem;
   text-align: center;
 }
+/* ========== Final Layout Fixes for Dashboard ========== */
+
+/* Improve spacing between fixed top elements */
+.container {
+  padding-top: 6rem; /* Leaves room for plan info + controls */
+  padding-bottom: 4rem;
+}
+
+/* Responsive adjustments for top bar elements */
+@media (max-width: 768px) {
+  .plan-info,
+  .top-controls {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-info {
+    margin-top: 1rem;
+  }
+
+  .top-controls select,
+  .upgrade-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .dashboard-header .intro {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+
+  .upload-area,
+  .result-area,
+  .history-box {
+    padding: 1rem;
+  }
+
+  .logo-checkboxes label {
+    width: 56px;
+    height: 56px;
+  }
+
+  .logo-checkboxes img {
+    height: 28px;
+    width: 28px;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Tweak section spacing */
+section {
+  margin-bottom: 3rem;
+}
+
+/* Logo adjustments */
+.logo {
+  max-width: 100px;
+  margin: 0 auto 1rem auto;
+  display: block;
+}
+
+/* Improve intro paragraph alignment */
+.dashboard-header p {
+  margin: 0.5rem auto;
+  max-width: 800px;
+  line-height: 1.6;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Upload area fixes */
+.file-upload-wrapper {
+  margin-bottom: 1rem;
+}
+
+#submit-button {
+  width: auto;
+  min-width: 200px;
+}
+
+/* Fix RTL scaling on mobile */
+@media (max-width: 768px) {
+  body.rtl .checkbox-group {
+    align-items: flex-end;
+  }
+
+  body.rtl .top-controls {
+    align-items: flex-end;
+  }
+
+  body.rtl .plan-info {
+    align-items: flex-end;
+  }
+
+  body.rtl .dashboard-header p {
+    padding: 0 1rem;
+  }
+}
