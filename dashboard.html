@@ -14,16 +14,25 @@
   </header>
 
   <main class="dash-content">
-    <section class="welcome" data-i18n="welcome">
-      Welcome!  
-      <ol>
-        <li>Upload your file.</li>
-        <li>Select platform &amp; region.</li>
-        <li>Press <strong>Scan</strong> and review the report.</li>
-      </ol>
+    <!-- welcome + quick guide -->
+    <section class="welcome">
+      <p>
+        CheckReel scans your content against the latest platform policies, flags
+        potential violations <strong>before</strong> you post, and keeps your
+        files private – so you stay compliant and protected.
+      </p>
+
+      <div class="guide-card">
+        <h3>How it works</h3>
+        <ul>
+          <li><span>1️⃣</span> Upload your video, image, or audio.</li>
+          <li><span>2️⃣</span> Pick the target platform & region.</li>
+          <li><span>3️⃣</span> Hit <strong>Scan</strong> to get an instant report.</li>
+        </ul>
+      </div>
     </section>
 
-    <h2 class="section-title" data-i18n="platformSelect">Select Platform</h2>
+    <h2 class="section-title">Select Platform</h2>
     <div id="platforms" class="platforms">
       <button class="platform" id="facebook"   aria-label="Facebook"></button>
       <button class="platform" id="instagram" aria-label="Instagram"></button>
@@ -34,7 +43,7 @@
       <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
     </div>
 
-    <h2 class="section-title" data-i18n="regionSelect">Select Region</h2>
+    <h2 class="section-title">Select Region</h2>
     <fieldset id="regions" class="regions">
       <label><input type="radio" name="region" value="mena" checked /> MENA</label>
       <label><input type="radio" name="region" value="us" /> US</label>
@@ -44,15 +53,26 @@
     </fieldset>
 
     <section class="upload-wrap">
-      <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
-      <button id="scanBtn" data-i18n="scan">Scan</button>
+      <label class="file-label">
+        <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
+        <span id="fileLabelText">Choose a file…</span>
+      </label>
+      <button id="scanBtn">Scan</button>
     </section>
 
     <section class="history-wrap">
-      <h2 data-i18n="history">Scan History</h2>
+      <h2>Scan History</h2>
       <ul id="history"></ul>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© 2025 CheckReel · All rights reserved.</p>
+    <p class="disclaimer">
+      Disclaimer: CheckReel provides automated compliance insights. Final responsibility
+      for publishing decisions remains with the user.
+    </p>
+  </footer>
 
   <script src="lang-loader.js" defer></script>
   <script src="dashboard.js"  defer></script>
