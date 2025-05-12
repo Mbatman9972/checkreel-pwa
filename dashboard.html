@@ -1,66 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CheckReel · Dashboard</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CheckReel · Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="icon" href="images/favicon.png" sizes="32x32" />
+</head>
 
-    <!-- styles -->
-    <link rel="stylesheet" href="dashboard.css" />
-  </head>
+<body>
+  <header class="dash-header">
+    <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
+  </header>
 
-  <body>
-    <header class="dash-header">
-      <!-- logo now points to your PNG -->
-      <img src="images/checkreel-logo.png" alt="CheckReel logo" class="logo" />
-      <!--  LANGUAGE SELECTOR REMOVED -->
-    </header>
+  <main class="dash-content">
+    <section class="welcome" data-i18n="welcome">
+      Welcome!  
+      <ol>
+        <li>Upload your file.</li>
+        <li>Select platform &amp; region.</li>
+        <li>Press <strong>Scan</strong> and review the report.</li>
+      </ol>
+    </section>
 
-    <main class="dash-content">
-      <!-- concise onboarding intro -->
-      <section class="intro" data-i18n="introCopy">
-        Welcome! Upload your content, pick the platform &amp; region, and let CheckReel double-check compliance before you post.
-      </section>
+    <h2 class="section-title" data-i18n="platformSelect">Select Platform</h2>
+    <div id="platforms" class="platforms">
+      <button class="platform" id="facebook"   aria-label="Facebook"></button>
+      <button class="platform" id="instagram" aria-label="Instagram"></button>
+      <button class="platform" id="youtube"   aria-label="YouTube"></button>
+      <button class="platform" id="tiktok"    aria-label="TikTok"></button>
+      <button class="platform" id="threads"   aria-label="Threads"></button>
+      <button class="platform" id="twitter"   aria-label="Twitter"></button>
+      <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
+    </div>
 
-      <!-- PLATFORM SELECT (icons / single-select) -->
-      <section class="platform-wrap">
-        <h2 data-i18n="platformSelect">Select Platform</h2>
+    <h2 class="section-title" data-i18n="regionSelect">Select Region</h2>
+    <fieldset id="regions" class="regions">
+      <label><input type="radio" name="region" value="mena" checked /> MENA</label>
+      <label><input type="radio" name="region" value="us" /> US</label>
+      <label><input type="radio" name="region" value="eu" /> EU</label>
+      <label><input type="radio" name="region" value="global" /> Global</label>
+      <label><input type="radio" name="region" value="me" /> Middle&nbsp;East</label>
+    </fieldset>
 
-        <div id="platforms" class="platforms">
-          <button class="platform" id="tiktok"    aria-label="TikTok"></button>
-          <button class="platform" id="youtube"   aria-label="YouTube"></button>
-          <button class="platform" id="instagram" aria-label="Instagram"></button>
-          <button class="platform" id="x"         aria-label="X"></button>
-        </div>
-      </section>
+    <section class="upload-wrap">
+      <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
+      <button id="scanBtn" data-i18n="scan">Scan</button>
+    </section>
 
-      <!-- REGION SELECT -->
-      <section class="region-wrap">
-        <h2 data-i18n="regionSelect">Select Region</h2>
+    <section class="history-wrap">
+      <h2 data-i18n="history">Scan History</h2>
+      <ul id="history"></ul>
+    </section>
+  </main>
 
-        <fieldset id="regions" class="regions">
-          <label><input type="radio" name="region" value="mena"    checked /> MENA</label>
-          <label><input type="radio" name="region" value="us"      /> US</label>
-          <label><input type="radio" name="region" value="eu"      /> EU</label>
-          <label><input type="radio" name="region" value="global"  /> Global</label>
-          <label><input type="radio" name="region" value="me"      /> Middle East</label>
-        </fieldset>
-      </section>
-
-      <!-- UPLOAD + HISTORY (unchanged) -->
-      <section class="upload-wrap">
-        <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
-        <button id="scanBtn" data-i18n="scan">Scan</button>
-      </section>
-
-      <section class="history-wrap">
-        <h2 data-i18n="history">Scan History</h2>
-        <ul id="history"></ul>
-      </section>
-    </main>
-
-    <!-- scripts -->
-    <script src="lang-loader.js" defer></script>
-    <script src="dashboard.js"   defer></script>
-  </body>
+  <script src="lang-loader.js" defer></script>
+  <script src="dashboard.js"  defer></script>
+</body>
 </html>

@@ -1,113 +1,32 @@
-/* ===== dashboard layout ===== */
-:root {
-  --accent: #1db954;
-  --bg: #101214;
-  --fg: #f1f3f5;
-  --dim: #6c6f73;
-  --radius: 1rem;
+:root{
+  --accent:#1db954;
+  --bg:#101214;
+  --fg:#f1f3f5;
+  --card:#1a1d20;
+  --radius:1rem;
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: system-ui, sans-serif;
-  color: var(--fg);
-  background: var(--bg);
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-.dash-header {
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-}
-
-.logo { height: 42px; }
-
-.dash-content {
-  width: min(960px, 94%);
-  margin: 1rem auto 4rem;
-  display: grid;
-  gap: 2rem;
-}
-
-/* intro copy */
-.intro {
-  background: #1a1d20;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--radius);
-  line-height: 1.55;
-}
-
-/* platform icons */
-.platforms {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.platform {
-  --size: 72px;
-  width: var(--size);
-  height: var(--size);
-  border: 2px solid transparent;
-  border-radius: 50%;
-  background: center/65%  no-repeat #1a1d20;
-  transition: transform .2s, box-shadow .2s, border-color .2s;
-  cursor: pointer;
-}
-.platform:focus-visible { outline: none; border-color: var(--accent); }
-.platform.selected {
-  transform: scale(1.08);
-  box-shadow: 0 0 12px var(--accent);
-  border-color: var(--accent);
-}
-/* individual icons — use the PNGs that are already in /images/platform-logos/ */
-#facebook  { background-image: url("images/platform-logos/facebook.png"); }
-#tiktok    { background-image: url("images/platform-logos/tiktok.png"); }
-#instagram { background-image: url("images/platform-logos/instagram.png"); }
-#threads   { background-image: url("images/platform-logos/threads.png"); }
-#youtube   { background-image: url("images/platform-logos/youtube.png"); }
-#twitter   { background-image: url("images/platform-logos/twitter.png"); }
-#snapchat  { background-image: url("images/platform-logos/snapchat.png"); }
-
-/* region radios */
-.regions {
-  display: flex;
-  gap: 1rem 1.5rem;
-  flex-wrap: wrap;
-  background: #1a1d20;
-  padding: 1rem 1.25rem;
-  border-radius: var(--radius);
-}
-.regions input { accent-color: var(--accent); margin-inline-end: .35em; }
-.regions label { cursor: pointer; }
-
-/* upload block */
-.upload-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-#scanBtn {
-  background: var(--accent);
-  color: #000;
-  border: none;
-  padding: .65rem 1.25rem;
-  border-radius: 999px;
-  cursor: pointer;
-}
-
-/* history list */
-.history-wrap ul { list-style: none; }
-.history-wrap li {
-  padding: .65rem 1rem;
-  background: #1a1d20;
-  border-radius: .5rem;
-  margin-top: .5rem;
-  font-size: .9rem;
-}
-
-/* RTL tweaks */
-[dir="rtl"] .dash-content { text-align: right; }
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif;}
+body{background:var(--bg);color:var(--fg);min-height:100dvh;}
+.logo{height:48px;}
+.dash-header{display:flex;align-items:center;padding:1rem 2rem;}
+.dash-content{width:min(960px,94%);margin:1rem auto 4rem;display:grid;gap:2rem;}
+.section-title{font-size:1.5rem;text-align:center;}
+.welcome{background:var(--card);padding:1.5rem;border-radius:var(--radius);}
+.platforms{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+.platform{--sz:72px;width:var(--sz);height:var(--sz);border-radius:50%;background:#1e2024 center/60% no-repeat;border:2px solid transparent;transition:.2s;cursor:pointer;}
+.platform.selected{transform:scale(1.08);box-shadow:0 0 12px var(--accent);border-color:var(--accent);}
+.regions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;background:var(--card);padding:1rem;border-radius:var(--radius);}
+.regions input{accent-color:var(--accent);}
+.upload-wrap{display:flex;gap:1rem;justify-content:center;}
+.history-wrap ul{list-style:none;}
+.history-wrap li{background:var(--card);padding:.5rem;border-radius:.5rem;margin-top:.5rem;font-size:.9rem;}
+/* icons */
+#facebook  {background-image:url("images/platform-logos/facebook.png");}
+#instagram {background-image:url("images/platform-logos/instagram.png");}
+#youtube   {background-image:url("images/platform-logos/youtube.png");}
+#tiktok    {background-image:url("images/platform-logos/tiktok.png");}
+#threads   {background-image:url("images/platform-logos/threads.png");}
+#twitter   {background-image:url("images/platform-logos/twitter.png");}
+#snapchat  {background-image:url("images/platform-logos/snapchat.png");}
+/* RTL */
+[dir="rtl"] .dash-content{text-align:right;}
