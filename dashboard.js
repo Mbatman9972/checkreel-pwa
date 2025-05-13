@@ -1,7 +1,5 @@
-/* dashboard.js – main logic for scan page */
 import { getUserPlan, getPlanLimit, remainingQuota } from "./tier.js";
 
-/* ------------------------------------------------------------------ */
 /* Init quota badge */
 const quotaBar = document.getElementById("quotaBar");
 
@@ -33,9 +31,8 @@ function decrementQuota() {
 
 renderQuota();
 
-/* ------------------------------------------------------------------ */
 /* Platform selector */
-let platform = "facebook";
+let platform = "";
 document.getElementById("platforms").addEventListener("click", e => {
   if (!e.target.classList.contains("platform")) return;
   document.querySelectorAll(".platform").forEach(b => b.classList.remove("selected"));
@@ -43,14 +40,12 @@ document.getElementById("platforms").addEventListener("click", e => {
   platform = e.target.id;
 });
 
-/* ------------------------------------------------------------------ */
 /* Region selector */
-let region = "mena";
+let region = "";
 document.getElementById("regions").addEventListener("change", e => {
   if (e.target.name === "region") region = e.target.value;
 });
 
-/* ------------------------------------------------------------------ */
 /* File label update */
 const fileInput = document.getElementById("fileInput");
 const fileTxt = document.getElementById("fileLabelText");
@@ -58,55 +53,59 @@ fileInput.onchange = () => {
   fileTxt.textContent = fileInput.files[0]?.name || "Choose a file…";
 };
 
-/* ------------------------------------------------------------------ */
 /* Scan button */
 const historyUl = document.getElementById("history");
 document.getElementById("scanBtn").onclick = async () => {
   const file = fileInput.files[0];
-  if (!file) return alert("Choose a file first");
 
-  // 🧪 Check scan limit from backend (Edge Function)
+  if (!file) return alert("Choose a file first");
+  if (!platform) return alert("Please select a platform");
+  if (!region) return alert("Please select a region");
+
   try {
     const res = await fetch('/scan/check', {
       method: 'GET',
       headers: {
-        'x-user-plan': getUserPlan() || 'free'
+        'x-user-plan': localStorage.getItem('userPlan') || 'free'
       }
     });
-    const result = await res.json();
-    if (result.error) {
-      showUpgrade(); // ❌ quota exceeded
-      return;
+
+    const text = await res.text();
+
+    try {
+      const result = JSON.parse(text);
+      if (result.error) {
+        showUpgrade(); // ❌ over quota
+        return;
+      }
+    } catch {
+      // Not a JSON error — continue
     }
+
+    renderQuota(); // update quota badge
+
+    const li = document.createElement("li");
+    const icon = new Image();
+    icon.src = `images/platform-logos/${platform}.png`;
+    icon.alt = platform;
+    icon.style.width = "22px";
+    icon.style.height = "22px";
+
+    li.append(
+      icon,
+      document.createTextNode(
+        `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
+      )
+    );
+    historyUl.prepend(li);
+
+    fileInput.value = "";
+    fileTxt.textContent = "Choose a file…";
   } catch (err) {
     alert("Could not verify scan quota. Please try again.");
-    return;
   }
-
-  renderQuota(); // ✅ Update quota display
-
-  // ✅ Log to history
-  const li = document.createElement("li");
-  const icon = new Image();
-  icon.src = `images/platform-logos/${platform}.png`;
-  icon.alt = platform;
-  icon.style.width = "22px";
-  icon.style.height = "22px";
-
-  li.append(
-    icon,
-    document.createTextNode(
-      `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
-    )
-  );
-  historyUl.prepend(li);
-
-  // ✅ Reset input
-  fileInput.value = "";
-  fileTxt.textContent = "Choose a file…";
 };
 
-/* ------------------------------------------------------------------ */
 /* Upgrade modal actions */
 const modal = document.getElementById("upgradeModal");
 function showUpgrade() {
