@@ -1,18 +1,25 @@
-/* tier.js – tiny store */
-const KEY     = "cr-tier";
-const DEFAULT = { name: "free", quota: 3 };
+export const PLANS = {
+  free: { limit: 3, label: "Free Plan" },
+  premium: { limit: 300, label: "Premium Plan" },
+  plus: { limit: Infinity, label: "Plus Plan" }
+};
 
-export function getTier()  { return JSON.parse(localStorage.getItem(KEY)) || DEFAULT; }
-export function setTier(t) { localStorage.setItem(KEY, JSON.stringify(t)); }
-
-export function decrementQuota() {
-  const t = getTier();
-  if (t.quota === "∞") return true;
-  if (t.quota > 0) { t.quota -= 1; setTier(t); return true; }
-  return false;
+export function getUserPlan() {
+  const plan = localStorage.getItem("userPlan");
+  return PLANS[plan] ? plan : "free";
 }
 
-/* dev helpers */
-window.__setFree    = () => setTier({ name: "free",    quota: 3   });
-window.__setPremium = () => setTier({ name: "premium", quota: 300 });
-window.__setPlus    = () => setTier({ name: "plus",    quota: "∞" });
+export function getPlanLimit(plan) {
+  return PLANS[plan]?.limit ?? PLANS.free.limit;
+}
+
+export function remainingQuota(used) {
+  const plan = getUserPlan();
+  const limit = getPlanLimit(plan);
+  return Math.max(0, limit - used);
+}
+
+// Dev override helpers (for testing in dev tools)
+window.__setFree = () => localStorage.setItem("userPlan", "free");
+window.__setPremium = () => localStorage.setItem("userPlan", "premium");
+window.__setPlus = () => localStorage.setItem("userPlan", "plus");

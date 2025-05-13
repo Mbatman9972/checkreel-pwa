@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin · CheckReel</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <meta charset="UTF-8">
+  <title>CheckReel Admin</title>
+  <style>
+    body { font-family: Arial; padding: 2rem; background: #0f172a; color: white; }
+    table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    th, td { padding: 0.75rem; border: 1px solid #374151; text-align: left; }
+    button { padding: 0.5rem 1rem; cursor: pointer; }
+  </style>
 </head>
-
 <body>
-  <h1 style="text-align:center;margin:1.5rem 0;">Admin Console</h1>
-
-  <table id="userTable" style="width:92%;margin:auto;border-collapse:collapse;color:#fff;font-size:.9rem;">
-    <thead style="background:#ffffff22;">
+  <h1>Admin Dashboard</h1>
+  <table id="userTable">
+    <thead>
       <tr>
-        <th style="padding:.6rem 0;">Email</th>
-        <th>Tier</th>
-        <th>Scans Used</th>
-        <th>Grant&nbsp;+1&nbsp;mo</th>
+        <th>ID</th><th>Email</th><th>Plan</th><th>Expires</th><th>Action</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 
-  <script type="module">
-    /* TEMP hard-coded users — will be replaced by Netlify Function fetch */
-    const users = [
-      { id: "u1", email: "trial@demo.com", tier: "free",    scans: 3 },
-      { id: "u2", email: "vip@demo.com",   tier: "premium", scans: 45 },
-      { id: "u3", email: "hero@demo.com",  tier: "plus",    scans: 128 }
-    ];
+  <script>
+    const API = 'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';
 
-    const tbody = document.querySelector("#userTable tbody");
+    async function loadUsers() {
+      const res = await fetch(`${API}?action=listUsers`);
+      const users = await res.json();
+      const tbody = document.querySelector('#userTable tbody');
+      tbody.innerHTML = '';
 
-    users.forEach(u => {
-      tbody.insertAdjacentHTML(
-        "beforeend",
-        `<tr>
-           <td style="padding:.5rem 0;">${u.email}</td>
-           <td style="text-align:center;">${u.tier}</td>
-           <td style="text-align:center;">${u.scans}</td>
-           <td style="text-align:center;">
-             <button data-id="${u.id}" style="padding:.3rem .8rem;cursor:pointer;">Grant</button>
-           </td>
-         </tr>`
-      );
-    });
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.email}</td>
+          <td>${user.plan}</td>
+          <td>${user.expires}</td>
+          <td><button onclick="grantMonth('${user.id}')">+1 mo</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
 
-    tbody.addEventListener("click", e => {
-      if (e.target.tagName === "BUTTON") {
-        const id = e.target.dataset.id;
-        // TODO: call backend to grant month for user id
-        e.target.textContent = "✅";
-        e.target.disabled = true;
-      }
-    });
+    async function grantMonth(userId) {
+      await fetch(`${API}?action=grantMonth&id=${userId}`);
+      alert(`Granted +1 month to ${userId}`);
+      loadUsers();
+    }
+
+    loadUsers();
   </script>
 </body>
 </html>
