@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin · CheckReel</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+  <h1 style="text-align:center;margin:1.5rem 0;">Admin Console</h1>
+
+  <table id="userTable" style="width:92%;margin:auto;border-collapse:collapse;color:#fff;font-size:.9rem;">
+    <thead style="background:#ffffff22;">
+      <tr>
+        <th style="padding:.6rem 0;">Email</th>
+        <th>Tier</th>
+        <th>Scans Used</th>
+        <th>Grant&nbsp;+1&nbsp;mo</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script type="module">
+    /* TEMP hard-coded users — will be replaced by Netlify Function fetch */
+    const users = [
+      { id: "u1", email: "trial@demo.com", tier: "free",    scans: 3 },
+      { id: "u2", email: "vip@demo.com",   tier: "premium", scans: 45 },
+      { id: "u3", email: "hero@demo.com",  tier: "plus",    scans: 128 }
+    ];
+
+    const tbody = document.querySelector("#userTable tbody");
+
+    users.forEach(u => {
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        `<tr>
+           <td style="padding:.5rem 0;">${u.email}</td>
+           <td style="text-align:center;">${u.tier}</td>
+           <td style="text-align:center;">${u.scans}</td>
+           <td style="text-align:center;">
+             <button data-id="${u.id}" style="padding:.3rem .8rem;cursor:pointer;">Grant</button>
+           </td>
+         </tr>`
+      );
+    });
+
+    tbody.addEventListener("click", e => {
+      if (e.target.tagName === "BUTTON") {
+        const id = e.target.dataset.id;
+        // TODO: call backend to grant month for user id
+        e.target.textContent = "✅";
+        e.target.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>
