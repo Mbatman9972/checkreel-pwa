@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CheckReel · Dashboard</title>
+
+  <!-- styles -->
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="icon" href="images/favicon.png" sizes="32x32" />
 </head>
@@ -33,6 +35,7 @@
       </div>
     </section>
 
+    <!-- platform select -->
     <h2 class="section-title" data-i18n="dash-platform-title">Select Platform</h2>
     <div id="platforms" class="platforms">
       <button class="platform" id="facebook"   aria-label="Facebook"></button>
@@ -44,6 +47,7 @@
       <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
     </div>
 
+    <!-- region select -->
     <h2 class="section-title" data-i18n="dash-region-title">Select Region</h2>
     <fieldset id="regions" class="regions">
       <label><input type="radio" name="region" value="mena" checked /> <span data-i18n="reg-mena">MENA</span></label>
@@ -53,6 +57,7 @@
       <label><input type="radio" name="region" value="me" /> <span data-i18n="reg-me">Middle East</span></label>
     </fieldset>
 
+    <!-- upload -->
     <section class="upload-wrap">
       <label class="file-label">
         <input type="file" id="fileInput" accept="video/*,image/*,audio/*" autocomplete="off" />
@@ -61,6 +66,7 @@
       <button id="scanBtn" data-i18n="dash-scan">Scan</button>
     </section>
 
+    <!-- history -->
     <section class="history-wrap">
       <h2 data-i18n="dash-history">Scan History</h2>
       <ul id="history"></ul>
@@ -75,6 +81,7 @@
     </p>
   </footer>
 
+  <!-- upgrade modal -->
   <div id="upgradeModal" class="modal hidden">
     <div class="modal-card">
       <h3>Upgrade to Premium</h3>
@@ -84,9 +91,9 @@
     </div>
   </div>
 
+  <!-- scripts (all ES-modules) -->
   <script type="module" src="lang-loader.js"></script>
-<script type="module" src="tier.js"></script>       <!-- NEW -->
-<script type="module" src="dashboard.js"></script>
-
+  <script type="module" src="tier.js"></script>
+  <script type="module" src="dashboard.js"></script>
 </body>
 </html>
