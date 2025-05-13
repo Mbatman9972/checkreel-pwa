@@ -61,19 +61,31 @@ fileInput.onchange = () => {
 /* ------------------------------------------------------------------ */
 /* Scan button */
 const historyUl = document.getElementById("history");
-document.getElementById("scanBtn").onclick = () => {
+document.getElementById("scanBtn").onclick = async () => {
   const file = fileInput.files[0];
   if (!file) return alert("Choose a file first");
 
-  // Check quota
-  if (!decrementQuota()) {
-    showUpgrade();
+  // 🧪 Check scan limit from backend (Edge Function)
+  try {
+    const res = await fetch('/scan/check', {
+      method: 'GET',
+      headers: {
+        'x-user-plan': getUserPlan() || 'free'
+      }
+    });
+    const result = await res.json();
+    if (result.error) {
+      showUpgrade(); // ❌ quota exceeded
+      return;
+    }
+  } catch (err) {
+    alert("Could not verify scan quota. Please try again.");
     return;
   }
 
-  renderQuota();
+  renderQuota(); // ✅ Update quota display
 
-  // Add to history
+  // ✅ Log to history
   const li = document.createElement("li");
   const icon = new Image();
   icon.src = `images/platform-logos/${platform}.png`;
@@ -89,7 +101,7 @@ document.getElementById("scanBtn").onclick = () => {
   );
   historyUl.prepend(li);
 
-  // Reset input
+  // ✅ Reset input
   fileInput.value = "";
   fileTxt.textContent = "Choose a file…";
 };
