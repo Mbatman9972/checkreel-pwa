@@ -10,6 +10,7 @@
 
 <body>
   <header class="dash-header">
+    <div id="quotaBar" class="quota-bar">Free · 3 / 3 scans left</div>
     <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
   </header>
 
@@ -74,7 +75,18 @@
     </p>
   </footer>
 
-  <script src="lang-loader.js" defer></script>
-  <script src="dashboard.js"  defer></script>
+  <div id="upgradeModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Upgrade to Premium</h3>
+      <p>Get unlimited scans, export history and priority checks.</p>
+      <button id="goUpgrade">Upgrade – $4.99 / mo</button>
+      <button id="closeModal">Maybe later</button>
+    </div>
+  </div>
+
+  <script type="module" src="lang-loader.js"></script>
+<script type="module" src="tier.js"></script>       <!-- NEW -->
+<script type="module" src="dashboard.js"></script>
+
 </body>
 </html>
