@@ -1,51 +1,107 @@
-const regionMap = {
-  mena: {
-    name: "MENA 🌍",
+// ========== REGION MAP LOGIC ==========
+
+// Region Definitions
+const regions = [
+  {
+    id: "middle-east",
+    key: "regionMiddleEast",
+    icon: "images/region-icons/middle-east.png",
     countries: [
-      "Algeria", "Bahrain", "Egypt", "Iran", "Iraq", "Jordan",
-      "Kuwait", "Lebanon", "Libya", "Mauritania", "Morocco", "Oman",
-      "Palestine", "Qatar", "Saudi Arabia", "Somalia", "Sudan", "Syria",
-      "Tunisia", "UAE", "Yemen", "Djibouti"
+      "Jordan", "Saudi Arabia", "Qatar", "UAE", "Kuwait", "Bahrain",
+      "Oman", "Iraq", "Lebanon", "Syria", "Palestine", "Yemen"
     ]
   },
-  me: {
-    name: "Middle East 🌍",
+  {
+    id: "mena",
+    key: "regionMENA",
+    icon: "images/region-icons/mena.png",
     countries: [
-      "Bahrain", "Egypt", "Iran", "Iraq", "Palestine", "Jordan",
-      "Kuwait", "Lebanon", "Oman", "Qatar", "Saudi Arabia", "Syria",
-      "Turkey", "UAE", "Yemen", "Cyprus", "Azerbaijan", "Armenia", "Georgia"
+      "Jordan", "Saudi Arabia", "Qatar", "UAE", "Kuwait", "Bahrain", "Oman", "Iraq",
+      "Lebanon", "Syria", "Palestine", "Yemen", "Egypt", "Algeria", "Tunisia",
+      "Morocco", "Libya", "Mauritania", "Sudan"
     ]
   },
-  eu: {
-    name: "Europe 🌍",
+  {
+    id: "europe",
+    key: "regionEurope",
+    icon: "images/region-icons/europe.png",
     countries: [
-      "Germany", "France", "Italy", "Spain", "Netherlands", "Sweden", "Belgium", "Poland",
-      "Portugal", "Austria", "Greece", "Romania", "Hungary", "Czech Republic", "Finland", "Denmark",
-      "Norway", "Ireland", "Croatia", "Slovakia", "Slovenia", "Estonia", "Latvia", "Lithuania",
-      "Bulgaria", "Luxembourg", "Malta", "Cyprus", "Iceland", "Liechtenstein", "Monaco", "San Marino",
-      "Vatican City", "Albania", "Serbia", "Bosnia and Herzegovina", "Macedonia", "Montenegro", "Moldova",
-      "Belarus", "Ukraine", "Russia"
+      "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina",
+      "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France",
+      "Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo",
+      "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro",
+      "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia",
+      "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland"
     ]
   },
-  global: {
-    name: "Worldwide 🌐",
+  {
+    id: "global",
+    key: "regionGlobal",
+    icon: "images/region-icons/global.png",
     countries: []
   }
-};
+];
 
-const mapBox = document.querySelector(".region-map");
-const listBox = document.querySelector(".country-list");
+const regionButtonsContainer = document.querySelector(".region-buttons");
+const countryListContainer = document.querySelector(".country-list");
 
-document.getElementById("regions").addEventListener("change", e => {
-  if (e.target.name !== "region") return;
+// Load language preference from sessionStorage
+let currentLang = sessionStorage.getItem("lang") || "en";
 
-  const val = e.target.value;
-  const data = regionMap[val];
+// Fetch translations and then render
+let translations = {};
+fetch(`lang/${currentLang}.json`)
+  .then(res => res.json())
+  .then(data => {
+    translations = data;
+    renderRegions();
+  });
 
-  if (data) {
-    mapBox.innerHTML = `<div style="margin-bottom: 0.5rem; font-weight: bold;">${data.name}</div>`;
-    listBox.innerHTML = data.countries.length
-      ? `<strong>Countries:</strong><br>${data.countries.join(", ")}`
-      : `<strong>Countries:</strong><br>All major regions included.`;
+function txt(path, fallback = "") {
+  const parts = path.split(".");
+  let val = translations;
+  for (const part of parts) {
+    if (val && part in val) {
+      val = val[part];
+    } else {
+      return fallback;
+    }
   }
-});
+  return val;
+}
+
+function renderRegions() {
+  regionButtonsContainer.innerHTML = "";
+
+  regions.forEach(region => {
+    const btn = document.createElement("button");
+    btn.className = "region-button";
+    btn.id = `btn-${region.id}`;
+
+    const icon = document.createElement("img");
+    icon.src = region.icon;
+    icon.alt = region.id;
+
+    const label = document.createElement("span");
+    label.textContent = txt(`regions.${region.key}`, region.id);
+
+    btn.appendChild(icon);
+    btn.appendChild(label);
+
+    btn.addEventListener("click", () => handleRegionClick(region));
+    regionButtonsContainer.appendChild(btn);
+  });
+}
+
+function handleRegionClick(region) {
+  document.querySelectorAll(".region-button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  document.querySelector(`#btn-${region.id}`).classList.add("active");
+
+  if (region.countries.length > 0) {
+    countryListContainer.innerHTML = region.countries.join(" • ");
+  } else {
+    countryListContainer.innerHTML = "";
+  }
+}

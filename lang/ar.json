@@ -48,5 +48,13 @@
   "reg-us": "الولايات المتحدة",
   "reg-eu": "الاتحاد الأوروبي",
   "reg-glob": "عالمي",
-  "reg-me": "الشرق الأوسط"
+  "reg-me": "الشرق الأوسط",
+
+  "regions": {
+    "selectTitle": "اختر منطقة",
+    "regionMiddleEast": "الشرق الأوسط",
+    "regionMENA": "منطقة الشرق الأوسط وشمال إفريقيا",
+    "regionEurope": "أوروبا",
+    "regionGlobal": "عالمي"
+  }
 }

@@ -42,7 +42,6 @@
         </form>
 
         <p data-i18n="home-subscription-note">$4.99/month after trial period</p>
-        <!-- ⭐ added id for JS lookup -->
         <p id="active-users" data-i18n="home-active-users">🎯 2,697 active users</p>
       </div>
     </header>
@@ -66,9 +65,26 @@
         CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.
       </p>
     </section>
+
+    <!-- ✅ REGION MAP SECTION -->
+    <section id="region-section">
+      <h2 data-i18n="regions.selectTitle">Select a Region</h2>
+
+      <div class="region-map"></div>
+
+      <div class="region-buttons">
+        <!-- Region buttons will be rendered here -->
+      </div>
+
+      <div class="country-list">
+        <!-- Selected country list appears here -->
+      </div>
+    </section>
   </div>
 
+  <!-- Language + App Logic -->
   <script src="lang-loader.js" defer></script>
-  <script src="app.js"        defer></script>
+  <script src="app.js" defer></script>
+  <script src="js/regionMap.js" defer></script>
 </body>
 </html>

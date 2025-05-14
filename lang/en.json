@@ -48,5 +48,13 @@
   "reg-us": "US",
   "reg-eu": "EU",
   "reg-glob": "Global",
-  "reg-me": "Middle East"
+  "reg-me": "Middle East",
+
+  "regions": {
+    "selectTitle": "Select a Region",
+    "regionMiddleEast": "Middle East",
+    "regionMENA": "MENA",
+    "regionEurope": "Europe",
+    "regionGlobal": "Global"
+  }
 }

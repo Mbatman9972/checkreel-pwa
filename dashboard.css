@@ -262,22 +262,87 @@ body {
   background: #ddd;
 }
 
-/* Map section */
+/* ========== REGION MAP SECTION ========== */
+
+#region-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--card);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#region-section h2 {
+  font-size: 1.5rem;
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+
 .region-map {
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   background-image: url("images/region-placeholder.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  height: 220px;
   border-radius: 12px;
+  margin: 0 auto;
+}
+
+.region-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
   margin-top: 1rem;
 }
+
+.region-button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #ffffff1a;
+  border: 2px solid #ffffff33;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+.region-button img {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.region-button:hover {
+  background-color: #ffffff33;
+  transform: translateY(-2px);
+}
+
+.region-button.active {
+  background-color: var(--accent);
+  color: #000;
+  font-weight: bold;
+}
+
 .country-list {
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
   color: #eee;
-  text-align: left;
+  text-align: center;
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto;
+  white-space: pre-wrap;
 }

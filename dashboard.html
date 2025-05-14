@@ -47,19 +47,21 @@
       <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
     </div>
 
-    <!-- region select -->
+    <!-- ✅ dynamic region selector -->
     <h2 class="section-title" data-i18n="dash-region-title">Select Region</h2>
-    <fieldset id="regions" class="regions">
-      <label><input type="radio" name="region" value="mena" checked /> <span data-i18n="reg-mena">MENA</span></label>
-      <label><input type="radio" name="region" value="us" /> <span data-i18n="reg-us">US</span></label>
-      <label><input type="radio" name="region" value="eu" /> <span data-i18n="reg-eu">EU</span></label>
-      <label><input type="radio" name="region" value="global" /> <span data-i18n="reg-glob">Global</span></label>
-      <label><input type="radio" name="region" value="me" /> <span data-i18n="reg-me">Middle East</span></label>
-    </fieldset>
+    <section id="region-section">
+      <h2 data-i18n="regions.selectTitle">Select a Region</h2>
 
-    <!-- 🌍 region map & country list display -->
-    <div id="regionMap" class="region-map"></div>
-    <div id="countryList" class="country-list"></div>
+      <div class="region-map"></div>
+
+      <div class="region-buttons">
+        <!-- Region buttons will be rendered here -->
+      </div>
+
+      <div class="country-list">
+        <!-- Selected country list appears here -->
+      </div>
+    </section>
 
     <!-- upload -->
     <section class="upload-wrap">
