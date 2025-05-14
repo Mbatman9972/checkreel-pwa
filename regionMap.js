@@ -1,6 +1,5 @@
 // ========== REGION MAP LOGIC ==========
 
-// Region Definitions
 const regions = [
   {
     id: "middle-east",
@@ -45,11 +44,11 @@ const regions = [
 const regionButtonsContainer = document.querySelector(".region-buttons");
 const countryListContainer = document.querySelector(".country-list");
 
-// Load language preference from sessionStorage
-let currentLang = sessionStorage.getItem("lang") || "en";
-
-// Fetch translations and then render
+// Load language preference
+const currentLang = sessionStorage.getItem("lang") || "en";
 let translations = {};
+
+// Load translations and render buttons
 fetch(`lang/${currentLang}.json`)
   .then(res => res.json())
   .then(data => {
@@ -58,19 +57,11 @@ fetch(`lang/${currentLang}.json`)
   });
 
 function txt(path, fallback = "") {
-  const parts = path.split(".");
-  let val = translations;
-  for (const part of parts) {
-    if (val && part in val) {
-      val = val[part];
-    } else {
-      return fallback;
-    }
-  }
-  return val;
+  return path.split(".").reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : fallback), translations);
 }
 
 function renderRegions() {
+  if (!regionButtonsContainer) return;
   regionButtonsContainer.innerHTML = "";
 
   regions.forEach(region => {
@@ -85,8 +76,7 @@ function renderRegions() {
     const label = document.createElement("span");
     label.textContent = txt(`regions.${region.key}`, region.id);
 
-    btn.appendChild(icon);
-    btn.appendChild(label);
+    btn.append(icon, label);
 
     btn.addEventListener("click", () => handleRegionClick(region));
     regionButtonsContainer.appendChild(btn);
@@ -94,14 +84,18 @@ function renderRegions() {
 }
 
 function handleRegionClick(region) {
-  document.querySelectorAll(".region-button").forEach(btn => {
-    btn.classList.remove("active");
-  });
-  document.querySelector(`#btn-${region.id}`).classList.add("active");
+  document.querySelectorAll(".region-button").forEach(btn =>
+    btn.classList.remove("active")
+  );
+  const selectedBtn = document.querySelector(`#btn-${region.id}`);
+  if (selectedBtn) selectedBtn.classList.add("active");
 
-  if (region.countries.length > 0) {
-    countryListContainer.innerHTML = region.countries.join(" • ");
-  } else {
-    countryListContainer.innerHTML = "";
+  if (countryListContainer) {
+    countryListContainer.innerHTML = region.countries.length > 0
+      ? region.countries.join(" • ")
+      : "";
   }
+
+  // ✅ Set global region for other scripts
+  window.region = region.id;
 }

@@ -34,14 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* Region selector (old radio) fallback */
-  let region = "";
-  const regionsRadio = document.getElementById("regions");
-  if (regionsRadio) {
-    regionsRadio.addEventListener("change", e => {
-      if (e.target.name === "region") region = e.target.value;
-    });
-  }
+
 
   /* File label update */
   const fileInput = document.getElementById("fileInput");
