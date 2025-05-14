@@ -1,47 +1,59 @@
-const regionData = {
+const regionMap = {
   mena: {
-    map: "🗺️ MENA Region",
-    countries: ["United Arab Emirates", "Saudi Arabia", "Qatar", "Egypt", "Jordan", "Kuwait", "Morocco"]
+    name: "MENA 🌍",
+    countries: [
+      "Algeria", "Bahrain", "Egypt", "Iraq", "Jordan", "Kuwait",
+      "Lebanon", "Libya", "Mauritania", "Morocco", "Oman", "Palestine",
+      "Qatar", "Saudi Arabia", "Sudan", "Syria", "Tunisia", "UAE", "Yemen"
+    ]
   },
   us: {
-    map: "🗺️ United States of America",
+    name: "United States of America 🇺🇸",
     countries: ["USA"]
   },
   eu: {
-    map: "🗺️ European Union",
-    countries: ["Germany", "France", "Italy", "Spain", "Netherlands", "Sweden"]
+    name: "European Union 🇪🇺",
+    countries: [
+      "Germany", "France", "Italy", "Spain", "Netherlands", "Poland",
+      "Sweden", "Greece", "Denmark", "Finland", "Portugal", "Belgium"
+    ]
   },
   global: {
-    map: "🌍 Worldwide",
+    name: "Worldwide 🌐",
     countries: ["All major regions included."]
   },
   me: {
-    map: "🗺️ Middle East",
-    countries: ["Bahrain", "Oman", "Iraq", "Lebanon", "Syria", "Palestine", "Yemen"]
+    name: "Middle East 🕌",
+    countries: [
+      "Bahrain", "Oman", "Iraq", "Lebanon", "Syria", "Palestine", "Yemen"
+    ]
   }
 };
 
-function renderMap(regionKey) {
+function renderMap(region) {
   const mapEl = document.getElementById("regionMap");
-  const countriesEl = document.getElementById("countryList");
+  const countryEl = document.getElementById("countryList");
 
-  if (!mapEl || !countriesEl) return;
+  if (!mapEl || !countryEl) return;
 
-  const region = regionData[regionKey];
-  if (!region) return;
+  const data = regionMap[region];
+  if (!data) return;
 
-  mapEl.innerHTML = `<p>${region.map}</p>`;
-  countriesEl.innerHTML = `<strong>Countries:</strong> ${region.countries.join(", ")}`;
+  const lang = document.documentElement.lang;
+  const isRTL = document.documentElement.dir === "rtl";
+
+  mapEl.textContent = data.name;
+  countryEl.innerHTML = `<strong>${isRTL ? "الدول:" : "Countries:"}</strong> ${data.countries.join(", ")}`;
 }
 
-document.getElementById("regions").addEventListener("change", (e) => {
+document.getElementById("regions").addEventListener("change", e => {
   if (e.target.name === "region") {
     renderMap(e.target.value);
   }
 });
 
-// render default on load
+// Initial render
 document.addEventListener("DOMContentLoaded", () => {
-  const defaultRegion = document.querySelector('input[name="region"]:checked')?.value || "mena";
-  renderMap(defaultRegion);
+  const selected = document.querySelector('input[name="region"]:checked');
+  if (selected) renderMap(selected.value);
 });
