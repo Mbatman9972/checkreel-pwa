@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
   /* File label update */
   const fileInput = document.getElementById("fileInput");
   const fileTxt = document.getElementById("fileLabelText");
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  /* Scan button */
+  /* Scan button with AI result tag */
   const historyUl = document.getElementById("history");
   const scanBtn = document.getElementById("scanBtn");
   if (scanBtn && fileInput && fileTxt) {
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const file = fileInput.files[0];
       if (!file) return alert("Choose a file first");
       if (!platform) return alert("Please select a platform");
-      if (!region) return alert("Please select a region");
+      if (!window.region) return alert("Please select a region");
 
       try {
         const res = await fetch('/scan/check', {
@@ -77,6 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       renderQuota();
 
+      // Simulate AI result tag
+      const passed = Math.random() > 0.3;
+      const tag = document.createElement("span");
+      tag.className = `scan-tag ${passed ? "passed" : "flagged"}`;
+      tag.textContent = passed ? "✅ Passed" : "🚫 Flagged";
+
       const li = document.createElement("li");
       const icon = new Image();
       icon.src = `images/platform-logos/${platform}.png`;
@@ -87,9 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
       li.append(
         icon,
         document.createTextNode(
-          `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
-        )
+          `  ${file.name} ✓ [${platform.toUpperCase()} · ${window.region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
+        ),
+        tag
       );
+
       if (historyUl) historyUl.prepend(li);
 
       fileInput.value = "";
