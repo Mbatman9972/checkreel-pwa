@@ -33,6 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
       platform = e.target.id;
     });
   }
+// Plan selector logic (for testing only)
+const planSelect = document.getElementById("planSelect");
+if (planSelect) {
+  // Load current
+  planSelect.value = localStorage.getItem("plan") || "free";
+
+  // On change → update plan and reset scan count
+  planSelect.onchange = () => {
+    localStorage.setItem("plan", planSelect.value);
+    localStorage.setItem("scanCount", "0");
+    location.reload();
+  };
+}
 
   /* File label update */
   const fileInput = document.getElementById("fileInput");

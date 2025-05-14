@@ -368,3 +368,24 @@ body {
   color: #ff1744;
   border: 1px solid #ff174455;
 }
+#planSelectorWrap {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: #ffffff22;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #fff;
+}
+#planSelect {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
