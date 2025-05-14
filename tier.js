@@ -1,25 +1,21 @@
-export const PLANS = {
-  free: { limit: 3, label: "Free Plan" },
-  premium: { limit: 300, label: "Premium Plan" },
-  plus: { limit: Infinity, label: "Plus Plan" }
-};
-
 export function getUserPlan() {
-  const plan = localStorage.getItem("userPlan");
-  return PLANS[plan] ? plan : "free";
+  return localStorage.getItem("userPlan") || "free";
 }
 
 export function getPlanLimit(plan) {
-  return PLANS[plan]?.limit ?? PLANS.free.limit;
+  switch (plan) {
+    case "plus":
+      return 40;
+    case "premium":
+      return 20;
+    case "free":
+    default:
+      return 3;
+  }
 }
 
-export function remainingQuota(used) {
+export function remainingQuota(usedCount) {
   const plan = getUserPlan();
   const limit = getPlanLimit(plan);
-  return Math.max(0, limit - used);
+  return limit === Infinity ? Infinity : Math.max(0, limit - usedCount);
 }
-
-// Dev override helpers (for testing in dev tools)
-window.__setFree = () => localStorage.setItem("userPlan", "free");
-window.__setPremium = () => localStorage.setItem("userPlan", "premium");
-window.__setPlus = () => localStorage.setItem("userPlan", "plus");

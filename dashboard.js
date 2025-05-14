@@ -11,22 +11,10 @@ function renderQuota() {
 
   quotaBar.textContent =
     plan === "plus"
-      ? "Plus · Unlimited scans"
-      : `${plan.charAt(0).toUpperCase() + plan.slice(1)} · ${remaining} ${remaining === 1 ? "scan" : "scans"} left`;
-}
-
-function decrementQuota() {
-  const plan = getUserPlan();
-  const limit = getPlanLimit(plan);
-
-  if (limit === Infinity) return true;
-
-  let used = Number(localStorage.getItem("scanCount")) || 0;
-  if (used >= limit) return false;
-
-  used++;
-  localStorage.setItem("scanCount", used);
-  return true;
+      ? "Plus · 40 scans"
+      : plan === "premium"
+      ? "Premium · 20 scans"
+      : `Free · ${remaining} ${remaining === 1 ? "scan" : "scans"} left`;
 }
 
 renderQuota();
@@ -57,7 +45,6 @@ fileInput.onchange = () => {
 const historyUl = document.getElementById("history");
 document.getElementById("scanBtn").onclick = async () => {
   const file = fileInput.files[0];
-
   if (!file) return alert("Choose a file first");
   if (!platform) return alert("Please select a platform");
   if (!region) return alert("Please select a region");
@@ -66,44 +53,41 @@ document.getElementById("scanBtn").onclick = async () => {
     const res = await fetch('/scan/check', {
       method: 'GET',
       headers: {
-        'x-user-plan': localStorage.getItem('userPlan') || 'free'
+        'x-user-plan': getUserPlan()
       }
     });
 
     const text = await res.text();
+    const result = JSON.parse(text);
 
-    try {
-      const result = JSON.parse(text);
-      if (result.error) {
-        showUpgrade(); // ❌ over quota
-        return;
-      }
-    } catch {
-      // Not a JSON error — continue
+    if (result.error) {
+      showUpgrade();
+      return;
     }
-
-    renderQuota(); // update quota badge
-
-    const li = document.createElement("li");
-    const icon = new Image();
-    icon.src = `images/platform-logos/${platform}.png`;
-    icon.alt = platform;
-    icon.style.width = "22px";
-    icon.style.height = "22px";
-
-    li.append(
-      icon,
-      document.createTextNode(
-        `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
-      )
-    );
-    historyUl.prepend(li);
-
-    fileInput.value = "";
-    fileTxt.textContent = "Choose a file…";
   } catch (err) {
     alert("Could not verify scan quota. Please try again.");
+    return;
   }
+
+  renderQuota();
+
+  const li = document.createElement("li");
+  const icon = new Image();
+  icon.src = `images/platform-logos/${platform}.png`;
+  icon.alt = platform;
+  icon.style.width = "22px";
+  icon.style.height = "22px";
+
+  li.append(
+    icon,
+    document.createTextNode(
+      `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
+    )
+  );
+  historyUl.prepend(li);
+
+  fileInput.value = "";
+  fileTxt.textContent = "Choose a file…";
 };
 
 /* Upgrade modal actions */

@@ -1,55 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CheckReel Admin</title>
   <style>
-    body { font-family: Arial; padding: 2rem; background: #0f172a; color: white; }
-    table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-    th, td { padding: 0.75rem; border: 1px solid #374151; text-align: left; }
-    button { padding: 0.5rem 1rem; cursor: pointer; }
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f6f6f6;
+    }
+    h1 {
+      color: #222;
+    }
+    label, select, input {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Admin Dashboard</h1>
-  <table id="userTable">
-    <thead>
-      <tr>
-        <th>ID</th><th>Email</th><th>Plan</th><th>Expires</th><th>Action</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <h1>🔐 Owner Panel – Grant Plan</h1>
+
+  <label for="email">User Email:</label>
+  <input type="email" id="email" placeholder="user@example.com" required />
+
+  <label for="plan">Plan:</label>
+  <select id="plan">
+    <option value="free">Free</option>
+    <option value="premium">Premium ($4.99)</option>
+    <option value="plus">Plus ($9.99)</option>
+  </select>
+
+  <button onclick="grantPlan()">Grant Access</button>
+
+  <p class="status" id="statusMsg"></p>
 
   <script>
-    const API = 'https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec';
+    async function grantPlan() {
+      const email = document.getElementById("email").value.trim();
+      const plan = document.getElementById("plan").value;
+      const statusMsg = document.getElementById("statusMsg");
 
-    async function loadUsers() {
-      const res = await fetch(`${API}?action=listUsers`);
-      const users = await res.json();
-      const tbody = document.querySelector('#userTable tbody');
-      tbody.innerHTML = '';
+      if (!email) {
+        statusMsg.textContent = "Please enter an email.";
+        return;
+      }
 
-      users.forEach(user => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${user.id}</td>
-          <td>${user.email}</td>
-          <td>${user.plan}</td>
-          <td>${user.expires}</td>
-          <td><button onclick="grantMonth('${user.id}')">+1 mo</button></td>
-        `;
-        tbody.appendChild(row);
-      });
+      try {
+        const res = await fetch("https://script.google.com/macros/s/AKfycbwKWcb5Tx2wHhyGn5Bwec4nwumlSibm9VPpJ2lR269M8e_xt-x7bUe2GmZX17FKJRk/exec", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ action: "grantPlan", email, plan })
+        });
+
+        const data = await res.json();
+        statusMsg.textContent = data.result === "success"
+          ? `✅ Access granted: ${plan.toUpperCase()}`
+          : `❌ Failed to update.`;
+      } catch (err) {
+        statusMsg.textContent = "⚠️ Error contacting server.";
+      }
     }
-
-    async function grantMonth(userId) {
-      await fetch(`${API}?action=grantMonth&id=${userId}`);
-      alert(`Granted +1 month to ${userId}`);
-      loadUsers();
-    }
-
-    loadUsers();
   </script>
 </body>
 </html>
