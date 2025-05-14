@@ -1,18 +1,4 @@
-<!DOCTYPE html><header class="dash-header">
-  <div class="header-bar">
-    <div id="quotaBar" class="quota-bar">Free · 3 scans left</div>
-    <div id="planSelectorWrap">
-      <label for="planSelect">Plan:</label>
-      <select id="planSelect">
-        <option value="free">Free</option>
-        <option value="premium">Premium</option>
-        <option value="plus">Plus</option>
-      </select>
-    </div>
-  </div>
-  <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
-</header>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -21,26 +7,27 @@
 
   <!-- styles -->
   <link rel="stylesheet" href="dashboard.css" />
-  <link rel="icon" href="images/favicon.png" sizes="32x32" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
-<!-- Plan Selector (temporary for testing) -->
-<div id="planSelectorWrap">
-  <label for="planSelect">Plan:</label>
-  <select id="planSelect">
-    <option value="free">Free</option>
-    <option value="premium">Premium</option>
-    <option value="plus">Plus</option>
-  </select>
-</div>
 
 <body>
   <header class="dash-header">
-    <div id="quotaBar" class="quota-bar">Free · 3 / 3 scans left</div>
+    <!-- ✅ Plan selector + scan count -->
+    <div id="planSelectorWrap">
+      Plan:
+      <select id="planSelect">
+        <option value="free">Free</option>
+        <option value="premium">Premium</option>
+        <option value="plus">Plus</option>
+      </select>
+    </div>
+
+    <!-- ✅ Single centered logo -->
     <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
   </header>
 
   <main class="dash-content">
-    <!-- welcome + quick guide -->
+    <!-- Welcome Message -->
     <section class="welcome">
       <p data-i18n="dash-welcome">
         CheckReel scans your content against the latest platform policies,
@@ -58,31 +45,28 @@
       </div>
     </section>
 
-    <!-- platform select -->
+    <!-- Platform selection -->
     <h2 class="section-title" data-i18n="dash-platform-title">Select Platform</h2>
     <div id="platforms" class="platforms">
-      <button class="platform" id="facebook"   aria-label="Facebook"></button>
+      <button class="platform" id="facebook" aria-label="Facebook"></button>
       <button class="platform" id="instagram" aria-label="Instagram"></button>
-      <button class="platform" id="youtube"   aria-label="YouTube"></button>
-      <button class="platform" id="tiktok"    aria-label="TikTok"></button>
-      <button class="platform" id="threads"   aria-label="Threads"></button>
-      <button class="platform" id="twitter"   aria-label="Twitter"></button>
-      <button class="platform" id="snapchat"  aria-label="Snapchat"></button>
+      <button class="platform" id="youtube" aria-label="YouTube"></button>
+      <button class="platform" id="tiktok" aria-label="TikTok"></button>
+      <button class="platform" id="threads" aria-label="Threads"></button>
+      <button class="platform" id="twitter" aria-label="Twitter"></button>
+      <button class="platform" id="snapchat" aria-label="Snapchat"></button>
     </div>
 
-    <!-- region select -->
+    <!-- Region selector -->
     <h2 class="section-title" data-i18n="dash-region-title">Select Region</h2>
     <section id="region-section">
-      <div class="region-buttons">
-        <!-- Region buttons will be rendered here -->
-      </div>
-
-      <div class="country-list">
-        <!-- Selected country list appears here -->
-      </div>
+      <h2 data-i18n="regions.selectTitle">Select a Region</h2>
+      <div class="region-map"></div>
+      <div class="region-buttons"><!-- Injected by JS --></div>
+      <div class="country-list"><!-- Filled by JS --></div>
     </section>
 
-    <!-- upload -->
+    <!-- Upload -->
     <section class="upload-wrap">
       <label class="file-label">
         <input type="file" id="fileInput" accept="video/*,image/*,audio/*" autocomplete="off" />
@@ -91,13 +75,14 @@
       <button id="scanBtn" data-i18n="dash-scan">Scan</button>
     </section>
 
-    <!-- history -->
+    <!-- History -->
     <section class="history-wrap">
       <h2 data-i18n="dash-history">Scan History</h2>
       <ul id="history"></ul>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <p>© 2025 CheckReel · All rights reserved.</p>
     <p class="disclaimer" data-i18n="dash-disclaimer">
@@ -106,7 +91,7 @@
     </p>
   </footer>
 
-  <!-- upgrade modal -->
+  <!-- Upgrade Modal -->
   <div id="upgradeModal" class="modal hidden">
     <div class="modal-card">
       <h3>Upgrade to Premium</h3>
@@ -116,7 +101,7 @@
     </div>
   </div>
 
-  <!-- scripts (all ES-modules) -->
+  <!-- Scripts -->
   <script type="module" src="lang-loader.js"></script>
   <script type="module" src="tier.js"></script>
   <script type="module" src="dashboard.js"></script>
