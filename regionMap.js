@@ -1,55 +1,51 @@
-const mapImg = document.getElementById("regionMap");
-const countryList = document.getElementById("countryList");
-
-const regionData = {
+const regionMap = {
   mena: {
-    map: "images/world-plain.png",
     name: "MENA 🌍",
     countries: [
-      "Algeria", "Bahrain", "Egypt", "Iran", "Iraq", "Palestine", "Jordan",
-      "Kuwait", "Lebanon", "Libya", "Morocco", "Oman", "Palestine",
-      "Qatar", "Saudi Arabia", "Syria", "Tunisia", "UAE", "Yemen",
-      "Sudan", "Mauritania", "Djibouti", "Somalia"
-    ]
-  },
-  us: {
-    map: "images/world-plain.png",
-    name: "United States of America 🗽",
-    countries: ["USA"]
-  },
-  eu: {
-    map: "images/world-plain.png",
-    name: "European Union 📘",
-    countries: [
-      "Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia",
-      "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary",
-      "Iceland", "Ireland", "Italy", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta",
-      "Moldova", "Monaco", "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal",
-      "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland",
-      "Ukraine", "United Kingdom", "Vatican City"
+      "Algeria", "Bahrain", "Egypt", "Iran", "Iraq", "Jordan",
+      "Kuwait", "Lebanon", "Libya", "Mauritania", "Morocco", "Oman",
+      "Palestine", "Qatar", "Saudi Arabia", "Somalia", "Sudan", "Syria",
+      "Tunisia", "UAE", "Yemen", "Djibouti"
     ]
   },
   me: {
-    map: "images/world-plain.png",
     name: "Middle East 🌍",
     countries: [
-      "Bahrain", "Egypt", "Iran", "Iraq", "Palestine", "Jordan", "Kuwait", "Lebanon", "Oman", "Qatar",
-      "Saudi Arabia", "Syria", "Turkey", "UAE", "Yemen", "Cyprus", "Azerbaijan", "Armenia", "Georgia"
+      "Bahrain", "Egypt", "Iran", "Iraq", "Palestine", "Jordan",
+      "Kuwait", "Lebanon", "Oman", "Qatar", "Saudi Arabia", "Syria",
+      "Turkey", "UAE", "Yemen", "Cyprus", "Azerbaijan", "Armenia", "Georgia"
     ]
+  },
+  eu: {
+    name: "Europe 🌍",
+    countries: [
+      "Germany", "France", "Italy", "Spain", "Netherlands", "Sweden", "Belgium", "Poland",
+      "Portugal", "Austria", "Greece", "Romania", "Hungary", "Czech Republic", "Finland", "Denmark",
+      "Norway", "Ireland", "Croatia", "Slovakia", "Slovenia", "Estonia", "Latvia", "Lithuania",
+      "Bulgaria", "Luxembourg", "Malta", "Cyprus", "Iceland", "Liechtenstein", "Monaco", "San Marino",
+      "Vatican City", "Albania", "Serbia", "Bosnia and Herzegovina", "Macedonia", "Montenegro", "Moldova",
+      "Belarus", "Ukraine", "Russia"
+    ]
+  },
+  global: {
+    name: "Worldwide 🌐",
+    countries: []
   }
 };
 
-// Handle change
+const mapBox = document.querySelector(".region-map");
+const listBox = document.querySelector(".country-list");
+
 document.getElementById("regions").addEventListener("change", e => {
   if (e.target.name !== "region") return;
-  const region = e.target.value;
-  renderMap(region);
+
+  const val = e.target.value;
+  const data = regionMap[val];
+
+  if (data) {
+    mapBox.innerHTML = `<div style="margin-bottom: 0.5rem; font-weight: bold;">${data.name}</div>`;
+    listBox.innerHTML = data.countries.length
+      ? `<strong>Countries:</strong><br>${data.countries.join(", ")}`
+      : `<strong>Countries:</strong><br>All major regions included.`;
+  }
 });
-
-function renderMap(region) {
-  const data = regionData[region];
-  if (!data) return;
-
-  mapImg.innerHTML = `<img src="${data.map}" alt="${region}" width="400" height="200" /><br><strong>${data.name}</strong>`;
-  countryList.innerHTML = `<strong>Countries:</strong><br>${data.countries.join(", ")}`;
-}
