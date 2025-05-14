@@ -43,9 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  /* Scan button with AI result tag */
+  /* Scan button with plan-based result */
   const historyUl = document.getElementById("history");
   const scanBtn = document.getElementById("scanBtn");
+
   if (scanBtn && fileInput && fileTxt) {
     scanBtn.onclick = async () => {
       const file = fileInput.files[0];
@@ -53,26 +54,31 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!platform) return alert("Please select a platform");
       if (!window.region) return alert("Please select a region");
 
-      // Simulate quota check (temporary until backend exists)
-const plan = getUserPlan();
-const used = Number(localStorage.getItem("scanCount")) || 0;
-const limit = getPlanLimit(plan);
+      const plan = getUserPlan();
+      const used = Number(localStorage.getItem("scanCount")) || 0;
+      const limit = getPlanLimit(plan);
 
-if (used >= limit) {
-  showUpgrade();
-  return;
-}
+      if (used >= limit) {
+        showUpgrade();
+        return;
+      }
 
-// Update local scan counter
-localStorage.setItem("scanCount", used + 1);
-
+      localStorage.setItem("scanCount", used + 1);
       renderQuota();
 
-      // Simulate AI result tag
       const passed = Math.random() > 0.3;
+      const ruleNote = getMockRule(platform, window.region);
+
+      const detailText =
+        plan === "plus"
+          ? (passed ? "✅ Passed — All checks clear. Saved to export." : `🚫 Flagged — ${ruleNote}`)
+          : plan === "premium"
+          ? (passed ? "✅ Passed" : `🚫 Flagged — ${ruleNote}`)
+          : (passed ? "✅ Passed" : "🚫 Flagged");
+
       const tag = document.createElement("span");
       tag.className = `scan-tag ${passed ? "passed" : "flagged"}`;
-      tag.textContent = passed ? "✅ Passed" : "🚫 Flagged";
+      tag.textContent = detailText;
 
       const li = document.createElement("li");
       const icon = new Image();
@@ -94,6 +100,25 @@ localStorage.setItem("scanCount", used + 1);
       fileInput.value = "";
       fileTxt.textContent = "Choose a file…";
     };
+  }
+
+  /* Simulated rules for flagged content */
+  function getMockRule(platform, region) {
+    const rules = {
+      tiktok: {
+        mena: ["No music with alcohol", "Avoid bold text overlays"],
+        eu: ["Blurred thumbnails", "Lack of caption contrast"]
+      },
+      youtube: {
+        global: ["Copyrighted music", "Misleading metadata"]
+      },
+      instagram: {
+        mena: ["Clothing sensitivity", "No hate speech"],
+        eu: ["Excessive hashtags", "Brand logo misuse"]
+      }
+    };
+    const options = rules?.[platform]?.[region] || ["Generic policy issue"];
+    return options[Math.floor(Math.random() * options.length)];
   }
 
   /* Upgrade modal actions */
