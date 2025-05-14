@@ -53,25 +53,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!platform) return alert("Please select a platform");
       if (!window.region) return alert("Please select a region");
 
-      try {
-        const res = await fetch('/scan/check', {
-          method: 'GET',
-          headers: {
-            'x-user-plan': getUserPlan()
-          }
-        });
+      // Simulate quota check (temporary until backend exists)
+const plan = getUserPlan();
+const used = Number(localStorage.getItem("scanCount")) || 0;
+const limit = getPlanLimit(plan);
 
-        const text = await res.text();
-        const result = JSON.parse(text);
+if (used >= limit) {
+  showUpgrade();
+  return;
+}
 
-        if (result.error) {
-          showUpgrade();
-          return;
-        }
-      } catch (err) {
-        alert("Could not verify scan quota. Please try again.");
-        return;
-      }
+// Update local scan counter
+localStorage.setItem("scanCount", used + 1);
 
       renderQuota();
 
