@@ -346,3 +346,25 @@ body {
   margin: 0 auto;
   white-space: pre-wrap;
 }
+/* ==== Scan Result Tags ==== */
+.scan-tag {
+  display: inline-block;
+  margin-left: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.scan-tag.passed {
+  background-color: #00c85322;
+  color: #00c853;
+  border: 1px solid #00c85355;
+}
+
+.scan-tag.flagged {
+  background-color: #ff174422;
+  color: #ff1744;
+  border: 1px solid #ff174455;
+}
