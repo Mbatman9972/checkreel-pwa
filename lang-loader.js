@@ -16,21 +16,26 @@
     } catch {
       if (lang !== DEFAULT_LANG) return loadLanguage(DEFAULT_LANG);
     }
+
     applyTranslations();
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    // Update select box value
+    const langSelect = document.getElementById("language-select");
+    if (langSelect) langSelect.value = currentLang;
   }
 
   function applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.dataset.i18n;
-      el.innerHTML = translations[key] || el.innerHTML;
+      if (translations[key]) el.innerHTML = translations[key];
     });
   }
 
   document.getElementById('language-select')?.addEventListener('change', (e) => {
-    const selectedLang = e.target.value;
-    if (selectedLang !== currentLang) loadLanguage(selectedLang);
+    const selected = e.target.value;
+    if (selected !== currentLang) loadLanguage(selected);
   });
 
   loadLanguage(currentLang);
