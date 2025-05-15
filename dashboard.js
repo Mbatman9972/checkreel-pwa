@@ -1,9 +1,13 @@
 import { getUserPlan, getPlanLimit, remainingQuota } from "./tier.js";
 
+// Load platform+region rules
+let rules = {};
+fetch("data/rules.json")
+  .then(res => res.json())
+  .then(json => rules = json);
+
 document.addEventListener("DOMContentLoaded", () => {
-  /* Quota & Plan UI */
   const quotaBar = document.getElementById("quotaBar");
-  const planSelect = document.getElementById("planSelect");
 
   function renderQuota() {
     const used = Number(localStorage.getItem("scanCount")) || 0;
@@ -21,18 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (planSelect) {
-    planSelect.value = getUserPlan();
-    planSelect.addEventListener("change", e => {
-      localStorage.setItem("plan", e.target.value);
-      localStorage.setItem("scanCount", 0);
-      renderQuota();
-    });
-  }
-
   renderQuota();
 
-  /* Platform Selection */
+  // Track selected platform
   let platform = "";
   const platformWrap = document.getElementById("platforms");
   if (platformWrap) {
@@ -44,11 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* Region Selection */
-  let region = "";
-  window.setRegion = r => (region = r); // Used by regionMap.js
-
-  /* File Input Label */
+  // File input
   const fileInput = document.getElementById("fileInput");
   const fileTxt = document.getElementById("fileLabelText");
   if (fileInput && fileTxt) {
@@ -57,30 +48,37 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  /* Scan Logic */
-  const scanBtn = document.getElementById("scanBtn");
+  // Scan button
   const historyUl = document.getElementById("history");
+  const scanBtn = document.getElementById("scanBtn");
 
   if (scanBtn && fileInput && fileTxt) {
-    scanBtn.onclick = async () => {
+    scanBtn.onclick = () => {
       const file = fileInput.files[0];
       if (!file) return alert("Choose a file first");
       if (!platform) return alert("Please select a platform");
-      if (!region) return alert("Please select a region");
+      if (!window.region) return alert("Please select a region");
 
       const plan = getUserPlan();
       const used = Number(localStorage.getItem("scanCount")) || 0;
       const limit = getPlanLimit(plan);
-
-      if (used >= limit) {
-        showUpgrade();
-        return;
-      }
-
+      if (used >= limit) return showUpgrade();
       localStorage.setItem("scanCount", used + 1);
       renderQuota();
 
-      // Simulate scan result
+      // ✅ Rule Check Patch — show console analysis
+      const region = window.region;
+      const platformRules = rules?.platforms?.[platform];
+      if (platformRules) {
+        const global = platformRules.global || {};
+        const regional = platformRules?.regional_exceptions?.[region] || {};
+        console.group(`📜 Rules for ${platform.toUpperCase()} - ${region}`);
+        console.log("Global Rules:", global);
+        console.log("Regional Rules:", regional);
+        console.groupEnd();
+      }
+
+      // Simulate AI scan tag
       const passed = Math.random() > 0.3;
       const tag = document.createElement("span");
       tag.className = `scan-tag ${passed ? "passed" : "flagged"}`;
@@ -96,18 +94,18 @@ document.addEventListener("DOMContentLoaded", () => {
       li.append(
         icon,
         document.createTextNode(
-          `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}] — ${new Date().toLocaleTimeString()}`
+          `  ${file.name} ✓ [${platform.toUpperCase()} · ${region}] — ${new Date().toLocaleTimeString()}`
         ),
         tag
       );
-
       if (historyUl) historyUl.prepend(li);
+
       fileInput.value = "";
       fileTxt.textContent = "Choose a file…";
     };
   }
 
-  /* Upgrade Modal */
+  // Upgrade modal
   const modal = document.getElementById("upgradeModal");
   const closeBtn = document.getElementById("closeModal");
   const goBtn = document.getElementById("goUpgrade");
@@ -117,9 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (closeBtn) {
-    closeBtn.onclick = () => {
-      if (modal) modal.classList.add("hidden");
-    };
+    closeBtn.onclick = () => modal.classList.add("hidden");
   }
 
   if (goBtn) {
