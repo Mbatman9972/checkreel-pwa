@@ -18,6 +18,10 @@
     apply();
     document.documentElement.lang = cur;
     document.documentElement.dir = cur === 'ar' ? 'rtl' : 'ltr';
+
+    // Set selector if it exists
+    const langSel = document.getElementById("language-select");
+    if (langSel) langSel.value = cur;
   }
 
   function apply() {
@@ -26,7 +30,7 @@
       if (dict[k]) el.innerHTML = dict[k];
     });
 
-    // Localize plan dropdown label (if present)
+    // Localize dashboard "Plan:" label if present
     const planLabel = document.querySelector('#planSelectorWrap span[data-i18n="plan-label"]');
     if (planLabel) {
       planLabel.textContent = dict['plan-label'] || 'Plan:';
