@@ -1,0 +1,30 @@
+{
+  "platforms": {
+    "tiktok": {
+      "version": "2025.05.1",
+      "global": {
+        "content_attributes": {
+          "contains_watermark": true,
+          "contains_weapon": false,
+          "contains_nudity": false
+        }
+      },
+      "regional_exceptions": {
+        "MENA": {
+          "additional_restrictions": [
+            "no_religious_music",
+            "no_public_dancing",
+            "modesty_required"
+          ]
+        },
+        "EU": {
+          "gdpr_compliance_required": true,
+          "political_content_reviewed": true
+        },
+        "US": {
+          "coppa_compliance": true
+        }
+      }
+    }
+  }
+}
