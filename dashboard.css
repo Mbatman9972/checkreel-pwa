@@ -32,34 +32,32 @@ body {
   flex-direction: column;
 }
 
-/* ====== HEADER ====== */
+/* ==== Header ==== */
 .dash-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   padding: 1rem 2rem;
-  position: relative;
 }
 
-.dash-header .logo {
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo {
   height: 80px;
-  margin-top: 0.5rem;
 }
 
 #planSelectorWrap {
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
-  background: #00000055;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  backdrop-filter: blur(4px);
-  color: #fff;
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  background: #00000055;
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+  color: #fff;
 }
 
 #planSelect {
@@ -70,7 +68,7 @@ body {
   border-radius: 6px;
 }
 
-/* ====== MAIN CONTENT ====== */
+/* ==== Content ==== */
 .dash-content {
   flex: 1;
   width: min(960px, 94%);
@@ -84,7 +82,7 @@ body {
   text-align: center;
 }
 
-/* ====== WELCOME SECTION ====== */
+/* ==== Welcome / Guide ==== */
 .welcome {
   display: flex;
   flex-direction: column;
@@ -114,7 +112,7 @@ body {
   margin-right: .5rem;
 }
 
-/* ====== PLATFORM SELECTOR ====== */
+/* ==== Platforms ==== */
 .platforms {
   display: flex;
   flex-wrap: wrap;
@@ -155,7 +153,7 @@ body {
 #twitter.selected { box-shadow: 0 0 14px var(--twitter); border-color: var(--twitter); }
 #snapchat.selected { box-shadow: 0 0 14px var(--snapchat); border-color: var(--snapchat); }
 
-/* ====== REGION SELECTOR ====== */
+/* ==== Region Selector ==== */
 .regions {
   display: flex;
   flex-wrap: wrap;
@@ -170,79 +168,6 @@ body {
   accent-color: var(--accent);
 }
 
-/* ====== REGION MAP SECTION ====== */
-#region-section {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: var(--card);
-  backdrop-filter: blur(4px);
-  border-radius: var(--radius);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-#region-section h2 {
-  font-size: 1.5rem;
-  color: var(--fg);
-  margin-bottom: 0.5rem;
-}
-
-.region-map {
-  width: 100%;
-  max-width: 720px;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  background-image: url("images/region-placeholder.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 12px;
-  margin: 0 auto;
-}
-
-.region-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.region-button {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 1.2rem;
-  background-color: #ffffff1a;
-  border: 2px solid #ffffff33;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-  font-size: 0.95rem;
-  color: #fff;
-}
-
-.region-button img {
-  width: 22px;
-  height: 22px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.region-button:hover {
-  background-color: #ffffff33;
-  transform: translateY(-2px);
-}
-
-.region-button.active {
-  background-color: var(--accent);
-  color: #000;
-  font-weight: bold;
-}
-
 .country-list {
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
@@ -254,7 +179,7 @@ body {
   white-space: pre-wrap;
 }
 
-/* ====== UPLOAD SECTION ====== */
+/* ==== Upload ==== */
 .upload-wrap {
   display: flex;
   gap: 1rem;
@@ -298,7 +223,7 @@ body {
   cursor: pointer;
 }
 
-/* ====== HISTORY ====== */
+/* ==== History ==== */
 .history-wrap ul {
   list-style: none;
   padding: 0;
@@ -321,7 +246,7 @@ body {
   object-fit: cover;
 }
 
-/* ====== SCAN TAG ====== */
+/* ==== AI Result Tag ==== */
 .scan-tag {
   display: inline-block;
   margin-left: 0.75rem;
@@ -342,7 +267,7 @@ body {
   border: 1px solid #ff174455;
 }
 
-/* ====== FOOTER ====== */
+/* ==== Footer ==== */
 .site-footer {
   text-align: center;
   padding: 1rem;
@@ -355,7 +280,7 @@ body {
   opacity: .8;
 }
 
-/* ====== MODAL ====== */
+/* ==== Modal ==== */
 .modal {
   position: fixed;
   inset: 0;

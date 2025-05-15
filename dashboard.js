@@ -1,8 +1,28 @@
-import { getUserPlan, getPlanLimit, remainingQuota } from "./tier.js";
+import { getUserPlan, getPlanLimit, remainingQuota, setUserPlan } from "./tier.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* Init quota badge */
   const quotaBar = document.getElementById("quotaBar");
+  const planSelect = document.getElementById("planSelect");
+  const planLabel = document.getElementById("planLabel");
+
+  // Language support for 'Plan:' label
+  const currentLang = sessionStorage.getItem("lang") || "en";
+  fetch(`lang/${currentLang}.json`)
+    .then(res => res.json())
+    .then(translations => {
+      if (planLabel && translations?.dashboard?.planLabel) {
+        planLabel.textContent = translations.dashboard.planLabel;
+      }
+    });
+
+  // Plan Selector Logic
+  if (planSelect) {
+    planSelect.value = getUserPlan();
+    planSelect.addEventListener("change", () => {
+      setUserPlan(planSelect.value);
+      renderQuota();
+    });
+  }
 
   function renderQuota() {
     const used = Number(localStorage.getItem("scanCount")) || 0;
@@ -22,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderQuota();
 
-  /* Platform selector */
+  // Platform Selection
   let platform = "";
   const platformWrap = document.getElementById("platforms");
   if (platformWrap) {
@@ -33,21 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
       platform = e.target.id;
     });
   }
-// Plan selector logic (for testing only)
-const planSelect = document.getElementById("planSelect");
-if (planSelect) {
-  // Load current
-  planSelect.value = localStorage.getItem("plan") || "free";
 
-  // On change → update plan and reset scan count
-  planSelect.onchange = () => {
-    localStorage.setItem("plan", planSelect.value);
-    localStorage.setItem("scanCount", "0");
-    location.reload();
-  };
-}
-
-  /* File label update */
+  // File Upload UI
   const fileInput = document.getElementById("fileInput");
   const fileTxt = document.getElementById("fileLabelText");
   if (fileInput && fileTxt) {
@@ -56,12 +63,11 @@ if (planSelect) {
     };
   }
 
-  /* Scan button with plan-based result */
-  const historyUl = document.getElementById("history");
+  // Scan Handler
   const scanBtn = document.getElementById("scanBtn");
-
+  const historyUl = document.getElementById("history");
   if (scanBtn && fileInput && fileTxt) {
-    scanBtn.onclick = async () => {
+    scanBtn.onclick = () => {
       const file = fileInput.files[0];
       if (!file) return alert("Choose a file first");
       if (!platform) return alert("Please select a platform");
@@ -79,19 +85,11 @@ if (planSelect) {
       localStorage.setItem("scanCount", used + 1);
       renderQuota();
 
+      // Simulated AI scan result
       const passed = Math.random() > 0.3;
-      const ruleNote = getMockRule(platform, window.region);
-
-      const detailText =
-        plan === "plus"
-          ? (passed ? "✅ Passed — All checks clear. Saved to export." : `🚫 Flagged — ${ruleNote}`)
-          : plan === "premium"
-          ? (passed ? "✅ Passed" : `🚫 Flagged — ${ruleNote}`)
-          : (passed ? "✅ Passed" : "🚫 Flagged");
-
       const tag = document.createElement("span");
       tag.className = `scan-tag ${passed ? "passed" : "flagged"}`;
-      tag.textContent = detailText;
+      tag.textContent = passed ? "✅ Passed" : "🚫 Flagged";
 
       const li = document.createElement("li");
       const icon = new Image();
@@ -115,26 +113,7 @@ if (planSelect) {
     };
   }
 
-  /* Simulated rules for flagged content */
-  function getMockRule(platform, region) {
-    const rules = {
-      tiktok: {
-        mena: ["No music with alcohol", "Avoid bold text overlays"],
-        eu: ["Blurred thumbnails", "Lack of caption contrast"]
-      },
-      youtube: {
-        global: ["Copyrighted music", "Misleading metadata"]
-      },
-      instagram: {
-        mena: ["Clothing sensitivity", "No hate speech"],
-        eu: ["Excessive hashtags", "Brand logo misuse"]
-      }
-    };
-    const options = rules?.[platform]?.[region] || ["Generic policy issue"];
-    return options[Math.floor(Math.random() * options.length)];
-  }
-
-  /* Upgrade modal actions */
+  // Upgrade Modal Logic
   const modal = document.getElementById("upgradeModal");
   const closeBtn = document.getElementById("closeModal");
   const goBtn = document.getElementById("goUpgrade");
