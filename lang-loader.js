@@ -1,42 +1,37 @@
 (function () {
-  const DEF = 'en', KEY = 'selectedLanguage';
-  let cur = localStorage.getItem(KEY) || DEF, dict = {};
+  const DEFAULT_LANG = 'en';
+  const LANG_KEY = 'selectedLanguage';
+  let currentLang = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+  let translations = {};
 
-  async function load(lang) {
+  async function loadLanguage(lang) {
     try {
-      const r = await fetch(`lang/${lang}.json`);
-      if (!r.ok) throw 0;
-      const j = await r.json();
-      if (!j || !Object.keys(j).length) throw 0;
-      dict = j;
-      cur = lang;
-      localStorage.setItem(KEY, lang);
+      const response = await fetch(`lang/${lang}.json`);
+      if (!response.ok) throw new Error();
+      const data = await response.json();
+      if (!data || !Object.keys(data).length) throw new Error();
+      translations = data;
+      currentLang = lang;
+      localStorage.setItem(LANG_KEY, lang);
     } catch {
-      if (lang !== DEF) return load(DEF);
+      if (lang !== DEFAULT_LANG) return loadLanguage(DEFAULT_LANG);
     }
-
-    apply();
-    document.documentElement.lang = cur;
-    document.documentElement.dir = cur === 'ar' ? 'rtl' : 'ltr';
-
-    // Set selector if it exists
-    const langSel = document.getElementById("language-select");
-    if (langSel) langSel.value = cur;
+    applyTranslations();
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   }
 
-  function apply() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.dataset.i18n;
-      if (dict[k]) el.innerHTML = dict[k];
+  function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.dataset.i18n;
+      el.innerHTML = translations[key] || el.innerHTML;
     });
-
-    // Localize dashboard "Plan:" label if present
-    const planLabel = document.querySelector('#planSelectorWrap span[data-i18n="plan-label"]');
-    if (planLabel) {
-      planLabel.textContent = dict['plan-label'] || 'Plan:';
-    }
   }
 
-  window.setLanguage = l => l !== cur && load(l);
-  load(cur);
+  document.getElementById('language-select')?.addEventListener('change', (e) => {
+    const selectedLang = e.target.value;
+    if (selectedLang !== currentLang) loadLanguage(selectedLang);
+  });
+
+  loadLanguage(currentLang);
 })();
