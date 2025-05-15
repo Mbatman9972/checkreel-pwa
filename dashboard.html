@@ -3,45 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CheckReel · Dashboard</title>
+  <title data-i18n="dashboard-page-title">CheckReel · Dashboard</title>
+
   <link rel="stylesheet" href="dashboard.css" />
   <link rel="icon" href="images/favicon.png" sizes="32x32" />
 </head>
+
 <body>
   <header class="dash-header">
-    <div class="header-bar">
-      <div id="quotaBar">Free · 3 scans left</div>
-      <div id="planSelectorWrap">
-        <span data-i18n="dash-plan">Plan:</span>
-        <select id="planSelect">
-          <option value="free">Free</option>
-          <option value="plus">Plus</option>
-          <option value="premium">Premium</option>
-        </select>
-      </div>
+    <div id="quotaBar">Free · 3 / 3 scans left</div>
+
+    <div id="planSelectorWrap">
+      <span data-i18n="plan-label">Plan:</span>
+      <select id="planSelect">
+        <option value="free">Free</option>
+        <option value="plus">Plus</option>
+        <option value="premium">Premium</option>
+      </select>
     </div>
-    <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
   </header>
 
+  <img src="images/checkreel-logo.png" alt="CheckReel" class="logo" />
+
   <main class="dash-content">
-    <!-- Welcome -->
+    <!-- welcome + quick guide -->
     <section class="welcome">
       <p data-i18n="dash-welcome">
         CheckReel scans your content against the latest platform policies,
         flags potential violations <strong>before</strong> you post,
-        and keeps your files private — so you stay compliant and protected.
+        and keeps your files private – so you stay compliant and protected.
       </p>
+
       <div class="guide-card">
         <h3 data-i18n="dash-how-title">How it works</h3>
         <ul>
-          <li data-i18n="dash-step1"><span>1️⃣</span> Upload your video, image or audio.</li>
-          <li data-i18n="dash-step2"><span>2️⃣</span> Pick the target platform & region.</li>
+          <li data-i18n="dash-step1"><span>1️⃣</span> Upload your video, image, or audio.</li>
+          <li data-i18n="dash-step2"><span>2️⃣</span> Pick the target platform &amp; region.</li>
           <li data-i18n="dash-step3"><span>3️⃣</span> Hit <strong>Scan</strong> to get an instant report.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Platforms -->
+    <!-- platform selection -->
     <h2 class="section-title" data-i18n="dash-platform-title">Select Platform</h2>
     <div id="platforms" class="platforms">
       <button class="platform" id="facebook" aria-label="Facebook"></button>
@@ -53,23 +56,23 @@
       <button class="platform" id="snapchat" aria-label="Snapchat"></button>
     </div>
 
-    <!-- Region selection (no map) -->
+    <!-- region selector -->
     <h2 class="section-title" data-i18n="dash-region-title">Select Region</h2>
     <section id="region-section">
       <div class="region-buttons"></div>
       <div class="country-list"></div>
     </section>
 
-    <!-- Upload -->
+    <!-- upload + scan -->
     <section class="upload-wrap">
       <label class="file-label">
-        <input type="file" id="fileInput" accept="video/*,image/*,audio/*" />
+        <input type="file" id="fileInput" accept="video/*,image/*,audio/*" autocomplete="off" />
         <span id="fileLabelText" data-i18n="dash-choose">Choose a file…</span>
       </label>
       <button id="scanBtn" data-i18n="dash-scan">Scan</button>
     </section>
 
-    <!-- History -->
+    <!-- scan history -->
     <section class="history-wrap">
       <h2 data-i18n="dash-history">Scan History</h2>
       <ul id="history"></ul>
@@ -84,6 +87,7 @@
     </p>
   </footer>
 
+  <!-- upgrade modal -->
   <div id="upgradeModal" class="modal hidden">
     <div class="modal-card">
       <h3>Upgrade to Premium</h3>
@@ -93,7 +97,7 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- scripts -->
   <script type="module" src="lang-loader.js"></script>
   <script type="module" src="tier.js"></script>
   <script type="module" src="dashboard.js"></script>
