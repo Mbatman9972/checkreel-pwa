@@ -1,9 +1,10 @@
 // ========== REGION MAP LOGIC ==========
 
+// Region Definitions
 const regions = [
   {
     id: "middle-east",
-    key: "regionMiddleEast",
+    key: "reg-me",
     icon: "images/region-icons/middle-east.png",
     countries: [
       "Jordan", "Saudi Arabia", "Qatar", "UAE", "Kuwait", "Bahrain",
@@ -12,7 +13,7 @@ const regions = [
   },
   {
     id: "mena",
-    key: "regionMENA",
+    key: "reg-mena",
     icon: "images/region-icons/mena.png",
     countries: [
       "Jordan", "Saudi Arabia", "Qatar", "UAE", "Kuwait", "Bahrain", "Oman", "Iraq",
@@ -22,20 +23,22 @@ const regions = [
   },
   {
     id: "europe",
-    key: "regionEurope",
+    key: "reg-eu",
     icon: "images/region-icons/europe.png",
     countries: [
-      "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina",
-      "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France",
-      "Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo",
-      "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco", "Montenegro",
-      "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal", "Romania", "San Marino", "Serbia",
-      "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland"
+      "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium",
+      "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic",
+      "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
+      "Hungary", "Iceland", "Ireland", "Italy", "Kazakhstan", "Kosovo", "Latvia",
+      "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Moldova", "Monaco",
+      "Montenegro", "Netherlands", "North Macedonia", "Norway", "Poland", "Portugal",
+      "Romania", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden",
+      "Switzerland"
     ]
   },
   {
     id: "global",
-    key: "regionGlobal",
+    key: "reg-glob",
     icon: "images/region-icons/global.png",
     countries: []
   }
@@ -44,11 +47,11 @@ const regions = [
 const regionButtonsContainer = document.querySelector(".region-buttons");
 const countryListContainer = document.querySelector(".country-list");
 
-// Load language preference
-const currentLang = sessionStorage.getItem("lang") || "en";
+// Load current language
+let currentLang = sessionStorage.getItem("lang") || "en";
 let translations = {};
 
-// Load translations and render buttons
+// Fetch translations, then render
 fetch(`lang/${currentLang}.json`)
   .then(res => res.json())
   .then(data => {
@@ -56,12 +59,11 @@ fetch(`lang/${currentLang}.json`)
     renderRegions();
   });
 
-function txt(path, fallback = "") {
-  return path.split(".").reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : fallback), translations);
+function txt(key, fallback = "") {
+  return translations[key] || fallback;
 }
 
 function renderRegions() {
-  if (!regionButtonsContainer) return;
   regionButtonsContainer.innerHTML = "";
 
   regions.forEach(region => {
@@ -74,9 +76,10 @@ function renderRegions() {
     icon.alt = region.id;
 
     const label = document.createElement("span");
-    label.textContent = txt(`regions.${region.key}`, region.id);
+    label.textContent = txt(region.key, region.id);
 
-    btn.append(icon, label);
+    btn.appendChild(icon);
+    btn.appendChild(label);
 
     btn.addEventListener("click", () => handleRegionClick(region));
     regionButtonsContainer.appendChild(btn);
@@ -87,15 +90,15 @@ function handleRegionClick(region) {
   document.querySelectorAll(".region-button").forEach(btn =>
     btn.classList.remove("active")
   );
-  const selectedBtn = document.querySelector(`#btn-${region.id}`);
-  if (selectedBtn) selectedBtn.classList.add("active");
 
-  if (countryListContainer) {
-    countryListContainer.innerHTML = region.countries.length > 0
-      ? region.countries.join(" • ")
-      : "";
+  const activeBtn = document.querySelector(`#btn-${region.id}`);
+  if (activeBtn) activeBtn.classList.add("active");
+
+  window.setRegion(region.id);
+
+  if (region.countries.length > 0) {
+    countryListContainer.innerHTML = region.countries.join(" • ");
+  } else {
+    countryListContainer.innerHTML = "";
   }
-
-  // ✅ Set global region for other scripts
-  window.region = region.id;
 }

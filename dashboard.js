@@ -1,28 +1,9 @@
-import { getUserPlan, getPlanLimit, remainingQuota, setUserPlan } from "./tier.js";
+import { getUserPlan, getPlanLimit, remainingQuota } from "./tier.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* Quota & Plan UI */
   const quotaBar = document.getElementById("quotaBar");
   const planSelect = document.getElementById("planSelect");
-  const planLabel = document.getElementById("planLabel");
-
-  // Language support for 'Plan:' label
-  const currentLang = sessionStorage.getItem("lang") || "en";
-  fetch(`lang/${currentLang}.json`)
-    .then(res => res.json())
-    .then(translations => {
-      if (planLabel && translations?.dashboard?.planLabel) {
-        planLabel.textContent = translations.dashboard.planLabel;
-      }
-    });
-
-  // Plan Selector Logic
-  if (planSelect) {
-    planSelect.value = getUserPlan();
-    planSelect.addEventListener("change", () => {
-      setUserPlan(planSelect.value);
-      renderQuota();
-    });
-  }
 
   function renderQuota() {
     const used = Number(localStorage.getItem("scanCount")) || 0;
@@ -40,9 +21,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  if (planSelect) {
+    planSelect.value = getUserPlan();
+    planSelect.addEventListener("change", e => {
+      localStorage.setItem("plan", e.target.value);
+      localStorage.setItem("scanCount", 0);
+      renderQuota();
+    });
+  }
+
   renderQuota();
 
-  // Platform Selection
+  /* Platform Selection */
   let platform = "";
   const platformWrap = document.getElementById("platforms");
   if (platformWrap) {
@@ -54,7 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // File Upload UI
+  /* Region Selection */
+  let region = "";
+  window.setRegion = r => (region = r); // Used by regionMap.js
+
+  /* File Input Label */
   const fileInput = document.getElementById("fileInput");
   const fileTxt = document.getElementById("fileLabelText");
   if (fileInput && fileTxt) {
@@ -63,15 +57,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // Scan Handler
+  /* Scan Logic */
   const scanBtn = document.getElementById("scanBtn");
   const historyUl = document.getElementById("history");
+
   if (scanBtn && fileInput && fileTxt) {
-    scanBtn.onclick = () => {
+    scanBtn.onclick = async () => {
       const file = fileInput.files[0];
       if (!file) return alert("Choose a file first");
       if (!platform) return alert("Please select a platform");
-      if (!window.region) return alert("Please select a region");
+      if (!region) return alert("Please select a region");
 
       const plan = getUserPlan();
       const used = Number(localStorage.getItem("scanCount")) || 0;
@@ -85,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("scanCount", used + 1);
       renderQuota();
 
-      // Simulated AI scan result
+      // Simulate scan result
       const passed = Math.random() > 0.3;
       const tag = document.createElement("span");
       tag.className = `scan-tag ${passed ? "passed" : "flagged"}`;
@@ -101,19 +96,18 @@ document.addEventListener("DOMContentLoaded", () => {
       li.append(
         icon,
         document.createTextNode(
-          `  ${file.name} ✓ [${platform.toUpperCase()} · ${window.region.toUpperCase()}]  —  ${new Date().toLocaleTimeString()}`
+          `  ${file.name} ✓ [${platform.toUpperCase()} · ${region.toUpperCase()}] — ${new Date().toLocaleTimeString()}`
         ),
         tag
       );
 
       if (historyUl) historyUl.prepend(li);
-
       fileInput.value = "";
       fileTxt.textContent = "Choose a file…";
     };
   }
 
-  // Upgrade Modal Logic
+  /* Upgrade Modal */
   const modal = document.getElementById("upgradeModal");
   const closeBtn = document.getElementById("closeModal");
   const goBtn = document.getElementById("goUpgrade");
