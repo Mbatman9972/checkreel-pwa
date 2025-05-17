@@ -30,10 +30,11 @@ body {
   background: radial-gradient(circle at 25% 20%, var(--g1), var(--g2) 40%, var(--g3) 70%, var(--g4) 100%);
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .logo {
-  height: 84px;
+  height: 64px; /* Reduced size for better mobile display */
   margin-inline: auto;
   display: block;
   margin-top: 0.5rem;
@@ -41,9 +42,19 @@ body {
 
 .dash-header {
   display: flex;
+  flex-direction: column; /* Stack items on mobile */
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+
+.header-bar {
+  display: flex;
+  width: 100%;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem 2rem;
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
+  gap: 0.5rem;
 }
 
 #quotaBar {
@@ -79,14 +90,15 @@ body {
 .dash-content {
   flex: 1;
   width: min(960px, 94%);
-  margin: 1rem auto 4rem;
+  margin: 0.5rem auto 2rem; /* Reduced margins */
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem; /* Reduced gap */
 }
 
 .section-title {
-  font-size: 1.6rem;
+  font-size: 1.4rem; /* Slightly smaller */
   text-align: center;
+  margin-top: 0.5rem;
 }
 
 .welcome {
@@ -95,7 +107,7 @@ body {
   gap: 1rem;
   background: var(--card);
   backdrop-filter: blur(4px);
-  padding: 1.5rem;
+  padding: 1.25rem; /* Slightly reduced padding */
   border-radius: var(--radius);
 }
 
@@ -121,12 +133,12 @@ body {
 .platforms {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem; /* Reduced gap */
   justify-content: center;
 }
 
 .platform {
-  --sz: 72px;
+  --sz: 60px; /* Smaller size for mobile */
   width: var(--sz);
   height: var(--sz);
   border-radius: 50%;
@@ -159,7 +171,7 @@ body {
 #snapchat.selected { box-shadow: 0 0 14px var(--snapchat); border-color: var(--snapchat); }
 
 #region-section {
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: var(--card);
   backdrop-filter: blur(4px);
   border-radius: var(--radius);
@@ -167,34 +179,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .region-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 0.6rem; /* Slightly smaller gap */
+  margin-top: 0.75rem;
 }
 
 .region-button {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 1.2rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem; /* Smaller padding */
   background-color: #ffffff1a;
   border: 2px solid #ffffff33;
   border-radius: 2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Slightly smaller font */
   color: #fff;
 }
 
 .region-button img {
-  width: 22px;
-  height: 22px;
+  width: 20px; /* Smaller */
+  height: 20px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -211,18 +223,19 @@ body {
 }
 
 .country-list {
-  padding: 0.5rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
   color: #eee;
   text-align: center;
   line-height: 1.6;
-  max-width: 700px;
+  max-width: 100%; /* Full width on mobile */
   margin: 0 auto;
   white-space: pre-wrap;
 }
 
 .upload-wrap {
   display: flex;
+  flex-direction: column; /* Stack on mobile */
   gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -232,6 +245,7 @@ body {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* Center text */
   gap: .75rem;
   background: #ffffff14;
   border: 2px dashed #ffffff66;
@@ -239,6 +253,8 @@ body {
   border-radius: var(--radius);
   cursor: pointer;
   user-select: none;
+  width: 100%; /* Full width on mobile */
+  max-width: 300px;
 }
 .file-label:hover {
   background: #ffffff22;
@@ -262,6 +278,8 @@ body {
   color: #000;
   font-weight: 600;
   cursor: pointer;
+  width: 100%; /* Full width on mobile */
+  max-width: 300px;
 }
 
 .history-wrap ul {
@@ -278,6 +296,7 @@ body {
   border-radius: .65rem;
   margin-top: .65rem;
   font-size: .9rem;
+  flex-wrap: wrap; /* Allow wrapping on very small screens */
 }
 .history-wrap li img {
   width: 22px;
@@ -325,6 +344,8 @@ body {
   border: none;
   border-radius: 999px;
   cursor: pointer;
+  width: 100%; /* Full width buttons */
+  margin-bottom: 0.5rem;
 }
 #goUpgrade {
   background: var(--accent);
@@ -355,4 +376,56 @@ body {
   background-color: #ff174422;
   color: #ff1744;
   border: 1px solid #ff174455;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .dash-header {
+    padding: 0.5rem;
+  }
+  
+  .dash-content {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .platform {
+    --sz: 50px; /* Even smaller on mobile */
+  }
+  
+  .welcome, #region-section {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .upload-wrap {
+    flex-direction: row; /* Side by side on larger screens */
+  }
+  
+  .header-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .dash-header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+  
+  .logo {
+    height: 84px; /* Original size on desktop */
+    margin-top: 0;
+    margin-inline: 0;
+  }
+  
+  .platform {
+    --sz: 72px; /* Original size on desktop */
+  }
+  
+  .file-label, #scanBtn {
+    width: auto; /* Auto width on desktop */
+    max-width: none;
+  }
 }
