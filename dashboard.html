@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckReel Dashboard</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1 class="logo">CheckReel</h1>
+                <div class="header-actions">
+                    <div class="language-switcher">
+                        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                        <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+                        <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+                    </div>
+                    <div class="tier-info" id="tierInfo">
+                        <span class="tier-badge" id="tierBadge">Free</span>
+                        <span class="scans-left" id="scansLeft">3 scans left</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="upload-section">
+                <h2 id="upload-title">Upload Content to Check</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon"></div>
+                    <p id="upload-text">Drag and drop your file here or click to browse</p>
+                    <p class="upload-support">Supports: MP4, MOV, JPG, PNG, MP3, WAV (Max 100MB)</p>
+                    <input type="file" id="fileInput" accept=".mp4,.mov,.jpg,.jpeg,.png,.mp3,.wav" hidden>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <div class="file-icon"></div>
+                        <div class="file-meta">
+                            <h3 id="fileName"></h3>
+                            <p id="fileSize"></p>
+                        </div>
+                        <button class="remove-file" id="removeFile">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="platform-section">
+                <h3 id="platform-title">Select Target Platform</h3>
+                <div class="platform-grid">
+                    <div class="platform-option" data-platform="tiktok">
+                        <div class="platform-icon"></div>
+                        <span>TikTok</span>
+                    </div>
+                    <div class="platform-option" data-platform="youtube">
+                        <div class="platform-icon"></div>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="platform-option" data-platform="instagram">
+                        <div class="platform-icon"></div>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="platform-option" data-platform="facebook">
+                        <div class="platform-icon"></div>
+                        <span>Facebook</span>
+                    </div>
+                    <div class="platform-option" data-platform="twitter">
+                        <div class="platform-icon"></div>
+                        <span>Twitter</span>
+                    </div>
+                    <div class="platform-option" data-platform="snapchat">
+                        <div class="platform-icon"></div>
+                        <span>Snapchat</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scan-section">
+                <button class="scan-btn" id="scanBtn" disabled>
+                    <span id="scan-btn-text">Start Content Check</span>
+                    <div class="btn-loader" id="btnLoader"></div>
+                </button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3 id="results-title">Compliance Report</h3>
+                <div class="report-card">
+                    <div class="report-header">
+                        <div class="compliance-score" id="complianceScore">
+                            <div class="score-circle">
+                                <span id="scoreValue">85</span>
+                                <span class="score-unit">%</span>
+                            </div>
+                            <p id="score-label">Compliance Score</p>
+                        </div>
+                        <div class="report-status" id="reportStatus">
+                            <div class="status-icon"></div>
+                            <p id="status-text">Ready to Post</p>
+                        </div>
+                    </div>
+                    
+                    <div class="report-details">
+                        <h4 id="issues-title">Issues Found</h4>
+                        <div class="issues-list" id="issuesList">
+                            <!-- Issues will be populated here -->
+                        </div>
+                        
+                        <h4 id="recommendations-title">Recommendations</h4>
+                        <div class="recommendations-list" id="recommendationsList">
+                            <!-- Recommendations will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upgrade-section" id="upgradeSection" style="display: none;">
+                <div class="upgrade-card">
+                    <h3 id="upgrade-title">Upgrade Your Plan</h3>
+                    <p id="upgrade-message">You've reached your scan limit. Upgrade to continue checking your content.</p>
+                    
+                    <div class="pricing-options">
+                        <div class="pricing-card">
+                            <h4>Plus</h4>
+                            <div class="price">$4.99<span>/month</span></div>
+                            <ul>
+                                <li>20 scans per month</li>
+                                <li>Priority support</li>
+                                <li>Detailed reports</li>
+                            </ul>
+                            <button class="upgrade-btn" onclick="upgradeTier('plus')">Choose Plus</button>
+                        </div>
+                        
+                        <div class="pricing-card premium">
+                            <h4>Premium</h4>
+                            <div class="price">$9.99<span>/month</span></div>
+                            <ul>
+                                <li>40 scans per month</li>
+                                <li>Priority support</li>
+                                <li>Advanced analytics</li>
+                                <li>API access</li>
+                            </ul>
+                            <button class="upgrade-btn" onclick="upgradeTier('premium')">Choose Premium</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="./lang-loader.js"></script>
+    <script src="./tier.js"></script>
+    <script src="./dashboard.js"></script>
+</body>
+</html>
+

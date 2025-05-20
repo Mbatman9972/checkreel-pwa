@@ -1,0 +1,171 @@
+﻿{
+  "platforms": {
+    "tiktok": {
+      "name": "TikTok",
+      "maxDuration": 600,
+      "minDuration": 3,
+      "aspectRatio": "9:16",
+      "maxFileSize": 100,
+      "allowedFormats": ["mp4", "mov"],
+      "contentRules": [
+        "No copyrighted music without permission",
+        "No nudity or sexual content",
+        "No violence or dangerous activities",
+        "No hate speech or harassment",
+        "No misinformation",
+        "Follow community guidelines"
+      ],
+      "recommendations": [
+        "Use trending hashtags",
+        "Post during peak hours (7-9 PM)",
+        "Keep videos under 60 seconds for better engagement",
+        "Add captions for accessibility",
+        "Use good lighting and clear audio"
+      ]
+    },
+    "youtube": {
+      "name": "YouTube",
+      "maxDuration": 43200,
+      "minDuration": 1,
+      "aspectRatio": "16:9",
+      "maxFileSize": 256000,
+      "allowedFormats": ["mp4", "mov", "avi", "wmv", "flv", "webm"],
+      "contentRules": [
+        "Respect copyright laws",
+        "No harmful or dangerous content",
+        "No hate speech",
+        "No spam or misleading content",
+        "Follow monetization policies if eligible",
+        "Age-appropriate content labeling"
+      ],
+      "recommendations": [
+        "Create engaging thumbnails",
+        "Use SEO-optimized titles and descriptions",
+        "Include relevant tags",
+        "Upload consistently",
+        "Engage with your audience",
+        "Use end screens and cards"
+      ]
+    },
+    "instagram": {
+      "name": "Instagram",
+      "maxDuration": 3600,
+      "minDuration": 3,
+      "aspectRatio": "1:1",
+      "maxFileSize": 100,
+      "allowedFormats": ["mp4", "mov", "jpg", "png"],
+      "contentRules": [
+        "No nudity or sexual content",
+        "Respect intellectual property",
+        "No bullying or harassment",
+        "No false information",
+        "No sale of illegal items",
+        "Follow community standards"
+      ],
+      "recommendations": [
+        "Use high-quality visuals",
+        "Write compelling captions",
+        "Use relevant hashtags (limit 30)",
+        "Post consistently",
+        "Engage with followers",
+        "Use Instagram Stories and Reels"
+      ]
+    },
+    "facebook": {
+      "name": "Facebook",
+      "maxDuration": 14400,
+      "minDuration": 1,
+      "aspectRatio": "16:9",
+      "maxFileSize": 4000,
+      "allowedFormats": ["mp4", "mov", "jpg", "png", "gif"],
+      "contentRules": [
+        "No hate speech or discrimination",
+        "No violence or graphic content",
+        "Respect privacy and safety",
+        "No false or misleading information",
+        "Follow community standards",
+        "Age-appropriate content"
+      ],
+      "recommendations": [
+        "Post when your audience is active",
+        "Use Facebook native video",
+        "Write engaging captions",
+        "Encourage comments and shares",
+        "Use Facebook Live for real-time engagement",
+        "Tag relevant people and pages"
+      ]
+    },
+    "twitter": {
+      "name": "Twitter",
+      "maxDuration": 140,
+      "minDuration": 0.5,
+      "aspectRatio": "16:9",
+      "maxFileSize": 512,
+      "allowedFormats": ["mp4", "mov", "jpg", "png", "gif"],
+      "contentRules": [
+        "No abusive behavior",
+        "No hateful conduct",
+        "No violence and physical harm",
+        "No harassment and privacy violations",
+        "No platform manipulation",
+        "Follow Twitter Rules"
+      ],
+      "recommendations": [
+        "Keep videos under 2 minutes 20 seconds",
+        "Use relevant hashtags",
+        "Tweet during peak hours",
+        "Engage with your community",
+        "Use Twitter Spaces for audio conversations",
+        "Retweet and reply to relevant content"
+      ]
+    },
+    "snapchat": {
+      "name": "Snapchat",
+      "maxDuration": 60,
+      "minDuration": 1,
+      "aspectRatio": "9:16",
+      "maxFileSize": 100,
+      "allowedFormats": ["mp4", "mov", "jpg", "png"],
+      "contentRules": [
+        "No sexually explicit content",
+        "No harassment or bullying",
+        "No violence or threats",
+        "No illegal activities",
+        "No spam or fake engagement",
+        "Follow community guidelines"
+      ],
+      "recommendations": [
+        "Use AR filters and lenses",
+        "Post to Stories regularly",
+        "Use location-based features",
+        "Engage with Snap Map",
+        "Create authentic, spontaneous content",
+        "Use Snapchat's creative tools"
+      ]
+    }
+  },
+  "general": {
+    "prohibited": [
+      "Copyrighted content without permission",
+      "Nudity and sexual content",
+      "Violence and graphic content",
+      "Hate speech and discrimination",
+      "Harassment and bullying",
+      "False or misleading information",
+      "Spam and fake engagement",
+      "Illegal activities",
+      "Dangerous or harmful behavior"
+    ],
+    "best_practices": [
+      "Create original, authentic content",
+      "Respect community guidelines",
+      "Use appropriate content warnings",
+      "Engage positively with your audience",
+      "Post consistently",
+      "Use high-quality media",
+      "Optimize for each platform",
+      "Monitor comments and engagement",
+      "Stay updated with platform changes"
+    ]
+  }
+}

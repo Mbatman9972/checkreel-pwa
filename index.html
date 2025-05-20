@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">CheckReel - Check Before You Post</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lang-btn:hover, .lang-btn.active {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #e6f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+        
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .benefit-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .subscription-form {
+            background: rgba(255,255,255,0.15);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .subscribe-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72,187,120,0.3);
+        }
+        
+        .subscription-note {
+            text-align: center;
+            margin-top: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        .stats {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .active-users {
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .platforms {
+            margin-bottom: 60px;
+        }
+        
+        .platforms h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .platform-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .about {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .about p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(72,187,120,0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(72,187,120,0.3);
+        }
+        
+        .error-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: rgba(245,101,101,0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(245,101,101,0.3);
+        }
+        
+        /* RTL Support */
+        [dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        [dir="rtl"] .header-content {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .language-switcher {
+            order: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">CheckReel</div>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1 id="hero-title">CheckReel</h1>
+                <p id="hero-subtitle">Don't guess  check before you post.</p>
+            </section>
+
+            <section class="benefits">
+                <div class="benefit-card">
+                    <p id="benefit-1"> Pre-check any video, image or audio</p>
+                </div>
+                <div class="benefit-card">
+                    <p id="benefit-2"> Instant AI-powered compliance report</p>
+                </div>
+                <div class="benefit-card">
+                    <p id="benefit-3"> Your privacy is fully protected</p>
+                </div>
+            </section>
+
+            <section class="subscription-form">
+                <form id="subscriptionForm">
+                    <div class="form-group">
+                        <input type="email" id="emailInput" placeholder="Enter your email address" required>
+                    </div>
+                    <button type="submit" class="subscribe-btn" id="subscribe-btn">Subscribe Now</button>
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Setting up your account...</p>
+                    </div>
+                    <div class="success-message" id="successMessage">
+                        <h3>Welcome to CheckReel!</h3>
+                        <p>Redirecting to your dashboard...</p>
+                    </div>
+                    <div class="error-message" id="errorMessage">
+                        <p>Something went wrong. Please try again.</p>
+                    </div>
+                </form>
+                <p class="subscription-note" id="subscription-note">$4.99/month after trial period</p>
+            </section>
+
+            <div class="stats">
+                <div class="active-users" id="active-users"> 2,729 active users</div>
+            </div>
+
+            <section class="platforms">
+                <h2 id="platforms-title">Supported Platforms</h2>
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>TikTok</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>YouTube</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>Instagram</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>Facebook</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>Twitter</p>
+                    </div>
+                    <div class="platform-card">
+                        <div class="platform-icon"></div>
+                        <p>Snapchat</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about">
+                <h2 id="about-title">About CheckReel</h2>
+                <p id="about-content">CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.</p>
+            </section>
+        </div>
+    </main>
+
+    <script src="./lang-loader.js"></script>
+    <script src="./landing.js"></script>
+</body>
+</html>
+
