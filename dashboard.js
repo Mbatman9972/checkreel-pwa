@@ -293,8 +293,21 @@ function updateUserCounter(){
   document.getElementById('active-users').textContent=`🔥 ${(base+inc).toLocaleString()} active users`;
 }
 function updateScansCounter(){
-  document.getElementById('scansUsedCounter').textContent =
-    safeStorage.getItem('checkreel_scans_used')||'0';
+  // Fixed version with proper null checks
+  const scansUsedCounter = document.getElementById('scansUsedCounter');
+  if (scansUsedCounter) {
+    scansUsedCounter.textContent = safeStorage.getItem('checkreel_scans_used') || '0';
+  }
+  
+  // Update the counter display in the header if it exists
+  const scansCounterElement = document.getElementById('scans-counter');
+  if (scansCounterElement) {
+    const tier = safeStorage.getItem('checkreel_tier') || 'free';
+    const used = +safeStorage.getItem('checkreel_scans_used') || 0;
+    const table = { free: {scans:3}, plus: {scans:20}, premium: {scans:40} };
+    const left = Math.max(0, table[tier].scans - used);
+    scansCounterElement.textContent = left;
+  }
 }
 
 /* ---------- 14. Language ---------- */
