@@ -1,20 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "",
+  "buildCommand": false,
   "outputDirectory": ".",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/dashboard", "dest": "/dashboard.html" },
-    { "src": "/admin", "dest": "/admin.html" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "s-maxage=1, stale-while-revalidate" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    }
-  ]
+  "public": true
 }
