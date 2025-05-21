@@ -41,30 +41,36 @@
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            color: white;
+            color: #000000; /* CHANGED: White to Black */
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            letter-spacing: 1px;
         }
         
         .language-switcher {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap; /* ADDED: Better mobile responsiveness */
         }
         
         .lang-btn {
             background: rgba(255,255,255,0.2);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.3); /* ADDED: Better borders */
+            padding: 10px 18px; /* INCREASED: Better touch targets */
+            border-radius: 25px;
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            font-weight: 600;
+            min-width: 45px; /* ADDED: Consistent button size */
         }
         
         .lang-btn:hover, .lang-btn.active {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.4);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
         }
         
         .hero {
@@ -87,38 +93,51 @@
             opacity: 0.9;
         }
         
+        /* IMPROVED: Better benefits section */
         .benefits {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
         }
         
         .benefit-card {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s ease;
+            background: rgba(255,255,255,0.15);
+            padding: 35px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            text-align: center;
         }
         
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
         }
         
         .benefit-card p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.95;
+            line-height: 1.4;
         }
         
+        /* FIXED: Color swap for email input and subscribe button */
         .subscription-form {
             background: rgba(255,255,255,0.15);
             padding: 40px;
-            border-radius: 20px;
+            border-radius: 25px;
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.2);
-            max-width: 500px;
+            border: 2px solid rgba(255,255,255,0.2);
+            max-width: 520px;
             margin: 0 auto 40px;
         }
         
@@ -128,35 +147,44 @@
         
         .form-group input {
             width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.2);
+            padding: 18px;
+            border: 2px solid rgba(72,187,120,0.3); /* CHANGED: Green border for email */
+            border-radius: 12px;
+            background: rgba(72,187,120,0.1); /* CHANGED: Light green background */
             color: white;
             font-size: 16px;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: rgba(72,187,120,0.6);
+            background: rgba(72,187,120,0.15);
         }
         
         .form-group input::placeholder {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
         }
         
         .subscribe-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #48bb78, #38a169);
-            border: none;
-            border-radius: 10px;
+            padding: 18px;
+            background: rgba(255,255,255,0.2); /* CHANGED: Light background for button */
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
             color: white;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .subscribe-btn:hover {
+            background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(72,187,120,0.3);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
         }
         
         .subscription-note {
@@ -173,11 +201,13 @@
         
         .active-users {
             font-size: 1.2rem;
-            background: rgba(255,255,255,0.1);
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: rgba(255,255,255,0.15);
+            padding: 18px 35px;
+            border-radius: 35px;
             display: inline-block;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            font-weight: 600;
         }
         
         .platforms {
@@ -193,44 +223,104 @@
         .platform-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         
         .platform-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
         }
         
         .platform-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            background: rgba(255,255,255,0.25);
         }
         
         .platform-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
         }
         
+        .platform-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .platform-card p {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* EXPANDED: Professional About section */
         .about {
             text-align: center;
-            padding: 60px 0;
+            padding: 80px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 25px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
         }
         
         .about h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 30px;
+            background: linear-gradient(45deg, #fff, #e6f3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .about p {
-            font-size: 1.2rem;
+        .about-intro {
+            font-size: 1.3rem;
             opacity: 0.9;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 0 auto 40px;
             line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .unique-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-item h3 {
+            color: #48bb78;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .feature-item p {
+            opacity: 0.9;
+            line-height: 1.5;
         }
         
         .loading {
@@ -288,9 +378,10 @@
             order: 1;
         }
         
+        /* IMPROVED: Mobile responsiveness */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .hero p {
@@ -299,15 +390,50 @@
             
             .benefits {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .platform-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
             
             .header-content {
                 flex-direction: column;
                 gap: 20px;
+                text-align: center;
+            }
+            
+            .language-switcher {
+                justify-content: center;
+            }
+            
+            .unique-features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .about {
+                padding: 60px 20px;
+            }
+            
+            .subscription-form {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lang-btn {
+                padding: 8px 15px;
+                font-size: 14px;
             }
         }
     </style>
@@ -330,18 +456,21 @@
         <div class="container">
             <section class="hero">
                 <h1 id="hero-title">CheckReel</h1>
-                <p id="hero-subtitle">Don't guess  check before you post.</p>
+                <p id="hero-subtitle">Don't guess — check before you post.</p>
             </section>
 
             <section class="benefits">
                 <div class="benefit-card">
-                    <p id="benefit-1"> Pre-check any video, image or audio</p>
+                    <span class="icon">🎯</span>
+                    <p id="benefit-1">✅ Pre-check any video, image or audio</p>
                 </div>
                 <div class="benefit-card">
-                    <p id="benefit-2"> Instant AI-powered compliance report</p>
+                    <span class="icon">📊</span>
+                    <p id="benefit-2">📊 Instant AI-powered compliance report</p>
                 </div>
                 <div class="benefit-card">
-                    <p id="benefit-3"> Your privacy is fully protected</p>
+                    <span class="icon">🔒</span>
+                    <p id="benefit-3">🔒 Your privacy is fully protected</p>
                 </div>
             </section>
 
@@ -367,34 +496,46 @@
             </section>
 
             <div class="stats">
-                <div class="active-users" id="active-users"> 2,729 active users</div>
+                <div class="active-users" id="active-users">🔥 2,729 active users</div>
             </div>
 
             <section class="platforms">
                 <h2 id="platforms-title">Supported Platforms</h2>
                 <div class="platform-grid">
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/tiktok.png" alt="TikTok">
+                        </div>
                         <p>TikTok</p>
                     </div>
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/youtube.png" alt="YouTube">
+                        </div>
                         <p>YouTube</p>
                     </div>
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/instagram.png" alt="Instagram">
+                        </div>
                         <p>Instagram</p>
                     </div>
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/facebook.png" alt="Facebook">
+                        </div>
                         <p>Facebook</p>
                     </div>
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/twitter.png" alt="Twitter">
+                        </div>
                         <p>Twitter</p>
                     </div>
                     <div class="platform-card">
-                        <div class="platform-icon"></div>
+                        <div class="platform-icon">
+                            <img src="./images/snapchat.png" alt="Snapchat">
+                        </div>
                         <p>Snapchat</p>
                     </div>
                 </div>
@@ -402,13 +543,77 @@
 
             <section class="about">
                 <h2 id="about-title">About CheckReel</h2>
-                <p id="about-content">CheckReel is part of Alwafer Media, specialising in social-media management, AI apps, and precision marketing.</p>
+                <p class="about-intro" id="about-content">CheckReel is the world's first AI-powered content compliance checker that helps creators, brands, and agencies ensure their content meets platform guidelines before posting.</p>
+                
+                <div class="unique-features">
+                    <div class="feature-item">
+                        <h3>🚀 Pre-Check Capability</h3>
+                        <p>Upload and analyze your content before posting to avoid violations, shadowbans, and removals.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🤖 AI-Powered Reports</h3>
+                        <p>Get detailed compliance scores and specific recommendations for each platform's guidelines.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🔐 Privacy First</h3>
+                        <p>Your content is processed securely and deleted immediately after analysis. We never store your files.</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 30px; opacity: 0.8; font-style: italic;">Part of Alwafer Media - Specialists in social media management, AI applications, and precision marketing.</p>
             </section>
         </div>
     </main>
 
-    <script src="./lang-loader.js"></script>
-    <script src="./landing.js"></script>
+    <script>
+        // Simplified language switching (inline to avoid 404 errors)
+        function switchLanguage(lang) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Set HTML attributes
+            document.documentElement.lang = lang;
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+            
+            // Store preference
+            localStorage.setItem('selectedLanguage', lang);
+            
+            // Here you can add translations later
+            console.log('Language switched to:', lang);
+        }
+        
+        // Simple form submission
+        document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            
+            if (email) {
+                document.getElementById('loading').style.display = 'block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Redirect to dashboard after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = './dashboard.html';
+                    }, 2000);
+                }, 1500);
+            }
+        });
+        
+        // Load saved language preference
+        const savedLang = localStorage.getItem('selectedLanguage') || 'en';
+        if (savedLang !== 'en') {
+            switchLanguage(savedLang);
+        }
+    </script>
 </body>
 </html>
-
