@@ -1,7 +1,7 @@
 ﻿// Dashboard functionality
 let selectedFile = null;
 let selectedPlatform = null;
-let currentLanguage = 'en';
+// Removed duplicate currentLanguage declaration - using global scope
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,6 +21,8 @@ function initializeUpload() {
     const fileInput = document.getElementById('fileInput');
     const fileInfo = document.getElementById('fileInfo');
     const removeFileBtn = document.getElementById('removeFile');
+    
+    if (!uploadArea || !fileInput) return;
     
     // Click to browse
     uploadArea.addEventListener('click', () => {
@@ -57,10 +59,12 @@ function initializeUpload() {
     });
     
     // Remove file
-    removeFileBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        clearSelectedFile();
-    });
+    if (removeFileBtn) {
+        removeFileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clearSelectedFile();
+        });
+    }
 }
 
 function handleFileSelect(file) {
@@ -89,11 +93,11 @@ function displayFileInfo(file) {
     const fileName = document.getElementById('fileName');
     const fileSize = document.getElementById('fileSize');
     
-    fileName.textContent = file.name;
-    fileSize.textContent = formatFileSize(file.size);
+    if (fileName) fileName.textContent = file.name;
+    if (fileSize) fileSize.textContent = formatFileSize(file.size);
     
-    uploadArea.style.display = 'none';
-    fileInfo.style.display = 'block';
+    if (uploadArea) uploadArea.style.display = 'none';
+    if (fileInfo) fileInfo.style.display = 'block';
 }
 
 function clearSelectedFile() {
@@ -102,10 +106,10 @@ function clearSelectedFile() {
     const fileInput = document.getElementById('fileInput');
     
     selectedFile = null;
-    fileInput.value = '';
+    if (fileInput) fileInput.value = '';
     
-    uploadArea.style.display = 'block';
-    fileInfo.style.display = 'none';
+    if (uploadArea) uploadArea.style.display = 'block';
+    if (fileInfo) fileInfo.style.display = 'none';
     
     updateScanButton();
 }
@@ -138,6 +142,8 @@ function initializePlatforms() {
 
 function updateScanButton() {
     const scanBtn = document.getElementById('scanBtn');
+    if (!scanBtn) return;
+    
     const canScan = selectedFile && selectedPlatform;
     
     scanBtn.disabled = !canScan;
@@ -150,16 +156,21 @@ function updateScanButton() {
 }
 
 // Scan functionality
-document.getElementById('scanBtn').addEventListener('click', async function() {
-    if (!selectedFile || !selectedPlatform) return;
-    
-    // Check if user has scans remaining
-    if (!checkScanLimit()) {
-        showUpgradeSection();
-        return;
+document.addEventListener('DOMContentLoaded', function() {
+    const scanBtn = document.getElementById('scanBtn');
+    if (scanBtn) {
+        scanBtn.addEventListener('click', async function() {
+            if (!selectedFile || !selectedPlatform) return;
+            
+            // Check if user has scans remaining
+            if (!checkScanLimit()) {
+                showUpgradeSection();
+                return;
+            }
+            
+            await performScan();
+        });
     }
-    
-    await performScan();
 });
 
 function checkScanLimit() {
@@ -181,10 +192,12 @@ async function performScan() {
     const btnLoader = document.getElementById('btnLoader');
     const resultsSection = document.getElementById('resultsSection');
     
+    if (!scanBtn) return;
+    
     // Update button state
     scanBtn.disabled = true;
-    btnText.textContent = 'Analyzing...';
-    btnLoader.classList.add('active');
+    if (btnText) btnText.textContent = 'Analyzing...';
+    if (btnLoader) btnLoader.classList.add('active');
     
     try {
         // Simulate scan process
@@ -203,7 +216,9 @@ async function performScan() {
         updateTierDisplay();
         
         // Scroll to results
-        resultsSection.scrollIntoView({ behavior: 'smooth' });
+        if (resultsSection) {
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
         
     } catch (error) {
         console.error('Scan error:', error);
@@ -211,8 +226,8 @@ async function performScan() {
     } finally {
         // Reset button state
         scanBtn.disabled = false;
-        btnText.textContent = 'Start Content Check';
-        btnLoader.classList.remove('active');
+        if (btnText) btnText.textContent = 'Start Content Check';
+        if (btnLoader) btnLoader.classList.remove('active');
     }
 }
 
@@ -220,21 +235,21 @@ function generateMockResults() {
     const score = Math.floor(Math.random() * 30) + 70; // 70-100
     
     const issues = [
-        { icon: '', text: 'Audio volume peaks detected at 0:15' },
-        { icon: '', text: 'Low resolution segments found' },
-        { icon: '', text: 'Consider adding captions for accessibility' }
+        { icon: '⚠️', text: 'Audio volume peaks detected at 0:15' },
+        { icon: '📺', text: 'Low resolution segments found' },
+        { icon: '♿', text: 'Consider adding captions for accessibility' }
     ];
     
     const recommendations = [
-        { icon: '', text: 'Use trending hashtags for better reach' },
-        { icon: '', text: 'Optimal posting time: 7-9 PM' },
-        { icon: '', text: 'Target audience alignment: 85%' }
+        { icon: '📈', text: 'Use trending hashtags for better reach' },
+        { icon: '⏰', text: 'Optimal posting time: 7-9 PM' },
+        { icon: '🎯', text: 'Target audience alignment: 85%' }
     ];
     
     return {
         score: score,
         status: score >= 80 ? 'Ready to Post' : 'Needs Review',
-        statusIcon: score >= 80 ? '' : '',
+        statusIcon: score >= 80 ? '✅' : '⚠️',
         issues: issues.slice(0, Math.floor(Math.random() * 3) + 1),
         recommendations: recommendations.slice(0, Math.floor(Math.random() * 3) + 1)
     };
@@ -250,38 +265,42 @@ function displayResults(results) {
     const scoreCircle = document.querySelector('.score-circle');
     
     // Update score
-    scoreValue.textContent = results.score;
-    scoreCircle.style.setProperty('--score', results.score);
+    if (scoreValue) scoreValue.textContent = results.score;
+    if (scoreCircle) scoreCircle.style.setProperty('--score', results.score);
     
     // Update status
-    statusText.textContent = results.status;
-    statusIcon.textContent = results.statusIcon;
+    if (statusText) statusText.textContent = results.status;
+    if (statusIcon) statusIcon.textContent = results.statusIcon;
     
     // Update issues
-    issuesList.innerHTML = '';
-    results.issues.forEach(issue => {
-        const item = document.createElement('div');
-        item.className = 'issue-item';
-        item.innerHTML = `
-            <span class="issue-icon">${issue.icon}</span>
-            <span>${issue.text}</span>
-        `;
-        issuesList.appendChild(item);
-    });
+    if (issuesList) {
+        issuesList.innerHTML = '';
+        results.issues.forEach(issue => {
+            const item = document.createElement('div');
+            item.className = 'issue-item';
+            item.innerHTML = `
+                <span class="issue-icon">${issue.icon}</span>
+                <span>${issue.text}</span>
+            `;
+            issuesList.appendChild(item);
+        });
+    }
     
     // Update recommendations
-    recommendationsList.innerHTML = '';
-    results.recommendations.forEach(rec => {
-        const item = document.createElement('div');
-        item.className = 'recommendation-item';
-        item.innerHTML = `
-            <span class="recommendation-icon">${rec.icon}</span>
-            <span>${rec.text}</span>
-        `;
-        recommendationsList.appendChild(item);
-    });
+    if (recommendationsList) {
+        recommendationsList.innerHTML = '';
+        results.recommendations.forEach(rec => {
+            const item = document.createElement('div');
+            item.className = 'recommendation-item';
+            item.innerHTML = `
+                <span class="recommendation-icon">${rec.icon}</span>
+                <span>${rec.text}</span>
+            `;
+            recommendationsList.appendChild(item);
+        });
+    }
     
-    resultsSection.style.display = 'block';
+    if (resultsSection) resultsSection.style.display = 'block';
 }
 
 function incrementScanCount() {
@@ -295,7 +314,7 @@ function updateTierDisplay() {
     const scansUsed = parseInt(localStorage.getItem('checkreel_scans_used') || '0');
     
     const tierData = {
-        free: { name: 'Free', scans: 3, class: 'tier-free' },
+        free: { name: 'Free Trial', scans: 3, class: 'tier-free' },
         plus: { name: 'Plus', scans: 20, class: 'tier-plus' },
         premium: { name: 'Premium', scans: 40, class: 'tier-premium' }
     };
@@ -303,19 +322,34 @@ function updateTierDisplay() {
     const tier = tierData[userTier];
     const scansLeft = Math.max(0, tier.scans - scansUsed);
     
-    document.getElementById('tierBadge').textContent = tier.name;
-    document.getElementById('tierBadge').className = `tier-badge ${tier.class}`;
-    document.getElementById('scansLeft').textContent = `${scansLeft} scans left`;
+    const tierBadge = document.getElementById('tierBadge');
+    const scansLeftEl = document.getElementById('scansLeft');
+    
+    if (tierBadge) {
+        tierBadge.textContent = tier.name;
+        tierBadge.className = `tier-badge ${tier.class}`;
+    }
+    
+    if (scansLeftEl) {
+        scansLeftEl.textContent = `${scansLeft} scans left`;
+    }
 }
 
 function showUpgradeSection() {
     const upgradeSection = document.getElementById('upgradeSection');
-    upgradeSection.style.display = 'block';
-    upgradeSection.scrollIntoView({ behavior: 'smooth' });
+    if (upgradeSection) {
+        upgradeSection.style.display = 'block';
+        upgradeSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 function upgradeTier(tier) {
-    const confirmUpgrade = confirm(`Upgrade to ${tier.charAt(0).toUpperCase() + tier.slice(1)} plan?`);
+    const tierNames = {
+        plus: 'Plus ($4.99/month)',
+        premium: 'Premium ($9.99/month)'
+    };
+    
+    const confirmUpgrade = confirm(`Upgrade to ${tierNames[tier]}?`);
     
     if (confirmUpgrade) {
         localStorage.setItem('checkreel_tier', tier);
@@ -324,13 +358,15 @@ function upgradeTier(tier) {
         updateTierDisplay();
         hideUpgradeSection();
         
-        alert(`Successfully upgraded to ${tier.charAt(0).toUpperCase() + tier.slice(1)} plan!`);
+        alert(`Successfully upgraded to ${tierNames[tier]}!`);
     }
 }
 
 function hideUpgradeSection() {
     const upgradeSection = document.getElementById('upgradeSection');
-    upgradeSection.style.display = 'none';
+    if (upgradeSection) {
+        upgradeSection.style.display = 'none';
+    }
 }
 
 function updateUserCounter() {
@@ -343,12 +379,17 @@ function updateUserCounter() {
     const totalUsers = baseCount + parseInt(userIncrement);
     const activeUsersEl = document.getElementById('active-users');
     if (activeUsersEl) {
-        activeUsersEl.textContent = ` ${totalUsers.toLocaleString()} active users`;
+        activeUsersEl.textContent = `🔥 ${totalUsers.toLocaleString()} active users`;
     }
 }
 
 function switchLanguage(lang) {
-    currentLanguage = lang;
+    // Use global currentLanguage or create if not exists
+    if (typeof window.currentLanguage === 'undefined') {
+        window.currentLanguage = 'en';
+    }
+    
+    window.currentLanguage = lang;
     localStorage.setItem('checkreel_language', lang);
     
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -362,14 +403,20 @@ function switchLanguage(lang) {
     
     if (lang === 'ar') {
         document.body.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('dir', 'rtl');
     } else {
         document.body.removeAttribute('dir');
+        document.documentElement.removeAttribute('dir');
     }
     
-    if (typeof loadLanguageContent === 'function') {
-        loadLanguageContent(lang);
+    // Apply language content if function exists
+    if (typeof window.loadLanguageContent === 'function') {
+        window.loadLanguageContent(lang);
     }
+    
+    console.log('Language switched to:', lang);
 }
 
+// Make functions globally available
 window.switchLanguage = switchLanguage;
 window.upgradeTier = upgradeTier;
