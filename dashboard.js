@@ -1,4 +1,129 @@
-﻿// Dashboard functionality
+﻿// Add this to the beginning of your dashboard.js file to fix localStorage errors
+
+// Safe localStorage wrapper to handle security errors
+const safeStorage = {
+    getItem: function(key) {
+        try {
+            return localStorage.getItem(key);
+        } catch (e) {
+            console.warn('localStorage access denied, using fallback');
+            return null;
+        }
+    },
+    
+    setItem: function(key, value) {
+        try {
+            localStorage.setItem(key, value);
+        } catch (e) {
+            console.warn('localStorage write denied, changes will not persist');
+        }
+    }
+};
+
+// Replace all localStorage calls in your existing code with safeStorage
+// For example:
+// OLD: localStorage.getItem('checkreel_language')
+// NEW: safeStorage.getItem('checkreel_language')
+
+// Updated functions with safe storage:
+function switchLanguage(lang) {
+    if (typeof window.currentLanguage === 'undefined') {
+        window.currentLanguage = 'en';
+    }
+    
+    window.currentLanguage = lang;
+    safeStorage.setItem('checkreel_language', lang);
+    
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
+    
+    if (lang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('dir', 'rtl');
+    } else {
+        document.body.removeAttribute('dir');
+        document.documentElement.removeAttribute('dir');
+    }
+    
+    console.log('Language switched to:', lang);
+}
+
+function selectTier(tier) {
+    currentTier = tier;
+    safeStorage.setItem('checkreel_tier', tier);
+    
+    document.querySelectorAll('.tier-plan').forEach(plan => {
+        plan.classList.remove('active');
+    });
+    document.querySelector(`[data-tier="${tier}"]`).classList.add('active');
+    
+    if (tier !== 'free') {
+        safeStorage.setItem('checkreel_scans_used', '0');
+    }
+    
+    updateTierDisplay();
+    updateScansCounter();
+}
+
+function updateTierDisplay() {
+    const userTier = safeStorage.getItem('checkreel_tier') || 'free';
+    const scansUsed = parseInt(safeStorage.getItem('checkreel_scans_used') || '0');
+    
+    const tierData = {
+        free: { name: 'Free Trial', scans: 3, class: 'tier-free' },
+        plus: { name: 'Plus', scans: 20, class: 'tier-plus' },
+        premium: { name: 'Premium', scans: 40, class: 'tier-premium' }
+    };
+    
+    const tier = tierData[userTier];
+    const scansLeft = Math.max(0, tier.scans - scansUsed);
+    
+    const tierBadge = document.getElementById('tierBadge');
+    const scansLeftEl = document.getElementById('scansLeft');
+    
+    if (tierBadge) {
+        tierBadge.textContent = tier.name;
+        tierBadge.className = `tier-badge ${tier.class}`;
+    }
+    
+    if (scansLeftEl) {
+        scansLeftEl.textContent = `${scansLeft} scans left`;
+    }
+}
+
+function incrementScanCount() {
+    const currentCount = parseInt(safeStorage.getItem('checkreel_scans_used') || '0');
+    safeStorage.setItem('checkreel_scans_used', (currentCount + 1).toString());
+}
+
+function updateScansCounter() {
+    const scansUsed = parseInt(safeStorage.getItem('checkreel_scans_used') || '0');
+    const counterEl = document.getElementById('scansUsedCounter');
+    if (counterEl) {
+        counterEl.textContent = scansUsed;
+    }
+}
+
+function updateUserCounter() {
+    const baseCount = 2697;
+    let userIncrement = safeStorage.getItem('checkreel_user_increment');
+    if (!userIncrement) {
+        userIncrement = Math.floor(Math.random() * 100) + 1;
+        safeStorage.setItem('checkreel_user_increment', userIncrement.toString());
+    }
+    const totalUsers = baseCount + parseInt(userIncrement);
+    
+    const activeUsersEl = document.getElementById('active-users');
+    if (activeUsersEl) {
+        activeUsersEl.textContent = `🔥 ${totalUsers.toLocaleString()} active users`;
+    }
+}// Dashboard functionality
 let selectedFile = null;
 let selectedPlatform = null;
 // Removed duplicate currentLanguage declaration - using global scope
