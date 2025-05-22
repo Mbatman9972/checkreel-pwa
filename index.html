@@ -6,6 +6,7 @@
     <title>CheckReel - AI Content Compliance Checker</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="manifest" href="manifest.json">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         * {
             margin: 0;
@@ -60,6 +61,12 @@
             background-clip: text;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .language-switcher {
             display: flex;
             gap: 5px;
@@ -81,6 +88,23 @@
         .lang-btn.active {
             background: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sign-in-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
         /* Hero Section */
@@ -255,13 +279,141 @@
             font-weight: 500;
         }
 
+        /* Sign In Modal */
+        .sign-in-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .sign-in-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            margin: 50px auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sign-in-form {
+            text-align: center;
+        }
+
+        .sign-in-form h2 {
+            margin-bottom: 30px;
+            color: #1e3c72;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .sign-in-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .sign-in-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .captcha-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* About Section */
+        .about-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 80px 0 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .about-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .company-highlight {
+            color: #667eea;
+            font-weight: 700;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
             padding: 40px 0;
             color: rgba(255, 255, 255, 0.8);
             font-size: 14px;
-            margin-top: 80px;
+            margin-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -291,6 +443,16 @@
             .features {
                 grid-template-columns: 1fr;
             }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .sign-in-content {
+                margin: 20px auto;
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -299,15 +461,16 @@
         <!-- Header -->
         <div class="header">
             <div class="logo-section">
-                <img src="images/logo.png" alt="CheckReel Logo" class="logo-img"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div style="display: none; width: 45px; height: 45px; background: linear-gradient(45deg, #1e3c72, #667eea); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">C</div>
+                <img src="images/logo.png" alt="CheckReel Logo" class="logo-img">
                 <span class="logo-text">CheckReel</span>
             </div>
-            <div class="language-switcher">
-                <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
-                <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+                </div>
+                <button class="sign-in-btn" onclick="openSignInModal()">Sign In</button>
             </div>
         </div>
 
@@ -390,6 +553,18 @@
                     <div class="stat-label">Platforms</div>
                 </div>
             </div>
+
+            <!-- About Section -->
+            <div class="about-section">
+                <h2>About CheckReel</h2>
+                <div class="about-content">
+                    <p><span class="company-highlight">CheckReel</span> is proudly part of <span class="company-highlight">Al Wafer Media</span>, a leading digital presence management company. At Al Wafer, we specialize in managing and growing digital presence across major social media platforms, including TikTok, YouTube, Instagram, Snapchat, X, and Facebook.</p>
+                    <br>
+                    <p>Our mission is to empower creators and businesses with tailored strategies, engaging content, and performance-driven insights. Whether you're aiming to build your brand, boost engagement, or grow your audience, Al Wafer is your trusted partner for social media success.</p>
+                    <br>
+                    <p>CheckReel represents our commitment to content safety and compliance, ensuring your creative vision aligns with platform guidelines while maximizing your reach and impact.</p>
+                </div>
+            </div>
         </div>
 
         <!-- French Content -->
@@ -465,6 +640,17 @@
                 <div class="stat-card">
                     <div class="stat-number">6</div>
                     <div class="stat-label">Plateformes</div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>À Propos de CheckReel</h2>
+                <div class="about-content">
+                    <p><span class="company-highlight">CheckReel</span> fait fièrement partie d'<span class="company-highlight">Al Wafer Media</span>, une entreprise leader dans la gestion de présence numérique. Chez Al Wafer, nous nous spécialisons dans la gestion et la croissance de la présence numérique sur les principales plateformes de médias sociaux.</p>
+                    <br>
+                    <p>Notre mission est d'autonomiser les créateurs et les entreprises avec des stratégies sur mesure, du contenu engageant et des insights axés sur la performance.</p>
+                    <br>
+                    <p>CheckReel représente notre engagement envers la sécurité et la conformité du contenu, garantissant que votre vision créative s'aligne sur les directives de la plateforme.</p>
                 </div>
             </div>
         </div>
@@ -544,11 +730,44 @@
                     <div class="stat-label">منصات</div>
                 </div>
             </div>
+
+            <div class="about-section">
+                <h2>حول تشيك ريل</h2>
+                <div class="about-content">
+                    <p><span class="company-highlight">تشيك ريل</span> جزء فخور من <span class="company-highlight">الوافر ميديا</span>، الشركة الرائدة في إدارة الحضور الرقمي. في الوافر، نتخصص في إدارة وتنمية الحضور الرقمي عبر منصات التواصل الاجتماعي الرئيسية.</p>
+                    <br>
+                    <p>مهمتنا هي تمكين المبدعين والشركات بالاستراتيجيات المخصصة والمحتوى الجذاب والرؤى المدفوعة بالأداء.</p>
+                    <br>
+                    <p>تشيك ريل يمثل التزامنا بسلامة المحتوى والامتثال، مما يضمن أن رؤيتك الإبداعية تتماشى مع إرشادات المنصة.</p>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
         <div class="footer">
             <p>&copy; 2025 CheckReel. All rights reserved. Copyright Protected.</p>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="sign-in-modal">
+        <div class="sign-in-content">
+            <button class="close-modal" onclick="closeSignInModal()">&times;</button>
+            <form class="sign-in-form" onsubmit="handleSignIn(event)">
+                <h2>Sign In to CheckReel</h2>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="captcha-container">
+                    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+                </div>
+                <button type="submit" class="sign-in-submit">Sign In</button>
+            </form>
         </div>
     </div>
 
@@ -584,6 +803,46 @@
 
             console.log('Language switched to:', lang);
         }
+
+        function openSignInModal() {
+            document.getElementById('signInModal').style.display = 'block';
+        }
+
+        function closeSignInModal() {
+            document.getElementById('signInModal').style.display = 'none';
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            
+            // Get user IP for tracking
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const userIP = data.ip;
+                    console.log('User IP:', userIP);
+                    
+                    // Store IP for abuse prevention
+                    localStorage.setItem('checkreel_user_ip', userIP);
+                    
+                    // Here you would normally validate credentials
+                    // For now, redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                })
+                .catch(error => {
+                    console.error('IP tracking error:', error);
+                    // Still allow sign in
+                    window.location.href = 'dashboard.html';
+                });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('signInModal');
+            if (e.target === modal) {
+                closeSignInModal();
+            }
+        });
 
         // Load saved language on page load
         document.addEventListener('DOMContentLoaded', function() {

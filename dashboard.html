@@ -79,29 +79,6 @@ letter-spacing: 0.5px;
 .tier-plus { background: #f3e5f5; color: #7b1fa2; }
 .tier-premium { background: #fff3e0; color: #f57c00; }
 
-.language-switcher {
-display: flex;
-gap: 5px;
-background: #f5f5f5;
-padding: 5px;
-border-radius: 10px;
-}
-
-.lang-btn {
-padding: 8px 12px;
-border: none;
-background: transparent;
-border-radius: 6px;
-cursor: pointer;
-font-size: 14px;
-transition: all 0.3s ease;
-}
-
-.lang-btn.active {
-background: white;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* Alert */
 .selection-alert {
 background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
@@ -238,10 +215,13 @@ margin-bottom: 8px;
 border-radius: 6px;
 object-fit: cover;
 transition: all 0.3s ease;
+opacity: 1;
 }
 
 .platform-option.selected .platform-icon {
-filter: brightness(0) invert(1);
+/* Keep icon visible when selected */
+opacity: 1;
+filter: brightness(1.2) contrast(1.1);
 }
 
 .platform-name {
@@ -379,6 +359,13 @@ color: white;
 .tier-scans {
 font-size: 12px;
 opacity: 0.8;
+margin-bottom: 10px;
+}
+
+.tier-features {
+font-size: 11px;
+opacity: 0.9;
+line-height: 1.4;
 }
 
 /* Scan Button */
@@ -513,11 +500,16 @@ margin-bottom: 30px;
 width: 120px;
 height: 120px;
 border-radius: 50%;
-background: conic-gradient(from 0deg, #1e3c72 0%, #667eea calc(var(--score) * 1%), #e0e0e0 calc(var(--score) * 1%));
+background: conic-gradient(from 0deg, 
+    #28a745 0%, 
+    #ffc107 calc(var(--score) * 0.7%), 
+    #dc3545 calc(var(--score) * 1%), 
+    #e0e0e0 calc(var(--score) * 1%));
 display: flex;
 align-items: center;
 justify-content: center;
 position: relative;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .score-circle::before {
@@ -533,6 +525,7 @@ position: absolute;
 font-size: 24px;
 font-weight: bold;
 z-index: 1;
+color: #333;
 }
 
 .status-indicator {
@@ -568,6 +561,40 @@ padding: 10px;
 margin-bottom: 10px;
 background: #f8f9fa;
 border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.issue-item:hover, .recommendation-item:hover {
+background: #e3f2fd;
+transform: translateX(5px);
+}
+
+/* Insight Modal */
+.insight-modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+z-index: 1000;
+padding: 20px;
+}
+
+.insight-content {
+background: white;
+border-radius: 20px;
+padding: 30px;
+max-width: 500px;
+margin: 50px auto;
+position: relative;
+}
+
+.insight-content h3 {
+margin-bottom: 20px;
+color: #1e3c72;
 }
 
 /* Stats */
@@ -640,19 +667,12 @@ gap: 20px;
 <!-- Header -->
 <div class="header">
 <div class="logo-section">
-<img src="images/logo.png" alt="CheckReel Logo" class="logo-img"
-onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-<div style="display: none; width: 45px; height: 45px; background: linear-gradient(45deg, #1e3c72, #667eea); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">C</div>
+<img src="images/logo.png" alt="CheckReel Logo" class="logo-img">
 <span class="logo-text">CheckReel</span>
 </div>
 <div class="user-section">
 <span id="scansLeft">3 scans left</span>
 <span id="tierBadge" class="tier-badge tier-free">Free Trial</span>
-<div class="language-switcher">
-<button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-<button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
-<button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
-</div>
 </div>
 </div>
 
@@ -669,16 +689,19 @@ onerror="this.style.display='none'; this.nextElementSibling.style.display='block
 <div class="tier-name">Free Trial</div>
 <div class="tier-price">$0</div>
 <div class="tier-scans">3 scans</div>
+<div class="tier-features">Basic compliance check<br>Standard results</div>
 </div>
 <div class="tier-plan recommended" data-tier="plus" onclick="selectTier('plus')">
 <div class="tier-name">Plus</div>
 <div class="tier-price">$4.99/mo</div>
 <div class="tier-scans">20 scans/month</div>
+<div class="tier-features">Enhanced compliance check<br>Detailed insights<br>Priority support</div>
 </div>
 <div class="tier-plan" data-tier="premium" onclick="selectTier('premium')">
 <div class="tier-name">Premium</div>
 <div class="tier-price">$9.99/mo</div>
 <div class="tier-scans">40 scans/month</div>
+<div class="tier-features">All features included<br>Claude & ChatGPT Plus analytics<br>AI tool recommendations<br>(Ideogram, ElevenLabs, Kling.AI, Luma Labs)<br>Dynamic AI model switching</div>
 </div>
 </div>
 </div>
@@ -828,6 +851,15 @@ onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background:
 </div>
 </div>
 
+<!-- Insight Modal -->
+<div id="insightModal" class="insight-modal">
+<div class="insight-content">
+<button class="close-modal" onclick="closeInsightModal()">&times;</button>
+<h3 id="insightTitle">Insight Details</h3>
+<div id="insightContent"></div>
+</div>
+</div>
+
 <!-- Footer -->
 <div class="footer">
 <p>&copy; 2025 CheckReel. All rights reserved. Copyright Protected.</p>
@@ -841,6 +873,13 @@ let selectedPlatform = null;
 let selectedRegion = null;
 let selectedCountry = null;
 let currentTier = 'free';
+let currentLanguage = 'en';
+
+// Load language from homepage
+document.addEventListener('DOMContentLoaded', function() {
+    currentLanguage = localStorage.getItem('checkreel_language') || 'en';
+    console.log('Dashboard loaded with language:', currentLanguage);
+});
 
 // Countries data
 const countriesData = {
@@ -871,9 +910,6 @@ initializeUpload();
 updateTierDisplay();
 updateUserCounter();
 updateScansCounter();
-// Load saved language preference
-const savedLang = localStorage.getItem('checkreel_language') || 'en';
-switchLanguage(savedLang);
 });
 
 // Tier selection
@@ -1125,8 +1161,8 @@ try {
 // Simulate scan process
 await new Promise(resolve => setTimeout(resolve, 3000));
 
-// Generate mock results
-const results = generateMockResults();
+// Generate consistent results (same score for all tiers)
+const results = generateConsistentResults();
 
 // Display results
 displayResults(results);
@@ -1154,25 +1190,48 @@ if (btnLoader) btnLoader.classList.remove('active');
 }
 }
 
-function generateMockResults() {
-const score = Math.floor(Math.random() * 30) + 70; // 70-100
-const issues = [
-{ icon: '⚠️', text: `Audio volume peaks detected for ${selectedPlatform}` },
-{ icon: '📺', text: `Content may not meet ${selectedRegion} guidelines` },
-{ icon: '♿', text: 'Consider adding captions for accessibility' }
+function generateConsistentResults() {
+// CONSISTENT score across all tiers - only details change
+const score = 85; // Fixed score
+const userTier = localStorage.getItem('checkreel_tier') || 'free';
+
+let issues, recommendations;
+
+if (userTier === 'free') {
+issues = [
+{ icon: '⚠️', text: `Basic compliance check for ${selectedPlatform}` }
 ];
-const recommendations = [
+recommendations = [
+{ icon: '💡', text: `Consider upgrading for detailed insights` }
+];
+} else if (userTier === 'plus') {
+issues = [
+{ icon: '⚠️', text: `Audio levels need adjustment for ${selectedPlatform}` },
+{ icon: '📺', text: `Content may not fully align with ${selectedRegion} guidelines` }
+];
+recommendations = [
 { icon: '📈', text: `Use trending hashtags for ${selectedPlatform}` },
-{ icon: '⏰', text: `Optimal posting time for ${selectedRegion}: 7-9 PM` },
-{ icon: '🎯', text: 'Target audience alignment: 85%' }
+{ icon: '⏰', text: `Optimal posting time for ${selectedRegion}: 7-9 PM` }
 ];
+} else { // premium
+issues = [
+{ icon: '⚠️', text: `Audio levels: Consider ElevenLabs for voice enhancement` },
+{ icon: '📺', text: `Visual quality: Try Ideogram for better graphics` },
+{ icon: '🎬', text: `Video enhancement: Use Kling.AI or Luma Labs for effects` }
+];
+recommendations = [
+{ icon: '🤖', text: `Claude recommends: Adjust content pacing for ${selectedPlatform}` },
+{ icon: '💬', text: `ChatGPT Plus suggests: Improve engagement hooks` },
+{ icon: '🛠️', text: `AI Tools: Ideogram (graphics), ElevenLabs (audio), Kling.AI (video)` }
+];
+}
 
 return {
 score: score,
 status: score >= 80 ? 'Ready to Post' : 'Needs Review',
 statusIcon: score >= 80 ? '✅' : '⚠️',
-issues: issues.slice(0, Math.floor(Math.random() * 3) + 1),
-recommendations: recommendations.slice(0, Math.floor(Math.random() * 3) + 1)
+issues: issues,
+recommendations: recommendations
 };
 }
 
@@ -1193,35 +1252,80 @@ if (scoreCircle) scoreCircle.style.setProperty('--score', results.score);
 if (statusText) statusText.textContent = results.status;
 if (statusIcon) statusIcon.textContent = results.statusIcon;
 
-// Update issues
+// Update issues with click handlers
 if (issuesList) {
 issuesList.innerHTML = '';
-results.issues.forEach(issue => {
+results.issues.forEach((issue, index) => {
 const item = document.createElement('div');
 item.className = 'issue-item';
 item.innerHTML = `
 <span class="issue-icon">${issue.icon}</span>
 <span>${issue.text}</span>
 `;
+item.onclick = () => showInsight('issue', issue, index);
 issuesList.appendChild(item);
 });
 }
 
-// Update recommendations
+// Update recommendations with click handlers
 if (recommendationsList) {
 recommendationsList.innerHTML = '';
-results.recommendations.forEach(rec => {
+results.recommendations.forEach((rec, index) => {
 const item = document.createElement('div');
 item.className = 'recommendation-item';
 item.innerHTML = `
 <span class="recommendation-icon">${rec.icon}</span>
 <span>${rec.text}</span>
 `;
+item.onclick = () => showInsight('recommendation', rec, index);
 recommendationsList.appendChild(item);
 });
 }
 
 if (resultsSection) resultsSection.style.display = 'block';
+}
+
+function showInsight(type, item, index) {
+const modal = document.getElementById('insightModal');
+const title = document.getElementById('insightTitle');
+const content = document.getElementById('insightContent');
+
+title.textContent = type === 'issue' ? 'Issue Details' : 'Recommendation Details';
+
+// Generate detailed insights based on tier
+const userTier = localStorage.getItem('checkreel_tier') || 'free';
+let detailedContent = '';
+
+if (userTier === 'premium' && type === 'recommendation') {
+detailedContent = `
+<p><strong>Detailed Analysis:</strong></p>
+<p>${item.text}</p>
+<br>
+<p><strong>Recommended AI Tools:</strong></p>
+<ul>
+<li>🎨 <strong>Ideogram:</strong> For creating better graphics and thumbnails</li>
+<li>🎙️ <strong>ElevenLabs:</strong> For voice enhancement and audio quality</li>
+<li>🎬 <strong>Kling.AI:</strong> For video effects and transitions</li>
+<li>✨ <strong>Luma Labs:</strong> For advanced video processing</li>
+</ul>
+<br>
+<p><strong>AI Model Insights:</strong> This analysis uses dynamic AI model switching based on traffic for optimal performance.</p>
+`;
+} else {
+detailedContent = `
+<p><strong>Details:</strong></p>
+<p>${item.text}</p>
+<br>
+<p>Upgrade to Premium for advanced AI tool recommendations and detailed insights.</p>
+`;
+}
+
+content.innerHTML = detailedContent;
+modal.style.display = 'block';
+}
+
+function closeInsightModal() {
+document.getElementById('insightModal').style.display = 'none';
 }
 
 function incrementScanCount() {
@@ -1278,54 +1382,25 @@ counterEl.textContent = scansUsed;
 }
 }
 
-function switchLanguage(lang) {
-// Use global currentLanguage or create if not exists
-if (typeof window.currentLanguage === 'undefined') {
-window.currentLanguage = 'en';
-}
-
-window.currentLanguage = lang;
-localStorage.setItem('checkreel_language', lang);
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-btn.classList.remove('active');
-});
-
-const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
-if (activeBtn) {
-activeBtn.classList.add('active');
-}
-
-if (lang === 'ar') {
-document.body.setAttribute('dir', 'rtl');
-document.documentElement.setAttribute('dir', 'rtl');
-} else {
-document.body.removeAttribute('dir');
-document.documentElement.removeAttribute('dir');
-}
-
-// Apply language content if function exists
-if (typeof window.loadLanguageContent === 'function') {
-window.loadLanguageContent(lang);
-}
-
-console.log('Language switched to:', lang);
-}
-
 // Make functions globally available
-window.switchLanguage = switchLanguage;
 window.selectTier = selectTier;
 window.selectRegion = selectRegion;
 window.selectPlatform = selectPlatform;
 window.showCountries = showCountries;
 window.closeCountriesModal = closeCountriesModal;
 window.selectCountry = selectCountry;
+window.showInsight = showInsight;
+window.closeInsightModal = closeInsightModal;
 
-// Close modal when clicking outside
+// Close modals when clicking outside
 window.addEventListener('click', function(e) {
-const modal = document.getElementById('countriesModal');
-if (e.target === modal) {
+const countriesModal = document.getElementById('countriesModal');
+const insightModal = document.getElementById('insightModal');
+if (e.target === countriesModal) {
 closeCountriesModal();
+}
+if (e.target === insightModal) {
+closeInsightModal();
 }
 });
 </script>
