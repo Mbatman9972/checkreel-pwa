@@ -202,10 +202,19 @@ box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .platform-option.selected {
-border-color: #1e3c72;
-background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+border-color: #e91e63;
+background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
 color: white;
-animation: glowPulse 2s infinite ease-in-out;
+animation: platformGlow 2s infinite ease-in-out;
+}
+
+@keyframes platformGlow {
+0%, 100% {
+box-shadow: 0 0 20px rgba(233, 30, 99, 0.7);
+}
+50% {
+box-shadow: 0 0 30px rgba(233, 30, 99, 1), 0 0 40px rgba(240, 98, 146, 0.8);
+}
 }
 
 .platform-icon {
@@ -486,6 +495,7 @@ border-color: #1e3c72;
 .results-section {
 display: none;
 margin-top: 30px;
+margin-bottom: 50px;
 }
 
 .score-display {
@@ -501,9 +511,9 @@ width: 120px;
 height: 120px;
 border-radius: 50%;
 background: conic-gradient(from 0deg, 
-    #28a745 0%, 
-    #ffc107 calc(var(--score) * 0.7%), 
-    #dc3545 calc(var(--score) * 1%), 
+    #dc3545 0%, 
+    #ffc107 calc(var(--score) * 0.4%), 
+    #28a745 calc(var(--score) * 1%), 
     #e0e0e0 calc(var(--score) * 1%));
 display: flex;
 align-items: center;
@@ -1297,19 +1307,19 @@ const userTier = localStorage.getItem('checkreel_tier') || 'free';
 let detailedContent = '';
 
 if (userTier === 'premium' && type === 'recommendation') {
-detailedContent = `
-<p><strong>Detailed Analysis:</strong></p>
+        detailedContent = `
+<p><strong>Advanced AI Analysis:</strong></p>
 <p>${item.text}</p>
 <br>
-<p><strong>Recommended AI Tools:</strong></p>
+<p><strong>Professional Tools Available:</strong></p>
 <ul>
-<li>🎨 <strong>Ideogram:</strong> For creating better graphics and thumbnails</li>
-<li>🎙️ <strong>ElevenLabs:</strong> For voice enhancement and audio quality</li>
-<li>🎬 <strong>Kling.AI:</strong> For video effects and transitions</li>
-<li>✨ <strong>Luma Labs:</strong> For advanced video processing</li>
+<li>🎨 <strong>Graphics Enhancement:</strong> Professional design tools for better visuals</li>
+<li>🎙️ <strong>Audio Improvement:</strong> Advanced voice enhancement and audio quality tools</li>
+<li>🎬 <strong>Video Optimization:</strong> Professional video effects and enhancement tools</li>
+<li>✨ <strong>Content Analysis:</strong> Advanced AI-powered content optimization</li>
 </ul>
 <br>
-<p><strong>AI Model Insights:</strong> This analysis uses dynamic AI model switching based on traffic for optimal performance.</p>
+<p><strong>AI Model Insights:</strong> This analysis uses multiple AI models with dynamic switching for optimal performance and accuracy.</p>
 `;
 } else {
 detailedContent = `
