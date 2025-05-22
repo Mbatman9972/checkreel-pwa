@@ -1,677 +1,1333 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheckReel Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="manifest" href="manifest.json">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CheckReel Dashboard</title>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="manifest" href="manifest.json">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
+body {
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #667eea 50%, #764ba2 75%, #8e44ad 100%);
+min-height: 100vh;
+color: #333;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
 
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+/* Header */
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+padding: 15px 30px;
+border-radius: 15px;
+margin-bottom: 30px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.logo-section {
+display: flex;
+align-items: center;
+gap: 15px;
+}
 
-        .logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
+.logo-img {
+width: 45px;
+height: 45px;
+border-radius: 10px;
+}
 
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.logo-text {
+font-size: 24px;
+font-weight: bold;
+background: linear-gradient(45deg, #1e3c72, #667eea);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
 
-        .tier-badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.user-section {
+display: flex;
+align-items: center;
+gap: 20px;
+}
 
-        .tier-free { background: #e3f2fd; color: #1976d2; }
-        .tier-plus { background: #f3e5f5; color: #7b1fa2; }
-        .tier-premium { background: #fff3e0; color: #f57c00; }
+.tier-badge {
+padding: 8px 16px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
 
-        .language-switcher {
-            display: flex;
-            gap: 5px;
-            background: #f5f5f5;
-            padding: 5px;
-            border-radius: 10px;
-        }
+.tier-free { background: #e3f2fd; color: #1976d2; }
+.tier-plus { background: #f3e5f5; color: #7b1fa2; }
+.tier-premium { background: #fff3e0; color: #f57c00; }
 
-        .lang-btn {
-            padding: 8px 12px;
-            border: none;
-            background: transparent;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
+.language-switcher {
+display: flex;
+gap: 5px;
+background: #f5f5f5;
+padding: 5px;
+border-radius: 10px;
+}
 
-        .lang-btn.active {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+.lang-btn {
+padding: 8px 12px;
+border: none;
+background: transparent;
+border-radius: 6px;
+cursor: pointer;
+font-size: 14px;
+transition: all 0.3s ease;
+}
 
-        /* Main Content */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
+.lang-btn.active {
+background: white;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+/* Alert */
+.selection-alert {
+background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+color: white;
+padding: 15px 25px;
+border-radius: 10px;
+margin-bottom: 20px;
+text-align: center;
+font-weight: 600;
+box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
 
-        .card h2 {
-            margin-bottom: 20px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.selection-alert.hidden {
+display: none;
+}
 
-        /* File Upload */
-        .upload-area {
-            border: 3px dashed #ddd;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
+/* Main Content */
+.dashboard-grid {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 20px;
+margin-bottom: 30px;
+}
 
-        .upload-area:hover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
-        }
+.card {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 25px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
 
-        .upload-area.dragover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            transform: scale(1.02);
-        }
+.card h2 {
+margin-bottom: 20px;
+color: #333;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 18px;
+}
 
-        .upload-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
+/* Region Selection */
+.region-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+margin-bottom: 15px;
+}
 
-        .file-info {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px solid #28a745;
-        }
+.region-option {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 15px;
+border: 2px solid #e0e0e0;
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.3s ease;
+background: white;
+text-align: center;
+}
 
-        .file-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+.region-option:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
 
-        .remove-file {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+.region-option.selected {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+color: white;
+animation: glowPulse 2s infinite ease-in-out;
+}
 
-        /* Platform Selection */
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+@keyframes glowPulse {
+0%, 100% {
+box-shadow: 0 0 20px rgba(30, 60, 114, 0.7);
+}
+50% {
+box-shadow: 0 0 30px rgba(30, 60, 114, 1), 0 0 40px rgba(102, 126, 234, 0.8);
+}
+}
 
-        .platform-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
+.region-icon {
+width: 35px;
+height: 35px;
+margin-bottom: 8px;
+border-radius: 6px;
+object-fit: cover;
+}
 
-        .platform-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
+.region-name {
+font-size: 12px;
+font-weight: 600;
+}
 
-        .platform-option.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            animation: glowPulse 2s infinite ease-in-out;
-        }
+/* Platform Selection */
+.platforms-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+}
 
-        @keyframes glowPulse {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(102, 126, 234, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(102, 126, 234, 1), 0 0 40px rgba(118, 75, 162, 0.8);
-            }
-        }
+.platform-option {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 15px;
+border: 2px solid #e0e0e0;
+border-radius: 12px;
+cursor: pointer;
+transition: all 0.3s ease;
+background: white;
+position: relative;
+overflow: hidden;
+}
 
-        .platform-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
+.platform-option:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
 
-        .platform-option.selected .platform-icon {
-            filter: brightness(0) invert(1);
-        }
+.platform-option.selected {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+color: white;
+animation: glowPulse 2s infinite ease-in-out;
+}
 
-        .platform-name {
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-        }
+.platform-icon {
+width: 35px;
+height: 35px;
+margin-bottom: 8px;
+border-radius: 6px;
+object-fit: cover;
+transition: all 0.3s ease;
+}
 
-        .icon-fallback {
-            display: none;
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-        }
+.platform-option.selected .platform-icon {
+filter: brightness(0) invert(1);
+}
 
-        /* Scan Button */
-        .scan-section {
-            text-align: center;
-            margin-top: 30px;
-        }
+.platform-name {
+font-size: 11px;
+font-weight: 600;
+text-align: center;
+}
 
-        .scan-btn {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 25px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 200px;
-            justify-content: center;
-        }
+/* File Upload */
+.upload-area {
+border: 3px dashed #ddd;
+border-radius: 15px;
+padding: 30px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
 
-        .scan-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
+.upload-area:hover {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+}
 
-        .scan-btn.ready {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
+.upload-area.dragover {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+transform: scale(1.02);
+}
 
-        .scan-btn.ready:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-        }
+.upload-icon {
+font-size: 36px;
+margin-bottom: 10px;
+display: block;
+}
 
-        .btn-loader {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-top: 2px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+.file-info {
+display: none;
+text-align: center;
+padding: 20px;
+background: #f8f9fa;
+border-radius: 10px;
+border: 2px solid #28a745;
+}
 
-        .btn-loader.active {
-            display: block;
-        }
+.file-name {
+font-weight: 600;
+margin-bottom: 5px;
+}
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+.remove-file {
+background: #dc3545;
+color: white;
+border: none;
+padding: 8px 16px;
+border-radius: 5px;
+cursor: pointer;
+margin-top: 10px;
+}
 
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+/* Tier Selection */
+.tier-selection {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 25px;
+margin-bottom: 20px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+.tier-plans {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin-top: 15px;
+}
 
-        .stat-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
+.tier-plan {
+background: white;
+border: 2px solid #e0e0e0;
+border-radius: 15px;
+padding: 20px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+}
 
-        .stat-label {
-            color: #666;
-            font-size: 14px;
-        }
+.tier-plan:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
 
-        /* Results Section */
-        .results-section {
-            display: none;
-            margin-top: 30px;
-        }
+.tier-plan.active {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+color: white;
+}
 
-        .score-display {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
+.tier-plan.recommended {
+border-color: #ff6b6b;
+}
 
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #667eea 0%, #764ba2 calc(var(--score) * 1%), #e0e0e0 calc(var(--score) * 1%));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+.tier-plan.recommended::before {
+content: "RECOMMENDED";
+position: absolute;
+top: -10px;
+left: 50%;
+transform: translateX(-50%);
+background: #ff6b6b;
+color: white;
+padding: 4px 12px;
+border-radius: 12px;
+font-size: 10px;
+font-weight: bold;
+}
 
-        .score-circle::before {
-            content: '';
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-        }
+.tier-name {
+font-size: 16px;
+font-weight: bold;
+margin-bottom: 8px;
+}
 
-        .score-value {
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 1;
-        }
+.tier-price {
+font-size: 18px;
+font-weight: bold;
+color: #1e3c72;
+margin-bottom: 8px;
+}
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 600;
-        }
+.tier-plan.active .tier-price {
+color: white;
+}
 
-        .status-icon {
-            font-size: 24px;
-        }
+.tier-scans {
+font-size: 12px;
+opacity: 0.8;
+}
 
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+/* Scan Button */
+.scan-section {
+text-align: center;
+margin-top: 30px;
+}
 
-        .issues-card, .recommendations-card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
+.scan-btn {
+background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+color: white;
+border: none;
+padding: 15px 40px;
+border-radius: 25px;
+font-size: 18px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+display: inline-flex;
+align-items: center;
+gap: 10px;
+min-width: 200px;
+justify-content: center;
+}
 
-        .issue-item, .recommendation-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
+.scan-btn:disabled {
+background: #ccc;
+cursor: not-allowed;
+}
 
-        /* Upgrade Section */
-        .upgrade-section {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+.scan-btn.ready {
+background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+}
 
-        .upgrade-plans {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+.scan-btn.ready:hover {
+transform: translateY(-2px);
+box-shadow: 0 12px 35px rgba(30, 60, 114, 0.4);
+}
 
-        .plan-card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
+.btn-loader {
+display: none;
+width: 20px;
+height: 20px;
+border: 2px solid transparent;
+border-top: 2px solid white;
+border-radius: 50%;
+animation: spin 1s linear infinite;
+}
 
-        .plan-card:hover {
-            border-color: #667eea;
-            transform: translateY(-5px);
-        }
+.btn-loader.active {
+display: block;
+}
 
-        .plan-price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-            margin: 10px 0;
-        }
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
 
-        .upgrade-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 15px;
-        }
+/* Countries Modal */
+.countries-modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+z-index: 1000;
+padding: 20px;
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .platforms-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .score-display {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
+.countries-content {
+background: white;
+border-radius: 20px;
+padding: 30px;
+max-width: 600px;
+max-height: 80vh;
+margin: 50px auto;
+overflow-y: auto;
+position: relative;
+}
+
+.close-modal {
+position: absolute;
+top: 15px;
+right: 20px;
+background: none;
+border: none;
+font-size: 24px;
+cursor: pointer;
+color: #666;
+}
+
+.countries-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 10px;
+margin-top: 20px;
+}
+
+.country-item {
+padding: 10px;
+background: #f8f9fa;
+border-radius: 8px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+border: 2px solid transparent;
+}
+
+.country-item:hover {
+background: #e3f2fd;
+border-color: #1e3c72;
+}
+
+/* Results Section */
+.results-section {
+display: none;
+margin-top: 30px;
+}
+
+.score-display {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 30px;
+margin-bottom: 30px;
+}
+
+.score-circle {
+width: 120px;
+height: 120px;
+border-radius: 50%;
+background: conic-gradient(from 0deg, #1e3c72 0%, #667eea calc(var(--score) * 1%), #e0e0e0 calc(var(--score) * 1%));
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+}
+
+.score-circle::before {
+content: '';
+width: 80px;
+height: 80px;
+background: white;
+border-radius: 50%;
+position: absolute;
+}
+
+.score-value {
+font-size: 24px;
+font-weight: bold;
+z-index: 1;
+}
+
+.status-indicator {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 18px;
+font-weight: 600;
+}
+
+.status-icon {
+font-size: 24px;
+}
+
+.results-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 20px;
+}
+
+.issues-card, .recommendations-card {
+background: white;
+padding: 20px;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.issue-item, .recommendation-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 10px;
+margin-bottom: 10px;
+background: #f8f9fa;
+border-radius: 8px;
+}
+
+/* Stats */
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 15px;
+margin-bottom: 20px;
+}
+
+.stat-card {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+padding: 15px;
+border-radius: 15px;
+text-align: center;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+font-size: 20px;
+font-weight: bold;
+color: #1e3c72;
+margin-bottom: 5px;
+}
+
+.stat-label {
+color: #666;
+font-size: 12px;
+}
+
+/* Footer */
+.footer {
+text-align: center;
+padding: 20px 0;
+color: rgba(255, 255, 255, 0.8);
+font-size: 14px;
+margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+.dashboard-grid {
+grid-template-columns: 1fr 1fr;
+}
+}
+
+@media (max-width: 768px) {
+.dashboard-grid {
+grid-template-columns: 1fr;
+}
+.platforms-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+.region-grid {
+grid-template-columns: 1fr;
+}
+.tier-plans {
+grid-template-columns: 1fr;
+}
+.score-display {
+flex-direction: column;
+gap: 20px;
+}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo-section">
-                <div class="logo">C</div>
-                <div>
-                    <h1 style="margin: 0; font-size: 24px;">CheckReel</h1>
-                    <div id="active-users" style="font-size: 12px; color: #666;">🔥 2,697 active users</div>
-                </div>
-            </div>
-            
-            <div class="user-section">
-                <span id="scansLeft">3 scans left</span>
-                <span id="tierBadge" class="tier-badge tier-free">Free Trial</span>
-                
-                <div class="language-switcher">
-                    <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
-                    <button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
-                    <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
-                </div>
-            </div>
-        </div>
+<div class="container">
+<!-- Header -->
+<div class="header">
+<div class="logo-section">
+<img src="images/logo.png" alt="CheckReel Logo" class="logo-img"
+onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+<div style="display: none; width: 45px; height: 45px; background: linear-gradient(45deg, #1e3c72, #667eea); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px;">C</div>
+<span class="logo-text">CheckReel</span>
+</div>
+<div class="user-section">
+<span id="scansLeft">3 scans left</span>
+<span id="tierBadge" class="tier-badge tier-free">Free Trial</span>
+<div class="language-switcher">
+<button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+<button class="lang-btn" onclick="switchLanguage('fr')">FR</button>
+<button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+</div>
+</div>
+</div>
 
-        <!-- Main Dashboard -->
-        <div class="dashboard-grid">
-            <!-- File Upload -->
-            <div class="card">
-                <h2>📁 Upload Content</h2>
-                
-                <div id="uploadArea" class="upload-area">
-                    <span class="upload-icon">📤</span>
-                    <h3>Drop your content here</h3>
-                    <p>or click to browse files</p>
-                    <small>Supports: MP4, MOV, JPG, PNG, MP3, WAV (max 100MB)</small>
-                </div>
-                
-                <div id="fileInfo" class="file-info">
-                    <div class="file-name" id="fileName"></div>
-                    <div class="file-size" id="fileSize"></div>
-                    <button id="removeFile" class="remove-file">Remove File</button>
-                </div>
-                
-                <input type="file" id="fileInput" style="display: none;" accept="video/*,image/*,audio/*">
-            </div>
+<!-- Selection Alert -->
+<div id="selectionAlert" class="selection-alert">
+⚠️ Please select a region and platform before uploading content for analysis
+</div>
 
-            <!-- Platform Selection -->
-            <div class="card">
-                <h2>🎯 Select Platform</h2>
-                
-                <div class="platforms-grid">
-                    <div class="platform-option" data-platform="tiktok">
-                        <img src="images/tiktok.png" alt="TikTok" class="platform-icon" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: #000;">TT</div>
-                        <span class="platform-name">TikTok</span>
-                    </div>
-                    
-                    <div class="platform-option" data-platform="youtube">
-                        <img src="images/youtube.png" alt="YouTube" class="platform-icon"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: #ff0000;">YT</div>
-                        <span class="platform-name">YouTube</span>
-                    </div>
-                    
-                    <div class="platform-option" data-platform="instagram">
-                        <img src="images/instagram.png" alt="Instagram" class="platform-icon"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">IG</div>
-                        <span class="platform-name">Instagram</span>
-                    </div>
-                    
-                    <div class="platform-option" data-platform="facebook">
-                        <img src="images/facebook.png" alt="Facebook" class="platform-icon"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: #1877f2;">FB</div>
-                        <span class="platform-name">Facebook</span>
-                    </div>
-                    
-                    <div class="platform-option" data-platform="twitter">
-                        <img src="images/twitter.png" alt="Twitter" class="platform-icon"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: #1da1f2; color: white;">X</div>
-                        <span class="platform-name">Twitter</span>
-                    </div>
-                    
-                    <div class="platform-option" data-platform="snapchat">
-                        <img src="images/snapchat.png" alt="Snapchat" class="platform-icon"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="icon-fallback" style="background: #fffc00; color: black;">SC</div>
-                        <span class="platform-name">Snapchat</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Tier Selection -->
+<div class="tier-selection">
+<h2>🎯 Choose Your Plan</h2>
+<div class="tier-plans">
+<div class="tier-plan active" data-tier="free" onclick="selectTier('free')">
+<div class="tier-name">Free Trial</div>
+<div class="tier-price">$0</div>
+<div class="tier-scans">3 scans</div>
+</div>
+<div class="tier-plan recommended" data-tier="plus" onclick="selectTier('plus')">
+<div class="tier-name">Plus</div>
+<div class="tier-price">$4.99/mo</div>
+<div class="tier-scans">20 scans/month</div>
+</div>
+<div class="tier-plan" data-tier="premium" onclick="selectTier('premium')">
+<div class="tier-name">Premium</div>
+<div class="tier-price">$9.99/mo</div>
+<div class="tier-scans">40 scans/month</div>
+</div>
+</div>
+</div>
 
-        <!-- Scan Button -->
-        <div class="scan-section">
-            <button id="scanBtn" class="scan-btn" disabled>
-                <span id="scan-btn-text">Start Content Check</span>
-                <div id="btnLoader" class="btn-loader"></div>
-            </button>
-        </div>
+<!-- Main Dashboard -->
+<div class="dashboard-grid">
+<!-- Region Selection -->
+<div class="card">
+<h2>🌍 Select Region</h2>
+<div class="region-grid">
+<div class="region-option" data-region="global" onclick="selectRegion('global')">
+<img src="images/region-icons/global.png" alt="Global" class="region-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #3498db; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;&quot;>🌍</div>';">
+<span class="region-name">Global</span>
+</div>
+<div class="region-option" data-region="middle-east" onclick="selectRegion('middle-east'); showCountries('middleEast')">
+<img src="images/region-icons/middle-east.png" alt="Middle East" class="region-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #e74c3c; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>ME</div>';">
+<span class="region-name">Middle East</span>
+</div>
+<div class="region-option" data-region="mena" onclick="selectRegion('mena'); showCountries('mena')">
+<img src="images/region-icons/mena.png" alt="MENA" class="region-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #f39c12; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>MENA</div>';">
+<span class="region-name">MENA</span>
+</div>
+<div class="region-option" data-region="europe" onclick="selectRegion('europe'); showCountries('europe')">
+<img src="images/region-icons/europe.png" alt="Europe" class="region-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #9b59b6; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;&quot;>EU</div>';">
+<span class="region-name">Europe</span>
+</div>
+</div>
+</div>
 
-        <!-- Results Section -->
-        <div id="resultsSection" class="results-section">
-            <div class="card">
-                <h2>📊 Compliance Results</h2>
-                
-                <div class="score-display">
-                    <div class="score-circle" style="--score: 85">
-                        <span id="scoreValue" class="score-value">85</span>
-                    </div>
-                    
-                    <div class="status-indicator">
-                        <span class="status-icon">✅</span>
-                        <span id="status-text">Ready to Post</span>
-                    </div>
-                </div>
+<!-- Platform Selection -->
+<div class="card">
+<h2>📱 Select Platform</h2>
+<div class="platforms-grid">
+<div class="platform-option" data-platform="tiktok" onclick="selectPlatform('tiktok')">
+<img src="images/tiktok.png" alt="TikTok" class="platform-icon">
+<span class="platform-name">TikTok</span>
+</div>
+<div class="platform-option" data-platform="youtube" onclick="selectPlatform('youtube')">
+<img src="images/youtube.png" alt="YouTube" class="platform-icon">
+<span class="platform-name">YouTube</span>
+</div>
+<div class="platform-option" data-platform="instagram" onclick="selectPlatform('instagram')">
+<img src="images/instagram.png" alt="Instagram" class="platform-icon">
+<span class="platform-name">Instagram</span>
+</div>
+<div class="platform-option" data-platform="facebook" onclick="selectPlatform('facebook')">
+<img src="images/facebook.png" alt="Facebook" class="platform-icon">
+<span class="platform-name">Facebook</span>
+</div>
+<div class="platform-option" data-platform="twitter" onclick="selectPlatform('twitter')">
+<img src="images/twitter.png" alt="Twitter" class="platform-icon">
+<span class="platform-name">Twitter</span>
+</div>
+<div class="platform-option" data-platform="snapchat" onclick="selectPlatform('snapchat')">
+<img src="images/snapchat.png" alt="Snapchat" class="platform-icon">
+<span class="platform-name">Snapchat</span>
+</div>
+</div>
+</div>
 
-                <div class="results-grid">
-                    <div class="issues-card">
-                        <h3>⚠️ Issues Found</h3>
-                        <div id="issuesList"></div>
-                    </div>
-                    
-                    <div class="recommendations-card">
-                        <h3>💡 Recommendations</h3>
-                        <div id="recommendationsList"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- File Upload -->
+<div class="card">
+<h2>📁 Upload Content</h2>
+<div id="uploadArea" class="upload-area">
+<span class="upload-icon">📤</span>
+<h3>Drop your content here</h3>
+<p>or click to browse files</p>
+<small>Supports: MP4, MOV, JPG, PNG, MP3, WAV (max 100MB)</small>
+</div>
+<div id="fileInfo" class="file-info">
+<div class="file-name" id="fileName"></div>
+<div class="file-size" id="fileSize"></div>
+<button id="removeFile" class="remove-file">Remove File</button>
+</div>
+<input type="file" id="fileInput" style="display: none;" accept="video/*,image/*,audio/*">
+</div>
+</div>
 
-        <!-- Upgrade Section -->
-        <div id="upgradeSection" class="upgrade-section">
-            <h2>🚀 Upgrade Your Plan</h2>
-            <p>You've reached your scan limit. Upgrade to continue checking your content!</p>
-            
-            <div class="upgrade-plans">
-                <div class="plan-card">
-                    <h3>Plus Plan</h3>
-                    <div class="plan-price">$4.99/month</div>
-                    <p>20 scans per month</p>
-                    <p>Advanced analytics</p>
-                    <p>Email support</p>
-                    <button class="upgrade-btn" onclick="upgradeTier('plus')">Upgrade to Plus</button>
-                </div>
-                
-                <div class="plan-card">
-                    <h3>Premium Plan</h3>
-                    <div class="plan-price">$9.99/month</div>
-                    <p>40 scans per month</p>
-                    <p>Advanced analytics</p>
-                    <p>Priority support</p>
-                    <p>API access</p>
-                    <button class="upgrade-btn" onclick="upgradeTier('premium')">Upgrade to Premium</button>
-                </div>
-            </div>
-        </div>
+<!-- Scan Button -->
+<div class="scan-section">
+<button id="scanBtn" class="scan-btn" disabled>
+<span id="scan-btn-text">Start Content Check</span>
+<div id="btnLoader" class="btn-loader"></div>
+</button>
+</div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">2,697+</div>
-                <div class="stat-label">Active Users</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">15,847</div>
-                <div class="stat-label">Content Scanned</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">94%</div>
-                <div class="stat-label">Success Rate</div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Platforms Supported</div>
-            </div>
-        </div>
-    </div>
+<!-- Results Section -->
+<div id="resultsSection" class="results-section">
+<div class="card">
+<h2>📊 Compliance Results</h2>
+<div class="score-display">
+<div class="score-circle" style="--score: 85">
+<span id="scoreValue" class="score-value">85</span>
+</div>
+<div class="status-indicator">
+<span class="status-icon">✅</span>
+<span id="status-text">Ready to Post</span>
+</div>
+</div>
+<div class="results-grid">
+<div class="issues-card">
+<h3>⚠️ Issues Found</h3>
+<div id="issuesList"></div>
+</div>
+<div class="recommendations-card">
+<h3>💡 Recommendations</h3>
+<div id="recommendationsList"></div>
+</div>
+</div>
+</div>
+</div>
 
-    <script src="dashboard.js"></script>
-    <script src="lang-loader.js"></script>
+<!-- Stats -->
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">2,697+</div>
+<div class="stat-label">Active Users</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">15,847</div>
+<div class="stat-label">Content Scanned</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">94%</div>
+<div class="stat-label">Success Rate</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">6</div>
+<div class="stat-label">Platforms</div>
+</div>
+<div class="stat-card">
+<div class="stat-number" id="scansUsedCounter">0</div>
+<div class="stat-label">Scans Used (Testing)</div>
+</div>
+</div>
+
+<!-- Countries Modal -->
+<div id="countriesModal" class="countries-modal">
+<div class="countries-content">
+<button class="close-modal" onclick="closeCountriesModal()">&times;</button>
+<h2 id="modalTitle">Select Country</h2>
+<div id="countriesGrid" class="countries-grid"></div>
+</div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<p>&copy; 2025 CheckReel. All rights reserved. Copyright Protected.</p>
+</div>
+</div>
+
+<script>
+// Global variables
+let selectedFile = null;
+let selectedPlatform = null;
+let selectedRegion = null;
+let selectedCountry = null;
+let currentTier = 'free';
+
+// Countries data
+const countriesData = {
+middleEast: [
+'Palestine', 'Jordan', 'Lebanon', 'Syria', 'Iraq', 'Kuwait', 'Saudi Arabia',
+'Bahrain', 'Qatar', 'United Arab Emirates', 'Oman', 'Yemen', 'Iran', 'Turkey', 'Cyprus'
+],
+mena: [
+'Palestine', 'Jordan', 'Lebanon', 'Syria', 'Iraq', 'Kuwait', 'Saudi Arabia',
+'Bahrain', 'Qatar', 'United Arab Emirates', 'Oman', 'Yemen', 'Iran', 'Turkey',
+'Egypt', 'Libya', 'Tunisia', 'Algeria', 'Morocco', 'Sudan', 'Mauritania', 'Djibouti', 'Somalia'
+],
+europe: [
+'Albania', 'Andorra', 'Armenia', 'Austria', 'Azerbaijan', 'Belarus', 'Belgium',
+'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic',
+'Denmark', 'Estonia', 'Finland', 'France', 'Georgia', 'Germany', 'Greece',
+'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kazakhstan', 'Kosovo', 'Latvia',
+'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Moldova', 'Monaco',
+'Montenegro', 'Netherlands', 'North Macedonia', 'Norway', 'Poland', 'Portugal',
+'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain',
+'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'Vatican City'
+]
+};
+
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', function() {
+initializeUpload();
+updateTierDisplay();
+updateUserCounter();
+updateScansCounter();
+// Load saved language preference
+const savedLang = localStorage.getItem('checkreel_language') || 'en';
+switchLanguage(savedLang);
+});
+
+// Tier selection
+function selectTier(tier) {
+currentTier = tier;
+localStorage.setItem('checkreel_tier', tier);
+// Update visual selection
+document.querySelectorAll('.tier-plan').forEach(plan => {
+plan.classList.remove('active');
+});
+document.querySelector(`[data-tier="${tier}"]`).classList.add('active');
+// Reset scans if upgrading
+if (tier !== 'free') {
+localStorage.setItem('checkreel_scans_used', '0');
+}
+updateTierDisplay();
+updateScansCounter();
+}
+
+// Region selection
+function selectRegion(region) {
+selectedRegion = region;
+// Remove previous selection
+document.querySelectorAll('.region-option').forEach(opt => opt.classList.remove('selected'));
+// Add selection to clicked option
+document.querySelector(`[data-region="${region}"]`).classList.add('selected');
+updateScanButton();
+updateSelectionAlert();
+}
+
+// Platform selection
+function selectPlatform(platform) {
+selectedPlatform = platform;
+// Remove previous selection
+document.querySelectorAll('.platform-option').forEach(opt => opt.classList.remove('selected'));
+// Add selection to clicked option
+document.querySelector(`[data-platform="${platform}"]`).classList.add('selected');
+updateScanButton();
+updateSelectionAlert();
+}
+
+// Countries modal
+function showCountries(region) {
+const modal = document.getElementById('countriesModal');
+const grid = document.getElementById('countriesGrid');
+const title = document.getElementById('modalTitle');
+title.textContent = `Select Country - ${region.charAt(0).toUpperCase() + region.slice(1)}`;
+grid.innerHTML = '';
+countriesData[region].forEach(country => {
+const item = document.createElement('div');
+item.className = 'country-item';
+item.textContent = country;
+item.onclick = () => selectCountry(country);
+grid.appendChild(item);
+});
+modal.style.display = 'block';
+}
+
+function selectCountry(country) {
+selectedCountry = country;
+closeCountriesModal();
+console.log('Selected country:', country);
+}
+
+function closeCountriesModal() {
+document.getElementById('countriesModal').style.display = 'none';
+}
+
+// Update selection alert
+function updateSelectionAlert() {
+const alert = document.getElementById('selectionAlert');
+if (selectedRegion && selectedPlatform) {
+alert.classList.add('hidden');
+} else {
+alert.classList.remove('hidden');
+}
+}
+
+// File upload functionality
+function initializeUpload() {
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+const fileInfo = document.getElementById('fileInfo');
+const removeFileBtn = document.getElementById('removeFile');
+
+if (!uploadArea || !fileInput) return;
+
+// Click to browse
+uploadArea.addEventListener('click', () => {
+if (!selectedRegion || !selectedPlatform) {
+alert('Please select a region and platform first!');
+return;
+}
+fileInput.click();
+});
+
+// File input change
+fileInput.addEventListener('change', (e) => {
+const file = e.target.files[0];
+if (file && selectedRegion && selectedPlatform) {
+handleFileSelect(file);
+}
+});
+
+// Drag and drop
+uploadArea.addEventListener('dragover', (e) => {
+e.preventDefault();
+if (selectedRegion && selectedPlatform) {
+uploadArea.classList.add('dragover');
+}
+});
+
+uploadArea.addEventListener('dragleave', (e) => {
+e.preventDefault();
+uploadArea.classList.remove('dragover');
+});
+
+uploadArea.addEventListener('drop', (e) => {
+e.preventDefault();
+uploadArea.classList.remove('dragover');
+if (!selectedRegion || !selectedPlatform) {
+alert('Please select a region and platform first!');
+return;
+}
+const file = e.dataTransfer.files[0];
+if (file) {
+handleFileSelect(file);
+}
+});
+
+// Remove file
+if (removeFileBtn) {
+removeFileBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+clearSelectedFile();
+});
+}
+}
+
+function handleFileSelect(file) {
+// Validate file type
+const allowedTypes = ['video/mp4', 'video/quicktime', 'image/jpeg', 'image/png', 'audio/mp3', 'audio/wav'];
+if (!allowedTypes.includes(file.type)) {
+alert('Unsupported file type. Please select MP4, MOV, JPG, PNG, MP3, or WAV files.');
+return;
+}
+
+// Validate file size (100MB limit)
+const maxSize = 100 * 1024 * 1024; // 100MB in bytes
+if (file.size > maxSize) {
+alert('File size too large. Please select a file smaller than 100MB.');
+return;
+}
+
+selectedFile = file;
+displayFileInfo(file);
+updateScanButton();
+}
+
+function displayFileInfo(file) {
+const uploadArea = document.getElementById('uploadArea');
+const fileInfo = document.getElementById('fileInfo');
+const fileName = document.getElementById('fileName');
+const fileSize = document.getElementById('fileSize');
+
+if (fileName) fileName.textContent = file.name;
+if (fileSize) fileSize.textContent = formatFileSize(file.size);
+if (uploadArea) uploadArea.style.display = 'none';
+if (fileInfo) fileInfo.style.display = 'block';
+}
+
+function clearSelectedFile() {
+const uploadArea = document.getElementById('uploadArea');
+const fileInfo = document.getElementById('fileInfo');
+const fileInput = document.getElementById('fileInput');
+
+selectedFile = null;
+if (fileInput) fileInput.value = '';
+if (uploadArea) uploadArea.style.display = 'block';
+if (fileInfo) fileInfo.style.display = 'none';
+updateScanButton();
+}
+
+function formatFileSize(bytes) {
+if (bytes === 0) return '0 Bytes';
+const k = 1024;
+const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+const i = Math.floor(Math.log(bytes) / Math.log(k));
+return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function updateScanButton() {
+const scanBtn = document.getElementById('scanBtn');
+if (!scanBtn) return;
+
+const canScan = selectedFile && selectedPlatform && selectedRegion;
+scanBtn.disabled = !canScan;
+
+if (canScan) {
+scanBtn.classList.add('ready');
+} else {
+scanBtn.classList.remove('ready');
+}
+}
+
+// Scan functionality
+document.addEventListener('DOMContentLoaded', function() {
+const scanBtn = document.getElementById('scanBtn');
+if (scanBtn) {
+scanBtn.addEventListener('click', async function() {
+if (!selectedFile || !selectedPlatform || !selectedRegion) return;
+
+// Check if user has scans remaining
+if (!checkScanLimit()) {
+alert('You have reached your scan limit! Please upgrade your plan.');
+return;
+}
+
+await performScan();
+});
+}
+});
+
+function checkScanLimit() {
+const userTier = localStorage.getItem('checkreel_tier') || 'free';
+const scansUsed = parseInt(localStorage.getItem('checkreel_scans_used') || '0');
+const limits = {
+free: 3,
+plus: 20,
+premium: 40
+};
+return scansUsed < limits[userTier];
+}
+
+async function performScan() {
+const scanBtn = document.getElementById('scanBtn');
+const btnText = document.getElementById('scan-btn-text');
+const btnLoader = document.getElementById('btnLoader');
+const resultsSection = document.getElementById('resultsSection');
+
+if (!scanBtn) return;
+
+// Update button state
+scanBtn.disabled = true;
+if (btnText) btnText.textContent = 'Analyzing...';
+if (btnLoader) btnLoader.classList.add('active');
+
+try {
+// Simulate scan process
+await new Promise(resolve => setTimeout(resolve, 3000));
+
+// Generate mock results
+const results = generateMockResults();
+
+// Display results
+displayResults(results);
+
+// Increment scan count (ACTIVE for testing)
+incrementScanCount();
+
+// Update displays
+updateTierDisplay();
+updateScansCounter();
+
+// Scroll to results
+if (resultsSection) {
+resultsSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+} catch (error) {
+console.error('Scan error:', error);
+alert('An error occurred during scanning. Please try again.');
+} finally {
+// Reset button state
+scanBtn.disabled = false;
+if (btnText) btnText.textContent = 'Start Content Check';
+if (btnLoader) btnLoader.classList.remove('active');
+}
+}
+
+function generateMockResults() {
+const score = Math.floor(Math.random() * 30) + 70; // 70-100
+const issues = [
+{ icon: '⚠️', text: `Audio volume peaks detected for ${selectedPlatform}` },
+{ icon: '📺', text: `Content may not meet ${selectedRegion} guidelines` },
+{ icon: '♿', text: 'Consider adding captions for accessibility' }
+];
+const recommendations = [
+{ icon: '📈', text: `Use trending hashtags for ${selectedPlatform}` },
+{ icon: '⏰', text: `Optimal posting time for ${selectedRegion}: 7-9 PM` },
+{ icon: '🎯', text: 'Target audience alignment: 85%' }
+];
+
+return {
+score: score,
+status: score >= 80 ? 'Ready to Post' : 'Needs Review',
+statusIcon: score >= 80 ? '✅' : '⚠️',
+issues: issues.slice(0, Math.floor(Math.random() * 3) + 1),
+recommendations: recommendations.slice(0, Math.floor(Math.random() * 3) + 1)
+};
+}
+
+function displayResults(results) {
+const resultsSection = document.getElementById('resultsSection');
+const scoreValue = document.getElementById('scoreValue');
+const statusText = document.getElementById('status-text');
+const statusIcon = document.querySelector('.status-icon');
+const issuesList = document.getElementById('issuesList');
+const recommendationsList = document.getElementById('recommendationsList');
+const scoreCircle = document.querySelector('.score-circle');
+
+// Update score
+if (scoreValue) scoreValue.textContent = results.score;
+if (scoreCircle) scoreCircle.style.setProperty('--score', results.score);
+
+// Update status
+if (statusText) statusText.textContent = results.status;
+if (statusIcon) statusIcon.textContent = results.statusIcon;
+
+// Update issues
+if (issuesList) {
+issuesList.innerHTML = '';
+results.issues.forEach(issue => {
+const item = document.createElement('div');
+item.className = 'issue-item';
+item.innerHTML = `
+<span class="issue-icon">${issue.icon}</span>
+<span>${issue.text}</span>
+`;
+issuesList.appendChild(item);
+});
+}
+
+// Update recommendations
+if (recommendationsList) {
+recommendationsList.innerHTML = '';
+results.recommendations.forEach(rec => {
+const item = document.createElement('div');
+item.className = 'recommendation-item';
+item.innerHTML = `
+<span class="recommendation-icon">${rec.icon}</span>
+<span>${rec.text}</span>
+`;
+recommendationsList.appendChild(item);
+});
+}
+
+if (resultsSection) resultsSection.style.display = 'block';
+}
+
+function incrementScanCount() {
+const currentCount = parseInt(localStorage.getItem('checkreel_scans_used') || '0');
+localStorage.setItem('checkreel_scans_used', (currentCount + 1).toString());
+}
+
+// Tier management
+function updateTierDisplay() {
+const userTier = localStorage.getItem('checkreel_tier') || 'free';
+const scansUsed = parseInt(localStorage.getItem('checkreel_scans_used') || '0');
+const tierData = {
+free: { name: 'Free Trial', scans: 3, class: 'tier-free' },
+plus: { name: 'Plus', scans: 20, class: 'tier-plus' },
+premium: { name: 'Premium', scans: 40, class: 'tier-premium' }
+};
+
+const tier = tierData[userTier];
+const scansLeft = Math.max(0, tier.scans - scansUsed);
+const tierBadge = document.getElementById('tierBadge');
+const scansLeftEl = document.getElementById('scansLeft');
+
+if (tierBadge) {
+tierBadge.textContent = tier.name;
+tierBadge.className = `tier-badge ${tier.class}`;
+}
+
+if (scansLeftEl) {
+scansLeftEl.textContent = `${scansLeft} scans left`;
+}
+}
+
+function updateUserCounter() {
+const baseCount = 2697;
+let userIncrement = localStorage.getItem('checkreel_user_increment');
+if (!userIncrement) {
+userIncrement = Math.floor(Math.random() * 100) + 1;
+localStorage.setItem('checkreel_user_increment', userIncrement.toString());
+}
+const totalUsers = baseCount + parseInt(userIncrement);
+
+// Update both stats if they exist
+const activeUsersEl = document.getElementById('active-users');
+if (activeUsersEl) {
+activeUsersEl.textContent = `🔥 ${totalUsers.toLocaleString()} active users`;
+}
+}
+
+function updateScansCounter() {
+const scansUsed = parseInt(localStorage.getItem('checkreel_scans_used') || '0');
+const counterEl = document.getElementById('scansUsedCounter');
+if (counterEl) {
+counterEl.textContent = scansUsed;
+}
+}
+
+function switchLanguage(lang) {
+// Use global currentLanguage or create if not exists
+if (typeof window.currentLanguage === 'undefined') {
+window.currentLanguage = 'en';
+}
+
+window.currentLanguage = lang;
+localStorage.setItem('checkreel_language', lang);
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+btn.classList.remove('active');
+});
+
+const activeBtn = document.querySelector(`[onclick="switchLanguage('${lang}')"]`);
+if (activeBtn) {
+activeBtn.classList.add('active');
+}
+
+if (lang === 'ar') {
+document.body.setAttribute('dir', 'rtl');
+document.documentElement.setAttribute('dir', 'rtl');
+} else {
+document.body.removeAttribute('dir');
+document.documentElement.removeAttribute('dir');
+}
+
+// Apply language content if function exists
+if (typeof window.loadLanguageContent === 'function') {
+window.loadLanguageContent(lang);
+}
+
+console.log('Language switched to:', lang);
+}
+
+// Make functions globally available
+window.switchLanguage = switchLanguage;
+window.selectTier = selectTier;
+window.selectRegion = selectRegion;
+window.selectPlatform = selectPlatform;
+window.showCountries = showCountries;
+window.closeCountriesModal = closeCountriesModal;
+window.selectCountry = selectCountry;
+
+// Close modal when clicking outside
+window.addEventListener('click', function(e) {
+const modal = document.getElementById('countriesModal');
+if (e.target === modal) {
+closeCountriesModal();
+}
+});
+</script>
 </body>
 </html>
