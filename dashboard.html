@@ -79,7 +79,93 @@ letter-spacing: 0.5px;
 .tier-plus { background: #f3e5f5; color: #7b1fa2; }
 .tier-premium { background: #fff3e0; color: #f57c00; }
 
-/* Alert */
+/* Tier Selection */
+.tier-selection {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 25px;
+margin-bottom: 20px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.tier-plans {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+margin-top: 15px;
+}
+
+.tier-plan {
+background: white;
+border: 2px solid #e0e0e0;
+border-radius: 15px;
+padding: 20px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+}
+
+.tier-plan:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tier-plan.active {
+border-color: #1e3c72;
+background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
+color: white;
+}
+
+.tier-plan.recommended {
+border-color: #ff6b6b;
+}
+
+.tier-plan.recommended::before {
+content: "RECOMMENDED";
+position: absolute;
+top: -10px;
+left: 50%;
+transform: translateX(-50%);
+background: #ff6b6b;
+color: white;
+padding: 4px 12px;
+border-radius: 12px;
+font-size: 10px;
+font-weight: bold;
+}
+
+.tier-name {
+font-size: 16px;
+font-weight: bold;
+margin-bottom: 8px;
+}
+
+.tier-price {
+font-size: 18px;
+font-weight: bold;
+color: #1e3c72;
+margin-bottom: 8px;
+}
+
+.tier-plan.active .tier-price {
+color: white;
+}
+
+.tier-scans {
+font-size: 12px;
+opacity: 0.8;
+margin-bottom: 10px;
+}
+
+.tier-features {
+font-size: 11px;
+opacity: 0.9;
+line-height: 1.4;
+}
+
+/* Alert - MOVED BELOW TIER SELECTION */
 .selection-alert {
 background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
 color: white;
@@ -208,12 +294,27 @@ color: white;
 animation: platformGlow 2s infinite ease-in-out;
 }
 
+.platform-option.selected.multiple {
+border-color: #4caf50;
+background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+animation: multiGlow 2s infinite ease-in-out;
+}
+
 @keyframes platformGlow {
 0%, 100% {
 box-shadow: 0 0 20px rgba(233, 30, 99, 0.7);
 }
 50% {
 box-shadow: 0 0 30px rgba(233, 30, 99, 1), 0 0 40px rgba(240, 98, 146, 0.8);
+}
+}
+
+@keyframes multiGlow {
+0%, 100% {
+box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+}
+50% {
+box-shadow: 0 0 30px rgba(76, 175, 80, 1), 0 0 40px rgba(102, 187, 106, 0.8);
 }
 }
 
@@ -228,7 +329,6 @@ opacity: 1;
 }
 
 .platform-option.selected .platform-icon {
-/* Keep icon visible when selected */
 opacity: 1;
 filter: brightness(1.2) contrast(1.1);
 }
@@ -237,6 +337,26 @@ filter: brightness(1.2) contrast(1.1);
 font-size: 11px;
 font-weight: 600;
 text-align: center;
+}
+
+.platform-counter {
+position: absolute;
+top: 5px;
+right: 5px;
+background: #ff6b6b;
+color: white;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+display: none;
+align-items: center;
+justify-content: center;
+font-size: 10px;
+font-weight: bold;
+}
+
+.platform-option.selected .platform-counter {
+display: flex;
 }
 
 /* File Upload */
@@ -291,97 +411,13 @@ cursor: pointer;
 margin-top: 10px;
 }
 
-/* Tier Selection */
-.tier-selection {
-background: rgba(255, 255, 255, 0.95);
-backdrop-filter: blur(10px);
-border-radius: 20px;
-padding: 25px;
-margin-bottom: 20px;
-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.tier-plans {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 15px;
-margin-top: 15px;
-}
-
-.tier-plan {
-background: white;
-border: 2px solid #e0e0e0;
-border-radius: 15px;
-padding: 20px;
-text-align: center;
-cursor: pointer;
-transition: all 0.3s ease;
-position: relative;
-}
-
-.tier-plan:hover {
-transform: translateY(-3px);
-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.tier-plan.active {
-border-color: #1e3c72;
-background: linear-gradient(135deg, #1e3c72 0%, #667eea 100%);
-color: white;
-}
-
-.tier-plan.recommended {
-border-color: #ff6b6b;
-}
-
-.tier-plan.recommended::before {
-content: "RECOMMENDED";
-position: absolute;
-top: -10px;
-left: 50%;
-transform: translateX(-50%);
-background: #ff6b6b;
-color: white;
-padding: 4px 12px;
-border-radius: 12px;
-font-size: 10px;
-font-weight: bold;
-}
-
-.tier-name {
-font-size: 16px;
-font-weight: bold;
-margin-bottom: 8px;
-}
-
-.tier-price {
-font-size: 18px;
-font-weight: bold;
-color: #1e3c72;
-margin-bottom: 8px;
-}
-
-.tier-plan.active .tier-price {
-color: white;
-}
-
-.tier-scans {
-font-size: 12px;
-opacity: 0.8;
-margin-bottom: 10px;
-}
-
-.tier-features {
-font-size: 11px;
-opacity: 0.9;
-line-height: 1.4;
-}
-
-/* Scan Button */
+/* Scan Button - FIXED POSITIONING */
 .scan-section {
 text-align: center;
 margin: 30px 0;
 padding: 20px 0;
+position: relative;
+z-index: 10;
 }
 
 .scan-btn {
@@ -399,6 +435,8 @@ align-items: center;
 gap: 10px;
 min-width: 200px;
 justify-content: center;
+position: relative;
+z-index: 10;
 }
 
 .scan-btn:disabled {
@@ -433,6 +471,88 @@ display: block;
 @keyframes spin {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
+}
+
+/* Scan History Section */
+.scan-history {
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+border-radius: 20px;
+padding: 25px;
+margin-bottom: 20px;
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+display: none;
+}
+
+.scan-history.visible {
+display: block;
+}
+
+.history-filters {
+display: flex;
+gap: 10px;
+margin-bottom: 20px;
+flex-wrap: wrap;
+}
+
+.filter-btn {
+padding: 8px 16px;
+border: 2px solid #e0e0e0;
+border-radius: 20px;
+background: white;
+cursor: pointer;
+transition: all 0.3s ease;
+font-size: 12px;
+}
+
+.filter-btn.active {
+border-color: #1e3c72;
+background: #1e3c72;
+color: white;
+}
+
+.history-item {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 15px;
+background: #f8f9fa;
+border-radius: 10px;
+margin-bottom: 10px;
+transition: all 0.3s ease;
+}
+
+.history-item:hover {
+background: #e3f2fd;
+transform: translateX(5px);
+}
+
+.history-info {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+
+.history-platform {
+width: 30px;
+height: 30px;
+border-radius: 6px;
+}
+
+.history-details h4 {
+margin-bottom: 5px;
+font-size: 14px;
+}
+
+.history-details p {
+font-size: 12px;
+color: #666;
+}
+
+.history-score {
+font-size: 18px;
+font-weight: bold;
+color: #1e3c72;
 }
 
 /* Countries Modal */
@@ -689,39 +809,56 @@ gap: 20px;
 
 <!-- Tier Selection -->
 <div class="tier-selection">
-<h2>🎯 Choose Your Plan</h2>
+<h2 data-lang="choose-plan">🎯 Choose Your Plan</h2>
 <div class="tier-plans">
 <div class="tier-plan active" data-tier="free" onclick="selectTier('free')">
-<div class="tier-name">Free Trial</div>
+<div class="tier-name" data-lang="free-trial">Free Trial</div>
 <div class="tier-price">$0</div>
 <div class="tier-scans">3 scans</div>
-<div class="tier-features">Basic compliance check<br>Standard results</div>
+<div class="tier-features" data-lang="basic-compliance">Basic compliance check<br>Standard results</div>
 </div>
 <div class="tier-plan recommended" data-tier="plus" onclick="selectTier('plus')">
-<div class="tier-name">Plus</div>
+<div class="tier-name" data-lang="plus-plan">Plus</div>
 <div class="tier-price">$4.99/mo</div>
 <div class="tier-scans">20 scans/month</div>
-<div class="tier-features">Enhanced compliance check<br>Detailed insights<br>Scan history<br>Priority support</div>
+<div class="tier-features" data-lang="enhanced-compliance">Enhanced compliance check<br>Detailed insights<br>Scan history<br>Priority support</div>
 </div>
 <div class="tier-plan" data-tier="premium" onclick="selectTier('premium')">
-<div class="tier-name">Premium</div>
+<div class="tier-name" data-lang="premium-plan">Premium</div>
 <div class="tier-price">$9.99/mo</div>
 <div class="tier-scans">40 scans/month</div>
-<div class="tier-features">All features included<br>Advanced AI guidance & analytics<br>Professional tool recommendations<br>Multiple platform scanning (max 3)<br>Scan history & insights</div>
+<div class="tier-features" data-lang="all-features">All features included<br>Advanced AI guidance for content optimization<br>Professional tool recommendations<br>Multiple platform scanning (max 3)<br>Comprehensive scan history & insights</div>
 </div>
 </div>
 </div>
 
-<!-- Selection Alert -->
-<div id="selectionAlert" class="selection-alert">
+<!-- Selection Alert - MOVED BELOW TIER SELECTION -->
+<div id="selectionAlert" class="selection-alert" data-lang="selection-alert">
 ⚠️ Please select a region and platform before uploading content for analysis
+</div>
+
+<!-- Scan History for Plus/Premium Users -->
+<div id="scanHistory" class="scan-history">
+<h2 data-lang="scan-history">📋 Scan History</h2>
+<div class="history-filters">
+<button class="filter-btn active" onclick="filterHistory('all')">All</button>
+<button class="filter-btn" onclick="filterHistory('tiktok')">TikTok</button>
+<button class="filter-btn" onclick="filterHistory('youtube')">YouTube</button>
+<button class="filter-btn" onclick="filterHistory('instagram')">Instagram</button>
+<button class="filter-btn" onclick="filterHistory('facebook')">Facebook</button>
+<button class="filter-btn" onclick="filterHistory('twitter')">Twitter</button>
+<button class="filter-btn" onclick="filterHistory('snapchat')">Snapchat</button>
+</div>
+<div id="historyList">
+<!-- History items will be populated here -->
+</div>
 </div>
 
 <!-- Main Dashboard -->
 <div class="dashboard-grid">
 <!-- Region Selection -->
 <div class="card">
-<h2>🌍 Select Region</h2>
+<h2 data-lang="select-region">🌍 Select Region</h2>
 <div class="region-grid">
 <div class="region-option" data-region="global" onclick="selectRegion('global')">
 <img src="images/region-icons/global.png" alt="Global" class="region-icon"
@@ -748,31 +885,140 @@ onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background:
 
 <!-- Platform Selection -->
 <div class="card">
-<h2>📱 Select Platform</h2>
+<h2 data-lang="select-platform">📱 Select Platform</h2>
 <div class="platforms-grid">
 <div class="platform-option" data-platform="tiktok" onclick="selectPlatform('tiktok')">
-<img src="images/tiktok.png" alt="TikTok" class="platform-icon">
+<img src="images/tiktok.png" alt="TikTok" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #000; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>TT</div>';">
 <span class="platform-name">TikTok</span>
+<div class="platform-counter">1</div>
 </div>
 <div class="platform-option" data-platform="youtube" onclick="selectPlatform('youtube')">
-<img src="images/youtube.png" alt="YouTube" class="platform-icon">
+<img src="images/youtube.png" alt="YouTube" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #ff0000; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>YT</div>';">
 <span class="platform-name">YouTube</span>
+<div class="platform-counter">2</div>
 </div>
 <div class="platform-option" data-platform="instagram" onclick="selectPlatform('instagram')">
+<img src="images/instagram.png" alt="Instagram" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>IG</div>';">
+<span class="platform-name">Instagram</span>
+<div class="platform-counter">3</div>
+</div>
+<div class="platform-option" data-platform="facebook" onclick="selectPlatform('facebook')">
+<img src="images/facebook.png" alt="Facebook" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #1877f2; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>FB</div>';">
+<span class="platform-name">Facebook</span>
+<div class="platform-counter">1</div>
+</div>
+<div class="platform-option" data-platform="twitter" onclick="selectPlatform('twitter')">
+<img src="images/twitter.png" alt="Twitter" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #1da1f2; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 10px;&quot;>TW</div>';">
+<span class="platform-name">Twitter</span>
+<div class="platform-counter">2</div>
+</div>
+<div class="platform-option" data-platform="snapchat" onclick="selectPlatform('snapchat')">
+<img src="images/snapchat.png" alt="Snapchat" class="platform-icon"
+onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background: #fffc00; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; font-size: 10px;&quot;>SC</div>';">
+<span class="platform-name">Snapchat</span>
+<div class="platform-counter">3</div>
+</div>
+</div>
+</div>
+
+<!-- File Upload -->
+<div class="card">
+<h2 data-lang="upload-content">📁 Upload Content</h2>
+<div id="uploadArea" class="upload-area">
+<span class="upload-icon">📤</span>
+<h3 data-lang="drop-content">Drop your content here</h3>
+<p data-lang="click-browse">or click to browse files</p>
+<small data-lang="file-support">Supports: MP4, MOV, JPG, PNG, MP3, WAV (max 100MB)</small>
+</div>
+<div id="fileInfo" class="file-info">
+<div class="file-name" id="fileName"></div>
+<div class="file-size" id="fileSize"></div>
+<button id="removeFile" class="remove-file">Remove File</button>
+</div>
+<input type="file" id="fileInput" style="display: none;" accept="video/*,image/*,audio/*">
+</div>
+</div>
+
+<!-- Scan Button -->
+<div class="scan-section">
+<button id="scanBtn" class="scan-btn" disabled>
+<span id="scan-btn-text" data-lang="start-content-check">Start Content Check</span>
+<div id="btnLoader" class="btn-loader"></div>
+</button>
+</div>
+
+<!-- Results Section -->
+<div id="resultsSection" class="results-section">
+<div class="card">
+<h2 data-lang="compliance-results">📊 Compliance Results</h2>
+<div class="score-display">
+<div class="score-circle" style="--score: 85">
+<span id="scoreValue" class="score-value">85</span>
+</div>
+<div class="status-indicator">
+<span class="status-icon">✅</span>
+<span id="status-text">Ready to Post</span>
+</div>
+</div>
+<div class="results-grid">
+<div class="issues-card">
+<h3 data-lang="issues-found">⚠️ Issues Found</h3>
+<div id="issuesList"></div>
+</div>
+<div class="recommendations-card">
+<h3 data-lang="recommendations">💡 Recommendations</h3>
+<div id="recommendationsList"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">2,697+</div>
+<div class="stat-label" data-lang="active-users">Active Users</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">15,847</div>
+<div class="stat-label" data-lang="content-scanned">Content Scanned</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">94%</div>
+<div class="stat-label" data-lang="success-rate">Success Rate</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">6</div>
+<div class="stat-label" data-lang="platforms">Platforms</div>
+</div>
+<div class="stat-card">
+<div class="stat-number" id="scansUsedCounter">0</div>
+<div class="stat-label" data-lang="scans-used">Scans Used (Testing)</div>
+</div>
+</div>="selectPlatform('instagram')">
 <img src="images/instagram.png" alt="Instagram" class="platform-icon">
 <span class="platform-name">Instagram</span>
+<div class="platform-counter">3</div>
 </div>
 <div class="platform-option" data-platform="facebook" onclick="selectPlatform('facebook')">
 <img src="images/facebook.png" alt="Facebook" class="platform-icon">
 <span class="platform-name">Facebook</span>
+<div class="platform-counter">1</div>
 </div>
 <div class="platform-option" data-platform="twitter" onclick="selectPlatform('twitter')">
 <img src="images/twitter.png" alt="Twitter" class="platform-icon">
 <span class="platform-name">Twitter</span>
+<div class="platform-counter">2</div>
 </div>
 <div class="platform-option" data-platform="snapchat" onclick="selectPlatform('snapchat')">
 <img src="images/snapchat.png" alt="Snapchat" class="platform-icon">
 <span class="platform-name">Snapchat</span>
+<div class="platform-counter">3</div>
 </div>
 </div>
 </div>
@@ -877,19 +1123,264 @@ onerror="this.outerHTML='<div style=&quot;width: 35px; height: 35px; background:
 </div>
 </div>
 
+<!-- Language Loader Script -->
+<script>
+// Language content loader for CheckReel Dashboard
+const LANGUAGE_CONTENT = {
+    en: {
+        "page-title": "CheckReel Dashboard",
+        "dashboard-title": "CheckReel Dashboard",
+        "choose-plan": "🎯 Choose Your Plan",
+        "free-trial": "Free Trial",
+        "plus-plan": "Plus", 
+        "premium-plan": "Premium",
+        "basic-compliance": "Basic compliance check<br>Standard results",
+        "enhanced-compliance": "Enhanced compliance check<br>Detailed insights<br>Scan history<br>Priority support",
+        "all-features": "All features included<br>Advanced AI guidance for content optimization<br>Professional tool recommendations<br>Multiple platform scanning (max 3)<br>Comprehensive scan history & insights",
+        "selection-alert": "⚠️ Please select a region and platform before uploading content for analysis",
+        "scan-history": "📋 Scan History",
+        "select-region": "🌍 Select Region",
+        "select-platform": "📱 Select Platform", 
+        "upload-content": "📁 Upload Content",
+        "drop-content": "Drop your content here",
+        "click-browse": "or click to browse files",
+        "file-support": "Supports: MP4, MOV, JPG, PNG, MP3, WAV (max 100MB)",
+        "start-content-check": "Start Content Check",
+        "analyzing": "Analyzing...",
+        "compliance-results": "📊 Compliance Results",
+        "issues-found": "⚠️ Issues Found",
+        "recommendations": "💡 Recommendations",
+        "active-users": "Active Users",
+        "content-scanned": "Content Scanned", 
+        "success-rate": "Success Rate",
+        "platforms": "Platforms",
+        "scans-used": "Scans Used (Testing)"
+    },
+    fr: {
+        "page-title": "Tableau de bord CheckReel",
+        "dashboard-title": "Tableau de bord CheckReel", 
+        "choose-plan": "🎯 Choisissez votre plan",
+        "free-trial": "Essai gratuit",
+        "plus-plan": "Plus",
+        "premium-plan": "Premium", 
+        "basic-compliance": "Vérification de conformité de base<br>Résultats standard",
+        "enhanced-compliance": "Vérification de conformité améliorée<br>Informations détaillées<br>Historique des analyses<br>Support prioritaire",
+        "all-features": "Toutes les fonctionnalités incluses<br>Conseils IA avancés pour l'optimisation du contenu<br>Recommandations d'outils professionnels<br>Analyse multi-plateforme (max 3)<br>Historique et informations complets",
+        "selection-alert": "⚠️ Veuillez sélectionner une région et une plateforme avant de télécharger du contenu pour analyse",
+        "scan-history": "📋 Historique des analyses",
+        "select-region": "🌍 Sélectionner la région",
+        "select-platform": "📱 Sélectionner la plateforme",
+        "upload-content": "📁 Télécharger le contenu",
+        "drop-content": "Déposez votre contenu ici",
+        "click-browse": "ou cliquez pour parcourir les fichiers", 
+        "file-support": "Supporte: MP4, MOV, JPG, PNG, MP3, WAV (max 100MB)",
+        "start-content-check": "Commencer la vérification",
+        "analyzing": "Analyse en cours...",
+        "compliance-results": "📊 Résultats de conformité",
+        "issues-found": "⚠️ Problèmes trouvés",
+        "recommendations": "💡 Recommandations",
+        "active-users": "Utilisateurs actifs",
+        "content-scanned": "Contenu analysé",
+        "success-rate": "Taux de réussite", 
+        "platforms": "Plateformes",
+        "scans-used": "Analyses utilisées (Test)"
+    },
+    ar: {
+        "page-title": "لوحة تحكم تشيكريل",
+        "dashboard-title": "لوحة تحكم تشيكريل",
+        "choose-plan": "🎯 اختر خطتك", 
+        "free-trial": "تجربة مجانية",
+        "plus-plan": "بلس",
+        "premium-plan": "بريميوم",
+        "basic-compliance": "فحص امتثال أساسي<br>نتائج قياسية",
+        "enhanced-compliance": "فحص امتثال محسن<br>رؤى مفصلة<br>سجل المسح<br>دعم أولوية",
+        "all-features": "جميع الميزات مشمولة<br>إرشادات ذكية متقدمة لتحسين المحتوى<br>توصيات أدوات احترافية<br>مسح متعدد المنصات (الحد الأقصى 3)<br>سجل ورؤى شاملة للمسح",
+        "selection-alert": "⚠️ يرجى تحديد منطقة ومنصة قبل رفع المحتوى للتحليل",
+        "scan-history": "📋 سجل المسح",
+        "select-region": "🌍 اختر المنطقة", 
+        "select-platform": "📱 اختر المنصة",
+        "upload-content": "📁 رفع المحتوى",
+        "drop-content": "اسحب محتواك هنا",
+        "click-browse": "أو انقر للتصفح",
+        "file-support": "يدعم: MP4, MOV, JPG, PNG, MP3, WAV (الحد الأقصى 100 ميجابايت)",
+        "start-content-check": "بدء فحص المحتوى", 
+        "analyzing": "جاري التحليل...",
+        "compliance-results": "📊 نتائج الامتثال",
+        "issues-found": "⚠️ المشاكل الموجودة", 
+        "recommendations": "💡 التوصيات",
+        "active-users": "المستخدمون النشطون",
+        "content-scanned": "المحتوى الممسوح",
+        "success-rate": "معدل النجاح",
+        "platforms": "المنصات", 
+        "scans-used": "المسوحات المستخدمة (اختبار)"
+    }
+};
+
+let dashboardLanguage = 'en';
+
+async function loadLanguageFromFile(lang) {
+    try {
+        const response = await fetch(`data/${lang}.json`);
+        if (response.ok) {
+            return await response.json();
+        }
+    } catch (error) {
+        console.warn(`Could not load ${lang}.json, using embedded content`);
+    }
+    return LANGUAGE_CONTENT[lang] || LANGUAGE_CONTENT.en;
+}
+
+function applyLanguageContent(content) {
+    // Update page title
+    if (content['page-title']) {
+        document.title = content['page-title'];
+    }
+    
+    // Apply content to elements with data-lang attributes and direct IDs
+    Object.keys(content).forEach(key => {
+        // Try direct ID match
+        const element = document.getElementById(key);
+        if (element) {
+            if (element.tagName === 'INPUT' && element.type === 'submit') {
+                element.value = content[key];
+            } else if (element.tagName === 'INPUT') {
+                element.placeholder = content[key];
+            } else {
+                element.innerHTML = content[key];
+            }
+        }
+        
+        // Try data-lang attribute match
+        const langElements = document.querySelectorAll(`[data-lang="${key}"]`);
+        langElements.forEach(el => {
+            if (el.tagName === 'INPUT' && el.type === 'submit') {
+                el.value = content[key];
+            } else if (el.tagName === 'INPUT') {
+                el.placeholder = content[key];
+            } else {
+                el.innerHTML = content[key];
+            }
+        });
+    });
+    
+    updateSpecialElements(content);
+}
+
+function updateSpecialElements(content) {
+    // Update tier features
+    const freeFeatures = document.querySelector('[data-tier="free"] .tier-features');
+    if (freeFeatures && content['basic-compliance']) {
+        freeFeatures.innerHTML = content['basic-compliance'];
+    }
+    
+    const plusFeatures = document.querySelector('[data-tier="plus"] .tier-features');
+    if (plusFeatures && content['enhanced-compliance']) {
+        plusFeatures.innerHTML = content['enhanced-compliance'];
+    }
+    
+    const premiumFeatures = document.querySelector('[data-tier="premium"] .tier-features');
+    if (premiumFeatures && content['all-features']) {
+        premiumFeatures.innerHTML = content['all-features'];
+    }
+    
+    // Update tier names
+    const freeTitle = document.querySelector('[data-tier="free"] .tier-name');
+    if (freeTitle && content['free-trial']) {
+        freeTitle.textContent = content['free-trial'];
+    }
+    
+    const plusTitle = document.querySelector('[data-tier="plus"] .tier-name');
+    if (plusTitle && content['plus-plan']) {
+        plusTitle.textContent = content['plus-plan'];
+    }
+    
+    const premiumTitle = document.querySelector('[data-tier="premium"] .tier-name');
+    if (premiumTitle && content['premium-plan']) {
+        premiumTitle.textContent = content['premium-plan'];
+    }
+    
+    updateActiveUsersCount(content);
+}
+
+function updateActiveUsersCount(content) {
+    const activeUsersEl = document.querySelector('.stat-card .stat-number');
+    if (!activeUsersEl) return;
+    
+    const baseCount = 2697;
+    let userIncrement = localStorage.getItem('checkreel_user_increment');
+    
+    if (!userIncrement) {
+        userIncrement = Math.floor(Math.random() * 100) + 1;
+        localStorage.setItem('checkreel_user_increment', userIncrement.toString());
+    }
+    
+    const totalUsers = baseCount + parseInt(userIncrement);
+    activeUsersEl.textContent = `${totalUsers.toLocaleString()}+`;
+}
+
+async function loadLanguageContent(lang) {
+    dashboardLanguage = lang;
+    
+    try {
+        const content = await loadLanguageFromFile(lang);
+        applyLanguageContent(content);
+        
+        localStorage.setItem('checkreel_language', lang);
+        document.documentElement.lang = lang;
+        
+        if (lang === 'ar') {
+            document.body.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.body.removeAttribute('dir');
+            document.documentElement.removeAttribute('dir');
+        }
+        
+    } catch (error) {
+        console.error('Failed to load language content:', error);
+        if (lang !== 'en') {
+            loadLanguageContent('en');
+        }
+    }
+}
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('checkreel_language') || 'en';
+    loadLanguageContent(savedLang);
+});
+
+// Make language functions globally available
+window.loadLanguageContent = loadLanguageContent;
+window.LANGUAGE_CONTENT = LANGUAGE_CONTENT;
+</script>
+
 <script>
 // Global variables
 let selectedFile = null;
-let selectedPlatform = null;
+let selectedPlatforms = []; // Changed to array for multi-platform support
 let selectedRegion = null;
 let selectedCountry = null;
 let currentTier = 'free';
-let currentLanguage = 'en';
 
-// Load language from homepage
+// Load language from homepage and initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
-    currentLanguage = localStorage.getItem('checkreel_language') || 'en';
-    console.log('Dashboard loaded with language:', currentLanguage);
+    const savedLanguage = localStorage.getItem('checkreel_language') || 'en';
+    console.log('Dashboard loaded with language:', savedLanguage);
+    
+    // Initialize all dashboard components
+    initializeUpload();
+    updateTierDisplay();
+    updateUserCounter();
+    updateScansCounter();
+    updateScanHistory();
+    
+    // Load language content (will be loaded by the embedded language loader)
+    setTimeout(() => {
+        if (typeof loadLanguageContent === 'function') {
+            loadLanguageContent(savedLanguage);
+        }
+    }, 100);
 });
 
 // Countries data
@@ -917,10 +1408,7 @@ europe: [
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
-initializeUpload();
-updateTierDisplay();
-updateUserCounter();
-updateScansCounter();
+// Remove duplicate - initialization is now handled above
 });
 
 // Tier selection
@@ -938,6 +1426,7 @@ localStorage.setItem('checkreel_scans_used', '0');
 }
 updateTierDisplay();
 updateScansCounter();
+updateScanHistory();
 }
 
 // Region selection
@@ -951,15 +1440,60 @@ updateScanButton();
 updateSelectionAlert();
 }
 
-// Platform selection
+// Platform selection - Enhanced for multi-platform support
 function selectPlatform(platform) {
-selectedPlatform = platform;
-// Remove previous selection
-document.querySelectorAll('.platform-option').forEach(opt => opt.classList.remove('selected'));
-// Add selection to clicked option
-document.querySelector(`[data-platform="${platform}"]`).classList.add('selected');
+const currentTier = localStorage.getItem('checkreel_tier') || 'free';
+const platformElement = document.querySelector(`[data-platform="${platform}"]`);
+const counter = platformElement.querySelector('.platform-counter');
+const isSelected = selectedPlatforms.includes(platform);
+
+if (currentTier === 'premium') {
+// Premium users can select up to 3 platforms
+if (isSelected) {
+// Remove platform
+selectedPlatforms = selectedPlatforms.filter(p => p !== platform);
+platformElement.classList.remove('selected', 'multiple');
+} else {
+// Add platform (max 3)
+if (selectedPlatforms.length < 3) {
+selectedPlatforms.push(platform);
+platformElement.classList.add('selected');
+if (selectedPlatforms.length > 1) {
+platformElement.classList.add('multiple');
+}
+} else {
+alert('Premium users can select maximum 3 platforms per scan');
+return;
+}
+}
+} else {
+// Free and Plus users can only select one platform
+selectedPlatforms = [platform];
+document.querySelectorAll('.platform-option').forEach(opt => {
+opt.classList.remove('selected', 'multiple');
+});
+platformElement.classList.add('selected');
+}
+
+// Update counter display
+updatePlatformCounters();
 updateScanButton();
 updateSelectionAlert();
+}
+
+function updatePlatformCounters() {
+document.querySelectorAll('.platform-option').forEach((option, index) => {
+const counter = option.querySelector('.platform-counter');
+const platform = option.dataset.platform;
+const platformIndex = selectedPlatforms.indexOf(platform);
+
+if (platformIndex !== -1) {
+counter.textContent = platformIndex + 1;
+counter.style.display = 'flex';
+} else {
+counter.style.display = 'none';
+}
+});
 }
 
 // Countries modal
@@ -992,11 +1526,66 @@ document.getElementById('countriesModal').style.display = 'none';
 // Update selection alert
 function updateSelectionAlert() {
 const alert = document.getElementById('selectionAlert');
-if (selectedRegion && selectedPlatform) {
+if (selectedRegion && selectedPlatforms.length > 0) {
 alert.classList.add('hidden');
 } else {
 alert.classList.remove('hidden');
 }
+}
+
+// Scan History Management
+function updateScanHistory() {
+const currentTier = localStorage.getItem('checkreel_tier') || 'free';
+const historySection = document.getElementById('scanHistory');
+
+if (currentTier === 'plus' || currentTier === 'premium') {
+historySection.classList.add('visible');
+loadScanHistory();
+} else {
+historySection.classList.remove('visible');
+}
+}
+
+function loadScanHistory() {
+const historyList = document.getElementById('historyList');
+const scanHistory = JSON.parse(localStorage.getItem('checkreel_scan_history') || '[]');
+
+if (scanHistory.length === 0) {
+historyList.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No scan history yet. Start scanning to see your results here!</p>';
+return;
+}
+
+historyList.innerHTML = '';
+scanHistory.forEach(scan => {
+const historyItem = document.createElement('div');
+historyItem.className = 'history-item';
+historyItem.innerHTML = `
+<div class="history-info">
+<img src="images/${scan.platform}.png" alt="${scan.platform}" class="history-platform">
+<div class="history-details">
+<h4>${scan.filename}</h4>
+<p>${scan.region} • ${scan.platform} • ${scan.date}</p>
+</div>
+</div>
+<div class="history-score">${scan.score}</div>
+`;
+historyList.appendChild(historyItem);
+});
+}
+
+function filterHistory(platform) {
+document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+event.target.classList.add('active');
+
+const historyItems = document.querySelectorAll('.history-item');
+historyItems.forEach(item => {
+const itemPlatform = item.querySelector('.history-platform').alt;
+if (platform === 'all' || itemPlatform === platform) {
+item.style.display = 'flex';
+} else {
+item.style.display = 'none';
+}
+});
 }
 
 // File upload functionality
@@ -1010,7 +1599,7 @@ if (!uploadArea || !fileInput) return;
 
 // Click to browse
 uploadArea.addEventListener('click', () => {
-if (!selectedRegion || !selectedPlatform) {
+if (!selectedRegion || selectedPlatforms.length === 0) {
 alert('Please select a region and platform first!');
 return;
 }
@@ -1020,7 +1609,7 @@ fileInput.click();
 // File input change
 fileInput.addEventListener('change', (e) => {
 const file = e.target.files[0];
-if (file && selectedRegion && selectedPlatform) {
+if (file && selectedRegion && selectedPlatforms.length > 0) {
 handleFileSelect(file);
 }
 });
@@ -1028,7 +1617,7 @@ handleFileSelect(file);
 // Drag and drop
 uploadArea.addEventListener('dragover', (e) => {
 e.preventDefault();
-if (selectedRegion && selectedPlatform) {
+if (selectedRegion && selectedPlatforms.length > 0) {
 uploadArea.classList.add('dragover');
 }
 });
@@ -1041,7 +1630,7 @@ uploadArea.classList.remove('dragover');
 uploadArea.addEventListener('drop', (e) => {
 e.preventDefault();
 uploadArea.classList.remove('dragover');
-if (!selectedRegion || !selectedPlatform) {
+if (!selectedRegion || selectedPlatforms.length === 0) {
 alert('Please select a region and platform first!');
 return;
 }
@@ -1062,7 +1651,7 @@ clearSelectedFile();
 
 function handleFileSelect(file) {
 // Validate file type
-const allowedTypes = ['video/mp4', 'video/quicktime', 'image/jpeg', 'image/png', 'audio/mp3', 'audio/wav'];
+const allowedTypes = ['video/mp4', 'video/quicktime', 'image/jpeg', 'image/png', 'audio/mp3', 'audio/wav', 'audio/opus'];
 if (!allowedTypes.includes(file.type)) {
 alert('Unsupported file type. Please select MP4, MOV, JPG, PNG, MP3, or WAV files.');
 return;
@@ -1116,7 +1705,7 @@ function updateScanButton() {
 const scanBtn = document.getElementById('scanBtn');
 if (!scanBtn) return;
 
-const canScan = selectedFile && selectedPlatform && selectedRegion;
+const canScan = selectedFile && selectedPlatforms.length > 0 && selectedRegion;
 scanBtn.disabled = !canScan;
 
 if (canScan) {
@@ -1131,7 +1720,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const scanBtn = document.getElementById('scanBtn');
 if (scanBtn) {
 scanBtn.addEventListener('click', async function() {
-if (!selectedFile || !selectedPlatform || !selectedRegion) return;
+if (!selectedFile || selectedPlatforms.length === 0 || !selectedRegion) return;
 
 // Check if user has scans remaining
 if (!checkScanLimit()) {
@@ -1163,20 +1752,31 @@ const resultsSection = document.getElementById('resultsSection');
 
 if (!scanBtn) return;
 
+// Get current language for button text
+const currentLang = localStorage.getItem('checkreel_language') || 'en';
+const analyzingText = {
+    'en': 'Analyzing...',
+    'fr': 'Analyse en cours...',
+    'ar': 'جاري التحليل...'
+};
+
 // Update button state
 scanBtn.disabled = true;
-if (btnText) btnText.textContent = 'Analyzing...';
+if (btnText) btnText.textContent = analyzingText[currentLang] || 'Analyzing...';
 if (btnLoader) btnLoader.classList.add('active');
 
 try {
 // Simulate scan process
 await new Promise(resolve => setTimeout(resolve, 3000));
 
-// Generate consistent results (same score for all tiers)
-const results = generateConsistentResults();
+// Generate results based on issue severity
+const results = generateEnhancedResults();
 
 // Display results
 displayResults(results);
+
+// Save to scan history for Plus/Premium users
+saveScanToHistory(results);
 
 // Increment scan count (ACTIVE for testing)
 incrementScanCount();
@@ -1184,6 +1784,7 @@ incrementScanCount();
 // Update displays
 updateTierDisplay();
 updateScansCounter();
+updateScanHistory();
 
 // Scroll to results
 if (resultsSection) {
@@ -1194,56 +1795,99 @@ resultsSection.scrollIntoView({ behavior: 'smooth' });
 console.error('Scan error:', error);
 alert('An error occurred during scanning. Please try again.');
 } finally {
-// Reset button state
+// Reset button state with correct language
+const startText = {
+    'en': 'Start Content Check',
+    'fr': 'Commencer la vérification',
+    'ar': 'بدء فحص المحتوى'
+};
 scanBtn.disabled = false;
-if (btnText) btnText.textContent = 'Start Content Check';
+if (btnText) btnText.textContent = startText[currentLang] || 'Start Content Check';
 if (btnLoader) btnLoader.classList.remove('active');
 }
 }
 
-function generateConsistentResults() {
-// CONSISTENT score across all tiers - only details change
-const score = 85; // Fixed score
+function generateEnhancedResults() {
 const userTier = localStorage.getItem('checkreel_tier') || 'free';
+const score = 70 + Math.floor(Math.random() * 31); // 70-100
+
+// Dynamic status based on severity
+let status, statusIcon;
+if (score >= 90) {
+status = 'Excellent - Ready to Post';
+statusIcon = '🌟';
+} else if (score >= 80) {
+status = 'Ready to Post';
+statusIcon = '✅';
+} else if (score >= 70) {
+status = 'Minor Issues - Review Recommended';
+statusIcon = '⚠️';
+} else if (score >= 60) {
+status = 'Needs Attention';
+statusIcon = '🔴';
+} else {
+status = 'Significant Issues Found';
+statusIcon = '❌';
+}
 
 let issues, recommendations;
 
 if (userTier === 'free') {
 issues = [
-{ icon: '⚠️', text: `Basic compliance check for ${selectedPlatform}` }
+{ icon: '⚠️', text: `Basic compliance check for ${selectedPlatforms[0]}` }
 ];
 recommendations = [
 { icon: '💡', text: `Consider upgrading for detailed insights` }
 ];
 } else if (userTier === 'plus') {
 issues = [
-{ icon: '⚠️', text: `Audio levels need adjustment for ${selectedPlatform}` },
+{ icon: '⚠️', text: `Audio levels need adjustment for ${selectedPlatforms[0]}` },
 { icon: '📺', text: `Content may not fully align with ${selectedRegion} guidelines` }
 ];
 recommendations = [
-{ icon: '📈', text: `Use trending hashtags for ${selectedPlatform}` },
+{ icon: '📈', text: `Use trending hashtags for ${selectedPlatforms[0]}` },
 { icon: '⏰', text: `Optimal posting time for ${selectedRegion}: 7-9 PM` }
 ];
 } else { // premium
 issues = [
-{ icon: '⚠️', text: `Audio levels: Consider ElevenLabs for voice enhancement` },
-{ icon: '📺', text: `Visual quality: Try Ideogram for better graphics` },
-{ icon: '🎬', text: `Video enhancement: Use Kling.AI or Luma Labs for effects` }
+{ icon: '⚠️', text: `Audio levels: Consider professional audio enhancement tools` },
+{ icon: '📺', text: `Visual quality: Enhance graphics with professional design tools` },
+{ icon: '🎬', text: `Video enhancement: Use professional video editing tools for better effects` }
 ];
 recommendations = [
-{ icon: '🤖', text: `Claude recommends: Adjust content pacing for ${selectedPlatform}` },
-{ icon: '💬', text: `ChatGPT Plus suggests: Improve engagement hooks` },
-{ icon: '🛠️', text: `AI Tools: Ideogram (graphics), ElevenLabs (audio), Kling.AI (video)` }
+{ icon: '🤖', text: `AI Analysis suggests: Adjust content pacing for ${selectedPlatforms.join(', ')}` },
+{ icon: '💬', text: `Advanced AI recommends: Improve engagement hooks` },
+{ icon: '🛠️', text: `Professional Tools: Enhanced graphics, audio optimization, and video effects available` }
 ];
 }
 
 return {
 score: score,
-status: score >= 80 ? 'Ready to Post' : 'Needs Review',
-statusIcon: score >= 80 ? '✅' : '⚠️',
+status: status,
+statusIcon: statusIcon,
 issues: issues,
 recommendations: recommendations
 };
+}
+
+function saveScanToHistory(results) {
+const currentTier = localStorage.getItem('checkreel_tier') || 'free';
+if (currentTier === 'free') return;
+
+const scanHistory = JSON.parse(localStorage.getItem('checkreel_scan_history') || '[]');
+const newScan = {
+filename: selectedFile.name,
+platform: selectedPlatforms.join(', '),
+region: selectedRegion,
+score: results.score,
+date: new Date().toLocaleDateString(),
+status: results.status
+};
+
+scanHistory.unshift(newScan); // Add to beginning
+if (scanHistory.length > 50) scanHistory.pop(); // Keep last 50 scans
+
+localStorage.setItem('checkreel_scan_history', JSON.stringify(scanHistory));
 }
 
 function displayResults(results) {
@@ -1308,7 +1952,7 @@ const userTier = localStorage.getItem('checkreel_tier') || 'free';
 let detailedContent = '';
 
 if (userTier === 'premium' && type === 'recommendation') {
-        detailedContent = `
+detailedContent = `
 <p><strong>Advanced AI Analysis:</strong></p>
 <p>${item.text}</p>
 <br>
@@ -1320,7 +1964,7 @@ if (userTier === 'premium' && type === 'recommendation') {
 <li>✨ <strong>Content Analysis:</strong> Advanced AI-powered content optimization</li>
 </ul>
 <br>
-<p><strong>AI Model Insights:</strong> This analysis uses multiple AI models with dynamic switching for optimal performance and accuracy.</p>
+<p><strong>AI Guidance:</strong> This analysis uses advanced AI technology with dynamic optimization for optimal performance and accuracy.</p>
 `;
 } else {
 detailedContent = `
@@ -1378,7 +2022,7 @@ localStorage.setItem('checkreel_user_increment', userIncrement.toString());
 }
 const totalUsers = baseCount + parseInt(userIncrement);
 
-// Update both stats if they exist
+// Update stats if they exist
 const activeUsersEl = document.getElementById('active-users');
 if (activeUsersEl) {
 activeUsersEl.textContent = `🔥 ${totalUsers.toLocaleString()} active users`;
@@ -1402,6 +2046,7 @@ window.closeCountriesModal = closeCountriesModal;
 window.selectCountry = selectCountry;
 window.showInsight = showInsight;
 window.closeInsightModal = closeInsightModal;
+window.filterHistory = filterHistory;
 
 // Close modals when clicking outside
 window.addEventListener('click', function(e) {
