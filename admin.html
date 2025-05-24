@@ -1,1065 +1,9 @@
-﻿<small style="color: #666;">sarah@company.com - Pending for 5 minutes</small>
-                                    </div>
-                                    <button class="btn btn-sm btn-success" onclick="retrySync('scan_result_002')">↻ Retry</button>
-                                </div>
-                            </div>
-
-                            <div style="padding: 12px; background: #d4edda; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #28a745;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <strong>Analytics data sync</strong><br>
-                                        <small style="color: #666;">Completed 1 minute ago</small>
-                                    </div>
-                                    <span style="color: #28a745; font-weight: 600;">✓ Done</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance Tab -->
-            <div id="tab-performance" class="tab-content">
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h2>⚡ PWA Performance Monitor</h2>
-                        <div class="card-actions">
-                            <button class="btn btn-primary btn-sm" onclick="runPerformanceAudit()">🔍 Run Audit</button>
-                            <button class="btn btn-info btn-sm" onclick="viewLighthouseReport()">📊 Lighthouse</button>
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px;">
-                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border-radius: 12px;">
-                            <div style="font-size: 1.8rem; font-weight: bold;">89</div>
-                            <div style="font-size: 12px;">PWA Score</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 12px;">
-                            <div style="font-size: 1.8rem; font-weight: bold;">2.3s</div>
-                            <div style="font-size: 12px;">Load Time</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #FF9800, #F57C00); color: white; border-radius: 12px;">
-                            <div style="font-size: 1.8rem; font-weight: bold;">95</div>
-                            <div style="font-size: 12px;">Lighthouse</div>
-                        </div>
-                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; border-radius: 12px;">
-                            <div style="font-size: 1.8rem; font-weight: bold;">99.9%</div>
-                            <div style="font-size: 12px;">Uptime</div>
-                        </div>
-                    </div>
-
-                    <div class="admin-card">
-                        <div class="card-header">
-                            <h2>📈 Performance Metrics</h2>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="performanceChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="admin-card">
-                        <div class="card-header">
-                            <h2>🎯 Core Web Vitals</h2>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
-                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 12px; border: 3px solid #4CAF50;">
-                                <div style="font-size: 2.2rem; font-weight: bold; color: #4CAF50; margin-bottom: 8px;">1.2s</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">Largest Contentful Paint</div>
-                                <div style="font-size: 11px; color: #4CAF50; font-weight: 600;">GOOD</div>
-                            </div>
-                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 12px; border: 3px solid #4CAF50;">
-                                <div style="font-size: 2.2rem; font-weight: bold; color: #4CAF50; margin-bottom: 8px;">0.08</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">First Input Delay</div>
-                                <div style="font-size: 11px; color: #4CAF50; font-weight: 600;">GOOD</div>
-                            </div>
-                            <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 12px; border: 3px solid #FF9800;">
-                                <div style="font-size: 2.2rem; font-weight: bold; color: #FF9800; margin-bottom: 8px;">0.12</div>
-                                <div style="font-weight: 600; margin-bottom: 4px;">Cumulative Layout Shift</div>
-                                <div style="font-size: 11px; color: #FF9800; font-weight: 600;">NEEDS IMPROVEMENT</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Tab -->
-            <div id="tab-settings" class="tab-content">
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h2>⚙️ PWA Configuration</h2>
-                        <div class="card-actions">
-                            <button class="btn btn-success btn-sm" onclick="savePWASettings()">💾 Save All</button>
-                            <button class="btn btn-warning btn-sm" onclick="resetPWASettings()">🔄 Reset</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>PWA Name</label>
-                        <input type="text" value="CheckReel - Content Compliance Checker" id="pwaName">
-                    </div>
-
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Theme Color</label>
-                            <input type="color" value="#667eea" id="themeColor">
-                        </div>
-                        <div class="form-group">
-                            <label>Background Color</label>
-                            <input type="color" value="#1e3c72" id="backgroundColor">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>PWA Display Mode</label>
-                        <select id="displayMode">
-                            <option value="standalone" selected>Standalone</option>
-                            <option value="fullscreen">Fullscreen</option>
-                            <option value="minimal-ui">Minimal UI</option>
-                            <option value="browser">Browser</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Start URL</label>
-                        <input type="url" value="/" id="startUrl">
-                    </div>
-
-                    <div class="form-group">
-                        <label>PWA Description</label>
-                        <textarea id="pwaDescription" rows="3">AI-powered content compliance checker for social media platforms. Ensure your content meets platform guidelines before posting.</textarea>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h2>🔔 Push Notification Settings</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label>VAPID Public Key</label>
-                        <input type="text" value="BH7..." id="vapidPublicKey">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Default Notification Icon</label>
-                        <input type="text" value="/images/icon-192.png" id="notificationIcon">
-                    </div>
-
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Auto-Request Permission</label>
-                            <select id="autoRequestPermission">
-                                <option value="true">Enabled</option>
-                                <option value="false" selected>Disabled</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Notification Timeout</label>
-                            <input type="number" value="5000" id="notificationTimeout">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h2>📡 Offline Configuration</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Cache Strategy</label>
-                        <select id="cacheStrategy">
-                            <option value="cache-first" selected>Cache First</option>
-                            <option value="network-first">Network First</option>
-                            <option value="stale-while-revalidate">Stale While Revalidate</option>
-                            <option value="network-only">Network Only</option>
-                        </select>
-                    </div>
-
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Max Cache Age (hours)</label>
-                            <input type="number" value="24" id="maxCacheAge">
-                        </div>
-                        <div class="form-group">
-                            <label>Max Cache Size (MB)</label>
-                            <input type="number" value="50" id="maxCacheSize">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Offline Page URL</label>
-                        <input type="text" value="/offline.html" id="offlinePageUrl">
-                    </div>
-                </div>
-
-                <div class="admin-card">
-                    <div class="card-header">
-                        <h2>🛠️ Development Tools</h2>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <button class="btn btn-primary" onclick="generateManifest()">📄 Generate Manifest</button>
-                        <button class="btn btn-success" onclick="validatePWA()">✅ Validate PWA</button>
-                        <button class="btn btn-warning" onclick="clearAllCaches()">🗑️ Clear All Caches</button>
-                        <button class="btn btn-info" onclick="exportPWAConfig()">📤 Export Config</button>
-                        <button class="btn btn-danger" onclick="resetServiceWorker()">🔄 Reset SW</button>
-                        <button class="btn btn-primary" onclick="testOfflineMode()">📡 Test Offline</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Bottom Navigation -->
-        <div class="mobile-bottom-nav">
-            <div class="bottom-nav-items">
-                <div class="bottom-nav-item active" onclick="switchMobileTab('pwa-analytics')">
-                    <div class="bottom-nav-icon">📊</div>
-                    <span>Analytics</span>
-                </div>
-                <div class="bottom-nav-item" onclick="switchMobileTab('users')">
-                    <div class="bottom-nav-icon">👥</div>
-                    <span>Users</span>
-                </div>
-                <div class="bottom-nav-item" onclick="switchMobileTab('notifications')">
-                    <div class="bottom-nav-icon">🔔</div>
-                    <span>Notify</span>
-                </div>
-                <div class="bottom-nav-item" onclick="switchMobileTab('offline')">
-                    <div class="bottom-nav-icon">📡</div>
-                    <span>Offline</span>
-                </div>
-                <div class="bottom-nav-item" onclick="switchMobileTab('performance')">
-                    <div class="bottom-nav-icon">⚡</div>
-                    <span>Speed</span>
-                </div>
-                <div class="bottom-nav-item" onclick="switchMobileTab('settings')">
-                    <div class="bottom-nav-icon">⚙️</div>
-                    <span>Settings</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Loading and Messages -->
-        <div id="messageContainer"></div>
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Processing request...</p>
-        </div>
-    </div>
-
-    <script>
-        // PWA-Optimized Admin Dashboard Functionality
-        let deferredPrompt;
-        let pwaInstallChart, platformInstallChart, usagePatternChart, performanceChart;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePWAFeatures();
-            initializeCharts();
-            updateStats();
-            checkPWAInstallability();
-            checkNotificationPermission();
-            checkOnlineStatus();
-            registerServiceWorkerEvents();
-        });
-
-        // PWA Installation Management
-        function initializePWAFeatures() {
-            // Listen for beforeinstallprompt event
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                showInstallBanner();
-            });
-
-            // Listen for app installed event
-            window.addEventListener('appinstalled', (e) => {
-                hideInstallBanner();
-                showMessage('🎉 CheckReel PWA installed successfully!', 'success');
-                updateInstallStats();
-            });
-        }
-
-        function checkPWAInstallability() {
-            // Check if app is already installed
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                hideInstallBanner();
-                updatePWAStatus('installed');
-            } else if (deferredPrompt) {
-                showInstallBanner();
-            }
-        }
-
-        function showInstallBanner() {
-            const banner = document.getElementById('pwaInstallBanner');
-            banner.classList.add('show');
-        }
-
-        function hideInstallBanner() {
-            const banner = document.getElementById('pwaInstallBanner');
-            banner.classList.remove('show');
-        }
-
-        function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        showMessage('🎉 CheckReel PWA installation started!', 'success');
-                    } else {
-                        showMessage('ℹ️ PWA installation cancelled', 'info');
-                    }
-                    deferredPrompt = null;
-                });
-            }
-        }
-
-        function forceAppInstall() {
-            if (deferredPrompt) {
-                installPWA();
-            } else {
-                showMessage('📱 PWA installation not available. Try refreshing the page.', 'warning');
-            }
-        }
-
-        // Push Notification Management
-        function checkNotificationPermission() {
-            if ('Notification' in window) {
-                if (Notification.permission === 'default') {
-                    showNotificationPermissionBanner();
-                } else if (Notification.permission === 'granted') {
-                    updatePWAStatus('notifications-enabled');
-                } else {
-                    updatePWAStatus('notifications-denied');
-                }
-            }
-        }
-
-        function showNotificationPermissionBanner() {
-            const banner = document.getElementById('notificationPermission');
-            banner.classList.add('show');
-        }
-
-        function requestNotificationPermission() {
-            if ('Notification' in window) {
-                Notification.requestPermission().then((permission) => {
-                    if (permission === 'granted') {
-                        showMessage('🔔 Notifications enabled successfully!', 'success');
-                        hideNotificationPermissionBanner();
-                        updatePWAStatus('notifications-enabled');
-                    } else {
-                        showMessage('⚠️ Notification permission denied', 'warning');
-                    }
-                });
-            }
-        }
-
-        function hideNotificationPermissionBanner() {
-            const banner = document.getElementById('notificationPermission');
-            banner.classList.remove('show');
-        }
-
-        function sendPushNotification() {
-            if (Notification.permission === 'granted') {
-                new Notification('CheckReel Admin', {
-                    body: 'Test notification from PWA Admin Dashboard',
-                    icon: '/images/icon-192.png',
-                    badge: '/images/icon-192.png',
-                    tag: 'admin-test'
-                });
-                showMessage('🔔 Test push notification sent!', 'success');
-            } else {
-                showMessage('⚠️ Push notifications not enabled', 'warning');
-                requestNotificationPermission();
-            }
-        }
-
-        function sendBulkPushNotification(event) {
-            event.preventDefault();
-            const title = document.getElementById('pushTitle').value;
-            const message = document.getElementById('pushMessage').value;
-            const target = document.getElementById('pushTarget').value;
-
-            if (!title || !message) {
-                showMessage('Please fill in all notification fields', 'error');
-                return;
-            }
-
-            showLoading(true);
-            
-            setTimeout(() => {
-                showLoading(false);
-                showMessage(`🔔 Push notification sent to ${target} users!`, 'success');
-                document.querySelector('.notification-form').reset();
-            }, 2000);
-        }
-
-        function sendQuickNotification(event) {
-            event.preventDefault();
-            const type = document.getElementById('quickNotificationType').value;
-            const priority = document.getElementById('quickNotificationPriority').value;
-            const title = document.getElementById('quickNotificationTitle').value;
-            const message = document.getElementById('quickNotificationMessage').value;
-
-            showLoading(true);
-            
-            setTimeout(() => {
-                showLoading(false);
-                showMessage(`🔔 ${type} notification sent with ${priority} priority!`, 'success');
-                event.target.reset();
-            }, 1500);
-        }
-
-        // Offline Management
-        function checkOnlineStatus() {
-            function updateOnlineStatus() {
-                const banner = document.getElementById('offlineBanner');
-                if (navigator.onLine) {
-                    banner.classList.remove('show');
-                    updatePWAStatus('online');
-                } else {
-                    banner.classList.add('show');
-                    updatePWAStatus('offline');
-                }
-            }
-
-            window.addEventListener('online', updateOnlineStatus);
-            window.addEventListener('offline', updateOnlineStatus);
-            updateOnlineStatus();
-        }
-
-        function syncOfflineData() {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showMessage('☁️ Offline data synced successfully!', 'success');
-                updateStats();
-            }, 2000);
-        }
-
-        function clearAppCache() {
-            if ('caches' in window) {
-                caches.keys().then((cacheNames) => {
-                    return Promise.all(
-                        cacheNames.map((cacheName) => {
-                            return caches.delete(cacheName);
-                        })
-                    );
-                }).then(() => {
-                    showMessage('🧹 App cache cleared successfully!', 'success');
-                });
-            }
-        }
-
-        // Service Worker Management
-        function registerServiceWorkerEvents() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.ready.then((registration) => {
-                    updatePWAStatus('service-worker-active');
-                });
-
-                navigator.serviceWorker.addEventListener('message', (event) => {
-                    if (event.data && event.data.type === 'CACHE_UPDATED') {
-                        showMessage('🔄 App updated in background', 'info');
-                    }
-                });
-            }
-        }
-
-        function updateServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistration().then((registration) => {
-                    if (registration) {
-                        registration.update().then(() => {
-                            showMessage('🔄 Service Worker updated!', 'success');
-                        });
-                    }
-                });
-            }
-        }
-
-        function unregisterServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistration().then((registration) => {
-                    if (registration) {
-                        registration.unregister().then(() => {
-                            showMessage('🗑️ Service Worker unregistered!', 'warning');
-                        });
-                    }
-                });
-            }
-        }
-
-        // Chart Initialization
-        function initializeCharts() {
-            // PWA Install Chart
-            const pwaCtx = document.getElementById('pwaInstallChart').getContext('2d');
-            pwaInstallChart = new Chart(pwaCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'PWA Installs',
-                        data: [45, 78, 123, 167, 245, 289, 334, 401, 478, 523, 601, 687],
-                        borderColor: '#4CAF50',
-                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // Platform Install Chart
-            const platformCtx = document.getElementById('platformInstallChart').getContext('2d');
-            platformInstallChart = new Chart(platformCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Android', 'iOS', 'Desktop', 'Other'],
-                    datasets: [{
-                        data: [567, 389, 234, 57],
-                        backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-
-            // Usage Pattern Chart
-            const usageCtx = document.getElementById('usagePatternChart').getContext('2d');
-            usagePatternChart = new Chart(usageCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    datasets: [{
-                        label: 'PWA Usage',
-                        data: [234, 267, 298, 256, 223, 189, 167],
-                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
-                        borderColor: '#667eea',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // Performance Chart
-            const perfCtx = document.getElementById('performanceChart');
-            if (perfCtx) {
-                performanceChart = new Chart(perfCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-                        datasets: [{
-                            label: 'Load Time (seconds)',
-                            data: [2.1, 1.9, 2.3, 2.8, 2.4, 2.1],
-                            borderColor: '#FF9800',
-                            backgroundColor: 'rgba(255, 152, 0, 0.1)',
-                            tension: 0.4
-                        }, {
-                            label: 'PWA Score',
-                            data: [89, 91, 87, 85, 88, 89],
-                            borderColor: '#4CAF50',
-                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        // Mobile Navigation
-        function switchMobileTab(tabName) {
-            // Update bottom nav active state
-            document.querySelectorAll('.bottom-nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-
-            // Switch tab content
-            switchTab(tabName);
-        }
-
-        function switchTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab content
-            document.getElementById(`tab-${tabName}`).classList.add('active');
-            
-            // Add active class to clicked button (if exists)
-            const tabBtn = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
-            if (tabBtn) {
-                tabBtn.classList.add('active');
-            }
-            
-            // Load tab-specific data
-            loadTabData(tabName);
-        }
-
-        function loadTabData(tabName) {
-            switch(tabName) {
-                case 'pwa-analytics':
-                    refreshPWAStats();
-                    break;
-                case 'users':
-                    refreshPWAUsers();
-                    break;
-                case 'notifications':
-                    refreshNotificationStats();
-                    break;
-                case 'performance':
-                    refreshPerformanceStats();
-                    break;
-            }
-        }
-
-        // PWA-Specific Functions
-        function refreshPWAStats() {
-            showMessage('📊 PWA analytics refreshed', 'success');
-            updateStats();
-        }
-
-        function exportPWAData() {
-            showMessage('📤 PWA data exported successfully', 'success');
-        }
-
-        function viewInstallStats() {
-            showMessage('📊 Install statistics: 87% mobile, 13% desktop', 'info');
-        }
-
-        function bulkNotifyUsers() {
-            showMessage('🔔 Bulk notification sent to all PWA users', 'success');
-        }
-
-        function notifyUser(email) {
-            showMessage(`🔔 Notification sent to ${email}`, 'success');
-        }
-
-        function enablePushForUser(email) {
-            showMessage(`🔔 Push notifications enabled for ${email}`, 'success');
-        }
-
-        function promoteInstall(email) {
-            showMessage(`📱 Install promotion sent to ${email}`, 'success');
-        }
-
-        function runPerformanceAudit() {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showMessage('🔍 Performance audit completed: 89/100 PWA Score', 'success');
-            }, 3000);
-        }
-
-        function viewLighthouseReport() {
-            showMessage('📊 Lighthouse report: Performance 95, PWA 89, Accessibility 92', 'info');
-        }
-
-        function savePWASettings() {
-            showMessage('💾 PWA settings saved successfully', 'success');
-        }
-
-        function generateManifest() {
-            showMessage('📄 Manifest.json generated successfully', 'success');
-        }
-
-        function validatePWA() {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showMessage('✅ PWA validation passed: All requirements met', 'success');
-            }, 2000);
-        }
-
-        // Utility Functions
-        function updatePWAStatus(status) {
-            // Update PWA status indicators
-            console.log('PWA Status updated:', status);
-        }
-
-        function updateStats() {
-            // Update all dashboard statistics
-            const stats = [
-                { id: 'totalUsers', base: 2847, growth: 0.1 },
-                { id: 'totalInstalls', base: 1247, growth: 0.2 },
-                { id: 'dailyInstalls', base: 47, growth: 0.15 },
-                { id: 'retentionRate', base: 78, growth: 0.05, suffix: '%' },
-                { id: 'offlineUsers', base: 89, growth: 0.1 },
-                { id: 'pwaEngagement', base: 89, growth: 0.03, suffix: '%' },
-                { id: 'offlineUsage', base: 23, growth: 0.08, suffix: '%' },
-                { id: 'pushOptIn', base: 67, growth: -0.03, suffix: '%' }
-            ];
-
-            stats.forEach(stat => {
-                const element = document.getElementById(stat.id);
-                if (element) {
-                    const variance = Math.floor(Math.random() * 10) - 5;
-                    const currentValue = stat.base + variance;
-                    const suffix = stat.suffix || '';
-                    element.textContent = `${currentValue.toLocaleString()}${suffix}`;
-                }
-            });
-        }
-
-        function updateInstallStats() {
-            const installs = document.getElementById('totalInstalls');
-            if (installs) {
-                const current = parseInt(installs.textContent) || 1247;
-                installs.textContent = (current + 1).toLocaleString();
-            }
-        }
-
-        function showLoading(show) {
-            const loading = document.getElementById('loading');
-            loading.style.display = show ? 'block' : 'none';
-        }
-
-        function showMessage(text, type) {
-            const container = document.getElementById('messageContainer');
-            const messageId = 'msg_' + Date.now();
-            
-            container.innerHTML = `<div class="message ${type}" id="${messageId}">
-                <span>${getMessageIcon(type)}</span>
-                <span>${text}</span>
-            </div>`;
-            
-            const messageEl = document.getElementById(messageId);
-            messageEl.style.display = 'flex';
-            
-            setTimeout(() => {
-                if (messageEl) {
-                    messageEl.remove();
-                }
-            }, 5000);
-        }
-
-        function getMessageIcon(type) {
-            const icons = {
-                success: '✅',
-                error: '❌',
-                warning: '⚠️',
-                info: 'ℹ️'
-            };
-            return icons[type] || 'ℹ️';
-        }
-
-        // Additional PWA Functions
-        function schedulePushNotification() {
-            const date = prompt('Schedule notification for (YYYY-MM-DD HH:MM):');
-            if (date) {
-                showMessage(`⏰ Push notification scheduled for ${date}`, 'success');
-            }
-        }
-
-        function testPushNotification() {
-            sendPushNotification();
-        }
-
-        function viewNotificationStats() {
-            showMessage('📊 Notification Stats: 890 subscribers, 67% opt-in rate, 89% open rate', 'info');
-        }
-
-        function scheduleNotification() {
-            showMessage('⏰ Notification scheduled successfully', 'success');
-        }
-
-        function forceOfflineSync() {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showMessage('🔄 Offline sync completed successfully', 'success');
-            }, 2000);
-        }
-
-        function clearOfflineData() {
-            if (confirm('Are you sure you want to clear all offline data?')) {
-                showMessage('🗑️ Offline data cleared successfully', 'warning');
-            }
-        }
-
-        function clearAppShellCache() {
-            showMessage('🧹 App shell cache cleared', 'success');
-        }
-
-        function clearAPICache() {
-            showMessage('🧹 API cache cleared', 'success');
-        }
-
-        function clearImageCache() {
-            showMessage('🧹 Image cache cleared', 'success');
-        }
-
-        function retrySync(syncId) {
-            showLoading(true);
-            setTimeout(() => {
-                showLoading(false);
-                showMessage(`🔄 Sync ${syncId} completed successfully`, 'success');
-            }, 1500);
-        }
-
-        function refreshPWAUsers() {
-            showMessage('👥 PWA user list refreshed', 'success');
-        }
-
-        function refreshNotificationStats() {
-            showMessage('🔔 Notification statistics refreshed', 'success');
-        }
-
-        function refreshPerformanceStats() {
-            showMessage('⚡ Performance metrics refreshed', 'success');
-        }
-
-        function resetPWASettings() {
-            if (confirm('Reset all PWA settings to default?')) {
-                showMessage('🔄 PWA settings reset to defaults', 'warning');
-            }
-        }
-
-        function clearAllCaches() {
-            if (confirm('Clear all application caches?')) {
-                showLoading(true);
-                setTimeout(() => {
-                    showLoading(false);
-                    showMessage('🗑️ All caches cleared successfully', 'success');
-                }, 2000);
-            }
-        }
-
-        function exportPWAConfig() {
-            showMessage('📤 PWA configuration exported', 'success');
-        }
-
-        function resetServiceWorker() {
-            if (confirm('Reset Service Worker? This will clear all cached data.')) {
-                unregisterServiceWorker();
-            }
-        }
-
-        function testOfflineMode() {
-            showMessage('📡 Offline mode test initiated', 'info');
-        }
-
-        function toggleMobileMenu() {
-            // Mobile menu toggle functionality
-            showMessage('☰ Mobile menu toggled', 'info');
-        }
-
-        // Auto-refresh stats every 30 seconds
-        setInterval(() => {
-            updateStats();
-        }, 30000);
-
-        // PWA Install Prompt Handling
-        let installPromptEvent;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            installPromptEvent = e;
-            showInstallBanner();
-        });
-
-        // Performance monitoring
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.addEventListener('message', event => {
-                if (event.data && event.data.type === 'PERFORMANCE_UPDATE') {
-                    updatePerformanceMetrics(event.data.metrics);
-                }
-            });
-        }
-
-        function updatePerformanceMetrics(metrics) {
-            // Update performance display
-            console.log('Performance metrics updated:', metrics);
-        }
-
-        // Initialize PWA features when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if running as PWA
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                document.body.classList.add('pwa-mode');
-                showMessage('📱 Running as PWA!', 'success');
-            }
-
-            // Initialize touch gestures for mobile
-            initializeTouchGestures();
-        });
-
-        function initializeTouchGestures() {
-            // Add touch gesture support for mobile navigation
-            let startX, startY;
-
-            document.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            });
-
-            document.addEventListener('touchend', (e) => {
-                if (!startX || !startY) return;
-
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                const diffX = startX - endX;
-                const diffY = startY - endY;
-
-                // Implement swipe gestures for tab navigation
-                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
-                    if (diffX > 0) {
-                        // Swipe left - next tab
-                        console.log('Swipe left detected');
-                    } else {
-                        // Swipe right - previous tab
-                        console.log('Swipe right detected');
-                    }
-                }
-            });
-        }
-
-        // Background sync handling
-        if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
-            navigator.serviceWorker.ready.then((registration) => {
-                // Register background sync
-                return registration.sync.register('background-sync');
-            }).then(() => {
-                showMessage('🔄 Background sync enabled', 'success');
-            }).catch((error) => {
-                console.error('Background sync registration failed:', error);
-            });
-        }
-
-        // Network status monitoring
-        function handleOnlineStatus() {
-            if (navigator.onLine) {
-                showMessage('🌐 Back online - syncing data...', 'success');
-                syncOfflineData();
-            } else {
-                showMessage('📡 You are now offline', 'warning');
-            }
-        }
-
-        window.addEventListener('online', handleOnlineStatus);
-        window.addEventListener('offline', handleOnlineStatus);
-
-        // PWA update detection
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                showMessage('🔄 App updated! Please refresh to see changes.', 'info');
-            });
-        }
-
-        // Battery API for PWA optimization
-        if ('getBattery' in navigator) {
-            navigator.getBattery().then((battery) => {
-                function updateBatteryInfo() {
-                    if (battery.level < 0.2) {
-                        // Enable power-saving mode
-                        document.body.classList.add('power-saving');
-                        showMessage('🔋 Low battery detected - power saving mode enabled', 'warning');
-                    }
-                }
-
-                battery.addEventListener('levelchange', updateBatteryInfo);
-                updateBatteryInfo();
-            });
-        }
-
-        // Memory usage monitoring
-        if ('memory' in performance) {
-            const memoryInfo = performance.memory;
-            if (memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit > 0.8) {
-                showMessage('⚠️ High memory usage detected', 'warning');
-            }
-        }
-
-        // Connection quality monitoring
-        if ('connection' in navigator) {
-            const connection = navigator.connection;
-            
-            function updateConnectionStatus() {
-                if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-                    document.body.classList.add('slow-connection');
-                    showMessage('🐌 Slow connection detected - optimizing for performance', 'info');
-                } else {
-                    document.body.classList.remove('slow-connection');
-                }
-            }
-
-            connection.addEventListener('change', updateConnectionStatus);
-            updateConnectionStatus();
-        }
-
-        // Visibility API for performance optimization
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // App is in background, reduce activity
-                console.log('App moved to background');
-            } else {
-                // App is visible again, resume normal activity
-                console.log('App is visible again');
-                updateStats();
-            }
-        });
-
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            showMessage('🚀 CheckReel PWA Admin Dashboard loaded successfully!', 'success');
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheckReel PWA Admin</title>
+    <title>CheckReel PWA Admin - إدارة تشيك ريل</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1083,13 +27,70 @@
             touch-action: manipulation;
             user-select: none;
             -webkit-user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        /* RTL Support */
+        body[dir="rtl"] {
+            font-family: 'Cairo', 'Amiri', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body[dir="rtl"] .admin-card,
+        body[dir="rtl"] .card-header,
+        body[dir="rtl"] .form-group {
+            text-align: right;
+        }
+
+        body[dir="rtl"] .stats-grid,
+        body[dir="rtl"] .pwa-quick-actions,
+        body[dir="rtl"] .install-metrics {
+            direction: rtl;
+        }
+
+        body[dir="rtl"] .card-actions {
+            justify-content: flex-start;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .language-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .lang-flag {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .lang-text {
+            font-weight: 600;
+            color: white;
+            font-size: 12px;
         }
 
         .admin-container {
             max-width: 1800px;
             margin: 0 auto;
             padding: 10px;
-            padding-bottom: 80px; /* Space for bottom nav */
+            padding-bottom: 80px;
         }
 
         /* PWA Install Banner */
@@ -1112,6 +113,11 @@
         .install-text {
             flex: 1;
             margin-right: 15px;
+        }
+
+        body[dir="rtl"] .install-text {
+            margin-right: 0;
+            margin-left: 15px;
         }
 
         .install-btn {
@@ -1165,6 +171,12 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .mobile-menu-btn {
@@ -1749,6 +761,63 @@
             50% { opacity: 0.7; }
         }
 
+        /* Chart Container - Mobile Optimized */
+        .chart-container {
+            height: 250px;
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .chart-mini {
+            height: 180px;
+        }
+
+        /* Notification Permission */
+        .notification-permission {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .notification-permission.show {
+            display: flex;
+        }
+
+        .permission-text {
+            flex: 1;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        body[dir="rtl"] .permission-text {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+
+        .permission-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .permission-btn:hover {
+            background: white;
+            color: #4CAF50;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .admin-container {
@@ -1813,6 +882,23 @@
             .pwa-action-text {
                 font-size: 10px;
             }
+
+            .header-controls {
+                gap: 10px;
+            }
+
+            .language-toggle {
+                padding: 6px 10px;
+            }
+
+            .lang-text {
+                font-size: 11px;
+            }
+        }
+
+        /* Touch Feedback */
+        .touch-feedback:active {
+            background: rgba(102, 126, 234, 0.1);
         }
 
         /* PWA Install Animation */
@@ -1831,61 +917,9 @@
             animation: slideInUp 0.5s ease-out;
         }
 
-        /* Touch Feedback */
-        .touch-feedback:active {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        /* Chart Container - Mobile Optimized */
-        .chart-container {
-            height: 250px;
-            position: relative;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-        }
-
-        .chart-mini {
-            height: 180px;
-        }
-
-        /* Notification Permission */
-        .notification-permission {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .notification-permission.show {
-            display: flex;
-        }
-
-        .permission-text {
-            flex: 1;
-            margin-right: 15px;
-            font-size: 14px;
-        }
-
-        .permission-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
+        /* Language Transition */
+        .lang-transition {
             transition: all 0.3s ease;
-            font-size: 12px;
-        }
-
-        .permission-btn:hover {
-            background: white;
-            color: #4CAF50;
         }
     </style>
 </head>
@@ -1894,25 +928,25 @@
         <!-- PWA Install Banner -->
         <div id="pwaInstallBanner" class="pwa-install-banner">
             <div class="install-text">
-                <strong>📱 Install CheckReel PWA</strong><br>
-                <small>Get the full app experience on your device!</small>
+                <strong data-en="📱 Install CheckReel PWA" data-ar="📱 تثبيت تطبيق تشيك ريل">📱 Install CheckReel PWA</strong><br>
+                <small data-en="Get the full app experience on your device!" data-ar="احصل على تجربة التطبيق الكاملة على جهازك!">Get the full app experience on your device!</small>
             </div>
-            <button class="install-btn" onclick="installPWA()">Install App</button>
+            <button class="install-btn" onclick="installPWA()" data-en="Install App" data-ar="تثبيت التطبيق">Install App</button>
         </div>
 
         <!-- Notification Permission Banner -->
         <div id="notificationPermission" class="notification-permission">
             <div class="permission-text">
-                <strong>🔔 Enable Notifications</strong><br>
-                <small>Get updates about your CheckReel PWA</small>
+                <strong data-en="🔔 Enable Notifications" data-ar="🔔 تفعيل الإشعارات">🔔 Enable Notifications</strong><br>
+                <small data-en="Get updates about your CheckReel PWA" data-ar="احصل على تحديثات حول تطبيق تشيك ريل">Get updates about your CheckReel PWA</small>
             </div>
-            <button class="permission-btn" onclick="requestNotificationPermission()">Enable</button>
+            <button class="permission-btn" onclick="requestNotificationPermission()" data-en="Enable" data-ar="تفعيل">Enable</button>
         </div>
 
         <!-- Offline Banner -->
         <div id="offlineBanner" class="offline-banner">
             <span>📡</span>
-            <span>You're offline. Some features may be limited.</span>
+            <span data-en="You're offline. Some features may be limited." data-ar="أنت غير متصل. قد تكون بعض الميزات محدودة.">You're offline. Some features may be limited.</span>
         </div>
 
         <!-- Header -->
@@ -1920,12 +954,18 @@
             <div class="logo-section">
                 <img src="images/logo.png" alt="CheckReel Logo" class="logo-img" 
                      onerror="this.style.display='none';">
-                <span class="logo-text">CheckReel PWA Admin</span>
+                <span class="logo-text" data-en="CheckReel PWA Admin" data-ar="إدارة تشيك ريل">CheckReel PWA Admin</span>
             </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="header-controls">
+                <div class="language-toggle" onclick="toggleLanguage()">
+                    <div class="lang-flag" id="currentFlag">🇺🇸</div>
+                    <span class="lang-text" id="currentLang">English</span>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            </div>
             <div class="admin-badges">
-                <div class="admin-badge badge-owner">👑 Owner</div>
-                <div class="admin-badge badge-pwa">📱 PWA</div>
+                <div class="admin-badge badge-owner" data-en="👑 Owner" data-ar="👑 المالك">👑 Owner</div>
+                <div class="admin-badge badge-pwa" data-en="📱 PWA" data-ar="📱 تطبيق ويب">📱 PWA</div>
             </div>
         </div>
 
@@ -1933,19 +973,19 @@
         <div class="pwa-status-bar">
             <div class="pwa-status-item">
                 <div class="status-dot status-online"></div>
-                <span>PWA Online</span>
+                <span data-en="PWA Online" data-ar="التطبيق متصل">PWA Online</span>
             </div>
             <div class="pwa-status-item">
                 <div class="status-dot status-online"></div>
-                <span>Service Worker Active</span>
+                <span data-en="Service Worker Active" data-ar="العامل النشط">Service Worker Active</span>
             </div>
             <div class="pwa-status-item">
                 <div class="status-dot status-warning"></div>
-                <span>Push Notifications</span>
+                <span data-en="Push Notifications" data-ar="الإشعارات الفورية">Push Notifications</span>
             </div>
             <div class="pwa-status-item">
                 <div class="status-dot status-online"></div>
-                <span>Background Sync</span>
+                <span data-en="Background Sync" data-ar="المزامنة التلقائية">Background Sync</span>
             </div>
         </div>
 
@@ -1953,33 +993,33 @@
         <div class="pwa-quick-actions">
             <div class="pwa-action touch-feedback" onclick="forceAppInstall()">
                 <span class="pwa-action-icon">📱</span>
-                <div class="pwa-action-text">Force Install</div>
-                <div class="pwa-action-count">245 installs</div>
+                <div class="pwa-action-text" data-en="Force Install" data-ar="إجبار التثبيت">Force Install</div>
+                <div class="pwa-action-count" data-en="245 installs" data-ar="245 تثبيت">245 installs</div>
             </div>
             <div class="pwa-action touch-feedback" onclick="sendPushNotification()">
                 <span class="pwa-action-icon">🔔</span>
-                <div class="pwa-action-text">Push Notify</div>
-                <div class="pwa-action-count">1,247 subscribers</div>
+                <div class="pwa-action-text" data-en="Push Notify" data-ar="إرسال إشعار">Push Notify</div>
+                <div class="pwa-action-count" data-en="1,247 subscribers" data-ar="1,247 مشترك">1,247 subscribers</div>
             </div>
             <div class="pwa-action touch-feedback" onclick="clearAppCache()">
                 <span class="pwa-action-icon">🧹</span>
-                <div class="pwa-action-text">Clear Cache</div>
-                <div class="pwa-action-count">15.2 MB</div>
+                <div class="pwa-action-text" data-en="Clear Cache" data-ar="مسح التخزين">Clear Cache</div>
+                <div class="pwa-action-count" data-en="15.2 MB" data-ar="15.2 ميجا">15.2 MB</div>
             </div>
             <div class="pwa-action touch-feedback" onclick="updateServiceWorker()">
                 <span class="pwa-action-icon">🔄</span>
-                <div class="pwa-action-text">Update SW</div>
-                <div class="pwa-action-count">v2.1.0</div>
+                <div class="pwa-action-text" data-en="Update SW" data-ar="تحديث العامل">Update SW</div>
+                <div class="pwa-action-count" data-en="v2.1.0" data-ar="إصدار 2.1.0">v2.1.0</div>
             </div>
             <div class="pwa-action touch-feedback" onclick="syncOfflineData()">
                 <span class="pwa-action-icon">☁️</span>
-                <div class="pwa-action-text">Sync Data</div>
-                <div class="pwa-action-count">23 pending</div>
+                <div class="pwa-action-text" data-en="Sync Data" data-ar="مزامنة البيانات">Sync Data</div>
+                <div class="pwa-action-count" data-en="23 pending" data-ar="23 معلق">23 pending</div>
             </div>
             <div class="pwa-action touch-feedback" onclick="viewInstallStats()">
                 <span class="pwa-action-icon">📊</span>
-                <div class="pwa-action-text">Install Stats</div>
-                <div class="pwa-action-count">87% mobile</div>
+                <div class="pwa-action-text" data-en="Install Stats" data-ar="إحصائيات التثبيت">Install Stats</div>
+                <div class="pwa-action-count" data-en="87% mobile" data-ar="87% موبايل">87% mobile</div>
             </div>
         </div>
 
@@ -1987,19 +1027,19 @@
         <div class="install-metrics">
             <div class="install-metric">
                 <div class="install-number" id="totalInstalls">1,247</div>
-                <div class="install-label">Total Installs</div>
+                <div class="install-label" data-en="Total Installs" data-ar="إجمالي التثبيتات">Total Installs</div>
             </div>
             <div class="install-metric">
                 <div class="install-number" id="dailyInstalls">47</div>
-                <div class="install-label">Today's Installs</div>
+                <div class="install-label" data-en="Today's Installs" data-ar="تثبيتات اليوم">Today's Installs</div>
             </div>
             <div class="install-metric">
                 <div class="install-number" id="retentionRate">78%</div>
-                <div class="install-label">7-Day Retention</div>
+                <div class="install-label" data-en="7-Day Retention" data-ar="الاحتفاظ لـ 7 أيام">7-Day Retention</div>
             </div>
             <div class="install-metric">
                 <div class="install-number" id="offlineUsers">89</div>
-                <div class="install-label">Offline Users</div>
+                <div class="install-label" data-en="Offline Users" data-ar="المستخدمون غير المتصلين">Offline Users</div>
             </div>
         </div>
 
@@ -2007,53 +1047,53 @@
         <div class="stats-grid">
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="totalUsers">2,847</div>
-                <div class="stat-label">Total Users</div>
-                <div class="stat-change positive" id="userGrowth">+12.5% this month</div>
+                <div class="stat-label" data-en="Total Users" data-ar="إجمالي المستخدمين">Total Users</div>
+                <div class="stat-change positive" id="userGrowth" data-en="+12.5% this month" data-ar="+12.5% هذا الشهر">+12.5% this month</div>
             </div>
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="monthlyRevenue">$1,247</div>
-                <div class="stat-label">Monthly Revenue</div>
-                <div class="stat-change positive" id="revenueGrowth">+18.3% this month</div>
+                <div class="stat-label" data-en="Monthly Revenue" data-ar="الإيرادات الشهرية">Monthly Revenue</div>
+                <div class="stat-change positive" id="revenueGrowth" data-en="+18.3% this month" data-ar="+18.3% هذا الشهر">+18.3% this month</div>
             </div>
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="totalScans">18,926</div>
-                <div class="stat-label">Total Scans</div>
-                <div class="stat-change positive" id="scanGrowth">+24.7% this month</div>
+                <div class="stat-label" data-en="Total Scans" data-ar="إجمالي الفحوصات">Total Scans</div>
+                <div class="stat-change positive" id="scanGrowth" data-en="+24.7% this month" data-ar="+24.7% هذا الشهر">+24.7% this month</div>
             </div>
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="pwaEngagement">89%</div>
-                <div class="stat-label">PWA Engagement</div>
-                <div class="stat-change positive">+5.2% vs web</div>
+                <div class="stat-label" data-en="PWA Engagement" data-ar="تفاعل التطبيق">PWA Engagement</div>
+                <div class="stat-change positive" data-en="+5.2% vs web" data-ar="+5.2% مقابل الويب">+5.2% vs web</div>
             </div>
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="offlineUsage">23%</div>
-                <div class="stat-label">Offline Usage</div>
-                <div class="stat-change positive">+8.1% this week</div>
+                <div class="stat-label" data-en="Offline Usage" data-ar="الاستخدام غير المتصل">Offline Usage</div>
+                <div class="stat-change positive" data-en="+8.1% this week" data-ar="+8.1% هذا الأسبوع">+8.1% this week</div>
             </div>
             <div class="stat-card touch-feedback">
                 <div class="stat-number" id="pushOptIn">67%</div>
-                <div class="stat-label">Push Opt-in Rate</div>
-                <div class="stat-change negative">-3.2% this month</div>
+                <div class="stat-label" data-en="Push Opt-in Rate" data-ar="معدل الاشتراك في الإشعارات">Push Opt-in Rate</div>
+                <div class="stat-change negative" data-en="-3.2% this month" data-ar="-3.2% هذا الشهر">-3.2% this month</div>
             </div>
         </div>
 
         <!-- Push Notification Panel -->
         <div class="notification-panel">
-            <h3>🔔 Send Push Notification</h3>
+            <h3 data-en="🔔 Send Push Notification" data-ar="🔔 إرسال إشعار فوري">🔔 Send Push Notification</h3>
             <form class="notification-form" onsubmit="sendBulkPushNotification(event)">
-                <input type="text" placeholder="Notification Title" id="pushTitle" required>
-                <textarea placeholder="Notification Message" id="pushMessage" rows="3" required></textarea>
+                <input type="text" placeholder="Notification Title" id="pushTitle" required data-placeholder-en="Notification Title" data-placeholder-ar="عنوان الإشعار">
+                <textarea placeholder="Notification Message" id="pushMessage" rows="3" required data-placeholder-en="Notification Message" data-placeholder-ar="رسالة الإشعار"></textarea>
                 <select id="pushTarget">
-                    <option value="all">All PWA Users</option>
-                    <option value="installed">Installed Users Only</option>
-                    <option value="active">Active Users (7 days)</option>
-                    <option value="inactive">Inactive Users</option>
-                    <option value="free">Free Tier Users</option>
-                    <option value="premium">Premium Users</option>
+                    <option value="all" data-en="All PWA Users" data-ar="جميع مستخدمي التطبيق">All PWA Users</option>
+                    <option value="installed" data-en="Installed Users Only" data-ar="المستخدمون المثبتون فقط">Installed Users Only</option>
+                    <option value="active" data-en="Active Users (7 days)" data-ar="المستخدمون النشطون (7 أيام)">Active Users (7 days)</option>
+                    <option value="inactive" data-en="Inactive Users" data-ar="المستخدمون غير النشطين">Inactive Users</option>
+                    <option value="free" data-en="Free Tier Users" data-ar="مستخدمو الخطة المجانية">Free Tier Users</option>
+                    <option value="premium" data-en="Premium Users" data-ar="المستخدمون المميزون">Premium Users</option>
                 </select>
                 <div style="display: flex; gap: 10px;">
-                    <button type="submit" class="btn btn-success" style="flex: 1; background: rgba(255,255,255,0.2); border: 2px solid white;">📤 Send Now</button>
-                    <button type="button" class="btn btn-warning" onclick="schedulePushNotification()" style="flex: 1; background: rgba(255,255,255,0.2); border: 2px solid white;">⏰ Schedule</button>
+                    <button type="submit" class="btn btn-success" style="flex: 1; background: rgba(255,255,255,0.2); border: 2px solid white;" data-en="📤 Send Now" data-ar="📤 إرسال الآن">📤 Send Now</button>
+                    <button type="button" class="btn btn-warning" onclick="schedulePushNotification()" style="flex: 1; background: rgba(255,255,255,0.2); border: 2px solid white;" data-en="⏰ Schedule" data-ar="⏰ جدولة">⏰ Schedule</button>
                 </div>
             </form>
         </div>
@@ -2063,35 +1103,35 @@
             <div class="sw-info">
                 <span style="font-size: 20px;">⚙️</span>
                 <div>
-                    <strong>Service Worker Status</strong><br>
-                    <small>Version 2.1.0 - Active since 2 hours ago</small>
+                    <strong data-en="Service Worker Status" data-ar="حالة العامل الخدمي">Service Worker Status</strong><br>
+                    <small data-en="Version 2.1.0 - Active since 2 hours ago" data-ar="الإصدار 2.1.0 - نشط منذ ساعتين">Version 2.1.0 - Active since 2 hours ago</small>
                 </div>
             </div>
             <div class="sw-actions">
-                <button class="btn btn-sm btn-primary" onclick="updateServiceWorker()">🔄 Update</button>
-                <button class="btn btn-sm btn-warning" onclick="unregisterServiceWorker()">🗑️ Reset</button>
+                <button class="btn btn-sm btn-primary" onclick="updateServiceWorker()" data-en="🔄 Update" data-ar="🔄 تحديث">🔄 Update</button>
+                <button class="btn btn-sm btn-warning" onclick="unregisterServiceWorker()" data-en="🗑️ Reset" data-ar="🗑️ إعادة تعيين">🗑️ Reset</button>
             </div>
         </div>
 
         <!-- Tab Navigation (Hidden on Mobile) -->
         <div class="tab-container">
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('pwa-analytics')">📊 PWA Analytics</button>
-                <button class="tab-btn" onclick="switchTab('users')">👥 Users</button>
-                <button class="tab-btn" onclick="switchTab('notifications')">🔔 Notifications</button>
-                <button class="tab-btn" onclick="switchTab('offline')">📡 Offline</button>
-                <button class="tab-btn" onclick="switchTab('performance')">⚡ Performance</button>
-                <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
+                <button class="tab-btn active" onclick="switchTab('pwa-analytics')" data-en="📊 PWA Analytics" data-ar="📊 تحليلات التطبيق">📊 PWA Analytics</button>
+                <button class="tab-btn" onclick="switchTab('users')" data-en="👥 Users" data-ar="👥 المستخدمون">👥 Users</button>
+                <button class="tab-btn" onclick="switchTab('notifications')" data-en="🔔 Notifications" data-ar="🔔 الإشعارات">🔔 Notifications</button>
+                <button class="tab-btn" onclick="switchTab('offline')" data-en="📡 Offline" data-ar="📡 غير متصل">📡 Offline</button>
+                <button class="tab-btn" onclick="switchTab('performance')" data-en="⚡ Performance" data-ar="⚡ الأداء">⚡ Performance</button>
+                <button class="tab-btn" onclick="switchTab('settings')" data-en="⚙️ Settings" data-ar="⚙️ الإعدادات">⚙️ Settings</button>
             </div>
 
             <!-- PWA Analytics Tab -->
             <div id="tab-pwa-analytics" class="tab-content active">
                 <div class="admin-card">
                     <div class="card-header">
-                        <h2>📱 PWA Installation Analytics</h2>
+                        <h2 data-en="📱 PWA Installation Analytics" data-ar="📱 تحليلات تثبيت التطبيق">📱 PWA Installation Analytics</h2>
                         <div class="card-actions">
-                            <button class="btn btn-info btn-sm" onclick="refreshPWAStats()">🔄 Refresh</button>
-                            <button class="btn btn-primary btn-sm" onclick="exportPWAData()">📤 Export</button>
+                            <button class="btn btn-info btn-sm" onclick="refreshPWAStats()" data-en="🔄 Refresh" data-ar="🔄 تحديث">🔄 Refresh</button>
+                            <button class="btn btn-primary btn-sm" onclick="exportPWAData()" data-en="📤 Export" data-ar="📤 تصدير">📤 Export</button>
                         </div>
                     </div>
                     <div class="chart-container">
@@ -2102,7 +1142,7 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="admin-card">
                         <div class="card-header">
-                            <h2>📲 Platform Breakdown</h2>
+                            <h2 data-en="📲 Platform Breakdown" data-ar="📲 تفصيل المنصات">📲 Platform Breakdown</h2>
                         </div>
                         <div class="chart-container chart-mini">
                             <canvas id="platformInstallChart"></canvas>
@@ -2111,7 +1151,7 @@
 
                     <div class="admin-card">
                         <div class="card-header">
-                            <h2>⏱️ Usage Patterns</h2>
+                            <h2 data-en="⏱️ Usage Patterns" data-ar="⏱️ أنماط الاستخدام">⏱️ Usage Patterns</h2>
                         </div>
                         <div class="chart-container chart-mini">
                             <canvas id="usagePatternChart"></canvas>
@@ -2121,24 +1161,24 @@
 
                 <div class="admin-card">
                     <div class="card-header">
-                        <h2>🎯 PWA Performance Metrics</h2>
+                        <h2 data-en="🎯 PWA Performance Metrics" data-ar="🎯 مقاييس أداء التطبيق">🎯 PWA Performance Metrics</h2>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                         <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
                             <div style="font-size: 2rem; font-weight: bold; color: #4CAF50; margin-bottom: 5px;">2.3s</div>
-                            <div style="font-size: 12px; color: #666;">Avg Load Time</div>
+                            <div style="font-size: 12px; color: #666;" data-en="Avg Load Time" data-ar="متوسط وقت التحميل">Avg Load Time</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
                             <div style="font-size: 2rem; font-weight: bold; color: #2196F3; margin-bottom: 5px;">89%</div>
-                            <div style="font-size: 12px; color: #666;">PWA Score</div>
+                            <div style="font-size: 12px; color: #666;" data-en="PWA Score" data-ar="نقاط التطبيق">PWA Score</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
                             <div style="font-size: 2rem; font-weight: bold; color: #FF9800; margin-bottom: 5px;">15.2MB</div>
-                            <div style="font-size: 12px; color: #666;">Cache Size</div>
+                            <div style="font-size: 12px; color: #666;" data-en="Cache Size" data-ar="حجم التخزين">Cache Size</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
                             <div style="font-size: 2rem; font-weight: bold; color: #9C27B0; margin-bottom: 5px;">67%</div>
-                            <div style="font-size: 12px; color: #666;">Offline Ready</div>
+                            <div style="font-size: 12px; color: #666;" data-en="Offline Ready" data-ar="جاهز للعمل بدون اتصال">Offline Ready</div>
                         </div>
                     </div>
                 </div>
@@ -2148,54 +1188,54 @@
             <div id="tab-users" class="tab-content">
                 <div class="admin-card">
                     <div class="card-header">
-                        <h2>👥 PWA User Management</h2>
+                        <h2 data-en="👥 PWA User Management" data-ar="👥 إدارة مستخدمي التطبيق">👥 PWA User Management</h2>
                         <div class="card-actions">
-                            <button class="btn btn-success btn-sm" onclick="bulkNotifyUsers()">🔔 Bulk Notify</button>
-                            <button class="btn btn-primary btn-sm" onclick="exportUsers()">📤 Export</button>
+                            <button class="btn btn-success btn-sm" onclick="bulkNotifyUsers()" data-en="🔔 Bulk Notify" data-ar="🔔 إشعار جماعي">🔔 Bulk Notify</button>
+                            <button class="btn btn-primary btn-sm" onclick="exportUsers()" data-en="📤 Export" data-ar="📤 تصدير">📤 Export</button>
                         </div>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px;">
                         <div style="text-align: center; padding: 12px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border-radius: 10px;">
                             <div style="font-size: 1.5rem; font-weight: bold;">1,247</div>
-                            <div style="font-size: 11px;">PWA Installed</div>
+                            <div style="font-size: 11px;" data-en="PWA Installed" data-ar="تطبيق مثبت">PWA Installed</div>
                         </div>
                         <div style="text-align: center; padding: 12px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 10px;">
                             <div style="font-size: 1.5rem; font-weight: bold;">890</div>
-                            <div style="font-size: 11px;">Push Enabled</div>
+                            <div style="font-size: 11px;" data-en="Push Enabled" data-ar="الإشعارات مفعلة">Push Enabled</div>
                         </div>
                         <div style="text-align: center; padding: 12px; background: linear-gradient(135deg, #FF9800, #F57C00); color: white; border-radius: 10px;">
                             <div style="font-size: 1.5rem; font-weight: bold;">234</div>
-                            <div style="font-size: 11px;">Offline Users</div>
+                            <div style="font-size: 11px;" data-en="Offline Users" data-ar="مستخدمون غير متصلين">Offline Users</div>
                         </div>
                         <div style="text-align: center; padding: 12px; background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; border-radius: 10px;">
                             <div style="font-size: 1.5rem; font-weight: bold;">78%</div>
-                            <div style="font-size: 11px;">Retention</div>
+                            <div style="font-size: 11px;" data-en="Retention" data-ar="الاحتفاظ">Retention</div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" placeholder="🔍 Search users by email, device, or install date..." style="width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #e0e0e0;">
+                        <input type="text" placeholder="🔍 Search users by email, device, or install date..." style="width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #e0e0e0;" data-placeholder-en="🔍 Search users by email, device, or install date..." data-placeholder-ar="🔍 البحث عن المستخدمين بالبريد الإلكتروني أو الجهاز أو تاريخ التثبيت...">
                     </div>
 
                     <div style="background: #f8f9fa; border-radius: 10px; padding: 15px;">
                         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 2px solid #e0e0e0; font-weight: 600; font-size: 12px;">
-                            <div>User Info</div>
-                            <div>Device</div>
-                            <div>Install Date</div>
-                            <div>Status</div>
-                            <div>Actions</div>
+                            <div data-en="User Info" data-ar="معلومات المستخدم">User Info</div>
+                            <div data-en="Device" data-ar="الجهاز">Device</div>
+                            <div data-en="Install Date" data-ar="تاريخ التثبيت">Install Date</div>
+                            <div data-en="Status" data-ar="الحالة">Status</div>
+                            <div data-en="Actions" data-ar="الإجراءات">Actions</div>
                         </div>
                         
                         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">john@example.com</div>
-                                <div style="font-size: 11px; color: #666;">📱 PWA Installed • 🔔 Push Enabled</div>
+                                <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • 🔔 Push Enabled" data-ar="📱 التطبيق مثبت • 🔔 الإشعارات مفعلة">📱 PWA Installed • 🔔 Push Enabled</div>
                             </div>
                             <div style="font-size: 12px;">iPhone 14</div>
                             <div style="font-size: 12px;">Dec 15, 2024</div>
                             <div>
-                                <span style="background: #e8f5e8; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">ACTIVE</span>
+                                <span style="background: #e8f5e8; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="ACTIVE" data-ar="نشط">ACTIVE</span>
                             </div>
                             <div>
                                 <button class="btn btn-sm btn-primary" onclick="notifyUser('john@example.com')" style="padding: 6px 10px; font-size: 10px;">🔔</button>
@@ -2205,12 +1245,12 @@
                         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">sarah@company.com</div>
-                                <div style="font-size: 11px; color: #666;">📱 PWA Installed • ✋ Push Disabled</div>
+                                <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • ✋ Push Disabled" data-ar="📱 التطبيق مثبت • ✋ الإشعارات معطلة">📱 PWA Installed • ✋ Push Disabled</div>
                             </div>
                             <div style="font-size: 12px;">Android</div>
                             <div style="font-size: 12px;">Nov 28, 2024</div>
                             <div>
-                                <span style="background: #fff3cd; color: #856404; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">OFFLINE</span>
+                                <span style="background: #fff3cd; color: #856404; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="OFFLINE" data-ar="غير متصل">OFFLINE</span>
                             </div>
                             <div>
                                 <button class="btn btn-sm btn-warning" onclick="enablePushForUser('sarah@company.com')" style="padding: 6px 10px; font-size: 10px;">🔔</button>
@@ -2220,12 +1260,12 @@
                         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">mike@startup.io</div>
-                                <div style="font-size: 11px; color: #666;">🌐 Web Only • ⚠️ Not Installed</div>
+                                <div style="font-size: 11px; color: #666;" data-en="🌐 Web Only • ⚠️ Not Installed" data-ar="🌐 ويب فقط • ⚠️ غير مثبت">🌐 Web Only • ⚠️ Not Installed</div>
                             </div>
                             <div style="font-size: 12px;">Desktop</div>
                             <div style="font-size: 12px;">Dec 20, 2024</div>
                             <div>
-                                <span style="background: #ffebee; color: #c62828; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;">WEB ONLY</span>
+                                <span style="background: #ffebee; color: #c62828; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="WEB ONLY" data-ar="ويب فقط">WEB ONLY</span>
                             </div>
                             <div>
                                 <button class="btn btn-sm btn-success" onclick="promoteInstall('mike@startup.io')" style="padding: 6px 10px; font-size: 10px;">📱</button>
@@ -2239,112 +1279,112 @@
             <div id="tab-notifications" class="tab-content">
                 <div class="admin-card">
                     <div class="card-header">
-                        <h2>🔔 Push Notification Management</h2>
+                        <h2 data-en="🔔 Push Notification Management" data-ar="🔔 إدارة الإشعارات الفورية">🔔 Push Notification Management</h2>
                         <div class="card-actions">
-                            <button class="btn btn-success btn-sm" onclick="testPushNotification()">🧪 Test Push</button>
-                            <button class="btn btn-primary btn-sm" onclick="viewNotificationStats()">📊 Stats</button>
+                            <button class="btn btn-success btn-sm" onclick="testPushNotification()" data-en="🧪 Test Push" data-ar="🧪 اختبار الإشعار">🧪 Test Push</button>
+                            <button class="btn btn-primary btn-sm" onclick="viewNotificationStats()" data-en="📊 Stats" data-ar="📊 الإحصائيات">📊 Stats</button>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px;">
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">890</div>
-                            <div style="font-size: 12px;">Subscribers</div>
+                            <div style="font-size: 12px;" data-en="Subscribers" data-ar="المشتركون">Subscribers</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">67%</div>
-                            <div style="font-size: 12px;">Opt-in Rate</div>
+                            <div style="font-size: 12px;" data-en="Opt-in Rate" data-ar="معدل الاشتراك">Opt-in Rate</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #FF9800, #F57C00); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">23</div>
-                            <div style="font-size: 12px;">Sent Today</div>
+                            <div style="font-size: 12px;" data-en="Sent Today" data-ar="مرسل اليوم">Sent Today</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">89%</div>
-                            <div style="font-size: 12px;">Open Rate</div>
+                            <div style="font-size: 12px;" data-en="Open Rate" data-ar="معدل الفتح">Open Rate</div>
                         </div>
                     </div>
 
                     <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 15px; color: #333;">📤 Quick Send Notification</h3>
+                        <h3 style="margin-bottom: 15px; color: #333;" data-en="📤 Quick Send Notification" data-ar="📤 إرسال إشعار سريع">📤 Quick Send Notification</h3>
                         <form onsubmit="sendQuickNotification(event)">
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label>Notification Type</label>
+                                    <label data-en="Notification Type" data-ar="نوع الإشعار">Notification Type</label>
                                     <select id="quickNotificationType">
-                                        <option value="announcement">📢 Announcement</option>
-                                        <option value="update">🚀 App Update</option>
-                                        <option value="promotion">🎉 Promotion</option>
-                                        <option value="reminder">⏰ Reminder</option>
-                                        <option value="alert">🚨 Alert</option>
+                                        <option value="announcement" data-en="📢 Announcement" data-ar="📢 إعلان">📢 Announcement</option>
+                                        <option value="update" data-en="🚀 App Update" data-ar="🚀 تحديث التطبيق">🚀 App Update</option>
+                                        <option value="promotion" data-en="🎉 Promotion" data-ar="🎉 عرض ترويجي">🎉 Promotion</option>
+                                        <option value="reminder" data-en="⏰ Reminder" data-ar="⏰ تذكير">⏰ Reminder</option>
+                                        <option value="alert" data-en="🚨 Alert" data-ar="🚨 تنبيه">🚨 Alert</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Priority Level</label>
+                                    <label data-en="Priority Level" data-ar="مستوى الأولوية">Priority Level</label>
                                     <select id="quickNotificationPriority">
-                                        <option value="low">Low Priority</option>
-                                        <option value="normal" selected>Normal</option>
-                                        <option value="high">High Priority</option>
-                                        <option value="urgent">🚨 Urgent</option>
+                                        <option value="low" data-en="Low Priority" data-ar="أولوية منخفضة">Low Priority</option>
+                                        <option value="normal" selected data-en="Normal" data-ar="عادي">Normal</option>
+                                        <option value="high" data-en="High Priority" data-ar="أولوية عالية">High Priority</option>
+                                        <option value="urgent" data-en="🚨 Urgent" data-ar="🚨 عاجل">🚨 Urgent</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" id="quickNotificationTitle" placeholder="Notification title..." required>
+                                <label data-en="Title" data-ar="العنوان">Title</label>
+                                <input type="text" id="quickNotificationTitle" placeholder="Notification title..." required data-placeholder-en="Notification title..." data-placeholder-ar="عنوان الإشعار...">
                             </div>
                             <div class="form-group">
-                                <label>Message</label>
-                                <textarea id="quickNotificationMessage" placeholder="Your notification message..." rows="3" required></textarea>
+                                <label data-en="Message" data-ar="الرسالة">Message</label>
+                                <textarea id="quickNotificationMessage" placeholder="Your notification message..." rows="3" required data-placeholder-en="Your notification message..." data-placeholder-ar="رسالة الإشعار..."></textarea>
                             </div>
                             <div style="display: flex; gap: 10px;">
-                                <button type="submit" class="btn btn-success" style="flex: 1;">📤 Send Immediately</button>
-                                <button type="button" class="btn btn-warning" onclick="scheduleNotification()" style="flex: 1;">⏰ Schedule</button>
+                                <button type="submit" class="btn btn-success" style="flex: 1;" data-en="📤 Send Immediately" data-ar="📤 إرسال فوري">📤 Send Immediately</button>
+                                <button type="button" class="btn btn-warning" onclick="scheduleNotification()" style="flex: 1;" data-en="⏰ Schedule" data-ar="⏰ جدولة">⏰ Schedule</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="admin-card">
                         <div class="card-header">
-                            <h2>📋 Recent Notifications</h2>
+                            <h2 data-en="📋 Recent Notifications" data-ar="📋 الإشعارات الأخيرة">📋 Recent Notifications</h2>
                         </div>
                         <div style="max-height: 300px; overflow-y: auto;">
                             <div style="padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #4CAF50;">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                    <strong>🚀 CheckReel Update Available</strong>
-                                    <span style="font-size: 11px; color: #666;">2 hours ago</span>
+                                    <strong data-en="🚀 CheckReel Update Available" data-ar="🚀 تحديث تشيك ريل متاح">🚀 CheckReel Update Available</strong>
+                                    <span style="font-size: 11px; color: #666;" data-en="2 hours ago" data-ar="منذ ساعتين">2 hours ago</span>
                                 </div>
-                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;">New features and improvements are ready to download!</p>
+                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;" data-en="New features and improvements are ready to download!" data-ar="ميزات وتحسينات جديدة جاهزة للتحميل!">New features and improvements are ready to download!</p>
                                 <div style="display: flex; gap: 15px; font-size: 11px;">
-                                    <span style="color: #4CAF50;">✅ Sent: 890</span>
-                                    <span style="color: #2196F3;">👁️ Opened: 756 (85%)</span>
-                                    <span style="color: #FF9800;">👆 Clicked: 234 (26%)</span>
+                                    <span style="color: #4CAF50;" data-en="✅ Sent: 890" data-ar="✅ مرسل: 890">✅ Sent: 890</span>
+                                    <span style="color: #2196F3;" data-en="👁️ Opened: 756 (85%)" data-ar="👁️ مفتوح: 756 (85%)">👁️ Opened: 756 (85%)</span>
+                                    <span style="color: #FF9800;" data-en="👆 Clicked: 234 (26%)" data-ar="👆 نقر: 234 (26%)">👆 Clicked: 234 (26%)</span>
                                 </div>
                             </div>
 
                             <div style="padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #FF9800;">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                    <strong>🎉 Free Premium Weekend</strong>
-                                    <span style="font-size: 11px; color: #666;">1 day ago</span>
+                                    <strong data-en="🎉 Free Premium Weekend" data-ar="🎉 عطلة نهاية أسبوع مميزة مجانية">🎉 Free Premium Weekend</strong>
+                                    <span style="font-size: 11px; color: #666;" data-en="1 day ago" data-ar="منذ يوم">1 day ago</span>
                                 </div>
-                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;">Enjoy Premium features free this weekend!</p>
+                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;" data-en="Enjoy Premium features free this weekend!" data-ar="استمتع بالميزات المميزة مجاناً هذه العطلة!">Enjoy Premium features free this weekend!</p>
                                 <div style="display: flex; gap: 15px; font-size: 11px;">
-                                    <span style="color: #4CAF50;">✅ Sent: 890</span>
-                                    <span style="color: #2196F3;">👁️ Opened: 623 (70%)</span>
-                                    <span style="color: #FF9800;">👆 Clicked: 187 (21%)</span>
+                                    <span style="color: #4CAF50;" data-en="✅ Sent: 890" data-ar="✅ مرسل: 890">✅ Sent: 890</span>
+                                    <span style="color: #2196F3;" data-en="👁️ Opened: 623 (70%)" data-ar="👁️ مفتوح: 623 (70%)">👁️ Opened: 623 (70%)</span>
+                                    <span style="color: #FF9800;" data-en="👆 Clicked: 187 (21%)" data-ar="👆 نقر: 187 (21%)">👆 Clicked: 187 (21%)</span>
                                 </div>
                             </div>
 
                             <div style="padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #2196F3;">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                    <strong>📊 Weekly Scan Summary</strong>
-                                    <span style="font-size: 11px; color: #666;">3 days ago</span>
+                                    <strong data-en="📊 Weekly Scan Summary" data-ar="📊 ملخص الفحص الأسبوعي">📊 Weekly Scan Summary</strong>
+                                    <span style="font-size: 11px; color: #666;" data-en="3 days ago" data-ar="منذ 3 أيام">3 days ago</span>
                                 </div>
-                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;">Your content compliance report is ready!</p>
+                                <p style="font-size: 13px; color: #666; margin-bottom: 8px;" data-en="Your content compliance report is ready!" data-ar="تقرير امتثال المحتوى جاهز!">Your content compliance report is ready!</p>
                                 <div style="display: flex; gap: 15px; font-size: 11px;">
-                                    <span style="color: #4CAF50;">✅ Sent: 567</span>
-                                    <span style="color: #2196F3;">👁️ Opened: 445 (78%)</span>
-                                    <span style="color: #FF9800;">👆 Clicked: 89 (16%)</span>
+                                    <span style="color: #4CAF50;" data-en="✅ Sent: 567" data-ar="✅ مرسل: 567">✅ Sent: 567</span>
+                                    <span style="color: #2196F3;" data-en="👁️ Opened: 445 (78%)" data-ar="👁️ مفتوح: 445 (78%)">👁️ Opened: 445 (78%)</span>
+                                    <span style="color: #FF9800;" data-en="👆 Clicked: 89 (16%)" data-ar="👆 نقر: 89 (16%)">👆 Clicked: 89 (16%)</span>
                                 </div>
                             </div>
                         </div>
@@ -2356,41 +1396,41 @@
             <div id="tab-offline" class="tab-content">
                 <div class="admin-card">
                     <div class="card-header">
-                        <h2>📡 Offline Management</h2>
+                        <h2 data-en="📡 Offline Management" data-ar="📡 إدارة العمل بدون اتصال">📡 Offline Management</h2>
                         <div class="card-actions">
-                            <button class="btn btn-primary btn-sm" onclick="forceOfflineSync()">🔄 Force Sync</button>
-                            <button class="btn btn-warning btn-sm" onclick="clearOfflineData()">🗑️ Clear Cache</button>
+                            <button class="btn btn-primary btn-sm" onclick="forceOfflineSync()" data-en="🔄 Force Sync" data-ar="🔄 فرض المزامنة">🔄 Force Sync</button>
+                            <button class="btn btn-warning btn-sm" onclick="clearOfflineData()" data-en="🗑️ Clear Cache" data-ar="🗑️ مسح التخزين">🗑️ Clear Cache</button>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px;">
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">234</div>
-                            <div style="font-size: 12px;">Users Offline</div>
+                            <div style="font-size: 12px;" data-en="Users Offline" data-ar="المستخدمون غير المتصلين">Users Offline</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">15.2MB</div>
-                            <div style="font-size: 12px;">Cache Size</div>
+                            <div style="font-size: 12px;" data-en="Cache Size" data-ar="حجم التخزين">Cache Size</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #FF9800, #F57C00); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">67%</div>
-                            <div style="font-size: 12px;">Offline Ready</div>
+                            <div style="font-size: 12px;" data-en="Offline Ready" data-ar="جاهز للعمل بدون اتصال">Offline Ready</div>
                         </div>
                         <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; border-radius: 12px;">
                             <div style="font-size: 1.8rem; font-weight: bold;">23</div>
-                            <div style="font-size: 12px;">Pending Syncs</div>
+                            <div style="font-size: 12px;" data-en="Pending Syncs" data-ar="المزامنات المعلقة">Pending Syncs</div>
                         </div>
                     </div>
 
                     <div class="admin-card">
                         <div class="card-header">
-                            <h2>💾 Cache Management</h2>
+                            <h2 data-en="💾 Cache Management" data-ar="💾 إدارة التخزين">💾 Cache Management</h2>
                         </div>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                             <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <strong>App Shell</strong>
-                                    <button class="btn btn-sm btn-warning" onclick="clearAppShellCache()">Clear</button>
+                                    <strong data-en="App Shell" data-ar="هيكل التطبيق">App Shell</strong>
+                                    <button class="btn btn-sm btn-warning" onclick="clearAppShellCache()" data-en="Clear" data-ar="مسح">Clear</button>
                                 </div>
                                 <div style="font-size: 14px; color: #666;">2.4 MB</div>
                                 <div style="background: #e0e0e0; height: 6px; border-radius: 3px; margin-top: 8px;">
@@ -2400,8 +1440,8 @@
                             
                             <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <strong>API Data</strong>
-                                    <button class="btn btn-sm btn-warning" onclick="clearAPICache()">Clear</button>
+                                    <strong data-en="API Data" data-ar="بيانات API">API Data</strong>
+                                    <button class="btn btn-sm btn-warning" onclick="clearAPICache()" data-en="Clear" data-ar="مسح">Clear</button>
                                 </div>
                                 <div style="font-size: 14px; color: #666;">8.7 MB</div>
                                 <div style="background: #e0e0e0; height: 6px; border-radius: 3px; margin-top: 8px;">
@@ -2411,8 +1451,8 @@
 
                             <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <strong>Images</strong>
-                                    <button class="btn btn-sm btn-warning" onclick="clearImageCache()">Clear</button>
+                                    <strong data-en="Images" data-ar="الصور">Images</strong>
+                                    <button class="btn btn-sm btn-warning" onclick="clearImageCache()" data-en="Clear" data-ar="مسح">Clear</button>
                                 </div>
                                 <div style="font-size: 14px; color: #666;">4.1 MB</div>
                                 <div style="background: #e0e0e0; height: 6px; border-radius: 3px; margin-top: 8px;">
@@ -2421,24 +1461,1187 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Performance Tab -->
+            <div id="tab-performance" class="tab-content">
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2 data-en="⚡ PWA Performance Monitor" data-ar="⚡ مراقب أداء التطبيق">⚡ PWA Performance Monitor</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-primary btn-sm" onclick="runPerformanceAudit()" data-en="🔍 Run Audit" data-ar="🔍 تشغيل التدقيق">🔍 Run Audit</button>
+                            <button class="btn btn-info btn-sm" onclick="viewLighthouseReport()" data-en="📊 Lighthouse" data-ar="📊 لايت هاوس">📊 Lighthouse</button>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border-radius: 12px;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">89</div>
+                            <div style="font-size: 12px;" data-en="PWA Score" data-ar="نقاط التطبيق">PWA Score</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #2196F3, #1976D2); color: white; border-radius: 12px;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">2.3s</div>
+                            <div style="font-size: 12px;" data-en="Load Time" data-ar="وقت التحميل">Load Time</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #FF9800, #F57C00); color: white; border-radius: 12px;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">95</div>
+                            <div style="font-size: 12px;" data-en="Lighthouse" data-ar="لايت هاوس">Lighthouse</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; border-radius: 12px;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">99.9%</div>
+                            <div style="font-size: 12px;" data-en="Uptime" data-ar="وقت التشغيل">Uptime</div>
+                        </div>
+                    </div>
 
                     <div class="admin-card">
                         <div class="card-header">
-                            <h2>🔄 Background Sync Queue</h2>
+                            <h2 data-en="📈 Performance Metrics" data-ar="📈 مقاييس الأداء">📈 Performance Metrics</h2>
                         </div>
-                        <div style="max-height: 250px; overflow-y: auto;">
-                            <div style="padding: 12px; background: #fff3cd; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #ffc107;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <strong>User registration sync</strong><br>
-                                        <small style="color: #666;">john@example.com - Pending for 2 minutes</small>
-                                    </div>
-                                    <button class="btn btn-sm btn-success" onclick="retrySync('user_reg_001')">↻ Retry</button>
-                                </div>
-                            </div>
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div style="padding: 12px; background: #fff3cd; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #ffc107;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <strong>Scan result upload</strong><br>
-<small style="color: #666;">sarah@company.com - Pending for 5 minutes</small>
+            <!-- Settings Tab -->
+            <div id="tab-settings" class="tab-content">
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h2 data-en="⚙️ PWA Configuration" data-ar="⚙️ إعداد التطبيق">⚙️ PWA Configuration</h2>
+                        <div class="card-actions">
+                            <button class="btn btn-success btn-sm" onclick="savePWASettings()" data-en="💾 Save All" data-ar="💾 حفظ الكل">💾 Save All</button>
+                            <button class="btn btn-warning btn-sm" onclick="resetPWASettings()" data-en="🔄 Reset" data-ar="🔄 إعادة تعيين">🔄 Reset</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="PWA Name" data-ar="اسم التطبيق">PWA Name</label>
+                        <input type="text" value="CheckReel - Content Compliance Checker" id="pwaName">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label data-en="Theme Color" data-ar="لون الموضوع">Theme Color</label>
+                            <input type="color" value="#667eea" id="themeColor">
+                        </div>
+                        <div class="form-group">
+                            <label data-en="Background Color" data-ar="لون الخلفية">Background Color</label>
+                            <input type="color" value="#1e3c72" id="backgroundColor">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="PWA Display Mode" data-ar="وضع عرض التطبيق">PWA Display Mode</label>
+                        <select id="displayMode">
+                            <option value="standalone" selected data-en="Standalone" data-ar="مستقل">Standalone</option>
+                            <option value="fullscreen" data-en="Fullscreen" data-ar="ملء الشاشة">Fullscreen</option>
+                            <option value="minimal-ui" data-en="Minimal UI" data-ar="واجهة بسيطة">Minimal UI</option>
+                            <option value="browser" data-en="Browser" data-ar="متصفح">Browser</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="Start URL" data-ar="رابط البداية">Start URL</label>
+                        <input type="url" value="/" id="startUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label data-en="PWA Description" data-ar="وصف التطبيق">PWA Description</label>
+                        <textarea id="pwaDescription" rows="3" data-placeholder-en="AI-powered content compliance checker for social media platforms. Ensure your content meets platform guidelines before posting." data-placeholder-ar="مدقق امتثال المحتوى المدعوم بالذكاء الاصطناعي لمنصات التواصل الاجتماعي. تأكد من أن المحتوى يلبي إرشادات المنصة قبل النشر.">AI-powered content compliance checker for social media platforms. Ensure your content meets platform guidelines before posting.</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Bottom Navigation -->
+        <div class="mobile-bottom-nav">
+            <div class="bottom-nav-items">
+                <div class="bottom-nav-item active" onclick="switchMobileTab('pwa-analytics')">
+                    <div class="bottom-nav-icon">📊</div>
+                    <span data-en="Analytics" data-ar="التحليلات">Analytics</span>
+                </div>
+                <div class="bottom-nav-item" onclick="switchMobileTab('users')">
+                    <div class="bottom-nav-icon">👥</div>
+                    <span data-en="Users" data-ar="المستخدمون">Users</span>
+                </div>
+                <div class="bottom-nav-item" onclick="switchMobileTab('notifications')">
+                    <div class="bottom-nav-icon">🔔</div>
+                    <span data-en="Notify" data-ar="الإشعارات">Notify</span>
+                </div>
+                <div class="bottom-nav-item" onclick="switchMobileTab('offline')">
+                    <div class="bottom-nav-icon">📡</div>
+                    <span data-en="Offline" data-ar="غير متصل">Offline</span>
+                </div>
+                <div class="bottom-nav-item" onclick="switchMobileTab('performance')">
+                    <div class="bottom-nav-icon">⚡</div>
+                    <span data-en="Speed" data-ar="السرعة">Speed</span>
+                </div>
+                <div class="bottom-nav-item" onclick="switchMobileTab('settings')">
+                    <div class="bottom-nav-icon">⚙️</div>
+                    <span data-en="Settings" data-ar="الإعدادات">Settings</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading and Messages -->
+        <div id="messageContainer"></div>
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p data-en="Processing request..." data-ar="جاري معالجة الطلب...">Processing request...</p>
+        </div>
+    </div>
+
+    <script>
+        // Language System
+        let currentLanguage = 'en';
+        const languages = {
+            en: { flag: '🇺🇸', name: 'English', dir: 'ltr' },
+            ar: { flag: '🇸🇦', name: 'العربية', dir: 'rtl' }
+        };
+
+        // PWA-Optimized Admin Dashboard Functionality
+        let deferredPrompt;
+        let pwaInstallChart, platformInstallChart, usagePatternChart, performanceChart;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLanguageSystem();
+            initializePWAFeatures();
+            initializeCharts();
+            updateStats();
+            checkPWAInstallability();
+            checkNotificationPermission();
+            checkOnlineStatus();
+            registerServiceWorkerEvents();
+        });
+
+        // Language System Functions
+        function initializeLanguageSystem() {
+            // Load saved language preference
+            const savedLang = localStorage.getItem('adminLanguage') || 'en';
+            setLanguage(savedLang);
+        }
+
+        function toggleLanguage() {
+            const newLang = currentLanguage === 'en' ? 'ar' : 'en';
+            setLanguage(newLang);
+            showMessage(`🌐 ${languages[newLang].name} language activated!`, 'success');
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            const langConfig = languages[lang];
+            
+            // Update document attributes
+            document.documentElement.lang = lang;
+            document.documentElement.dir = langConfig.dir;
+            document.body.dir = langConfig.dir;
+            
+            // Update language toggle display
+            document.getElementById('currentFlag').textContent = langConfig.flag;
+            document.getElementById('currentLang').textContent = langConfig.name;
+            
+            // Update all translatable elements
+            updateAllTranslations();
+            
+            // Update placeholders
+            updatePlaceholders();
+            
+            // Save preference
+            try {
+                localStorage.setItem('adminLanguage', lang);
+            } catch(e) {
+                // Fallback if localStorage not available
+                console.log('Language preference saved in memory');
+            }
+        }
+
+        function updateAllTranslations() {
+            const elements = document.querySelectorAll('[data-en], [data-ar]');
+            elements.forEach(element => {
+                const translation = element.getAttribute(`data-${currentLanguage}`);
+                if (translation) {
+                    if (element.tagName === 'OPTION') {
+                        element.textContent = translation;
+                    } else {
+                        element.innerHTML = translation;
+                    }
+                }
+            });
+        }
+
+        function updatePlaceholders() {
+            const elements = document.querySelectorAll(`[data-placeholder-${currentLanguage}]`);
+            elements.forEach(element => {
+                const placeholder = element.getAttribute(`data-placeholder-${currentLanguage}`);
+                if (placeholder) {
+                    element.placeholder = placeholder;
+                }
+            });
+        }
+
+        // PWA Installation Management
+        function initializePWAFeatures() {
+            // Listen for beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                showInstallBanner();
+            });
+
+            // Listen for app installed event
+            window.addEventListener('appinstalled', (e) => {
+                hideInstallBanner();
+                showMessage(getLocalizedMessage('🎉 CheckReel PWA installed successfully!', '🎉 تم تثبيت تطبيق تشيك ريل بنجاح!'), 'success');
+                updateInstallStats();
+            });
+        }
+
+        function getLocalizedMessage(enMessage, arMessage) {
+            return currentLanguage === 'ar' ? arMessage : enMessage;
+        }
+
+        function checkPWAInstallability() {
+            // Check if app is already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                hideInstallBanner();
+                updatePWAStatus('installed');
+            } else if (deferredPrompt) {
+                showInstallBanner();
+            }
+        }
+
+        function showInstallBanner() {
+            const banner = document.getElementById('pwaInstallBanner');
+            banner.classList.add('show');
+        }
+
+        function hideInstallBanner() {
+            const banner = document.getElementById('pwaInstallBanner');
+            banner.classList.remove('show');
+        }
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showMessage(getLocalizedMessage('🎉 CheckReel PWA installation started!', '🎉 بدأ تثبيت تطبيق تشيك ريل!'), 'success');
+                    } else {
+                        showMessage(getLocalizedMessage('ℹ️ PWA installation cancelled', 'ℹ️ تم إلغاء تثبيت التطبيق'), 'info');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        function forceAppInstall() {
+            if (deferredPrompt) {
+                installPWA();
+            } else {
+                showMessage(getLocalizedMessage('📱 PWA installation not available. Try refreshing the page.', '📱 تثبيت التطبيق غير متاح. جرب تحديث الصفحة.'), 'warning');
+            }
+        }
+
+        // Push Notification Management
+        function checkNotificationPermission() {
+            if ('Notification' in window) {
+                if (Notification.permission === 'default') {
+                    showNotificationPermissionBanner();
+                } else if (Notification.permission === 'granted') {
+                    updatePWAStatus('notifications-enabled');
+                } else {
+                    updatePWAStatus('notifications-denied');
+                }
+            }
+        }
+
+        function showNotificationPermissionBanner() {
+            const banner = document.getElementById('notificationPermission');
+            banner.classList.add('show');
+        }
+
+        function requestNotificationPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        showMessage(getLocalizedMessage('🔔 Notifications enabled successfully!', '🔔 تم تفعيل الإشعارات بنجاح!'), 'success');
+                        hideNotificationPermissionBanner();
+                        updatePWAStatus('notifications-enabled');
+                    } else {
+                        showMessage(getLocalizedMessage('⚠️ Notification permission denied', '⚠️ تم رفض إذن الإشعارات'), 'warning');
+                    }
+                });
+            }
+        }
+
+        function hideNotificationPermissionBanner() {
+            const banner = document.getElementById('notificationPermission');
+            banner.classList.remove('show');
+        }
+
+        function sendPushNotification() {
+            if (Notification.permission === 'granted') {
+                new Notification('CheckReel Admin', {
+                    body: currentLanguage === 'ar' ? 'إشعار تجريبي من لوحة إدارة تشيك ريل' : 'Test notification from PWA Admin Dashboard',
+                    icon: '/images/icon-192.png',
+                    badge: '/images/icon-192.png',
+                    tag: 'admin-test'
+                });
+                showMessage(getLocalizedMessage('🔔 Test push notification sent!', '🔔 تم إرسال إشعار تجريبي!'), 'success');
+            } else {
+                showMessage(getLocalizedMessage('⚠️ Push notifications not enabled', '⚠️ الإشعارات الفورية غير مفعلة'), 'warning');
+                requestNotificationPermission();
+            }
+        }
+
+        function sendBulkPushNotification(event) {
+            event.preventDefault();
+            const title = document.getElementById('pushTitle').value;
+            const message = document.getElementById('pushMessage').value;
+            const target = document.getElementById('pushTarget').value;
+
+            if (!title || !message) {
+                showMessage(getLocalizedMessage('Please fill in all notification fields', 'يرجى ملء جميع حقول الإشعار'), 'error');
+                return;
+            }
+
+            showLoading(true);
+            
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage(`🔔 Push notification sent to ${target} users!`, `🔔 تم إرسال الإشعار إلى مستخدمي ${target}!`), 'success');
+                document.querySelector('.notification-form').reset();
+            }, 2000);
+        }
+
+        function sendQuickNotification(event) {
+            event.preventDefault();
+            const type = document.getElementById('quickNotificationType').value;
+            const priority = document.getElementById('quickNotificationPriority').value;
+            const title = document.getElementById('quickNotificationTitle').value;
+            const message = document.getElementById('quickNotificationMessage').value;
+
+            showLoading(true);
+            
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage(`🔔 ${type} notification sent with ${priority} priority!`, `🔔 تم إرسال إشعار ${type} بأولوية ${priority}!`), 'success');
+                event.target.reset();
+            }, 1500);
+        }
+
+        // Offline Management
+        function checkOnlineStatus() {
+            function updateOnlineStatus() {
+                const banner = document.getElementById('offlineBanner');
+                if (navigator.onLine) {
+                    banner.classList.remove('show');
+                    updatePWAStatus('online');
+                } else {
+                    banner.classList.add('show');
+                    updatePWAStatus('offline');
+                }
+            }
+
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+            updateOnlineStatus();
+        }
+
+        function syncOfflineData() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('☁️ Offline data synced successfully!', '☁️ تمت مزامنة البيانات غير المتصلة بنجاح!'), 'success');
+                updateStats();
+            }, 2000);
+        }
+
+        function clearAppCache() {
+            if ('caches' in window) {
+                caches.keys().then((cacheNames) => {
+                    return Promise.all(
+                        cacheNames.map((cacheName) => {
+                            return caches.delete(cacheName);
+                        })
+                    );
+                }).then(() => {
+                    showMessage(getLocalizedMessage('🧹 App cache cleared successfully!', '🧹 تم مسح تخزين التطبيق بنجاح!'), 'success');
+                });
+            }
+        }
+
+        // Service Worker Management
+        function registerServiceWorkerEvents() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.ready.then((registration) => {
+                    updatePWAStatus('service-worker-active');
+                });
+
+                navigator.serviceWorker.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'CACHE_UPDATED') {
+                        showMessage(getLocalizedMessage('🔄 App updated in background', '🔄 تم تحديث التطبيق في الخلفية'), 'info');
+                    }
+                });
+            }
+        }
+
+        function updateServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then((registration) => {
+                    if (registration) {
+                        registration.update().then(() => {
+                            showMessage(getLocalizedMessage('🔄 Service Worker updated!', '🔄 تم تحديث العامل الخدمي!'), 'success');
+                        });
+                    }
+                });
+            }
+        }
+
+        function unregisterServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then((registration) => {
+                    if (registration) {
+                        registration.unregister().then(() => {
+                            showMessage(getLocalizedMessage('🗑️ Service Worker unregistered!', '🗑️ تم إلغاء تسجيل العامل الخدمي!'), 'warning');
+                        });
+                    }
+                });
+            }
+        }
+
+        // Chart Initialization
+        function initializeCharts() {
+            // PWA Install Chart
+            const pwaCtx = document.getElementById('pwaInstallChart').getContext('2d');
+            pwaInstallChart = new Chart(pwaCtx, {
+                type: 'line',
+                data: {
+                    labels: currentLanguage === 'ar' ? 
+                        ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'] :
+                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: currentLanguage === 'ar' ? 'تثبيتات التطبيق' : 'PWA Installs',
+                        data: [45, 78, 123, 167, 245, 289, 334, 401, 478, 523, 601, 687],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Platform Install Chart
+            const platformCtx = document.getElementById('platformInstallChart').getContext('2d');
+            platformInstallChart = new Chart(platformCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: currentLanguage === 'ar' ? 
+                        ['أندرويد', 'آيفون', 'سطح المكتب', 'أخرى'] :
+                        ['Android', 'iOS', 'Desktop', 'Other'],
+                    datasets: [{
+                        data: [567, 389, 234, 57],
+                        backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Usage Pattern Chart
+            const usageCtx = document.getElementById('usagePatternChart').getContext('2d');
+            usagePatternChart = new Chart(usageCtx, {
+                type: 'bar',
+                data: {
+                    labels: currentLanguage === 'ar' ? 
+                        ['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'] :
+                        ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: currentLanguage === 'ar' ? 'استخدام التطبيق' : 'PWA Usage',
+                        data: [234, 267, 298, 256, 223, 189, 167],
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: '#667eea',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Performance Chart
+            const perfCtx = document.getElementById('performanceChart');
+            if (perfCtx) {
+                performanceChart = new Chart(perfCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                        datasets: [{
+                            label: currentLanguage === 'ar' ? 'وقت التحميل (ثواني)' : 'Load Time (seconds)',
+                            data: [2.1, 1.9, 2.3, 2.8, 2.4, 2.1],
+                            borderColor: '#FF9800',
+                            backgroundColor: 'rgba(255, 152, 0, 0.1)',
+                            tension: 0.4
+                        }, {
+                            label: currentLanguage === 'ar' ? 'نقاط التطبيق' : 'PWA Score',
+                            data: [89, 91, 87, 85, 88, 89],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Mobile Navigation
+        function switchMobileTab(tabName) {
+            // Update bottom nav active state
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Switch tab content
+            switchTab(tabName);
+        }
+
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            
+            // Add active class to clicked button (if exists)
+            const tabBtn = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+            if (tabBtn) {
+                tabBtn.classList.add('active');
+            }
+            
+            // Load tab-specific data
+            loadTabData(tabName);
+        }
+
+        function loadTabData(tabName) {
+            switch(tabName) {
+                case 'pwa-analytics':
+                    refreshPWAStats();
+                    break;
+                case 'users':
+                    refreshPWAUsers();
+                    break;
+                case 'notifications':
+                    refreshNotificationStats();
+                    break;
+                case 'performance':
+                    refreshPerformanceStats();
+                    break;
+            }
+        }
+
+        // PWA-Specific Functions
+        function refreshPWAStats() {
+            showMessage(getLocalizedMessage('📊 PWA analytics refreshed', '📊 تم تحديث تحليلات التطبيق'), 'success');
+            updateStats();
+        }
+
+        function exportPWAData() {
+            showMessage(getLocalizedMessage('📤 PWA data exported successfully', '📤 تم تصدير بيانات التطبيق بنجاح'), 'success');
+        }
+
+        function viewInstallStats() {
+            showMessage(getLocalizedMessage('📊 Install statistics: 87% mobile, 13% desktop', '📊 إحصائيات التثبيت: 87% موبايل، 13% سطح المكتب'), 'info');
+        }
+
+        function bulkNotifyUsers() {
+            showMessage(getLocalizedMessage('🔔 Bulk notification sent to all PWA users', '🔔 تم إرسال إشعار جماعي لجميع مستخدمي التطبيق'), 'success');
+        }
+
+        function notifyUser(email) {
+            showMessage(getLocalizedMessage(`🔔 Notification sent to ${email}`, `🔔 تم إرسال إشعار إلى ${email}`), 'success');
+        }
+
+        function enablePushForUser(email) {
+            showMessage(getLocalizedMessage(`🔔 Push notifications enabled for ${email}`, `🔔 تم تفعيل الإشعارات الفورية لـ ${email}`), 'success');
+        }
+
+        function promoteInstall(email) {
+            showMessage(getLocalizedMessage(`📱 Install promotion sent to ${email}`, `📱 تم إرسال ترويج التثبيت إلى ${email}`), 'success');
+        }
+
+        function runPerformanceAudit() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('🔍 Performance audit completed: 89/100 PWA Score', '🔍 تم إكمال تدقيق الأداء: 89/100 نقاط التطبيق'), 'success');
+            }, 3000);
+        }
+
+        function viewLighthouseReport() {
+            showMessage(getLocalizedMessage('📊 Lighthouse report: Performance 95, PWA 89, Accessibility 92', '📊 تقرير لايت هاوس: الأداء 95، التطبيق 89، إمكانية الوصول 92'), 'info');
+        }
+
+        function savePWASettings() {
+            showMessage(getLocalizedMessage('💾 PWA settings saved successfully', '💾 تم حفظ إعدادات التطبيق بنجاح'), 'success');
+        }
+
+        function generateManifest() {
+            showMessage(getLocalizedMessage('📄 Manifest.json generated successfully', '📄 تم إنشاء Manifest.json بنجاح'), 'success');
+        }
+
+        function validatePWA() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('✅ PWA validation passed: All requirements met', '✅ نجح التحقق من التطبيق: تم استيفاء جميع المتطلبات'), 'success');
+            }, 2000);
+        }
+
+        // Utility Functions
+        function updatePWAStatus(status) {
+            // Update PWA status indicators
+            console.log('PWA Status updated:', status);
+        }
+
+        function updateStats() {
+            // Update all dashboard statistics
+            const stats = [
+                { id: 'totalUsers', base: 2847, growth: 0.1 },
+                { id: 'totalInstalls', base: 1247, growth: 0.2 },
+                { id: 'dailyInstalls', base: 47, growth: 0.15 },
+                { id: 'retentionRate', base: 78, growth: 0.05, suffix: '%' },
+                { id: 'offlineUsers', base: 89, growth: 0.1 },
+                { id: 'pwaEngagement', base: 89, growth: 0.03, suffix: '%' },
+                { id: 'offlineUsage', base: 23, growth: 0.08, suffix: '%' },
+                { id: 'pushOptIn', base: 67, growth: -0.03, suffix: '%' }
+            ];
+
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.id);
+                if (element) {
+                    const variance = Math.floor(Math.random() * 10) - 5;
+                    const currentValue = stat.base + variance;
+                    const suffix = stat.suffix || '';
+                    element.textContent = `${currentValue.toLocaleString()}${suffix}`;
+                }
+            });
+        }
+
+        function updateInstallStats() {
+            const installs = document.getElementById('totalInstalls');
+            if (installs) {
+                const current = parseInt(installs.textContent) || 1247;
+                installs.textContent = (current + 1).toLocaleString();
+            }
+        }
+
+        function showLoading(show) {
+            const loading = document.getElementById('loading');
+            loading.style.display = show ? 'block' : 'none';
+        }
+
+        function showMessage(text, type) {
+            const container = document.getElementById('messageContainer');
+            const messageId = 'msg_' + Date.now();
+            
+            container.innerHTML = `<div class="message ${type}" id="${messageId}">
+                <span>${getMessageIcon(type)}</span>
+                <span>${text}</span>
+            </div>`;
+            
+            const messageEl = document.getElementById(messageId);
+            messageEl.style.display = 'flex';
+            
+            setTimeout(() => {
+                if (messageEl) {
+                    messageEl.remove();
+                }
+            }, 5000);
+        }
+
+        function getMessageIcon(type) {
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️',
+                info: 'ℹ️'
+            };
+            return icons[type] || 'ℹ️';
+        }
+
+        // Additional PWA Functions
+        function schedulePushNotification() {
+            const datePrompt = currentLanguage === 'ar' ? 
+                'جدولة الإشعار لـ (YYYY-MM-DD HH:MM):' : 
+                'Schedule notification for (YYYY-MM-DD HH:MM):';
+            const date = prompt(datePrompt);
+            if (date) {
+                showMessage(getLocalizedMessage(`⏰ Push notification scheduled for ${date}`, `⏰ تم جدولة الإشعار الفوري لـ ${date}`), 'success');
+            }
+        }
+
+        function testPushNotification() {
+            sendPushNotification();
+        }
+
+        function viewNotificationStats() {
+            showMessage(getLocalizedMessage('📊 Notification Stats: 890 subscribers, 67% opt-in rate, 89% open rate', '📊 إحصائيات الإشعارات: 890 مشترك، 67% معدل اشتراك، 89% معدل فتح'), 'info');
+        }
+
+        function scheduleNotification() {
+            showMessage(getLocalizedMessage('⏰ Notification scheduled successfully', '⏰ تم جدولة الإشعار بنجاح'), 'success');
+        }
+
+        function forceOfflineSync() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('🔄 Offline sync completed successfully', '🔄 تمت مزامنة البيانات غير المتصلة بنجاح'), 'success');
+            }, 2000);
+        }
+
+        function clearOfflineData() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'هل أنت متأكد من أنك تريد مسح جميع البيانات غير المتصلة؟' :
+                'Are you sure you want to clear all offline data?';
+            if (confirm(confirmText)) {
+                showMessage(getLocalizedMessage('🗑️ Offline data cleared successfully', '🗑️ تم مسح البيانات غير المتصلة بنجاح'), 'warning');
+            }
+        }
+
+        function clearAppShellCache() {
+            showMessage(getLocalizedMessage('🧹 App shell cache cleared', '🧹 تم مسح تخزين هيكل التطبيق'), 'success');
+        }
+
+        function clearAPICache() {
+            showMessage(getLocalizedMessage('🧹 API cache cleared', '🧹 تم مسح تخزين API'), 'success');
+        }
+
+        function clearImageCache() {
+            showMessage(getLocalizedMessage('🧹 Image cache cleared', '🧹 تم مسح تخزين الصور'), 'success');
+        }
+
+        function retrySync(syncId) {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage(`🔄 Sync ${syncId} completed successfully`, `🔄 تمت مزامنة ${syncId} بنجاح`), 'success');
+            }, 1500);
+        }
+
+        function refreshPWAUsers() {
+            showMessage(getLocalizedMessage('👥 PWA user list refreshed', '👥 تم تحديث قائمة مستخدمي التطبيق'), 'success');
+        }
+
+        function refreshNotificationStats() {
+            showMessage(getLocalizedMessage('🔔 Notification statistics refreshed', '🔔 تم تحديث إحصائيات الإشعارات'), 'success');
+        }
+
+        function refreshPerformanceStats() {
+            showMessage(getLocalizedMessage('⚡ Performance metrics refreshed', '⚡ تم تحديث مقاييس الأداء'), 'success');
+        }
+
+        function resetPWASettings() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'إعادة تعيين جميع إعدادات التطبيق إلى الافتراضي؟' :
+                'Reset all PWA settings to default?';
+            if (confirm(confirmText)) {
+                showMessage(getLocalizedMessage('🔄 PWA settings reset to defaults', '🔄 تم إعادة تعيين إعدادات التطبيق للافتراضي'), 'warning');
+            }
+        }
+
+        function clearAllCaches() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'مسح جميع تخازين التطبيق؟' :
+                'Clear all application caches?';
+            if (confirm(confirmText)) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage('🗑️ All caches cleared successfully', '🗑️ تم مسح جميع التخازين بنجاح'), 'success');
+                }, 2000);
+            }
+        }
+
+        function exportPWAConfig() {
+            showMessage(getLocalizedMessage('📤 PWA configuration exported', '📤 تم تصدير إعداد التطبيق'), 'success');
+        }
+
+        function resetServiceWorker() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'إعادة تعيين العامل الخدمي؟ سيؤدي هذا إلى مسح جميع البيانات المخزنة.' :
+                'Reset Service Worker? This will clear all cached data.';
+            if (confirm(confirmText)) {
+                unregisterServiceWorker();
+            }
+        }
+
+        function testOfflineMode() {
+            showMessage(getLocalizedMessage('📡 Offline mode test initiated', '📡 بدء اختبار وضع عدم الاتصال'), 'info');
+        }
+
+        function toggleMobileMenu() {
+            // Mobile menu toggle functionality
+            showMessage(getLocalizedMessage('☰ Mobile menu toggled', '☰ تم تبديل قائمة الموبايل'), 'info');
+        }
+
+        function exportUsers() {
+            showMessage(getLocalizedMessage('📤 Users exported successfully', '📤 تم تصدير المستخدمين بنجاح'), 'success');
+        }
+
+        // Auto-refresh stats every 30 seconds
+        setInterval(() => {
+            updateStats();
+        }, 30000);
+
+        // PWA Install Prompt Handling
+        let installPromptEvent;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            installPromptEvent = e;
+            showInstallBanner();
+        });
+
+        // Performance monitoring
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', event => {
+                if (event.data && event.data.type === 'PERFORMANCE_UPDATE') {
+                    updatePerformanceMetrics(event.data.metrics);
+                }
+            });
+        }
+
+        function updatePerformanceMetrics(metrics) {
+            // Update performance display
+            console.log('Performance metrics updated:', metrics);
+        }
+
+        // Initialize PWA features when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if running as PWA
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                document.body.classList.add('pwa-mode');
+                showMessage(getLocalizedMessage('📱 Running as PWA!', '📱 يعمل كتطبيق ويب!'), 'success');
+            }
+
+            // Initialize touch gestures for mobile
+            initializeTouchGestures();
+
+            // Initialize language system
+            initializeLanguageSystem();
+        });
+
+        function initializeTouchGestures() {
+            // Add touch gesture support for mobile navigation
+            let startX, startY;
+
+            document.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+
+            document.addEventListener('touchend', (e) => {
+                if (!startX || !startY) return;
+
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+
+                // Implement swipe gestures for tab navigation
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe left - next tab
+                        console.log('Swipe left detected');
+                    } else {
+                        // Swipe right - previous tab
+                        console.log('Swipe right detected');
+                    }
+                }
+            });
+        }
+
+        // Background sync handling
+        if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+            navigator.serviceWorker.ready.then((registration) => {
+                // Register background sync
+                return registration.sync.register('background-sync');
+            }).then(() => {
+                showMessage(getLocalizedMessage('🔄 Background sync enabled', '🔄 تم تفعيل المزامنة التلقائية'), 'success');
+            }).catch((error) => {
+                console.error('Background sync registration failed:', error);
+            });
+        }
+
+        // Network status monitoring
+        function handleOnlineStatus() {
+            if (navigator.onLine) {
+                showMessage(getLocalizedMessage('🌐 Back online - syncing data...', '🌐 عاد الاتصال - جاري مزامنة البيانات...'), 'success');
+                syncOfflineData();
+            } else {
+                showMessage(getLocalizedMessage('📡 You are now offline', '📡 أنت الآن غير متصل'), 'warning');
+            }
+        }
+
+        window.addEventListener('online', handleOnlineStatus);
+        window.addEventListener('offline', handleOnlineStatus);
+
+        // PWA update detection
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                showMessage(getLocalizedMessage('🔄 App updated! Please refresh to see changes.', '🔄 تم تحديث التطبيق! يرجى تحديث الصفحة لرؤية التغييرات.'), 'info');
+            });
+        }
+
+        // Battery API for PWA optimization
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then((battery) => {
+                function updateBatteryInfo() {
+                    if (battery.level < 0.2) {
+                        // Enable power-saving mode
+                        document.body.classList.add('power-saving');
+                        showMessage(getLocalizedMessage('🔋 Low battery detected - power saving mode enabled', '🔋 تم اكتشاف بطارية منخفضة - تم تفعيل وضع توفير الطاقة'), 'warning');
+                    }
+                }
+
+                battery.addEventListener('levelchange', updateBatteryInfo);
+                updateBatteryInfo();
+            });
+        }
+
+        // Memory usage monitoring
+        if ('memory' in performance) {
+            const memoryInfo = performance.memory;
+            if (memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit > 0.8) {
+                showMessage(getLocalizedMessage('⚠️ High memory usage detected', '⚠️ تم اكتشاف استخدام عالي للذاكرة'), 'warning');
+            }
+        }
+
+        // Connection quality monitoring
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            function updateConnectionStatus() {
+                if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                    document.body.classList.add('slow-connection');
+                    showMessage(getLocalizedMessage('🐌 Slow connection detected - optimizing for performance', '🐌 تم اكتشاف اتصال بطيء - جاري التحسين للأداء'), 'info');
+                } else {
+                    document.body.classList.remove('slow-connection');
+                }
+            }
+
+            connection.addEventListener('change', updateConnectionStatus);
+            updateConnectionStatus();
+        }
+
+        // Visibility API for performance optimization
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // App is in background, reduce activity
+                console.log('App moved to background');
+            } else {
+                // App is visible again, resume normal activity
+                console.log('App is visible again');
+                updateStats();
+                // Update charts with current language
+                if (typeof initializeCharts === 'function') {
+                    initializeCharts();
+                }
+            }
+        });
+
+        // Language change handler for charts
+        function updateChartsLanguage() {
+            if (pwaInstallChart) {
+                pwaInstallChart.data.labels = currentLanguage === 'ar' ? 
+                    ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'] :
+                    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                pwaInstallChart.data.datasets[0].label = currentLanguage === 'ar' ? 'تثبيتات التطبيق' : 'PWA Installs';
+                pwaInstallChart.update();
+            }
+
+            if (platformInstallChart) {
+                platformInstallChart.data.labels = currentLanguage === 'ar' ? 
+                    ['أندرويد', 'آيفون', 'سطح المكتب', 'أخرى'] :
+                    ['Android', 'iOS', 'Desktop', 'Other'];
+                platformInstallChart.update();
+            }
+
+            if (usagePatternChart) {
+                usagePatternChart.data.labels = currentLanguage === 'ar' ? 
+                    ['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'] :
+                    ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                usagePatternChart.data.datasets[0].label = currentLanguage === 'ar' ? 'استخدام التطبيق' : 'PWA Usage';
+                usagePatternChart.update();
+            }
+
+            if (performanceChart) {
+                performanceChart.data.datasets[0].label = currentLanguage === 'ar' ? 'وقت التحميل (ثواني)' : 'Load Time (seconds)';
+                performanceChart.data.datasets[1].label = currentLanguage === 'ar' ? 'نقاط التطبيق' : 'PWA Score';
+                performanceChart.update();
+            }
+        }
+
+        // Override setLanguage to update charts
+        const originalSetLanguage = setLanguage;
+        setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            updateChartsLanguage();
+        };
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            showMessage(getLocalizedMessage('🚀 CheckReel PWA Admin Dashboard loaded successfully!', '🚀 تم تحميل لوحة إدارة تشيك ريل بنجاح!'), 'success');
+        });
+
+        // Add smooth transitions for language changes
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add transition class to elements that change with language
+            const transitionElements = document.querySelectorAll('[data-en], [data-ar], .chart-container');
+            transitionElements.forEach(el => {
+                el.classList.add('lang-transition');
+            });
+        });
+
+        // RTL-specific adjustments
+        function adjustForRTL() {
+            if (currentLanguage === 'ar') {
+                // Ensure proper RTL layout for grids and flexbox
+                document.body.style.direction = 'rtl';
+                
+                // Adjust chart text alignment
+                Chart.defaults.font.family = "'Cairo', 'Amiri', 'Tajawal', sans-serif";
+            } else {
+                document.body.style.direction = 'ltr';
+                Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+            }
+        }
+
+        // Call RTL adjustments when language changes
+        const originalSetLanguageWithRTL = setLanguage;
+        setLanguage = function(lang) {
+            originalSetLanguageWithRTL(lang);
+            adjustForRTL();
+            updateChartsLanguage();
+        };
+
+        // Keyboard shortcuts for language switching
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + Shift + L to toggle language
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'L') {
+                e.preventDefault();
+                toggleLanguage();
+            }
+        });
+
+        // Add context menu for language switching (right-click)
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.closest('.language-toggle')) {
+                e.preventDefault();
+                toggleLanguage();
+            }
+        });
+
+        // Auto-detect browser language on first visit
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('ar') && !localStorage.getItem('adminLanguage')) {
+                setLanguage('ar');
+            }
+        }
+
+        // Call on initial load
+        document.addEventListener('DOMContentLoaded', detectBrowserLanguage);
+
+        // Add accessibility improvements for screen readers
+        function updateAriaLabels() {
+            const languageToggle = document.querySelector('.language-toggle');
+            if (languageToggle) {
+                languageToggle.setAttribute('aria-label', 
+                    currentLanguage === 'ar' ? 'تبديل اللغة' : 'Toggle Language'
+                );
+            }
+        }
+
+        // Update ARIA labels when language changes
+        const originalSetLanguageWithAria = setLanguage;
+        setLanguage = function(lang) {
+            originalSetLanguageWithAria(lang);
+            updateAriaLabels();
+        };
+
+        // Add loading state for language switching
+        function showLanguageLoading() {
+            const toggle = document.querySelector('.language-toggle');
+            if (toggle) {
+                toggle.style.opacity = '0.6';
+                toggle.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    toggle.style.opacity = '1';
+                    toggle.style.pointerEvents = 'auto';
+                }, 300);
+            }
+        }
+
+        // Enhanced toggle function with loading state
+        const originalToggleLanguage = toggleLanguage;
+        toggleLanguage = function() {
+            showLanguageLoading();
+            setTimeout(originalToggleLanguage, 50);
+        };
+    </script>
+</body>
+</html>
