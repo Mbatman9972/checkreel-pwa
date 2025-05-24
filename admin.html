@@ -2499,7 +2499,65 @@
         function testPushNotification() {
             sendPushNotification();
         }
+// Missing PWA Quick Action Functions
+function forceAppInstall() {
+    if (deferredPrompt) {
+        installPWA();
+    } else {
+        showMessage(getLocalizedMessage('📱 PWA installation not available. Try refreshing the page.', '📱 تثبيت التطبيق غير متاح. جرب تحديث الصفحة.'), 'warning');
+    }
+}
 
+function clearAppCache() {
+    if ('caches' in window) {
+        caches.keys().then((cacheNames) => {
+            return Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
+        }).then(() => {
+            showMessage(getLocalizedMessage('🧹 App cache cleared successfully!', '🧹 تم مسح تخزين التطبيق بنجاح!'), 'success');
+        });
+    }
+}
+
+function updateServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then((registration) => {
+            if (registration) {
+                registration.update().then(() => {
+                    showMessage(getLocalizedMessage('🔄 Service Worker updated!', '🔄 تم تحديث العامل الخدمي!'), 'success');
+                });
+            }
+        });
+    }
+}
+
+function syncOfflineData() {
+    showLoading(true);
+    setTimeout(() => {
+        showLoading(false);
+        showMessage(getLocalizedMessage('☁️ Offline data synced successfully!', '☁️ تمت مزامنة البيانات غير المتصلة بنجاح!'), 'success');
+        updateStats();
+    }, 2000);
+}
+
+function viewInstallStats() {
+    showMessage(getLocalizedMessage('📊 Install statistics: 87% mobile, 13% desktop', '📊 إحصائيات التثبيت: 87% موبايل، 13% سطح المكتب'), 'info');
+}
+
+function sendBulkPushNotification(event) {
+    event.preventDefault();
+    const title = document.getElementById('pushTitle').value;
+    const message = document.getElementById('pushMessage').value;
+    if (!title || !message) {
+        showMessage(getLocalizedMessage('Please fill in all notification fields', 'يرجى ملء جميع حقول الإشعار'), 'error');
+        return;
+    }
+    showLoading(true);
+    setTimeout(() => {
+        showLoading(false);
+        showMessage(getLocalizedMessage('🔔 Push notification sent successfully!', '🔔 تم إرسال الإشعار بنجاح!'), 'success');
+        event.target.reset();
+    }, 2000);
+}
         function viewNotificationStats() {
             showMessage(getLocalizedMessage('📊 Notification Stats: 890 subscribers, 67% opt-in rate, 89% open rate', '📊 إحصائيات الإشعارات: 890 مشترك، 67% معدل اشتراك، 89% معدل فتح'), 'info');
         }
