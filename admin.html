@@ -1542,24 +1542,101 @@
         }
 
         // FIXED: Chart Initialization with Proper Cleanup
-        function initializeCharts() {
-            // Destroy existing charts before creating new ones
-            if (window.pwaInstallChart) {
-                window.pwaInstallChart.destroy();
-                window.pwaInstallChart = null;
+         function initializeCharts() {
+    // FIXED: Safely destroy existing charts with proper checks
+    if (window.pwaInstallChart && typeof window.pwaInstallChart.destroy === 'function') {
+        window.pwaInstallChart.destroy();
+        window.pwaInstallChart = null;
+    }
+    if (window.platformInstallChart && typeof window.platformInstallChart.destroy === 'function') {
+        window.platformInstallChart.destroy();
+        window.platformInstallChart = null;
+    }
+    if (window.usagePatternChart && typeof window.usagePatternChart.destroy === 'function') {
+        window.usagePatternChart.destroy();
+        window.usagePatternChart = null;
+    }
+    if (window.performanceChart && typeof window.performanceChart.destroy === 'function') {
+        window.performanceChart.destroy();
+        window.performanceChart = null;
+    }
+
+    // Clear canvas contexts safely
+    const canvases = ['pwaInstallChart', 'platformInstallChart', 'usagePatternChart', 'performanceChart'];
+    canvases.forEach(canvasId => {
+        const canvas = document.getElementById(canvasId);
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
-            if (window.platformInstallChart) {
-                window.platformInstallChart.destroy();
-                window.platformInstallChart = null;
-            }
-            if (window.usagePatternChart) {
-                window.usagePatternChart.destroy();
-                window.usagePatternChart = null;
-            }
-            if (window.performanceChart) {
-                window.performanceChart.destroy();
-                window.performanceChart = null;
-            }
+        }
+    });
+
+    // Create charts with delay
+    setTimeout(() => {
+        createNewCharts();
+    }, 100);
+}
+
+function createNewCharts() {
+    try {
+        // PWA Install Chart
+        const pwaCtx = document.getElementById('pwaInstallChart');
+        if (pwaCtx) {
+            window.pwaInstallChart = new Chart(pwaCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: currentLanguage === 'ar' ? 
+                        ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'] :
+                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: currentLanguage === 'ar' ? 'تثبيتات التطبيق' : 'PWA Installs',
+                        data: [45, 78, 123, 167, 245, 289, 334, 401, 478, 523, 601, 687],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        // Platform Install Chart
+        const platformCtx = document.getElementById('platformInstallChart');
+        if (platformCtx) {
+            window.platformInstallChart = new Chart(platformCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: currentLanguage === 'ar' ? 
+                        ['أندرويد', 'آيفون', 'سطح المكتب', 'أخرى'] :
+                        ['Android', 'iOS', 'Desktop', 'Other'],
+                    datasets: [{
+                        data: [567, 389, 234, 57],
+                        backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        console.log('✅ All charts initialized successfully!');
+        
+    } catch (error) {
+        console.error('❌ Chart initialization error:', error);
+    }
+}
 
             // Clear canvas contexts
             const canvases = ['pwaInstallChart', 'platformInstallChart', 'usagePatternChart', 'performanceChart'];
@@ -1699,7 +1776,7 @@
                     }
                 });
             }
-        }
+        
 
         // Push Notification Management
         function checkNotificationPermission() {
