@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<button class="btn btn-success" onclick="createFreeTrial()" data-en="🎁 Create 7-Day Trial" data-ar="🎁 إنشاء تجربة 7 أيام">🎁 Create 7-Day Trial</button>
+                                <button class="btn btn-primary" onclick="upgradeExpiredUsers()" data-en="⏰ Convert Expired Trials" data-ar="⏰ تحويل التجارب المنتهية">⏰ Convert Expired Trials</button>
+                                <button class="btn btn-warning" onclick="grantBonusScans()" data-en="➕ Grant Bonus Scans" data-ar="➕ منح فحوصات إضافية">➕ Grant Bonus Scans</button>
+                                <button class="btn btn-info" onclick="sendUpgradePromotions()" data-en="📧 Send Upgrade Promos" data-ar="📧 إرسال عروض الترقية">📧 Send Upgrade Promos</button>
+                                <button class="btn" style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white;" onclick="showTierHistory()" data-en="📊 Tier History Report" data-ar="📊 تقرير تاريخ الخطط">📊 Tier History Report</button>
+                                <button class="btn" style="background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white;" onclick="customTierCreator()" data-en="⚙️ Custom Tier Creator" data-ar="⚙️ منشئ خطة مخصصة">⚙️ Custom Tier Creator</button>
+                            </div>
+                        </div>
+                    </div><!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -1219,56 +1227,117 @@
                     </div>
 
                     <div style="background: #f8f9fa; border-radius: 10px; padding: 15px;">
-                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 2px solid #e0e0e0; font-weight: 600; font-size: 12px;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 2px solid #e0e0e0; font-weight: 600; font-size: 12px;">
                             <div data-en="User Info" data-ar="معلومات المستخدم">User Info</div>
                             <div data-en="Device" data-ar="الجهاز">Device</div>
+                            <div data-en="Tier" data-ar="الخطة">Tier</div>
                             <div data-en="Install Date" data-ar="تاريخ التثبيت">Install Date</div>
                             <div data-en="Status" data-ar="الحالة">Status</div>
-                            <div data-en="Actions" data-ar="الإجراءات">Actions</div>
+                            <div data-en="Tier Actions" data-ar="إدارة الخطة">Tier Actions</div>
                         </div>
                         
-                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">john@example.com</div>
                                 <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • 🔔 Push Enabled" data-ar="📱 التطبيق مثبت • 🔔 الإشعارات مفعلة">📱 PWA Installed • 🔔 Push Enabled</div>
                             </div>
                             <div style="font-size: 12px;">iPhone 14</div>
+                            <div>
+                                <span style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 4px 10px; border-radius: 15px; font-size: 10px; font-weight: 600;" data-en="PLUS" data-ar="بلس">PLUS</span>
+                                <div style="font-size: 9px; color: #666; margin-top: 2px;" data-en="$4.99/month" data-ar="4.99$ شهرياً">$4.99/month</div>
+                            </div>
                             <div style="font-size: 12px;">Dec 15, 2024</div>
                             <div>
                                 <span style="background: #e8f5e8; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="ACTIVE" data-ar="نشط">ACTIVE</span>
                             </div>
-                            <div>
-                                <button class="btn btn-sm btn-primary" onclick="notifyUser('john@example.com')" style="padding: 6px 10px; font-size: 10px;">🔔</button>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 4px 8px; font-size: 9px;" onclick="upgradeToPremium('john@example.com')" data-en="⬆️ Premium" data-ar="⬆️ مميز">⬆️ Premium</button>
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #2196F3, #1976D2); color: white; padding: 4px 8px; font-size: 9px;" onclick="extendSubscription('john@example.com')" data-en="📅 Extend" data-ar="📅 تمديد">📅 Extend</button>
+                                <button class="btn btn-sm btn-primary" onclick="notifyUser('john@example.com')" style="padding: 4px 8px; font-size: 9px;">🔔</button>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">sarah@company.com</div>
                                 <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • ✋ Push Disabled" data-ar="📱 التطبيق مثبت • ✋ الإشعارات معطلة">📱 PWA Installed • ✋ Push Disabled</div>
                             </div>
                             <div style="font-size: 12px;">Android</div>
+                            <div>
+                                <span style="background: linear-gradient(135deg, #9C27B0, #7B1FA2); color: white; padding: 4px 10px; border-radius: 15px; font-size: 10px; font-weight: 600;" data-en="PREMIUM" data-ar="مميز">PREMIUM</span>
+                                <div style="font-size: 9px; color: #666; margin-top: 2px;" data-en="$9.99/month" data-ar="9.99$ شهرياً">$9.99/month</div>
+                            </div>
                             <div style="font-size: 12px;">Nov 28, 2024</div>
                             <div>
                                 <span style="background: #fff3cd; color: #856404; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="OFFLINE" data-ar="غير متصل">OFFLINE</span>
                             </div>
-                            <div>
-                                <button class="btn btn-sm btn-warning" onclick="enablePushForUser('sarah@company.com')" style="padding: 6px 10px; font-size: 10px;">🔔</button>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #ff6b6b, #ff5252); color: white; padding: 4px 8px; font-size: 9px;" onclick="downgradeTier('sarah@company.com')" data-en="⬇️ Downgrade" data-ar="⬇️ تخفيض">⬇️ Downgrade</button>
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 4px 8px; font-size: 9px;" onclick="grantFreeTrial('sarah@company.com')" data-en="🎁 Trial" data-ar="🎁 تجربة">🎁 Trial</button>
+                                <button class="btn btn-sm btn-warning" onclick="enablePushForUser('sarah@company.com')" style="padding: 4px 8px; font-size: 9px;">🔔</button>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; align-items: center;">
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; margin-bottom: 3px;">mike@startup.io</div>
                                 <div style="font-size: 11px; color: #666;" data-en="🌐 Web Only • ⚠️ Not Installed" data-ar="🌐 ويب فقط • ⚠️ غير مثبت">🌐 Web Only • ⚠️ Not Installed</div>
                             </div>
                             <div style="font-size: 12px;">Desktop</div>
+                            <div>
+                                <span style="background: linear-gradient(135deg, #757575, #616161); color: white; padding: 4px 10px; border-radius: 15px; font-size: 10px; font-weight: 600;" data-en="FREE" data-ar="مجاني">FREE</span>
+                                <div style="font-size: 9px; color: #666; margin-top: 2px;" data-en="3 scans left" data-ar="3 فحوصات متبقية">3 scans left</div>
+                            </div>
                             <div style="font-size: 12px;">Dec 20, 2024</div>
                             <div>
                                 <span style="background: #ffebee; color: #c62828; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="WEB ONLY" data-ar="ويب فقط">WEB ONLY</span>
                             </div>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 4px 8px; font-size: 9px;" onclick="upgradeToPlus('mike@startup.io')" data-en="⬆️ Plus" data-ar="⬆️ بلس">⬆️ Plus</button>
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 4px 8px; font-size: 9px;" onclick="upgradeToPremium('mike@startup.io')" data-en="⬆️ Premium" data-ar="⬆️ مميز">⬆️ Premium</button>
+                                <button class="btn btn-sm btn-success" onclick="promoteInstall('mike@startup.io')" style="padding: 4px 8px; font-size: 9px;">📱</button>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e0e0e0; align-items: center;">
                             <div>
-                                <button class="btn btn-sm btn-success" onclick="promoteInstall('mike@startup.io')" style="padding: 6px 10px; font-size: 10px;">📱</button>
+                                <div style="font-weight: 600; margin-bottom: 3px;">lisa@design.co</div>
+                                <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • 🔔 Push Enabled" data-ar="📱 التطبيق مثبت • 🔔 الإشعارات مفعلة">📱 PWA Installed • 🔔 Push Enabled</div>
+                            </div>
+                            <div style="font-size: 12px;">iPad Pro</div>
+                            <div>
+                                <span style="background: linear-gradient(135deg, #757575, #616161); color: white; padding: 4px 10px; border-radius: 15px; font-size: 10px; font-weight: 600;" data-en="FREE" data-ar="مجاني">FREE</span>
+                                <div style="font-size: 9px; color: #ff5722; margin-top: 2px; font-weight: 600;" data-en="0 scans left!" data-ar="لا توجد فحوصات!">0 scans left!</div>
+                            </div>
+                            <div style="font-size: 12px;">Dec 18, 2024</div>
+                            <div>
+                                <span style="background: #e8f5e8; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="ACTIVE" data-ar="نشط">ACTIVE</span>
+                            </div>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 4px 8px; font-size: 9px;" onclick="upgradeToPlus('lisa@design.co')" data-en="⬆️ Plus" data-ar="⬆️ بلس">⬆️ Plus</button>
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #2196F3, #1976D2); color: white; padding: 4px 8px; font-size: 9px;" onclick="grantExtraScans('lisa@design.co')" data-en="➕ Scans" data-ar="➕ فحوصات">➕ Scans</button>
+                                <button class="btn btn-sm btn-primary" onclick="notifyUser('lisa@design.co')" style="padding: 4px 8px; font-size: 9px;">🔔</button>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 10px; padding: 12px 0; align-items: center;">
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 3px;">alex@tech.com</div>
+                                <div style="font-size: 11px; color: #666;" data-en="📱 PWA Installed • 🔔 Push Enabled • 🎁 Trial User" data-ar="📱 التطبيق مثبت • 🔔 الإشعارات مفعلة • 🎁 مستخدم تجريبي">📱 PWA Installed • 🔔 Push Enabled • 🎁 Trial User</div>
+                            </div>
+                            <div style="font-size: 12px;">Galaxy S23</div>
+                            <div>
+                                <span style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 4px 10px; border-radius: 15px; font-size: 10px; font-weight: 600;" data-en="TRIAL" data-ar="تجريبي">TRIAL</span>
+                                <div style="font-size: 9px; color: #ff5722; margin-top: 2px; font-weight: 600;" data-en="3 days left" data-ar="3 أيام متبقية">3 days left</div>
+                            </div>
+                            <div style="font-size: 12px;">Dec 22, 2024</div>
+                            <div>
+                                <span style="background: #e8f5e8; color: #2e7d32; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 600;" data-en="ACTIVE" data-ar="نشط">ACTIVE</span>
+                            </div>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 4px 8px; font-size: 9px;" onclick="convertTrialToPlus('alex@tech.com')" data-en="💰 Convert" data-ar="💰 تحويل">💰 Convert</button>
+                                <button class="btn btn-sm" style="background: linear-gradient(135deg, #2196F3, #1976D2); color: white; padding: 4px 8px; font-size: 9px;" onclick="extendTrial('alex@tech.com')" data-en="⏰ Extend" data-ar="⏰ تمديد">⏰ Extend</button>
+                                <button class="btn btn-sm btn-primary" onclick="notifyUser('alex@tech.com')" style="padding: 4px 8px; font-size: 9px;">🔔</button>
                             </div>
                         </div>
                     </div>
@@ -2221,8 +2290,203 @@
             return icons[type] || 'ℹ️';
         }
 
-        // Additional PWA Functions
-        function schedulePushNotification() {
+        // Tier Management Functions
+        function upgradeToPlus(email) {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage(`⬆️ ${email} upgraded to Plus ($4.99/month)`, `⬆️ تم ترقية ${email} إلى بلس (4.99$ شهرياً)`), 'success');
+                updateTierStats();
+            }, 1500);
+        }
+
+        function upgradeToPremium(email) {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage(`⬆️ ${email} upgraded to Premium ($9.99/month)`, `⬆️ تم ترقية ${email} إلى مميز (9.99$ شهرياً)`), 'success');
+                updateTierStats();
+            }, 1500);
+        }
+
+        function downgradeTier(email) {
+            const confirmText = currentLanguage === 'ar' ? 
+                `هل أنت متأكد من تخفيض خطة ${email}؟` :
+                `Are you sure you want to downgrade ${email}?`;
+            if (confirm(confirmText)) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage(`⬇️ ${email} downgraded successfully`, `⬇️ تم تخفيض خطة ${email} بنجاح`), 'warning');
+                    updateTierStats();
+                }, 1500);
+            }
+        }
+
+        function grantFreeTrial(email) {
+            const daysPrompt = currentLanguage === 'ar' ? 
+                'كم يوم للتجربة المجانية؟ (7, 14, أو 30):' : 
+                'How many days for free trial? (7, 14, or 30):';
+            const days = prompt(daysPrompt, '7');
+            if (days) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage(`🎁 ${email} granted ${days}-day Premium trial`, `🎁 تم منح ${email} تجربة مميزة لـ ${days} أيام`), 'success');
+                }, 1500);
+            }
+        }
+
+        function extendSubscription(email) {
+            const monthsPrompt = currentLanguage === 'ar' ? 
+                'كم شهر إضافي للاشتراك؟' : 
+                'How many additional months?';
+            const months = prompt(monthsPrompt, '1');
+            if (months) {
+                showMessage(getLocalizedMessage(`📅 ${email} subscription extended by ${months} month(s)`, `📅 تم تمديد اشتراك ${email} لـ ${months} شهر`), 'success');
+            }
+        }
+
+        function grantExtraScans(email) {
+            const scansPrompt = currentLanguage === 'ar' ? 
+                'كم فحص إضافي تريد منحه؟' : 
+                'How many extra scans to grant?';
+            const scans = prompt(scansPrompt, '10');
+            if (scans) {
+                showMessage(getLocalizedMessage(`➕ ${email} granted ${scans} extra scans`, `➕ تم منح ${email} ${scans} فحص إضافي`), 'success');
+            }
+        }
+
+        function convertTrialToPlus(email) {
+            const confirmText = currentLanguage === 'ar' ? 
+                `تحويل تجربة ${email} إلى اشتراك بلس؟` :
+                `Convert ${email}'s trial to Plus subscription?`;
+            if (confirm(confirmText)) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage(`💰 ${email} trial converted to Plus subscription`, `💰 تم تحويل تجربة ${email} إلى اشتراك بلس`), 'success');
+                    updateTierStats();
+                }, 1500);
+            }
+        }
+
+        function extendTrial(email) {
+            const daysPrompt = currentLanguage === 'ar' ? 
+                'كم يوم إضافي للتجربة؟' : 
+                'How many additional trial days?';
+            const days = prompt(daysPrompt, '7');
+            if (days) {
+                showMessage(getLocalizedMessage(`⏰ ${email} trial extended by ${days} days`, `⏰ تم تمديد تجربة ${email} لـ ${days} أيام`), 'success');
+            }
+        }
+
+        // Bulk Tier Management Functions
+        function showBulkTierManager() {
+            showMessage(getLocalizedMessage('📊 Bulk tier management panel opened', '📊 تم فتح لوحة إدارة الخطط الجماعية'), 'info');
+        }
+
+        function bulkUpgadeFromFree() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'ترقية جميع المستخدمين المجانيين إلى بلس؟' :
+                'Upgrade all free users to Plus?';
+            if (confirm(confirmText)) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage('⬆️ 1,892 free users upgraded to Plus - Revenue impact: +$9,462/month', '⬆️ تم ترقية 1,892 مستخدم مجاني إلى بلس - تأثير الإيرادات: +9,462$ شهرياً'), 'success');
+                    updateTierStats();
+                }, 3000);
+            }
+        }
+
+        function bulkUpgadeToPremium() {
+            const confirmText = currentLanguage === 'ar' ? 
+                'ترقية جميع مستخدمي بلس إلى مميز؟' :
+                'Upgrade all Plus users to Premium?';
+            if (confirm(confirmText)) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage('⬆️ 756 Plus users upgraded to Premium - Revenue impact: +$3,780/month', '⬆️ تم ترقية 756 مستخدم بلس إلى مميز - تأثير الإيرادات: +3,780$ شهرياً'), 'success');
+                    updateTierStats();
+                }, 3000);
+            }
+        }
+
+        function managePremiumUsers() {
+            showMessage(getLocalizedMessage('⚙️ Premium user management panel opened', '⚙️ تم فتح لوحة إدارة المستخدمين المميزين'), 'info');
+        }
+
+        function manageTrialUsers() {
+            showMessage(getLocalizedMessage('🎁 Trial user management panel opened', '🎁 تم فتح لوحة إدارة المستخدمين التجريبيين'), 'info');
+        }
+
+        // Quick Actions Functions
+        function createFreeTrial() {
+            const emailPrompt = currentLanguage === 'ar' ? 
+                'أدخل البريد الإلكتروني لمنح تجربة مجانية:' : 
+                'Enter email to grant free trial:';
+            const email = prompt(emailPrompt);
+            if (email) {
+                showMessage(getLocalizedMessage(`🎁 7-day Premium trial created for ${email}`, `🎁 تم إنشاء تجربة مميزة لـ 7 أيام لـ ${email}`), 'success');
+            }
+        }
+
+        function upgradeExpiredUsers() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('⏰ 23 expired trial users converted to Plus subscriptions', '⏰ تم تحويل 23 مستخدم تجريبي منتهي إلى اشتراكات بلس'), 'success');
+            }, 2000);
+        }
+
+        function grantBonusScans() {
+            const scansPrompt = currentLanguage === 'ar' ? 
+                'كم فحص إضافي لجميع المستخدمين المجانيين؟' : 
+                'How many bonus scans for all free users?';
+            const scans = prompt(scansPrompt, '5');
+            if (scans) {
+                showLoading(true);
+                setTimeout(() => {
+                    showLoading(false);
+                    showMessage(getLocalizedMessage(`➕ ${scans} bonus scans granted to all free users`, `➕ تم منح ${scans} فحوصات إضافية لجميع المستخدمين المجانيين`), 'success');
+                }, 2000);
+            }
+        }
+
+        function sendUpgradePromotions() {
+            showLoading(true);
+            setTimeout(() => {
+                showLoading(false);
+                showMessage(getLocalizedMessage('📧 Upgrade promotion emails sent to 1,892 free users', '📧 تم إرسال رسائل ترويج الترقية لـ 1,892 مستخدم مجاني'), 'success');
+            }, 2000);
+        }
+
+        function showTierHistory() {
+            showMessage(getLocalizedMessage('📊 Tier history report: 342 upgrades, 23 downgrades this month', '📊 تقرير تاريخ الخطط: 342 ترقية، 23 تخفيض هذا الشهر'), 'info');
+        }
+
+        function customTierCreator() {
+            showMessage(getLocalizedMessage('⚙️ Custom tier creator opened - Create unlimited tiers', '⚙️ تم فتح منشئ الخطط المخصصة - أنشئ خطط غير محدودة'), 'info');
+        }
+
+        function generatePromoCode() {
+            const codeTypes = currentLanguage === 'ar' ? 
+                'نوع كود الخصم:\n1. خصم 50% على بلس\n2. خصم 30% على مميز\n3. تجربة مجانية 14 يوم\n4. مخصص' :
+                'Promo code type:\n1. 50% off Plus\n2. 30% off Premium\n3. 14-day free trial\n4. Custom';
+            const choice = prompt(codeTypes, '1');
+            if (choice) {
+                const code = 'CHECKRL' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                showMessage(getLocalizedMessage(`🎫 Promo code created: ${code}`, `🎫 تم إنشاء كود الخصم: ${code}`), 'success');
+            }
+        }
+
+        function updateTierStats() {
+            // Simulate tier statistics update
+            console.log('Tier statistics updated');
+        }
+             function schedulePushNotification() {
             const datePrompt = currentLanguage === 'ar' ? 
                 'جدولة الإشعار لـ (YYYY-MM-DD HH:MM):' : 
                 'Schedule notification for (YYYY-MM-DD HH:MM):';
