@@ -1,0 +1,15 @@
+[33m23f8a2f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m FINAL: Enhanced dashboard with multi-platform, scan history, language switching - ERROR FIXED
+[33mb4ea886[m  Final deployment - Homepage + Dashboard
+[33m5a2009e[m  Final fixes - Email only, gradient colors, enhanced free trial
+[33m2e94e59[m  Enhanced v2.0 - Sign-in, Premium features, Fixed issues
+[33m866d7e6[m  DEPLOY BOTH enhanced homepage AND dashboard
+[33m8e2d6cd[m Fix dashboard.js errors and manifest.json configuration
+[33mb99a183[m Fix vercel.json configuration
+[33m1ae9d09[m Simplify Vercel config
+[33ma767d55[m Add Vercel configuration to fix deployment
+[33m2eae41a[m Fix syntax error in dashboard.js drop event listener
+[33m2095626[m  Enhanced CheckReel v2.0 - Logo integration, region selection, tier management, and platform validation
+[33m8a813fe[m Enhanced dashboard with platform icons and glow effects
+[33m4635867[m Enhanced dashboard with platform icons and glow effects
+[33m6db2ba3[m Add corrected manifest.json and functional lang-loader.js
+[33me618ec3[m FINAL FIX: Force correct MIME types for JS files
