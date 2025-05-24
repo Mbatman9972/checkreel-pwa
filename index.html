@@ -684,5 +684,36 @@
             }
         }
     </script>
+    <!-- SECRET ADMIN ACCESS - INVISIBLE TO USERS -->
+<div id="secretAdminAccess" style="position: fixed; bottom: 0; left: 0; width: 20px; height: 20px; opacity: 0; z-index: 9999; cursor: pointer;" onclick="checkAdminAccess()"></div>
+
+<script>
+// Secret Admin Access System - Invisible Corner Click
+let clickCount = 0;
+let clickTimer = null;
+
+function checkAdminAccess() {
+    clickCount++;
+    
+    // Reset counter after 3 seconds of no clicks
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => {
+        clickCount = 0;
+    }, 3000);
+    
+    // Secret sequence: 7 clicks in bottom-left corner
+    if (clickCount === 7) {
+        const password = prompt('🔐 Admin Access\n\nEnter owner password:');
+        
+        // YOUR SECRET PASSWORD - CHANGE THIS!
+        if (password === 'MM7268') {
+            window.location.href = 'admin.html';
+        } else if (password !== null) {
+            alert('❌ Access Denied');
+            clickCount = 0;
+        }
+    }
+}
+</script>
 </body>
 </html>
